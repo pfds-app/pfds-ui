@@ -6,7 +6,7 @@ export const dummiesprovider: ResourceProvider<Dummy> = {
   resource: "dummies",
   getList: async ({ pagination }) => {
     return healthApi()
-      .getDummies(pagination.page, pagination.perPage)
+      .getPrivateDummies(pagination.page, pagination.perPage)
       .then((response) => response.data);
   },
 };
