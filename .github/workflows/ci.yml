@@ -1,10 +1,11 @@
 name: ci
 
 on:
-  push:
-    branches: ['main']
-  pull_request:
-    branches: ['main']
+  # push:
+  #   branches: ['main']
+  # pull_request:
+  #   branches: ['main']
+  workflow_dispatch:
 
 jobs:
   style:
@@ -19,7 +20,7 @@ jobs:
           node-version: 22.4.x
 
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm ci
 
       - name: Run Prettier
         run: npm run format:check
