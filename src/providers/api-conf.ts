@@ -1,11 +1,10 @@
 import { Configuration } from "@/gen/pfds-api-client";
+import { authWhoamiCache } from "@/common/utils/cache";
 
-export const configureApi = <
-  T extends { new(conf?: Configuration): InstanceType<T> },
->(
-  ApiClass: T
-): (() => InstanceType<T>) => {
+export const API_BASE_PATH = process.env.API_URL!;
+export const getConfiguration = () => {
   const conf = new Configuration();
-  conf.accessToken = "test";
-  return () => new ApiClass(conf);
-};
+  conf.accessToken = authWhoamiCache.get()?.token ?? "";
+  conf.basePath = API_BASE_PATH;
+  return conf;
+}

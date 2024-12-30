@@ -1,10 +1,17 @@
 import { Admin, Resource } from "react-admin";
-import { dataProvider } from "./providers";
+
+import { LoginPage } from "./security/components";
+import { authProvider, dataProvider } from "./providers";
 import { DUMMIES_UI } from "./operations/dummies";
 
 export const Dashboard = () => {
   return (
-    <Admin requireAuth={false} dataProvider={dataProvider}>
+    <Admin
+      requireAuth={true}
+      authProvider={authProvider}
+      dataProvider={dataProvider}
+      loginPage={<LoginPage />}
+    >
       <Resource name="dummies" {...DUMMIES_UI} />
     </Admin>
   );
