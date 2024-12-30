@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Menu as RaMenu, useSidebarState, useTranslate } from "react-admin";
 import { Box, SxProps, Drawer, useTheme, useMediaQuery } from "@mui/material";
-import { Home, AccountCircle } from "@mui/icons-material";
+import { Home } from "@mui/icons-material";
 import { usePalette } from "@/common/hooks";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
 
@@ -71,13 +71,8 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
         <RaMenu>
           <RaMenu.Item
             to="/"
-            primaryText={translate("ha.words.home")}
-            leftIcon={<Home />}
-          />
-          <RaMenu.Item
-            to="/profiles"
             primaryText={translate("ha.words.profil")}
-            leftIcon={<AccountCircle />}
+            leftIcon={<Home />}
           />
         </RaMenu>
       </Box>

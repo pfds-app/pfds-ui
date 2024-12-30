@@ -24,9 +24,9 @@ export const PfdsLogo = () => {
             marginLeft: 9,
           }}
         >
-          Naturo{" "}
+          Pfds{" "}
         </span>
-        Match
+        Pfds
       </Typography>
     </FlexBox>
   );

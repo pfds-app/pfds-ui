@@ -206,7 +206,7 @@ export const AppBarContent = () => {
         <MuiMenuList dense sx={{ minWidth: "200px" }}>
           <MuiMenuItem
             onClick={() => {
-              redirect("/profiles");
+              redirect("/");
               closeMenu();
             }}
             sx={{ "& .MuiSvgIcon-root": { mb: 0.3 } }}
