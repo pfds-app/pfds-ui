@@ -1,13 +1,15 @@
-import { AuthProvider } from 'react-admin';
-import { isAxiosError } from 'axios';
-import { SigninPayload } from '@/gen/pfds-api-client';
-import { authWhoamiCache, clearCaches } from '@/common/utils/cache';
-import { securityApi } from './api';
-import { unwrap } from './utils';
+import { AuthProvider } from "react-admin";
+import { isAxiosError } from "axios";
+import { SigninPayload } from "@/gen/pfds-api-client";
+import { authWhoamiCache, clearCaches } from "@/common/utils/cache";
+import { securityApi } from "./api";
+import { unwrap } from "./utils";
 
 const TO_SIGNOUT_STATUS_CODES = [403, 401];
 const shouldSignout = (error: any) => {
-  return isAxiosError(error) && TO_SIGNOUT_STATUS_CODES.includes(error.status ?? 0);
+  return (
+    isAxiosError(error) && TO_SIGNOUT_STATUS_CODES.includes(error.status ?? 0)
+  );
 };
 export const authProvider: AuthProvider = {
   login: async (loginData: SigninPayload) => {
@@ -34,11 +36,15 @@ export const authProvider: AuthProvider = {
       return Promise.resolve({
         id: "",
         avatar: "",
-        fullName: ""
-      })
+        fullName: "",
+      });
     }
 
-    return Promise.resolve({ id: whoami.id, fullName: whoami.username, avatar: whoami.photo });
+    return Promise.resolve({
+      id: whoami.id,
+      fullName: whoami.username,
+      avatar: whoami.photo,
+    });
   },
   getPermissions: () => Promise.resolve([]),
 };

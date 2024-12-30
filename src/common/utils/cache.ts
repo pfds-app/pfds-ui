@@ -5,9 +5,12 @@ export type CacheObject<T> = {
   get: () => T | null;
   invalidate: () => void;
   isPresent: () => boolean;
-}
+};
 
-const createObjectCacher = <T>(key: string, storageFactory: () => Storage): CacheObject<T> => {
+const createObjectCacher = <T>(
+  key: string,
+  storageFactory: () => Storage
+): CacheObject<T> => {
   const storage = storageFactory();
   return {
     replace: (obj: T) => {
@@ -30,7 +33,8 @@ const createObjectCacher = <T>(key: string, storageFactory: () => Storage): Cach
   };
 };
 
-export const inLocalStorage = <T>(key: string) => createObjectCacher<T>(key, () => localStorage);
+export const inLocalStorage = <T>(key: string) =>
+  createObjectCacher<T>(key, () => localStorage);
 
 export const clearCaches = () => {
   localStorage.clear();

@@ -7,4 +7,4 @@ export const getConfiguration = () => {
   conf.accessToken = authWhoamiCache.get()?.token ?? "";
   conf.basePath = API_BASE_PATH;
   return conf;
-}
+};

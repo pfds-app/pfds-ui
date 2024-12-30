@@ -1,12 +1,11 @@
-import { Datagrid, List, TextField } from "react-admin";
+import { TextField } from "react-admin";
+import { List } from "@/common/components/list";
 
 export const DummiesList = () => {
   return (
     <List>
-      <Datagrid rowClick={false}>
-        <TextField label="ID" source="id" />
-        <TextField label="Name" source="name" />
-      </Datagrid>
+      <TextField label="ID" source="id" />
+      <TextField label="Name" source="name" />
     </List>
   );
 };
