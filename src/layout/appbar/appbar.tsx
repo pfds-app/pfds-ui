@@ -25,7 +25,6 @@ import {
   Logout,
   Check,
   GTranslate,
-  Settings,
   ExpandMore,
   ExpandLess,
   AccountCircle,
@@ -49,7 +48,9 @@ const APPBAR_SX: SxProps = {
   flexDirection: "row",
   boxShadow: "none",
   px: 2,
+  py: 1,
   width: "100%",
+  ...PAPER_BOX_SX,
 };
 
 const USER_INFO_SX: SxProps = {
@@ -159,11 +160,7 @@ export const AppBarContent = () => {
   const translate = useTranslate();
 
   return (
-    <MuiAppBar
-      id="appbar"
-      position="sticky"
-      sx={{ ...APPBAR_SX, ...PAPER_BOX_SX, bgcolor, backgroundImage: "none" }}
-    >
+    <MuiAppBar id="appbar" position="sticky" sx={{ ...APPBAR_SX, bgcolor }}>
       <FlexBox sx={{ gap: 5 }}>
         <PfdsLogo />
       </FlexBox>
@@ -215,21 +212,11 @@ export const AppBarContent = () => {
             <ListItemIcon>
               <AccountCircle />
             </ListItemIcon>
-            <ListItemText>{translate("ha.words.profil")}</ListItemText>
+            <ListItemText>
+              {translate("ha.appBar.userPopover.editProfile")}
+            </ListItemText>
           </MuiMenuItem>
           <Divider sx={{ my: 0 }} />
-          <MuiMenuItem
-            onClick={() => {
-              redirect("/settings");
-              closeMenu();
-            }}
-            sx={{ "& .MuiSvgIcon-root": { mb: 0.3 } }}
-          >
-            <ListItemIcon>
-              <Settings />
-            </ListItemIcon>
-            <ListItemText>{translate("ha.words.settings")}</ListItemText>
-          </MuiMenuItem>
           <SelectLocalMenu closeMainMenu={closeMenu} />
           <MuiMenuItem
             onClick={async () => {

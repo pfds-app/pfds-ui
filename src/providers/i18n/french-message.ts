@@ -4,7 +4,24 @@ import frenchMessages from "ra-language-french";
 export const haFrenchMessages: any = {
   ...frenchMessages,
   ha: {
+    appBar: {
+      userPopover: {
+        editProfile: "Editer le profil",
+      },
+    },
     words: {
+      home: "Accueil",
+      calendar: "Calendrier",
+      stats: "Statistiques",
+      creation: "Créations",
+      herivelona: "Herivelona",
+      caisse: "Caisse",
+      presence: "Présence",
+      fitadiavamBola: "Fitadiavam-bola",
+      activity: "Activité",
+      history: "Historiques",
+      find: "Rechercher",
+      about: "A propos",
       welcome: "Bievenu !",
       or: "Ou",
       signin: "Se connecter",
@@ -14,7 +31,6 @@ export const haFrenchMessages: any = {
       profil: "Profil",
       signup: "S'inscrire",
       next: "Suivant",
-      home: "Accueil",
       light: "Clair",
       dark: "Sombre",
       prev: "Précédent",

@@ -1,47 +1,59 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Menu as RaMenu, useSidebarState, useTranslate } from "react-admin";
 import { Box, SxProps, Drawer, useTheme, useMediaQuery } from "@mui/material";
-import { Home } from "@mui/icons-material";
+import {
+  AssignmentTurnedIn,
+  Home,
+  EventAvailable,
+  SignalCellularAlt,
+  AutoGraph,
+  PersonAdd,
+  AddBusiness,
+  LocalAtm,
+  Celebration,
+  Search,
+  ReceiptLong,
+  Apartment,
+} from "@mui/icons-material";
 import { usePalette } from "@/common/hooks";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
 
 const MENU_SX: SxProps = {
-  "top": "50px",
+  "top": "72px",
   "left": 0,
-  "py": 2,
-  "width": "250px",
-  "height": "calc(100vh - 50px)",
+  "pb": 2,
+  "width": "220px",
+  "height": "calc(100vh - 72px)",
   "display": "flex",
   "flexDirection": "column",
   "justifyContent": "space-between",
   "& .RaMenu-open": {
-    width: "96%",
+    width: "100%",
     mx: "auto",
   },
   "& .MuiMenuItem-root": {
-    "my": "1px",
-    "alignItems": "end",
+    "mt": 1,
+    "fontSize": "14px",
+    "fontWeight": "normal",
     "transition": "all linear .5s",
+    "color": "#edebe6",
+    "borderBottom": "1px solid #FFFFFF50",
+    "bgcolor": "none",
+    "alignItems": "end",
+    "opacity": ".8",
     "&:hover": {
-      "& .RaMenuItemLink-icon": {
-        color: "white",
-      },
-      "color": "white",
-      "bgcolor": "#49A078",
-      "borderRadius": "8px",
+      color: "white",
+      opacity: 1,
     },
   },
   "& .RaMenuItemLink-active": {
-    "bgcolor": "#49A078",
-    "color": "white !important",
-    "borderRadius": "8px",
-    "& .RaMenuItemLink-icon": {
-      color: "white",
-    },
+    color: "white !important",
+    opacity: "1 !important",
   },
   "& .MuiSvgIcon-root": {
+    color: "white",
     transition: "all linear .5s",
-    mb: 0.47,
+    mb: 0.3,
   },
 };
 
@@ -49,6 +61,10 @@ export function Menu() {
   const [open, setOpen] = useSidebarState();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
+
+  useEffect(() => {
+    setOpen(true);
+  }, [isSmall]);
 
   return isSmall ? (
     <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
@@ -62,17 +78,75 @@ export function Menu() {
 export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
   sx,
 }) => {
-  const { bgcolor } = usePalette();
   const translate = useTranslate();
+  const { primaryPalette } = usePalette();
 
   return (
-    <Box sx={{ ...MENU_SX, ...PAPER_BOX_SX, bgcolor, ...sx }}>
+    <Box
+      sx={{ ...MENU_SX, ...PAPER_BOX_SX, bgcolor: primaryPalette.main, ...sx }}
+    >
       <Box>
         <RaMenu>
           <RaMenu.Item
             to="/"
-            primaryText={translate("ha.words.profil")}
+            sx={{ mt: "0 !important" }}
+            primaryText={translate("ha.words.home")}
             leftIcon={<Home />}
+          />
+          <RaMenu.Item
+            to="/calendar"
+            primaryText={translate("ha.words.calendar")}
+            leftIcon={<EventAvailable />}
+          />
+          <RaMenu.Item
+            to="/stats"
+            primaryText={translate("ha.words.stats")}
+            leftIcon={<SignalCellularAlt />}
+          />
+          <RaMenu.Item
+            to="/creation"
+            primaryText={translate("ha.words.creation")}
+            leftIcon={<AutoGraph />}
+          />
+          <RaMenu.Item
+            to="/herivelona"
+            primaryText={translate("ha.words.herivelona")}
+            leftIcon={<PersonAdd />}
+          />
+          <RaMenu.Item
+            to="/caisse"
+            primaryText={translate("ha.words.caisse")}
+            leftIcon={<AddBusiness />}
+          />
+          <RaMenu.Item
+            to="/presence"
+            primaryText={translate("ha.words.presence")}
+            leftIcon={<AssignmentTurnedIn />}
+          />
+          <RaMenu.Item
+            to="/fitadiavam-bola"
+            primaryText={translate("ha.words.fitadiavamBola")}
+            leftIcon={<LocalAtm />}
+          />
+          <RaMenu.Item
+            to="/activity"
+            primaryText={translate("ha.words.activity")}
+            leftIcon={<Celebration />}
+          />
+          <RaMenu.Item
+            to="/history"
+            primaryText={translate("ha.words.history")}
+            leftIcon={<ReceiptLong />}
+          />
+          <RaMenu.Item
+            to="/search"
+            primaryText={translate("ha.words.find")}
+            leftIcon={<Search />}
+          />
+          <RaMenu.Item
+            to="/about"
+            primaryText={translate("ha.words.about")}
+            leftIcon={<Apartment />}
           />
         </RaMenu>
       </Box>
