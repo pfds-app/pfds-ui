@@ -19,11 +19,12 @@ import { usePalette } from "@/common/hooks";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
 
 const MENU_SX: SxProps = {
-  "top": "72px",
+  "top": "68px",
   "left": 0,
-  "pb": 2,
+  "pb": 3,
   "width": "220px",
-  "height": "calc(100vh - 72px)",
+  "height": "calc(100vh - 65px)",
+  "overflowY": "auto",
   "display": "flex",
   "flexDirection": "column",
   "justifyContent": "space-between",
@@ -144,6 +145,7 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             leftIcon={<Search />}
           />
           <RaMenu.Item
+            sx={{ borderBottom: "none !important" }}
             to="/about"
             primaryText={translate("ha.words.about")}
             leftIcon={<Apartment />}

@@ -1,4 +1,4 @@
-import { Admin, Resource } from "react-admin";
+import { Admin, CustomRoutes, Resource } from "react-admin";
 
 import { Layout } from "./layout";
 import { LoginPage } from "./security/components";
@@ -7,6 +7,8 @@ import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
 import { pfdsLightTheme } from "./themes";
 import { DUMMIES_UI } from "./operations/dummies";
+import { Route } from "react-router-dom";
+import { AboutPage } from "./operations/about";
 
 export const Dashboard = () => {
   return (
@@ -22,6 +24,9 @@ export const Dashboard = () => {
     >
       <Resource name="dummies" {...DUMMIES_UI} />
       <Resource name="profiles" />
+      <CustomRoutes>
+        <Route path="/about" element={<AboutPage />} />
+      </CustomRoutes>
     </Admin>
   );
 };

@@ -48,7 +48,7 @@ const APPBAR_SX: SxProps = {
   flexDirection: "row",
   boxShadow: "none",
   px: 2,
-  py: 1,
+  py: "5px",
   width: "100%",
   ...PAPER_BOX_SX,
 };
