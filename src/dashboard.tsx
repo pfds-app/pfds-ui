@@ -1,11 +1,11 @@
 import { Admin, Resource } from "react-admin";
 
-import { Layout } from "./layout"
+import { Layout } from "./layout";
 import { LoginPage } from "./security/components";
 import { ProfileShow } from "./operations/profiles";
 import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
-import { pfdsDarkTheme, pfdsLightTheme } from "./themes";
+import { pfdsLightTheme } from "./themes";
 import { DUMMIES_UI } from "./operations/dummies";
 
 export const Dashboard = () => {
@@ -18,8 +18,7 @@ export const Dashboard = () => {
       authProvider={authProvider}
       dataProvider={dataProvider}
       i18nProvider={i18nProvider}
-      darkTheme={pfdsDarkTheme}
-      lightTheme={pfdsLightTheme}
+      theme={pfdsLightTheme}
     >
       <Resource name="dummies" {...DUMMIES_UI} />
       <Resource name="profiles" />

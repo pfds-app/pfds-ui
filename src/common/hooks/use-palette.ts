@@ -1,5 +1,4 @@
 import { useTheme, Palette, PaletteColor } from "@mui/material";
-import { useIsDarkTheme } from "./use-is-dark-theme";
 
 const getPaletteColorNumberValue = (
   paletteColor: PaletteColor,
@@ -10,25 +9,20 @@ const getPaletteColorNumberValue = (
 
 export const usePalette = () => {
   const theme = useTheme();
-  const isDarkTheme = useIsDarkTheme();
   const palette = theme.palette as Palette & Record<string, any>;
-  const bgcolor = isDarkTheme
-    ? getPaletteColorNumberValue(palette.black, 900)
-    : "white";
-  const bgcolorPaper = isDarkTheme
-    ? getPaletteColorNumberValue(palette.black, 1000)
-    : "#edebe6";
-  const primaryColor = !isDarkTheme
-    ? getPaletteColorNumberValue(palette.black, 700)
-    : "white";
-  const secondaryColor = !isDarkTheme ? "gray" : "#b5b5ac";
+  const bgcolor = "white";
+  const bgcolorPaper = "#edebe6";
+  const textPrimaryColor = getPaletteColorNumberValue(palette.black, 700);
+  const textSecondaryColor = "gray";
+  const primaryPalette = palette.primary;
 
   return {
     palette: theme.palette as Palette & Record<string, any>,
     getPaletteColorValue: getPaletteColorNumberValue,
     bgcolor,
-    primaryColor,
-    secondaryColor,
+    textPrimaryColor,
+    textSecondaryColor,
     bgcolorPaper,
+    primaryPalette,
   };
 };

@@ -31,7 +31,7 @@ import {
   AccountCircle,
   ArrowRight,
 } from "@mui/icons-material";
-import { FlexBox, PfdsLogo, ThemeAndLocaleSwitch } from "@/common/components";
+import { FlexBox, PfdsLogo, LocaleSwitch } from "@/common/components";
 import {
   DialogContextProvider,
   useDialogContext,
@@ -142,7 +142,8 @@ const SelectLocalMenuContent: FC<{ closeMainMenu: () => void }> = ({
 };
 
 export const AppBarContent = () => {
-  const { primaryColor, secondaryColor, bgcolor, bgcolorPaper } = usePalette();
+  const { textPrimaryColor, textSecondaryColor, bgcolor, bgcolorPaper } =
+    usePalette();
   const { id } = useWhoami();
   const { isLoading, data: user } = useGetOne<RestUser>("profiles", {
     id: id!,
@@ -167,10 +168,10 @@ export const AppBarContent = () => {
         <PfdsLogo />
       </FlexBox>
       <FlexBox sx={{ gap: 0.5 }}>
-        <ThemeAndLocaleSwitch
+        <LocaleSwitch
           locale={false}
           sx={{
-            "& *": { color: `${primaryColor} !important` },
+            "& *": { color: `${textPrimaryColor} !important` },
             "position": "static",
           }}
         />
@@ -178,7 +179,7 @@ export const AppBarContent = () => {
           sx={{
             ...USER_INFO_SX,
             "&:hover": { bgcolor: bgcolorPaper },
-            "& *": { color: `${primaryColor} !important` },
+            "& *": { color: `${textPrimaryColor} !important` },
           }}
           onClick={openMenu}
         >
@@ -192,10 +193,10 @@ export const AppBarContent = () => {
             <CircularProgress />
           )}
           <Box>
-            <Typography sx={{ fontSize: "14px", color: primaryColor }}>
+            <Typography sx={{ fontSize: "14px", color: textPrimaryColor }}>
               {user?.username}
             </Typography>
-            <Typography sx={{ fontSize: "13px", color: secondaryColor }}>
+            <Typography sx={{ fontSize: "13px", color: textSecondaryColor }}>
               {user?.email}
             </Typography>
           </Box>

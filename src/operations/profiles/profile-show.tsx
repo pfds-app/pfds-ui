@@ -48,5 +48,5 @@ const ProfileShowContent = () => {
         </Dialog>
       }
     />
-  )
-}
+  );
+};

@@ -1,8 +1,4 @@
-import {
-  RaThemeOptions,
-  defaultLightTheme,
-  defaultDarkTheme,
-} from "react-admin";
+import { RaThemeOptions, defaultLightTheme } from "react-admin";
 import { COMPONENT_THEME } from "./component-theme";
 import { COLOR_PALETTE } from "./color-palette";
 
@@ -24,21 +20,6 @@ export const pfdsLightTheme: RaThemeOptions = {
     ...COLOR_PALETTE,
     background: {
       default: "#ffffff",
-    },
-  },
-};
-
-export const pfdsDarkTheme = {
-  ...defaultDarkTheme,
-  components: {
-    ...defaultDarkTheme.components,
-    ...COMPONENT_THEME,
-  },
-  palette: {
-    ...defaultDarkTheme.palette,
-    ...COLOR_PALETTE,
-    background: {
-      default: "#2e2d2d",
     },
   },
 };

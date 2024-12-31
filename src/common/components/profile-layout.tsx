@@ -3,13 +3,18 @@ import { Box, Typography, Avatar } from "@mui/material";
 import { LocationOn } from "@mui/icons-material";
 import { RestUser } from "@/gen/pfds-api-client";
 import { FlexBox } from "./flex-box";
-import { useIsDarkTheme, usePalette } from "../hooks";
+import { usePalette } from "../hooks";
 
 const FieldLabel = ({ label }: { label: string }) => {
-  const { primaryColor } = usePalette();
+  const { textPrimaryColor } = usePalette();
   return (
     <Typography
-      sx={{ fontSize: "13px", mb: 1, color: primaryColor, fontWeight: "bold" }}
+      sx={{
+        fontSize: "13px",
+        mb: 1,
+        color: textPrimaryColor,
+        fontWeight: "bold",
+      }}
     >
       {label}
     </Typography>
@@ -17,9 +22,9 @@ const FieldLabel = ({ label }: { label: string }) => {
 };
 
 const FieldValue = ({ value }: { value: string }) => {
-  const { secondaryColor } = usePalette();
+  const { textSecondaryColor } = usePalette();
   return (
-    <Typography sx={{ mb: 1, fontSize: "13px", color: secondaryColor }}>
+    <Typography sx={{ mb: 1, fontSize: "13px", color: textSecondaryColor }}>
       {value}
     </Typography>
   );
@@ -29,12 +34,7 @@ export const ProfileLayout: FC<{
   user: RestUser;
   actions: ReactNode;
 }> = ({ user, actions }) => {
-  const isDarkTheme = useIsDarkTheme();
-  const { bgcolor, primaryColor } = usePalette();
-
-  const borderSeparator = isDarkTheme
-    ? "1px solid rgba(255, 255, 255, .2)"
-    : "1px solid rgba(0, 0, 0, .1)";
+  const { bgcolor, textPrimaryColor } = usePalette();
 
   return (
     <FlexBox
@@ -57,7 +57,7 @@ export const ProfileLayout: FC<{
           <Typography
             variant="h2"
             sx={{
-              color: primaryColor,
+              color: textPrimaryColor,
               fontSize: "1.4rem",
             }}
           >
@@ -75,11 +75,11 @@ export const ProfileLayout: FC<{
           </FlexBox>
         </Box>
       </FlexBox>
-      <Box sx={{ borderLeft: borderSeparator, pl: 2 }}>
+      <Box sx={{ borderLeft: "1px solid rgba(0, 0, 0, .1)", pl: 2 }}>
         <FlexBox
           sx={{
             gap: 2,
-            color: primaryColor,
+            color: textPrimaryColor,
             justifyContent: "start",
             alignItems: "start",
           }}
