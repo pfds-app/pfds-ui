@@ -3,6 +3,15 @@ import englishMessages from "ra-language-english";
 export const haEnglishMessages: any = {
   ...englishMessages,
   ha: {
+    about: {
+      title: "About J.F.D.S",
+      contacts: "Our Contacts",
+      credits: "Created by",
+      whoAreUs: {
+        title: "Who Are We?",
+        content: "J.F.D.S, or more precisely Jeune Foi Digital Soavimasoandro, is a platform for an association of young believers from the Catholic Church located in Soavimasoandro."
+      }
+    },
     appBar: {
       userPopover: {
         editProfile: "Edit profile",

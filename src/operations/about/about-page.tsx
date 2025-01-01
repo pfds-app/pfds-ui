@@ -1,7 +1,10 @@
 import { Typography, Box } from "@mui/material";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
+import { useTranslate } from "react-admin";
 
 export const AboutPage = () => {
+  const translate = useTranslate();
+
   return (
     <>
       <Typography
@@ -17,7 +20,7 @@ export const AboutPage = () => {
           opacity: 0.9,
         }}
       >
-        À propos de J.F.D.S
+        {translate("ha.about.title")}
       </Typography>
       <Box
         sx={{
@@ -32,15 +35,13 @@ export const AboutPage = () => {
         }}
       >
         <Typography variant="h2" sx={{ fontSize: "1.7rem", mb: "5px" }}>
-          Nous sommes qui ?
+          {translate("ha.about.whoAreUs.title")}
         </Typography>
         <Typography sx={{ fontSize: "14px", opacity: 0.8 }}>
-          J.F.D.S ou plus précisement Jeune Foi Digital Soavimasoandro <br />
-          est une plateforme d'association des jeunes croyant de l'église
-          catholique sise à Soavimasoandro
+          {translate("ha.about.whoAreUs.content")}
         </Typography>
         <Typography variant="h2" sx={{ fontSize: "1.7rem", mt: 3 }}>
-          Nos Contacts
+          {translate("ha.about.contacts")}
         </Typography>
         <Typography sx={{ fontSize: "14px", opacity: 0.8, my: 2 }}>
           mail:{" "}
@@ -69,14 +70,17 @@ export const AboutPage = () => {
               textDecoration: "none",
             }}
           >
+            {
+              //TODO: change to facebook link and name
+            }
             vdktsoavimasoandro@gmail.com
           </a>
         </Typography>
         <Typography variant="h2" sx={{ fontSize: "1.7rem", mt: 3, mb: "5px" }}>
-          Crée par
+          {translate("ha.about.credits")}
         </Typography>
         <Typography sx={{ fontSize: "14px", opacity: 0.8, my: 2 }}>
-          jead 2023 ( adlinjeannot@gmail.com / 0326891205 )
+          © jead 2023 ( adlinjeannot@gmail.com / 0326891205 )
         </Typography>
       </Box>
     </>
