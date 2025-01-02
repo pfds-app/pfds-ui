@@ -1,6 +1,6 @@
 import { AuthProvider } from "react-admin";
 import { isAxiosError } from "axios";
-import { SigninPayload } from "@/gen/pfds-api-client";
+import { SigninPayload } from "@/gen/jfds-api-client";
 import { authWhoamiCache, clearCaches } from "@/common/utils/cache";
 import { securityApi } from "./api";
 import { unwrap } from "./utils";

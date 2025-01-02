@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Pfds Api
- * Pfds
+ * Jfds Api
+ * Jfds
  *
  * The version of the OpenAPI document: 0.0.1
  *

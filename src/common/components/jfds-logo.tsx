@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import { FlexBox } from "./flex-box";
 import { usePalette } from "../hooks";
 
-export const PfdsLogo = () => {
+export const JfdsLogo = () => {
   const { primaryPalette } = usePalette();
 
   return (

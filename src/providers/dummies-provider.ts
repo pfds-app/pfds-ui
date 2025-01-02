@@ -1,4 +1,4 @@
-import { type Dummy } from "@/gen/pfds-api-client";
+import { type Dummy } from "@/gen/jfds-api-client";
 import { type ResourceProvider } from "@rck.princy/ra-data-provider-wrapper";
 import { healthApi } from "./api";
 

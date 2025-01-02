@@ -2,7 +2,7 @@ import { Button, Show, useShowContext, useTranslate } from "react-admin";
 import { CircularProgress, DialogContent } from "@mui/material";
 import { ProfileLayout } from "@/common/components";
 import { Dialog } from "@/common/components";
-import { RestUser } from "@/gen/pfds-api-client";
+import { User } from "@/gen/jfds-api-client";
 import { NOOP_FN } from "@/common/utils/noop-fn";
 import { useWhoami } from "@/security/hooks";
 
@@ -21,7 +21,7 @@ export const ProfileShow = () => {
 };
 
 const ProfileShowContent = () => {
-  const { record: user, isLoading } = useShowContext<RestUser>();
+  const { record: user, isLoading } = useShowContext<User>();
   const translate = useTranslate();
 
   if (isLoading) {

@@ -9,8 +9,9 @@ export const haEnglishMessages: any = {
       credits: "Created by",
       whoAreUs: {
         title: "Who Are We?",
-        content: "J.F.D.S, or more precisely Jeune Foi Digital Soavimasoandro, is a platform for an association of young believers from the Catholic Church located in Soavimasoandro."
-      }
+        content:
+          "J.F.D.S, or more precisely Jeune Foi Digital Soavimasoandro, is a platform for an association of young believers from the Catholic Church located in Soavimasoandro.",
+      },
     },
     appBar: {
       userPopover: {

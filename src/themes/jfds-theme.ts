@@ -2,7 +2,7 @@ import { RaThemeOptions, defaultLightTheme } from "react-admin";
 import { COMPONENT_THEME } from "./component-theme";
 import { COLOR_PALETTE } from "./color-palette";
 
-export const pfdsLightTheme: RaThemeOptions = {
+export const jfdsLightTheme: RaThemeOptions = {
   ...defaultLightTheme,
   components: {
     ...defaultLightTheme.components,

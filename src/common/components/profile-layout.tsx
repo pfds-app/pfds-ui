@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 import { Box, Typography, Avatar } from "@mui/material";
 import { LocationOn } from "@mui/icons-material";
-import { RestUser } from "@/gen/pfds-api-client";
+import { User } from "@/gen/jfds-api-client";
 import { FlexBox } from "./flex-box";
 import { usePalette } from "../hooks";
 
@@ -31,7 +31,7 @@ const FieldValue = ({ value }: { value: string }) => {
 };
 
 export const ProfileLayout: FC<{
-  user: RestUser;
+  user: User;
   actions: ReactNode;
 }> = ({ user, actions }) => {
   const { bgcolor, textPrimaryColor } = usePalette();

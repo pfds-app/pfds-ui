@@ -1,4 +1,4 @@
-import { HealthApi, SecurityApi, UsersApi } from "@/gen/pfds-api-client";
+import { HealthApi, SecurityApi, UsersApi } from "@/gen/jfds-api-client";
 import { getConfiguration } from "./api-conf";
 
 export const healthApi = () => new HealthApi(getConfiguration());

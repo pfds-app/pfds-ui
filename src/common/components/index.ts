@@ -4,4 +4,4 @@ export * from "./popover";
 export * from "./flex-box";
 export * from "./tooltip-icon-button";
 export * from "./locale-switch";
-export * from "./pfds-logo";
+export * from "./jfds-logo";

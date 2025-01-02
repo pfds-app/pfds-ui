@@ -65,7 +65,7 @@ export function Menu() {
 
   useEffect(() => {
     setOpen(true);
-  }, [isSmall]);
+  }, [isSmall, setOpen]);
 
   return isSmall ? (
     <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>

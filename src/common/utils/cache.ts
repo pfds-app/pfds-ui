@@ -1,4 +1,4 @@
-import { Whoami } from "@/gen/pfds-api-client";
+import { Whoami } from "@/gen/jfds-api-client";
 
 export type CacheObject<T> = {
   replace: (obj: T) => T;

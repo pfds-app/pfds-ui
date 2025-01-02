@@ -10,7 +10,8 @@ export const haFrenchMessages: any = {
       credits: "Crée par",
       whoAreUs: {
         title: "Nous sommes qui ?",
-        content: "J.F.D.S ou plus précisement Jeune Foi Digital Soavimasoandro est une plateforme d'association des jeunes croyant de l'église catholique sise à Soavimasoandro"
+        content:
+          "J.F.D.S ou plus précisement Jeune Foi Digital Soavimasoandro est une plateforme d'association des jeunes croyant de l'église catholique sise à Soavimasoandro",
       },
     },
     appBar: {
