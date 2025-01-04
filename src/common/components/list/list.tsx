@@ -18,7 +18,10 @@ const DATAGRID_WRAPPER_SX: SxProps = {
   "p": 2,
   "borderRadius": "8px",
   "& .RaDatagrid-headerRow": {
-    bgcolor: `white !important`,
+    "bgcolor": `white !important`,
+    "& *": {
+      position: "static !important",
+    },
   },
   "& *": {
     boxShadow: "none !important",
@@ -26,19 +29,13 @@ const DATAGRID_WRAPPER_SX: SxProps = {
   "maxHeight": "300px !important",
   "overflowY": "scroll",
   "& .RaDatagrid-headerCell": {
-    "position": "static",
-    "borderRadius": "0px !important",
-    "transform": "translateY(0) !important",
-    "& .Mui-active": {
-      color: "#6e6b6b",
-    },
-    "& .MuiSvgIcon-root": {
-      display: "none !important",
-    },
-    "color": "#6e6b6b",
-    "bgcolor": `transparent !important`,
-    "fontWeight": "bold",
-    "py": 1,
+    position: "static",
+    borderRadius: "0px !important",
+    transform: "translateY(0) !important",
+    color: "#6e6b6b",
+    bgcolor: `transparent !important`,
+    fontWeight: "bold",
+    py: 1,
   },
   "& th, & td": {
     border: "1px solid #d4d2d2 !important",
@@ -80,12 +77,7 @@ export const List: FC<ListProps> = ({
       pagination={<Pagination />}
       {...raListProps}
     >
-      <Box
-        sx={{
-          bgcolor,
-          ...DATAGRID_WRAPPER_SX,
-        }}
-      >
+      <Box sx={{ bgcolor, ...DATAGRID_WRAPPER_SX }}>
         <Datagrid
           rowClick={false}
           bulkActionButtons={false}

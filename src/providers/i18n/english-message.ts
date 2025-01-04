@@ -41,6 +41,7 @@ export const haEnglishMessages: any = {
       next: "Next",
       prev: "Back",
       edit: "Edit",
+      delete: "Delete",
       finish: "Finish",
       signout: "Logout",
       lang: "Langages",

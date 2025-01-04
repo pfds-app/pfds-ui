@@ -45,6 +45,7 @@ export const haFrenchMessages: any = {
       dark: "Sombre",
       prev: "Précédent",
       edit: "Editer",
+      delete: "Supprimer",
       finish: "Terminer",
       signout: "Se Déconnecter",
     },

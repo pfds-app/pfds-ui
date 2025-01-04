@@ -1,1 +1,1 @@
-export * from "./ra-buttons";
+export * from "./buttons";

@@ -5,3 +5,7 @@ export const toISOString = (date: string) => {
     throw new Error("String passed to toISOString is not a valid string");
   }
 };
+
+export const newDateToISOString = () => {
+  return new Date().toISOString();
+};

@@ -2,6 +2,7 @@ import { FC, ReactElement, ReactNode } from "react";
 import {
   Dialog as MuiDialog,
   DialogProps as MuiDialogProps,
+  DialogContent as MuiDialogContent,
 } from "@mui/material";
 import {
   DialogContextProvider,
@@ -10,7 +11,7 @@ import {
 
 export type DialogProps = Partial<MuiDialogProps> & {
   defaultValue?: boolean;
-  actionHandler: ReactElement;
+  actionHandler?: ReactElement;
   children: ReactNode;
 };
 
@@ -34,7 +35,7 @@ export const DialogContent: FC<
   const { status, close } = useDialogContext<false>();
   return (
     <MuiDialog open={status} onClose={close} {...dialogProps}>
-      {children}
+      <MuiDialogContent>{children}</MuiDialogContent>
     </MuiDialog>
   );
 };
