@@ -1,2 +1,2 @@
-export * from "./sacrament-list"
-export * from "./sacrament-create"
+export * from "./sacrament-list";
+export * from "./sacrament-create";

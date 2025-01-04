@@ -8,19 +8,50 @@ import {
 } from "react-admin";
 import { Pagination } from "./pagination";
 import { usePalette } from "@/common/hooks";
+import { ListEmpty } from "./list-empty";
 
-export type ListProps = Partial<RaListProps> & {
+export type ListProps = Partial<Omit<RaListProps, "empty">> & {
   datagridProps?: DatagridProps;
 };
 
 const DATAGRID_WRAPPER_SX: SxProps = {
   "p": 2,
   "borderRadius": "8px",
+  "& .RaDatagrid-headerRow": {
+    bgcolor: `white !important`,
+  },
   "& *": {
     boxShadow: "none !important",
   },
-  "maxHeight": "250px !important",
+  "maxHeight": "300px !important",
   "overflowY": "scroll",
+  "& .RaDatagrid-headerCell": {
+    "position": "static",
+    "borderRadius": "0px !important",
+    "transform": "translateY(0) !important",
+    "& .Mui-active": {
+      color: "#6e6b6b",
+    },
+    "& .MuiSvgIcon-root": {
+      display: "none !important",
+    },
+    "color": "#6e6b6b",
+    "bgcolor": `transparent !important`,
+    "fontWeight": "bold",
+    "py": 1,
+  },
+  "& th, & td": {
+    border: "1px solid #d4d2d2 !important",
+  },
+};
+
+const alternateDatagridRowSx: DatagridProps["rowSx"] = (_record, index) => {
+  return {
+    "bgcolor": index % 2 === 0 ? "#f3f3f3" : "white",
+    "&:hover": {
+      bgcolor: index % 2 === 0 ? "#f3f3f3 !important" : "white !important",
+    },
+  };
 };
 
 export const List: FC<ListProps> = ({
@@ -29,10 +60,12 @@ export const List: FC<ListProps> = ({
   sx = {},
   ...raListProps
 }) => {
-  const { bgcolor, palette } = usePalette();
+  const { bgcolor } = usePalette();
 
   return (
     <RaList
+      actions={false}
+      empty={false}
       sx={{
         "& .RaList-actions": {
           p: 1,
@@ -51,15 +84,15 @@ export const List: FC<ListProps> = ({
         sx={{
           bgcolor,
           ...DATAGRID_WRAPPER_SX,
-          "& th": {
-            color: `${palette.primary.main} !important`,
-            bgcolor: `${bgcolor} !important`,
-            fontWeight: "bold",
-            transform: "translateY(-20%)",
-          },
         }}
       >
-        <Datagrid bulkActionButtons={false} {...datagridProps}>
+        <Datagrid
+          rowClick={false}
+          bulkActionButtons={false}
+          empty={<ListEmpty />}
+          rowSx={alternateDatagridRowSx}
+          {...datagridProps}
+        >
           {children}
         </Datagrid>
       </Box>

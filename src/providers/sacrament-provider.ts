@@ -13,10 +13,12 @@ export const sacramentProvider: ResourceProvider<Sacrament> = {
     return unwrap(() => resourcesApi().deleteSacramentById(id));
   },
   getOne: ({ id }) => {
-    return unwrap(() => resourcesApi().getSacramentById(id))
+    return unwrap(() => resourcesApi().getSacramentById(id));
   },
   saveOrUpdate: async ({ data: sacrament }) => {
-    const [response] = await unwrap(() => resourcesApi().crupdateSacraments([sacrament as Sacrament]));
+    const [response] = await unwrap(() =>
+      resourcesApi().crupdateSacraments([sacrament as Sacrament])
+    );
     return response;
-  }
-}
+  },
+};

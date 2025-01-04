@@ -1,6 +1,12 @@
-import { FC } from "react"
-import { CreateProps, Create as RaCreate, SaveButton, SimpleForm, Toolbar } from "react-admin"
-import { PostAdd } from "@mui/icons-material"
+import { FC } from "react";
+import {
+  CreateProps,
+  Create as RaCreate,
+  SaveButton,
+  SimpleForm,
+  Toolbar,
+} from "react-admin";
+import { PostAdd } from "@mui/icons-material";
 
 export const Create: FC<CreateProps> = ({ children, ...createProps }) => {
   return (
@@ -8,20 +14,20 @@ export const Create: FC<CreateProps> = ({ children, ...createProps }) => {
       redirect={false}
       sx={{
         "& .RaCreate-card": {
-          boxShadow: "none"
-        }
+          boxShadow: "none",
+        },
       }}
       {...createProps}
     >
       <SimpleForm
-        toolbar={(
-          <Toolbar>
+        toolbar={
+          <Toolbar sx={{ mt: "5px" }}>
             <SaveButton color="success" label="Créer" icon={<PostAdd />} />
           </Toolbar>
-        )}
+        }
       >
         {children}
       </SimpleForm>
     </RaCreate>
-  )
-}
+  );
+};

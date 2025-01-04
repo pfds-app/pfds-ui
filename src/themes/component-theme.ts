@@ -5,7 +5,7 @@ export const COMPONENT_THEME: Partial<RaThemeOptions["components"]> = {
     defaultProps: {
       size: "small",
       variant: "filled",
-      fullWidth: true
+      fullWidth: true,
     },
   },
   MuiFormControl: {

@@ -1,1 +1,1 @@
-export * from "./creation-page"
+export * from "./creation-page";

@@ -1,5 +1,5 @@
-import { useCallback, useLayoutEffect, useState } from 'react';
-import { stringifyObj } from '../utils/stringify-obj';
+import { useCallback, useLayoutEffect, useState } from "react";
+import { stringifyObj } from "../utils/stringify-obj";
 
 export type UseTabManagerArgs = {
   defaultTabIndex?: number;
@@ -7,7 +7,11 @@ export type UseTabManagerArgs = {
   tabParamName?: string;
 };
 
-export const useTabManager = ({ defaultTabIndex = 0, tabParamName = 'tab', values }: UseTabManagerArgs) => {
+export const useTabManager = ({
+  defaultTabIndex = 0,
+  tabParamName = "tab",
+  values,
+}: UseTabManagerArgs) => {
   const [tabIndex, setTabIndex] = useState(defaultTabIndex);
   const stringifiedValues = stringifyObj(values);
 
@@ -29,7 +33,7 @@ export const useTabManager = ({ defaultTabIndex = 0, tabParamName = 'tab', value
 
       searchParams.set(tabParamName, newTabValue);
       const newURL = `${location.pathname}?${searchParams.toString()}`;
-      window.history.pushState({}, '', newURL);
+      window.history.pushState({}, "", newURL);
     },
     [location, stringifiedValues]
   );
