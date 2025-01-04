@@ -18,6 +18,14 @@ export const haFrenchMessages: any = {
         code: "Code",
       },
     },
+    association: {
+      name: "Fikambanana masina |||| Fikambanana masina",
+      fields: {
+        id: "Id",
+        name: "Libellé",
+        code: "Code",
+      },
+    },
   },
   pfds: {
     common: {

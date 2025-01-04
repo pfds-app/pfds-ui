@@ -6,3 +6,4 @@ export * from "./user-provider";
 export * from "./profile-provider";
 export * from "./sacrament-provider";
 export * from "./region-provider";
+export * from "./association-provider";

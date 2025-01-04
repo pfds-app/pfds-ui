@@ -18,6 +18,14 @@ export const haEnglishMessages: any = {
         code: "Code",
       },
     },
+    association: {
+      name: "Fikambanana masina |||| Fikambanana masina",
+      fields: {
+        id: "Id",
+        name: "Label",
+        code: "Code",
+      },
+    },
   },
   pfds: {
     common: {

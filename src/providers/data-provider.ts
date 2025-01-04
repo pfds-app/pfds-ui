@@ -3,9 +3,16 @@ import { userProvider } from "./user-provider";
 import { profileProvider } from "./profile-provider";
 import { sacramentProvider } from "./sacrament-provider";
 import { regionProvider } from "./region-provider";
+import { associationProvider } from "./association-provider";
 
 export const dataProvider = createRaProvider(
-  [userProvider, profileProvider, sacramentProvider, regionProvider],
+  [
+    userProvider,
+    profileProvider,
+    sacramentProvider,
+    regionProvider,
+    associationProvider,
+  ],
   {
     getListOptions: {
       defaultPagination: {
