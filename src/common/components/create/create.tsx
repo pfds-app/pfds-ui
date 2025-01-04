@@ -22,7 +22,11 @@ export const Create: FC<CreateProps> = ({ children, ...createProps }) => {
       <SimpleForm
         toolbar={
           <Toolbar sx={{ mt: "5px" }}>
-            <SaveButton color="success" label="Créer" icon={<PostAdd />} />
+            <SaveButton
+              color="success"
+              label={"ra.action.create"}
+              icon={<PostAdd />}
+            />
           </Toolbar>
         }
       >

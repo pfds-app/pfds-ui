@@ -35,7 +35,7 @@ export const SacramentListContent = () => {
   return (
     <BoxPaperTitled title="Lisitry ny Sakramenta" containerSx={{ pt: 0 }}>
       <List
-        resource="sacraments"
+        resource="sacrament"
         datagridProps={{
           sx: {
             "& .RaDatagrid-headerRow": {
@@ -51,14 +51,14 @@ export const SacramentListContent = () => {
           },
         }}
       >
-        <TextField sortable={false} source="name" label="Libellé" />
+        <TextField sortable={false} source="name" />
         <FunctionField
           label="Actions"
           render={(sacrament: Sacrament) => (
             <>
               <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
                 <EditButton onClick={() => doEdit(sacrament)} />
-                <DeleteButton resource="sacraments" id={sacrament.id} />
+                <DeleteButton resource="sacrament" id={sacrament.id} />
               </FlexBox>
             </>
           )}

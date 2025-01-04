@@ -9,13 +9,11 @@ import {
 export type EditButtonProps = Partial<TooltipIconButtonProps>;
 
 export const EditButton: FC<EditButtonProps> = (props) => {
-  const translate = useTranslate();
-
   return (
     <TooltipIconButton
       size="small"
       color="primary"
-      title={translate("ha.words.edit")}
+      title={"ra.action.edit"}
       {...props}
     >
       <EditIcon fontSize="small" />
@@ -41,8 +39,9 @@ export const DeleteButton: FC<DeleteButtonProps> = ({
       id,
     },
     {
-      onSuccess: () => notify("Element Supprimer !"),
-      onError: () => notify("Une rrreur s'est produite ", { type: "error" }),
+      onSuccess: () =>
+        notify(translate("ra.notification.deleted", { smart_count: 1 })),
+      onError: () => notify("ra.page.error", { type: "error" }),
     }
   );
 
@@ -51,7 +50,7 @@ export const DeleteButton: FC<DeleteButtonProps> = ({
       onClick={() => deleteRecord()}
       size="small"
       color="error"
-      title={translate("ha.words.delete")}
+      title={"ra.action.delete"}
       disabled={isLoading}
       {...tooltipProps}
     >

@@ -2,9 +2,19 @@ import englishMessages from "ra-language-english";
 
 export const haEnglishMessages: any = {
   ...englishMessages,
+  resources: {
+    sacrament: {
+      name: "Sakramenta",
+      fields: {
+        id: "Id",
+        name: "Label",
+      },
+    },
+  },
   pfds: {
     common: {
       edit_profile: "Edit profile",
+      empty: "There is no record!",
     },
     sign_in: {
       welcome: "Welcome !",
@@ -28,14 +38,7 @@ export const haEnglishMessages: any = {
           "J.F.D.S, or more precisely Jeune Foi Digital Soavimasoandro, is a platform for an association of young believers from the Catholic Church located in Soavimasoandro.",
       },
     },
-  },
-  ha: {
-    appBar: {
-      userPopover: {
-        editProfile: "Edit profile",
-      },
-    },
-    words: {
+    menu: {
       home: "Home",
       calendar: "Calendar",
       stats: "Statistics",
@@ -49,44 +52,6 @@ export const haEnglishMessages: any = {
       find: "Search",
       about: "About",
       welcome: "Welcome !",
-      or: "Or",
-      signin: "Signin",
-      settings: "Settings",
-      profil: "Profile",
-      more: "More",
-      signup: "Signup",
-      next: "Next",
-      prev: "Back",
-      edit: "Edit",
-      delete: "Delete",
-      finish: "Finish",
-      signout: "Logout",
-      lang: "Langages",
-      light: "Light",
-      dark: "Dark",
-    },
-    text: {
-      forgotPassword: "Forgot password ?",
-      alreadyHaveAccount: "Already have a account ?",
-      doesNotHaveAccountYet: "Does not have an account yet ?",
-    },
-    login: {
-      forms: {
-        confirmPassword: {
-          label: "Confirm your password",
-          error: "The passwords do not match",
-        },
-        password: "Password",
-        username: "Username",
-      },
-    },
-    locales: {
-      fr: {
-        name: "French",
-      },
-      en: {
-        name: "English",
-      },
     },
   },
 };

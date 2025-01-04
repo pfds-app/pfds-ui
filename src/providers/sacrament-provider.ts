@@ -4,7 +4,7 @@ import { unwrap } from "./utils";
 import { resourcesApi } from "./api";
 
 export const sacramentProvider: ResourceProvider<Sacrament> = {
-  resource: "sacraments",
+  resource: "sacrament",
   getList: ({ filter = {}, pagination: { perPage, page } }) => {
     const { name } = filter;
     return unwrap(() => resourcesApi().getSacraments(name, page, perPage));

@@ -25,7 +25,7 @@ export const Dashboard = () => {
     >
       <Resource name="dummies" {...DUMMIES_UI} />
       <Resource name="profiles" />
-      <Resource name="sacraments" />
+      <Resource name="sacrament" />
       <CustomRoutes>
         <Route path="/about" element={<AboutPage />} />
         <Route path="/creations" element={<CreationPage />} />

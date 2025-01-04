@@ -92,7 +92,7 @@ const SelectLocalMenuContent: FC<{ closeMainMenu: () => void }> = ({
   const languages = SUPPORTED_LOCALES.map((locale) => {
     return {
       locale,
-      name: translate(`ha.locales.${locale}.name`),
+      name: translate(`pfds.locales.${locale}.name`),
     };
   });
 

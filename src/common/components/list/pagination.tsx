@@ -23,7 +23,7 @@ export const Pagination = () => {
     <FlexBox sx={{ gap: 1, justifyContent: "end", bgcolor, p: 1 }}>
       <TooltipIconButton
         size="small"
-        title="Previous"
+        title="ra.navigation.previous"
         disabled={!hasPreviousPage}
         onClick={doPrevPage}
         sx={{
@@ -69,7 +69,7 @@ export const Pagination = () => {
         </TooltipIconButton>
       )}
       <TooltipIconButton
-        title="Next"
+        title="ra.navigation.next"
         disabled={!hasNextPage}
         onClick={doNextPage}
         size="small"

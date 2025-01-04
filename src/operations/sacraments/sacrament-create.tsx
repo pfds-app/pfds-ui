@@ -6,11 +6,11 @@ import { createTranform } from "@/common/utils/transform";
 export const SacramentCreate = () => {
   return (
     <BoxPaperTitled
-      title="Sacramenta"
+      title="Sakramenta"
       sx={{ minWidth: "350px", width: "350px" }}
     >
-      <Create transform={createTranform} resource="sacraments">
-        <TextInput validate={required()} source="name" label="Libellé" />
+      <Create transform={createTranform} resource="sacrament">
+        <TextInput validate={required()} source="name" />
       </Create>
     </BoxPaperTitled>
   );

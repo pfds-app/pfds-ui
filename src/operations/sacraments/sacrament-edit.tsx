@@ -6,8 +6,8 @@ import { FC } from "react";
 
 export const SacramentEdit: FC<{ sacrament: Sacrament }> = ({ sacrament }) => {
   return (
-    <Edit id={sacrament.id} resource="sacraments" transform={updateTranform}>
-      <TextInput source="name" label="Libellé" />
+    <Edit id={sacrament.id} resource="sacrament" transform={updateTranform}>
+      <TextInput source="name" />
     </Edit>
   );
 };
