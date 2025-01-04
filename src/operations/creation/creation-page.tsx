@@ -7,6 +7,7 @@ import { AssociationCreate, AssociationList } from "../association";
 import { CommitteeCreate, CommitteeList } from "../committee";
 import { useTabManager } from "@/common/hooks";
 import { EventCreate, EventList } from "../event";
+import { ResponsabilityCreate, ResponsabilityList } from "../responsability";
 
 const CREATION_TABS = [
   "sacraments",
@@ -14,6 +15,7 @@ const CREATION_TABS = [
   "associations",
   "committees",
   "events",
+  "responsabilities",
 ];
 
 export const CreationPage = () => {
@@ -29,6 +31,7 @@ export const CreationPage = () => {
         <Tab label="Fikambanana Masina" />
         <Tab label="Vaomieran'asa" />
         <Tab label="Evènment spécial" />
+        <Tab label="Andraikitra" />
       </Tabs>
       <WithLayoutPadding sx={{ mt: 3 }}>
         <TabPanel index={0} currentIndex={tabIndex}>
@@ -59,6 +62,12 @@ export const CreationPage = () => {
           <ListAndCreateLayout>
             <EventCreate />
             <EventList />
+          </ListAndCreateLayout>
+        </TabPanel>
+        <TabPanel index={5} currentIndex={tabIndex}>
+          <ListAndCreateLayout>
+            <ResponsabilityCreate />
+            <ResponsabilityList />
           </ListAndCreateLayout>
         </TabPanel>
       </WithLayoutPadding>

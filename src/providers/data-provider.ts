@@ -6,6 +6,7 @@ import { regionProvider } from "./region-provider";
 import { associationProvider } from "./association-provider";
 import { committeeProvider } from "./committee-provider";
 import { eventProvider } from "./event-provider";
+import { responsabilityProvider } from "./responsability-provider";
 
 export const dataProvider = createRaProvider(
   [
@@ -16,6 +17,7 @@ export const dataProvider = createRaProvider(
     associationProvider,
     committeeProvider,
     eventProvider,
+    responsabilityProvider,
   ],
   {
     getListOptions: {

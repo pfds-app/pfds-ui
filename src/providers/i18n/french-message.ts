@@ -44,6 +44,13 @@ export const haFrenchMessages: any = {
         endDate: "Fin de d'evènement",
       },
     },
+    responsability: {
+      name: "Andraikitra",
+      fields: {
+        id: "Id",
+        name: "Libellé",
+      },
+    },
   },
   pfds: {
     common: {

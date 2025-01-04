@@ -9,3 +9,4 @@ export * from "./region-provider";
 export * from "./association-provider";
 export * from "./committee-provider";
 export * from "./event-provider";
+export * from "./responsability-provider";

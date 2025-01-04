@@ -44,6 +44,13 @@ export const haEnglishMessages: any = {
         endDate: "Event end date",
       },
     },
+    responsability: {
+      name: "Andraikitra",
+      fields: {
+        id: "Id",
+        name: "Label",
+      },
+    },
   },
   pfds: {
     common: {
