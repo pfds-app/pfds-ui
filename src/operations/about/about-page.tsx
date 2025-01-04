@@ -1,12 +1,13 @@
-import { Typography, Box } from "@mui/material";
-import { PAPER_BOX_SX } from "@/common/utils/common-props";
 import { useTranslate } from "react-admin";
+import { Typography, Box } from "@mui/material";
+import { WithLayoutPadding } from "@/common/components";
+import { PAPER_BOX_SX } from "@/common/utils/common-props";
 
 export const AboutPage = () => {
   const translate = useTranslate();
 
   return (
-    <>
+    <WithLayoutPadding>
       <Typography
         sx={{
           mt: 3,
@@ -83,6 +84,6 @@ export const AboutPage = () => {
           © jead 2023 ( adlinjeannot@gmail.com / 0326891205 )
         </Typography>
       </Box>
-    </>
+    </WithLayoutPadding>
   );
 };

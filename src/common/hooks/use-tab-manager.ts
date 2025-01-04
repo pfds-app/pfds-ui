@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
 import { stringifyObj } from '../utils/stringify-obj';
 
 export type UseTabManagerArgs = {
@@ -39,7 +39,7 @@ export const useTabManager = ({ defaultTabIndex = 0, tabParamName = 'tab', value
     updateURLWithTab(newIndex);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setTabIndex(getTabIndexFromURL());
   }, [getTabIndexFromURL, setTabIndex]);
 

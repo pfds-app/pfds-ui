@@ -7,10 +7,10 @@ import { usePalette } from "@/common/hooks";
 
 const MAIN_CONTENT_SX: SxProps = {
   m: 0,
-  px: 1,
+  pt: "1px",
   ml: {
     xs: 0,
-    md: "250px",
+    md: "220px",
   },
 };
 
