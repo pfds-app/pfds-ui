@@ -10,6 +10,14 @@ export const haEnglishMessages: any = {
         name: "Label",
       },
     },
+    region: {
+      name: "Faritra |||| Faritra",
+      fields: {
+        id: "Id",
+        name: "Label",
+        code: "Code",
+      },
+    },
   },
   pfds: {
     common: {

@@ -146,7 +146,7 @@ export const AppBarContent = () => {
   const { textPrimaryColor, textSecondaryColor, bgcolor, bgcolorPaper } =
     usePalette();
   const { id } = useWhoami();
-  const { isLoading, data: user } = useGetOne<User>("profiles", {
+  const { isLoading, data: user } = useGetOne<User>("profile", {
     id: id!,
   });
   const {

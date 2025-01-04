@@ -20,12 +20,12 @@ export const SacramentList = () => {
 };
 
 export const SacramentListContent = () => {
-  const [sacramentToEdit, setSacramentToEdit] = useState<Sacrament | null>(
-    null
-  );
   const { status, toggleStatus } = useDialogContext<false>();
   const { primaryPalette, getPaletteColorValue } = usePalette();
   const headerRowBgcolor = getPaletteColorValue(primaryPalette, 900);
+  const [sacramentToEdit, setSacramentToEdit] = useState<Sacrament | null>(
+    null
+  );
 
   const doEdit = (sacrament: Sacrament) => {
     toggleStatus();

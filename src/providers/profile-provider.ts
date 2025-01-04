@@ -4,7 +4,7 @@ import { unwrap } from "./utils";
 import { usersApi } from "./api";
 
 export const profileProvider: ResourceProvider<User> = {
-  resource: "profiles",
+  resource: "profile",
   getOne: async ({ id }) => {
     return unwrap(() => usersApi().getUserById(id));
   },

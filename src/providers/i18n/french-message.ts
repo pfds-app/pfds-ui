@@ -10,6 +10,14 @@ export const haFrenchMessages: any = {
         name: "Libellé",
       },
     },
+    region: {
+      name: "Faritra |||| Faritra",
+      fields: {
+        id: "Id",
+        name: "Libellé",
+        code: "Code",
+      },
+    },
   },
   pfds: {
     common: {

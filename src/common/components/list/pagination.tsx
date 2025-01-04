@@ -38,6 +38,7 @@ export const Pagination = () => {
         <TooltipIconButton
           size="small"
           title={(page - 1).toString()}
+          translateTitle={false}
           sx={{ fontSize: "13px", py: 0.6, px: 2, borderRadius: "8px" }}
           onClick={doPrevPage}
         >
@@ -47,6 +48,7 @@ export const Pagination = () => {
       <TooltipIconButton
         size="small"
         title={page.toString()}
+        translateTitle={false}
         sx={{
           fontSize: "13px",
           py: 0.6,
@@ -62,6 +64,7 @@ export const Pagination = () => {
         <TooltipIconButton
           size="small"
           title={(page + 1).toString()}
+          translateTitle={false}
           sx={{ fontSize: "13px", py: 0.6, px: 2, borderRadius: "8px" }}
           onClick={doNextPage}
         >
