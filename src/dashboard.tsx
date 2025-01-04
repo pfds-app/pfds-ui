@@ -25,6 +25,8 @@ export const Dashboard = () => {
       <Resource name="sacrament" />
       <Resource name="region" />
       <Resource name="assocation" />
+      <Resource name="committee" />
+
       <CustomRoutes>
         <Route path="/about" element={<AboutPage />} />
         <Route path="/creations" element={<CreationPage />} />

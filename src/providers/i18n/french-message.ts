@@ -26,6 +26,14 @@ export const haFrenchMessages: any = {
         code: "Code",
       },
     },
+    committee: {
+      name: "Vaomieran'asa |||| Vaomieran'asa",
+      fields: {
+        id: "Id",
+        name: "Libellé",
+        code: "Code",
+      },
+    },
   },
   pfds: {
     common: {

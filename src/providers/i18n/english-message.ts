@@ -26,6 +26,14 @@ export const haEnglishMessages: any = {
         code: "Code",
       },
     },
+    committee: {
+      name: "Vaomieran'asa |||| Vaomieran'asa",
+      fields: {
+        id: "Id",
+        name: "Label",
+        code: "Code",
+      },
+    },
   },
   pfds: {
     common: {

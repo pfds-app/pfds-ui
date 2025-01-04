@@ -4,9 +4,10 @@ import { ListAndCreateLayout, WithLayoutPadding } from "@/common/components";
 import { SacramentList, SacramentCreate } from "../sacrament";
 import { RegionCreate, RegionList } from "../region";
 import { AssociationCreate, AssociationList } from "../association";
+import { CommitteeCreate, CommitteeList } from "../committee";
 import { useTabManager } from "@/common/hooks";
 
-const CREATION_TABS = ["sacraments", "regions", "associations"];
+const CREATION_TABS = ["sacraments", "regions", "associations", "committees"];
 
 export const CreationPage = () => {
   const { tabIndex, handleTabChange } = useTabManager({
@@ -19,6 +20,7 @@ export const CreationPage = () => {
         <Tab label="Sakramenta" />
         <Tab label="Faritra" />
         <Tab label="Fikambanana Masina" />
+        <Tab label="Vaomieran'asa" />
       </Tabs>
       <WithLayoutPadding sx={{ mt: 3 }}>
         <TabPanel index={0} currentIndex={tabIndex}>
@@ -37,6 +39,12 @@ export const CreationPage = () => {
           <ListAndCreateLayout>
             <AssociationCreate />
             <AssociationList />
+          </ListAndCreateLayout>
+        </TabPanel>
+        <TabPanel index={3} currentIndex={tabIndex}>
+          <ListAndCreateLayout>
+            <CommitteeCreate />
+            <CommitteeList />
           </ListAndCreateLayout>
         </TabPanel>
       </WithLayoutPadding>
