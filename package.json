@@ -12,6 +12,9 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
     "@rck.princy/ra-data-provider-wrapper": "^0.0.2",
     "axios": "^1.7.9",
     "ra-language-french": "^5.4.3",
