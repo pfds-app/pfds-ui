@@ -8,6 +8,7 @@ import { jfdsLightTheme } from "./themes";
 import { Route } from "react-router-dom";
 import { AboutPage } from "./operations/about";
 import { CreationPage } from "./operations/creation";
+import { Calendar } from "./operations/calendar";
 
 export const Dashboard = () => {
   return (
@@ -32,6 +33,7 @@ export const Dashboard = () => {
       <CustomRoutes>
         <Route path="/about" element={<AboutPage />} />
         <Route path="/creations" element={<CreationPage />} />
+        <Route path="/calendar" element={<Calendar />} />
       </CustomRoutes>
     </Admin>
   );
