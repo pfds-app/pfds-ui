@@ -212,9 +212,7 @@ export const AppBarContent = () => {
             <ListItemIcon>
               <AccountCircle />
             </ListItemIcon>
-            <ListItemText>
-              {translate("ha.appBar.userPopover.editProfile")}
-            </ListItemText>
+            <ListItemText>{translate("pfds.common.edit_profile")}</ListItemText>
           </MuiMenuItem>
           <Divider sx={{ my: 0 }} />
           <SelectLocalMenu closeMainMenu={closeMenu} />
@@ -228,7 +226,7 @@ export const AppBarContent = () => {
             <ListItemIcon>
               <Logout />
             </ListItemIcon>
-            <ListItemText>{translate("ha.words.signout")}</ListItemText>
+            <ListItemText>{translate("ra.auth.logout")}</ListItemText>
           </MuiMenuItem>
         </MuiMenuList>
       </MuiMenu>

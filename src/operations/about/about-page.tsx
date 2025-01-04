@@ -2,6 +2,12 @@ import { useTranslate } from "react-admin";
 import { Typography, Box } from "@mui/material";
 import { WithLayoutPadding } from "@/common/components";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
+import {
+  FB_PAGE_NAME,
+  FB_PROFILE_LINK,
+  MAIL_VALUE,
+  MAILTO_LINK,
+} from "@/common/utils/constant";
 
 export const AboutPage = () => {
   const translate = useTranslate();
@@ -21,7 +27,7 @@ export const AboutPage = () => {
           opacity: 0.9,
         }}
       >
-        {translate("ha.about.title")}
+        {translate("pfds.about.title")}
       </Typography>
       <Box
         sx={{
@@ -36,49 +42,46 @@ export const AboutPage = () => {
         }}
       >
         <Typography variant="h2" sx={{ fontSize: "1.7rem", mb: "5px" }}>
-          {translate("ha.about.whoAreUs.title")}
+          {translate("pfds.about.who_are_us.title")}
         </Typography>
         <Typography sx={{ fontSize: "14px", opacity: 0.8 }}>
-          {translate("ha.about.whoAreUs.content")}
+          {translate("pfds.about.who_are_us.content")}
         </Typography>
         <Typography variant="h2" sx={{ fontSize: "1.7rem", mt: 3 }}>
-          {translate("ha.about.contacts")}
+          {translate("pfds.about.contacts")}
         </Typography>
         <Typography sx={{ fontSize: "14px", opacity: 0.8, my: 2 }}>
-          mail:{" "}
+          Mail:{" "}
           <a
-            href="mailto:vdktsoavimasoandro@gmail.com"
+            href={MAILTO_LINK}
             style={{
               fontWeight: "bold",
               color: "black",
               textDecoration: "none",
             }}
           >
-            vdktsoavimasoandro@gmail.com
+            {MAIL_VALUE}
           </a>
         </Typography>
         <Typography sx={{ fontSize: "14px", opacity: 0.8, my: 2 }}>
-          phone:{" "}
+          Phone:{" "}
           <span style={{ fontWeight: "bold", color: "black" }}>0341256232</span>
         </Typography>
         <Typography sx={{ fontSize: "14px", opacity: 0.8, my: 2 }}>
-          mail:{" "}
+          Facebook:{" "}
           <a
-            href="mailto:vdktsoavimasoandro@gmail.com"
+            href={FB_PROFILE_LINK}
             style={{
               color: "blue",
               fontWeight: "bold",
               textDecoration: "none",
             }}
           >
-            {
-              //TODO: change to facebook link and name
-            }
-            vdktsoavimasoandro@gmail.com
+            {FB_PAGE_NAME}
           </a>
         </Typography>
         <Typography variant="h2" sx={{ fontSize: "1.7rem", mt: 3, mb: "5px" }}>
-          {translate("ha.about.credits")}
+          {translate("pfds.about.credits")}
         </Typography>
         <Typography sx={{ fontSize: "14px", opacity: 0.8, my: 2 }}>
           © jead 2023 ( adlinjeannot@gmail.com / 0326891205 )

@@ -3,17 +3,34 @@ import frenchMessages from "ra-language-french";
 //TODO: avoid type any
 export const haFrenchMessages: any = {
   ...frenchMessages,
-  ha: {
+  pfds: {
+    common: {
+      edit_profile: "Editer le profil",
+    },
+    sign_in: {
+      welcome: "Bievenu !",
+      username: "Nom d'Utilisateur",
+    },
+    locales: {
+      fr: {
+        name: "Français",
+      },
+      en: {
+        name: "Anglais",
+      },
+    },
     about: {
       title: "À propos de J.F.D.S",
       contacts: "Nos Contacts",
       credits: "Crée par",
-      whoAreUs: {
+      who_are_us: {
         title: "Nous sommes qui ?",
         content:
           "J.F.D.S ou plus précisement Jeune Foi Digital Soavimasoandro est une plateforme d'association des jeunes croyant de l'église catholique sise à Soavimasoandro",
       },
     },
+  },
+  ha: {
     appBar: {
       userPopover: {
         editProfile: "Editer le profil",

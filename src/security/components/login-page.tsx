@@ -12,6 +12,13 @@ import {
 import { SocialIcon } from "react-social-icons";
 import { FlexBox, LocaleSwitch } from "@/common/components";
 import { usePalette } from "@/common/hooks";
+import { Link } from "react-router-dom";
+import {
+  FB_PAGE_NAME,
+  FB_PROFILE_LINK,
+  MAIL_VALUE,
+  MAILTO_LINK,
+} from "@/common/utils/constant";
 
 export const LoginPage = () => {
   const { primaryPalette, textSecondaryColor } = usePalette();
@@ -24,10 +31,10 @@ export const LoginPage = () => {
     >
       <FlexBox
         sx={{
-          position: "relative",
-          width: "98%",
           p: 3,
           pt: 7,
+          width: "98%",
+          position: "relative",
           bgcolor: "white",
           alignItems: "start",
           borderRadius: "8px",
@@ -55,7 +62,7 @@ export const LoginPage = () => {
           sx={{ flex: 1, flexDirection: "column", justifyContent: "start" }}
         >
           <Typography sx={{ fontSize: "1.5rem", mb: 5 }}>
-            {translate("ha.words.welcome")}
+            {translate("pfds.sign_in.welcome")}
           </Typography>
           <SimpleForm
             disableInvalidFormNotification
@@ -64,24 +71,26 @@ export const LoginPage = () => {
               <Toolbar>
                 <SaveButton
                   fullWidth
-                  label={translate("ha.words.signin")}
+                  label={translate("ra.auth.sign_in")}
                   icon={<></>}
                 />
               </Toolbar>
             }
           >
             <TextInput
-              label={translate("ha.login.forms.username")}
               source="username"
+              label={translate("pfds.sign_in.username")}
               validate={required()}
             />
             <PasswordInput
-              label={translate("ha.login.forms.password")}
               source="password"
+              label={translate("ra.auth.password")}
               validate={required()}
             />
           </SimpleForm>
           <Typography
+            to={MAILTO_LINK}
+            component={Link}
             sx={{
               mt: 5,
               fontSize: "14px",
@@ -96,9 +105,11 @@ export const LoginPage = () => {
               style={{ width: "20px", height: "20px" }}
               network="email"
             />
-            vdktsoavimasoandro@gmail.com
+            {MAIL_VALUE}
           </Typography>
           <Typography
+            component={Link}
+            to={FB_PROFILE_LINK}
             sx={{
               mt: 1,
               fontSize: "14px",
@@ -113,7 +124,7 @@ export const LoginPage = () => {
               style={{ width: "20px", height: "20px" }}
               network="facebook"
             />
-            Vovonan'ny Tanora Katolika Soavimasoandro
+            {FB_PAGE_NAME}
           </Typography>
         </FlexBox>
         <LocaleSwitch />

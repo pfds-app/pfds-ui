@@ -16,7 +16,7 @@ export const LocaleSwitch: FC<{ sx?: SxProps; locale?: boolean }> = ({
   const languages = SUPPORTED_LOCALES.map((locale) => {
     return {
       locale,
-      name: translate(`ha.locales.${locale}.name`),
+      name: translate(`pfds.locales.${locale}.name`),
     };
   });
 

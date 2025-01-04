@@ -33,23 +33,22 @@ export const DeleteButton: FC<DeleteButtonProps> = ({
   resource,
   ...tooltipProps
 }) => {
-  const translate = useTranslate();
-  const [deleteRecord, { isLoading }] = useDelete();
   const notify = useNotify();
+  const translate = useTranslate();
+  const [deleteRecord, { isLoading }] = useDelete(
+    resource,
+    {
+      id,
+    },
+    {
+      onSuccess: () => notify("Element Supprimer !"),
+      onError: () => notify("Une rrreur s'est produite ", { type: "error" }),
+    }
+  );
 
   return (
     <TooltipIconButton
-      onClick={() =>
-        deleteRecord(
-          resource,
-          { id },
-          {
-            onSuccess: () => notify("Element Supprimer !"),
-            onError: () =>
-              notify("Une rrreur s'est produite ", { type: "error" }),
-          }
-        )
-      }
+      onClick={() => deleteRecord()}
       size="small"
       color="error"
       title={translate("ha.words.delete")}
