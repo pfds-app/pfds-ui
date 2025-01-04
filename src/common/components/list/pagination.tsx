@@ -6,17 +6,24 @@ import { usePalette } from "@/common/hooks";
 
 export const Pagination = () => {
   const { bgcolor, palette } = usePalette();
-  const { page } = useListContext();
+  const { page, hasNextPage, hasPreviousPage } = useListContext();
   const { setPage } = useListController();
+
+  const doNextPage = () => {
+    setPage(page + 1);
+  }
+
+  const doPrevPage = () => {
+    setPage(page - 1);
+  }
 
   return (
     <FlexBox sx={{ gap: 1, justifyContent: "end", bgcolor, p: 1 }}>
       <TooltipIconButton
         size="small"
         title="Previous"
-        onClick={() => {
-          setPage(page - 1);
-        }}
+        disabled={!hasPreviousPage}
+        onClick={doPrevPage}
         sx={{
           "& .MuiSvgIcon-root": { fontSize: "17px" },
           "px": 2,
@@ -25,13 +32,18 @@ export const Pagination = () => {
       >
         <ArrowBackIos />
       </TooltipIconButton>
-      <TooltipIconButton
-        size="small"
-        title={(page - 1).toString()}
-        sx={{ fontSize: "13px", py: 0.6, px: 2, borderRadius: "8px" }}
-      >
-        {page - 1}
-      </TooltipIconButton>
+      {
+        hasPreviousPage && (
+          <TooltipIconButton
+            size="small"
+            title={(page - 1).toString()}
+            sx={{ fontSize: "13px", py: 0.6, px: 2, borderRadius: "8px" }}
+            onClick={doPrevPage}
+          >
+            {page - 1}
+          </TooltipIconButton>
+        )
+      }
       <TooltipIconButton
         size="small"
         title={page.toString()}
@@ -45,15 +57,22 @@ export const Pagination = () => {
       >
         {page}
       </TooltipIconButton>
-      <TooltipIconButton
-        size="small"
-        title={(page + 1).toString()}
-        sx={{ fontSize: "13px", py: 0.6, px: 2, borderRadius: "8px" }}
-      >
-        {page + 1}
-      </TooltipIconButton>
+      {
+        hasNextPage && (
+          <TooltipIconButton
+            size="small"
+            title={(page + 1).toString()}
+            sx={{ fontSize: "13px", py: 0.6, px: 2, borderRadius: "8px" }}
+            onClick={doNextPage}
+          >
+            {page + 1}
+          </TooltipIconButton>
+        )
+      }
       <TooltipIconButton
         title="Next"
+        disabled={!hasNextPage}
+        onClick={doNextPage}
         size="small"
         sx={{
           "& .MuiSvgIcon-root": { fontSize: "17px" },
@@ -63,6 +82,6 @@ export const Pagination = () => {
       >
         <ArrowForwardIos />
       </TooltipIconButton>
-    </FlexBox>
+    </FlexBox >
   );
 };

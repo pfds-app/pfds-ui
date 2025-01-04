@@ -9,6 +9,7 @@ import { jfdsLightTheme } from "./themes";
 import { DUMMIES_UI } from "./operations/dummies";
 import { Route } from "react-router-dom";
 import { AboutPage } from "./operations/about";
+import { CreationPage } from "./operations/creations";
 
 export const Dashboard = () => {
   return (
@@ -24,8 +25,10 @@ export const Dashboard = () => {
     >
       <Resource name="dummies" {...DUMMIES_UI} />
       <Resource name="profiles" />
+      <Resource name="sacraments" />
       <CustomRoutes>
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/creations" element={<CreationPage />} />
       </CustomRoutes>
     </Admin>
   );

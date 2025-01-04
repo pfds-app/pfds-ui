@@ -5,3 +5,4 @@ export * from "./data-provider";
 export * from "./dummies-provider";
 export * from "./user-provider";
 export * from "./profile-provider";
+export * from "./sacrament-provider";

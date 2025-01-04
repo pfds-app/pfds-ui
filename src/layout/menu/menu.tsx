@@ -105,7 +105,7 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             leftIcon={<SignalCellularAlt />}
           />
           <RaMenu.Item
-            to="/creation"
+            to="/creations"
             primaryText={translate("ha.words.creation")}
             leftIcon={<AutoGraph />}
           />
