@@ -22,7 +22,7 @@ export const Tabs: FC<TabsProps> = ({
         "& .MuiTab-root": {
           "color": "white",
           "textTransform": "none",
-          "minWidth": "200px",
+          "minWidth": "170px",
           "border": "none !important",
           "&[aria-selected=true]": {
             bgcolor: "#4d4b4b !important",

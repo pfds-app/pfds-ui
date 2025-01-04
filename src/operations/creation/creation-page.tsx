@@ -6,8 +6,15 @@ import { RegionCreate, RegionList } from "../region";
 import { AssociationCreate, AssociationList } from "../association";
 import { CommitteeCreate, CommitteeList } from "../committee";
 import { useTabManager } from "@/common/hooks";
+import { EventCreate, EventList } from "../event";
 
-const CREATION_TABS = ["sacraments", "regions", "associations", "committees"];
+const CREATION_TABS = [
+  "sacraments",
+  "regions",
+  "associations",
+  "committees",
+  "events",
+];
 
 export const CreationPage = () => {
   const { tabIndex, handleTabChange } = useTabManager({
@@ -21,6 +28,7 @@ export const CreationPage = () => {
         <Tab label="Faritra" />
         <Tab label="Fikambanana Masina" />
         <Tab label="Vaomieran'asa" />
+        <Tab label="Evènment spécial" />
       </Tabs>
       <WithLayoutPadding sx={{ mt: 3 }}>
         <TabPanel index={0} currentIndex={tabIndex}>
@@ -45,6 +53,12 @@ export const CreationPage = () => {
           <ListAndCreateLayout>
             <CommitteeCreate />
             <CommitteeList />
+          </ListAndCreateLayout>
+        </TabPanel>
+        <TabPanel index={4} currentIndex={tabIndex}>
+          <ListAndCreateLayout>
+            <EventCreate />
+            <EventList />
           </ListAndCreateLayout>
         </TabPanel>
       </WithLayoutPadding>

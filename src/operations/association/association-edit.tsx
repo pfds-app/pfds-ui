@@ -1,4 +1,4 @@
-import { TextInput } from "react-admin";
+import { required, TextInput } from "react-admin";
 import { Edit } from "@/common/components/edit";
 import { updateTranform } from "@/common/utils/transform";
 import { Association } from "@/gen/jfds-api-client";
@@ -9,8 +9,8 @@ export const AssociationEdit: FC<{ association: Association }> = ({
 }) => {
   return (
     <Edit id={association.id} resource="association" transform={updateTranform}>
-      <TextInput source="code" />
-      <TextInput source="name" />
+      <TextInput validate={required()} source="code" />
+      <TextInput validate={required()} source="name" />
     </Edit>
   );
 };

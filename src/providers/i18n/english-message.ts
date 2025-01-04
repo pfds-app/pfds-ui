@@ -34,11 +34,22 @@ export const haEnglishMessages: any = {
         code: "Code",
       },
     },
+    event: {
+      name: "Event |||| Events",
+      fields: {
+        id: "Id",
+        name: "Event name",
+        place: "Place",
+        beginDate: "Event start date",
+        endDate: "Event end date",
+      },
+    },
   },
   pfds: {
     common: {
       edit_profile: "Edit profile",
       empty: "There is no record!",
+      optional: "Optional",
     },
     sign_in: {
       welcome: "Welcome !",

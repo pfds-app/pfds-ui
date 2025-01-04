@@ -34,11 +34,22 @@ export const haFrenchMessages: any = {
         code: "Code",
       },
     },
+    event: {
+      name: "Evènment |||| Evènments",
+      fields: {
+        id: "Id",
+        name: "Nom de l'evènment",
+        place: "Lieu",
+        beginDate: "Début de d'evènement",
+        endDate: "Fin de d'evènement",
+      },
+    },
   },
   pfds: {
     common: {
       edit_profile: "Editer le profil",
       empty: "Il n'y a pas d'enregistrement!",
+      optional: "Facultatif",
     },
     sign_in: {
       welcome: "Bievenu !",
