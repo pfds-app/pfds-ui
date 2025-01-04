@@ -4,6 +4,8 @@ export const COMPONENT_THEME: Partial<RaThemeOptions["components"]> = {
   MuiTextField: {
     defaultProps: {
       size: "small",
+      variant: "filled",
+      fullWidth: true
     },
   },
   MuiFormControl: {

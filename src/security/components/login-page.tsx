@@ -71,13 +71,11 @@ export const LoginPage = () => {
             }
           >
             <TextInput
-              fullWidth
               label={translate("ha.login.forms.username")}
               source="username"
               validate={required()}
             />
             <PasswordInput
-              fullWidth
               label={translate("ha.login.forms.password")}
               source="password"
               validate={required()}

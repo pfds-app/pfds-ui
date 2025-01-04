@@ -1,12 +1,14 @@
 import { Tab } from "@mui/material";
 import { Tabs, TabPanel } from "@/common/components/tabs"
-import { SacramentList } from "../sacraments";
+import { ListAndCreateLayout, WithLayoutPadding } from "@/common/components";
+import { SacramentList, SacramentCreate } from "../sacraments";
 import { useTabManager } from "@/common/hooks"
 
 const CREATION_TABS = [
   "sacraments",
   "regions"
 ]
+
 export const CreationPage = () => {
   const { tabIndex, handleTabChange } = useTabManager({ values: CREATION_TABS });
 
@@ -16,9 +18,16 @@ export const CreationPage = () => {
         <Tab label="Sakramenta" />
         <Tab label="Regions" />
       </Tabs>
-      <TabPanel index={0} currentIndex={tabIndex}>
-        <SacramentList />
-      </TabPanel>
+      <WithLayoutPadding sx={{ mt: 3 }}>
+
+        <TabPanel index={0} currentIndex={tabIndex}>
+          <ListAndCreateLayout>
+            <SacramentCreate />
+            <SacramentList />
+          </ListAndCreateLayout>
+        </TabPanel>
+
+      </WithLayoutPadding>
     </>
   )
 }

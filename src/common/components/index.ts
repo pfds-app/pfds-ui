@@ -7,3 +7,4 @@ export * from "./locale-switch";
 export * from "./jfds-logo";
 export * from "./box-paper-titled";
 export * from "./with-layout-padding";
+export * from "./list-and-create-layout";
