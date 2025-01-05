@@ -92,7 +92,7 @@ const SelectLocalMenuContent: FC<{ closeMainMenu: () => void }> = ({
   const languages = SUPPORTED_LOCALES.map((locale) => {
     return {
       locale,
-      name: translate(`pfds.locales.${locale}.name`),
+      name: translate(`custom.locales.${locale}.name`),
     };
   });
 
@@ -212,7 +212,9 @@ export const AppBarContent = () => {
             <ListItemIcon>
               <AccountCircle />
             </ListItemIcon>
-            <ListItemText>{translate("pfds.common.edit_profile")}</ListItemText>
+            <ListItemText>
+              {translate("custom.common.edit_profile")}
+            </ListItemText>
           </MuiMenuItem>
           <Divider sx={{ my: 0 }} />
           <SelectLocalMenu closeMainMenu={closeMenu} />

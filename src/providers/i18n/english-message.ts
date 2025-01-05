@@ -51,8 +51,24 @@ export const haEnglishMessages: any = {
         name: "Label",
       },
     },
+    ledger: {
+      name: "Ledger",
+      fields: {
+        id: "Id",
+        name: "Label",
+        mouvementType: "Mouvement",
+        ledgerDate: "Date",
+        price: "Amount",
+      },
+    },
   },
-  pfds: {
+  custom: {
+    enum: {
+      ledger_mouvement_type: {
+        IN: "In",
+        OUT: "Out",
+      },
+    },
     common: {
       edit_profile: "Edit profile",
       empty: "There is no record!",
@@ -86,7 +102,7 @@ export const haEnglishMessages: any = {
       stats: "Statistics",
       creation: "Creations",
       herivelona: "Herivelona",
-      caisse: "Cash",
+      caisse: "Ledger",
       presence: "Presence",
       fitadiavamBola: "Fitadiavam-bola",
       activity: "Activities",

@@ -20,6 +20,7 @@ export const Create: FC<CreateProps> = ({ children, ...createProps }) => {
       {...createProps}
     >
       <SimpleForm
+        disableInvalidFormNotification
         toolbar={
           <Toolbar sx={{ mt: "5px" }}>
             <SaveButton

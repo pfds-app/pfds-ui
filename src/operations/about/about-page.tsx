@@ -27,7 +27,7 @@ export const AboutPage = () => {
           opacity: 0.9,
         }}
       >
-        {translate("pfds.about.title")}
+        {translate("custom.about.title")}
       </Typography>
       <Box
         sx={{
@@ -42,13 +42,13 @@ export const AboutPage = () => {
         }}
       >
         <Typography variant="h2" sx={{ fontSize: "1.7rem", mb: "5px" }}>
-          {translate("pfds.about.who_are_us.title")}
+          {translate("custom.about.who_are_us.title")}
         </Typography>
         <Typography sx={{ fontSize: "14px", opacity: 0.8 }}>
-          {translate("pfds.about.who_are_us.content")}
+          {translate("custom.about.who_are_us.content")}
         </Typography>
         <Typography variant="h2" sx={{ fontSize: "1.7rem", mt: 3 }}>
-          {translate("pfds.about.contacts")}
+          {translate("custom.about.contacts")}
         </Typography>
         <Typography sx={{ fontSize: "14px", opacity: 0.8, my: 2 }}>
           Mail:{" "}
@@ -81,7 +81,7 @@ export const AboutPage = () => {
           </a>
         </Typography>
         <Typography variant="h2" sx={{ fontSize: "1.7rem", mt: 3, mb: "5px" }}>
-          {translate("pfds.about.credits")}
+          {translate("custom.about.credits")}
         </Typography>
         <Typography sx={{ fontSize: "14px", opacity: 0.8, my: 2 }}>
           © jead 2023 ( adlinjeannot@gmail.com / 0326891205 )

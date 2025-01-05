@@ -1,14 +1,15 @@
 import { Admin, CustomRoutes, Resource } from "react-admin";
+import { Route } from "react-router-dom";
 
 import { Layout } from "./layout";
 import { LoginPage } from "./security/components";
-import { authProvider, dataProvider } from "./providers";
-import { i18nProvider } from "./providers/i18n";
-import { jfdsLightTheme } from "./themes";
-import { Route } from "react-router-dom";
 import { AboutPage } from "./operations/about";
 import { CreationPage } from "./operations/creation";
 import { Calendar } from "./operations/calendar";
+import { LedgerPage } from "./operations/ledger";
+import { authProvider, dataProvider } from "./providers";
+import { i18nProvider } from "./providers/i18n";
+import { jfdsLightTheme } from "./themes";
 
 export const Dashboard = () => {
   return (
@@ -29,11 +30,13 @@ export const Dashboard = () => {
       <Resource name="committee" />
       <Resource name="event" />
       <Resource name="responsability" />
+      <Resource name="ledger" />
 
       <CustomRoutes>
         <Route path="/about" element={<AboutPage />} />
         <Route path="/creations" element={<CreationPage />} />
         <Route path="/calendar" element={<Calendar />} />
+        <Route path="/ledger" element={<LedgerPage />} />
       </CustomRoutes>
     </Admin>
   );

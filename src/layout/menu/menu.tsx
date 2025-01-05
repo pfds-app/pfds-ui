@@ -91,63 +91,63 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
           <RaMenu.Item
             to="/"
             sx={{ mt: "0 !important" }}
-            primaryText={translate("pfds.menu.home")}
+            primaryText={translate("custom.menu.home")}
             leftIcon={<Home />}
           />
           <RaMenu.Item
             to="/calendar"
-            primaryText={translate("pfds.menu.calendar")}
+            primaryText={translate("custom.menu.calendar")}
             leftIcon={<EventAvailable />}
           />
           <RaMenu.Item
             to="/stats"
-            primaryText={translate("pfds.menu.stats")}
+            primaryText={translate("custom.menu.stats")}
             leftIcon={<SignalCellularAlt />}
           />
           <RaMenu.Item
             to="/creations"
-            primaryText={translate("pfds.menu.creation")}
+            primaryText={translate("custom.menu.creation")}
             leftIcon={<AutoGraph />}
           />
           <RaMenu.Item
             to="/herivelona"
-            primaryText={translate("pfds.menu.herivelona")}
+            primaryText={translate("custom.menu.herivelona")}
             leftIcon={<PersonAdd />}
           />
           <RaMenu.Item
-            to="/caisse"
-            primaryText={translate("pfds.menu.caisse")}
+            to="/ledger"
+            primaryText={translate("custom.menu.caisse")}
             leftIcon={<AddBusiness />}
           />
           <RaMenu.Item
             to="/presence"
-            primaryText={translate("pfds.menu.presence")}
+            primaryText={translate("custom.menu.presence")}
             leftIcon={<AssignmentTurnedIn />}
           />
           <RaMenu.Item
             to="/fitadiavam-bola"
-            primaryText={translate("pfds.menu.fitadiavamBola")}
+            primaryText={translate("custom.menu.fitadiavamBola")}
             leftIcon={<LocalAtm />}
           />
           <RaMenu.Item
             to="/activity"
-            primaryText={translate("pfds.menu.activity")}
+            primaryText={translate("custom.menu.activity")}
             leftIcon={<Celebration />}
           />
           <RaMenu.Item
             to="/history"
-            primaryText={translate("pfds.menu.history")}
+            primaryText={translate("custom.menu.history")}
             leftIcon={<ReceiptLong />}
           />
           <RaMenu.Item
             to="/search"
-            primaryText={translate("pfds.menu.find")}
+            primaryText={translate("custom.menu.find")}
             leftIcon={<Search />}
           />
           <RaMenu.Item
             sx={{ borderBottom: "none !important" }}
             to="/about"
-            primaryText={translate("pfds.menu.about")}
+            primaryText={translate("custom.menu.about")}
             leftIcon={<Apartment />}
           />
         </RaMenu>

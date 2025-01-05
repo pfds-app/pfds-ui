@@ -51,8 +51,24 @@ export const haFrenchMessages: any = {
         name: "Libellé",
       },
     },
+    ledger: {
+      name: "Caisse",
+      fields: {
+        id: "Id",
+        name: "Libellé",
+        mouvementType: "Mouvement",
+        ledgerDate: "Date",
+        price: "Montant",
+      },
+    },
   },
-  pfds: {
+  custom: {
+    enum: {
+      ledger_mouvement_type: {
+        IN: "Entrée",
+        OUT: "Sortie",
+      },
+    },
     common: {
       edit_profile: "Editer le profil",
       empty: "Il n'y a pas d'enregistrement!",

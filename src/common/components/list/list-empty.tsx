@@ -14,7 +14,7 @@ export const ListEmpty = () => {
         textAlign: "center",
       }}
     >
-      {translate("pfds.common.empty")}
+      {translate("custom.common.empty")}
     </Typography>
   );
 };

@@ -28,7 +28,7 @@ export const EventCreate = () => {
         <TextInput validate={required()} source="place" />
         <DateInput validate={required()} source="beginDate" />
         <DateInput
-          label={`${translate("resources.event.fields.endDate")} (${translate("pfds.common.optional")})}`}
+          label={`${translate("resources.event.fields.endDate")} (${translate("custom.common.optional")})}`}
           source="endDate"
         />
       </Create>

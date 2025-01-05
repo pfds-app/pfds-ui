@@ -62,7 +62,7 @@ export const LoginPage = () => {
           sx={{ flex: 1, flexDirection: "column", justifyContent: "start" }}
         >
           <Typography sx={{ fontSize: "1.5rem", mb: 5 }}>
-            {translate("pfds.sign_in.welcome")}
+            {translate("custom.sign_in.welcome")}
           </Typography>
           <SimpleForm
             disableInvalidFormNotification
@@ -79,7 +79,7 @@ export const LoginPage = () => {
           >
             <TextInput
               source="username"
-              label={translate("pfds.sign_in.username")}
+              label={translate("custom.sign_in.username")}
               validate={required()}
             />
             <PasswordInput

@@ -1,4 +1,5 @@
 import { createRaProvider } from "@rck.princy/ra-data-provider-wrapper";
+
 import { userProvider } from "./user-provider";
 import { profileProvider } from "./profile-provider";
 import { sacramentProvider } from "./sacrament-provider";
@@ -7,6 +8,7 @@ import { associationProvider } from "./association-provider";
 import { committeeProvider } from "./committee-provider";
 import { eventProvider } from "./event-provider";
 import { responsabilityProvider } from "./responsability-provider";
+import { ledgerProvider } from "./ledger-provider";
 
 export const dataProvider = createRaProvider(
   [
@@ -18,6 +20,7 @@ export const dataProvider = createRaProvider(
     committeeProvider,
     eventProvider,
     responsabilityProvider,
+    ledgerProvider,
   ],
   {
     getListOptions: {
