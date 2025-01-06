@@ -10,6 +10,7 @@ import { eventProvider } from "./event-provider";
 import { responsabilityProvider } from "./responsability-provider";
 import { ledgerProvider } from "./ledger-provider";
 import { operationProvider } from "./operation-provider";
+import { ticketProvider } from "./ticket-provider";
 
 export const dataProvider = createRaProvider(
   [
@@ -23,6 +24,7 @@ export const dataProvider = createRaProvider(
     responsabilityProvider,
     ledgerProvider,
     operationProvider,
+    ticketProvider,
   ],
   {
     getListOptions: {

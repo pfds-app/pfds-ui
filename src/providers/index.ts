@@ -12,3 +12,4 @@ export * from "./event-provider";
 export * from "./responsability-provider";
 export * from "./ledger-provider";
 export * from "./operation-provider";
+export * from "./ticket-provider";

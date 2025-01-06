@@ -72,6 +72,16 @@ export const haEnglishMessages: any = {
         operationDate: "Date",
       },
     },
+    ticket: {
+      name: "Ticket",
+      fields: {
+        id: "Id",
+        operation: "Operation",
+        staff: "Staff",
+        fromNumber: "From",
+        toNumber: "To",
+      },
+    },
   },
   custom: {
     enum: {

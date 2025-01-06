@@ -21,4 +21,10 @@ export const operationProvider: ResourceProvider<Operation> = {
     );
     return response;
   },
+  getMany: async (_resource, { ids }) => {
+    const [id] = ids as string[]; // as we use only select input and never array input
+    return {
+      data: [await unwrap(() => moneysApi().getOperationById(id))],
+    } as any;
+  },
 };
