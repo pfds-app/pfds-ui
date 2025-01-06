@@ -61,6 +61,17 @@ export const haEnglishMessages: any = {
         price: "Amount",
       },
     },
+    operation: {
+      name: "Operation",
+      fields: {
+        id: "Id",
+        name: "Label",
+        numberOfTickets: "Number of tickets",
+        ticketPrice: "Price of ticket (Ariary)",
+        description: "Description",
+        operationDate: "Date",
+      },
+    },
   },
   custom: {
     enum: {

@@ -11,3 +11,4 @@ export * from "./committee-provider";
 export * from "./event-provider";
 export * from "./responsability-provider";
 export * from "./ledger-provider";
+export * from "./operation-provider";

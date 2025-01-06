@@ -141,6 +141,55 @@ export interface Committee {
 /**
  *
  * @export
+ * @interface CrupdateTicket
+ */
+export interface CrupdateTicket {
+  /**
+   *
+   * @type {string}
+   * @memberof CrupdateTicket
+   */
+  id: string;
+  /**
+   *
+   * @type {number}
+   * @memberof CrupdateTicket
+   */
+  fromNumber: number;
+  /**
+   *
+   * @type {number}
+   * @memberof CrupdateTicket
+   */
+  toNumber: number;
+  /**
+   *
+   * @type {string}
+   * @memberof CrupdateTicket
+   */
+  operationId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CrupdateTicket
+   */
+  staffId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CrupdateTicket
+   */
+  createdAt: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CrupdateTicket
+   */
+  updatedAt: string;
+}
+/**
+ *
+ * @export
  * @interface Dummy
  */
 export interface Dummy {
@@ -264,6 +313,104 @@ export const LedgerMouvementTypeEnum = {
 export type LedgerMouvementTypeEnum =
   (typeof LedgerMouvementTypeEnum)[keyof typeof LedgerMouvementTypeEnum];
 
+/**
+ *
+ * @export
+ * @interface Operation
+ */
+export interface Operation {
+  /**
+   *
+   * @type {string}
+   * @memberof Operation
+   */
+  id: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Operation
+   */
+  name: string;
+  /**
+   *
+   * @type {number}
+   * @memberof Operation
+   */
+  numberOfTickets: number;
+  /**
+   *
+   * @type {string}
+   * @memberof Operation
+   */
+  ticketPrice: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Operation
+   */
+  description: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Operation
+   */
+  operationDate: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Operation
+   */
+  createdAt: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Operation
+   */
+  updatedAt: string;
+}
+/**
+ *
+ * @export
+ * @interface PayedTicket
+ */
+export interface PayedTicket {
+  /**
+   *
+   * @type {string}
+   * @memberof PayedTicket
+   */
+  id: string;
+  /**
+   *
+   * @type {number}
+   * @memberof PayedTicket
+   */
+  ticketNumber: number;
+  /**
+   *
+   * @type {string}
+   * @memberof PayedTicket
+   */
+  ticketId: string;
+  /**
+   *
+   * @type {boolean}
+   * @memberof PayedTicket
+   */
+  isPayed: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof PayedTicket
+   */
+  createdAt: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PayedTicket
+   */
+  updatedAt: string;
+}
 /**
  *
  * @export
@@ -519,6 +666,55 @@ export const SignupPayloadGenderEnum = {
 export type SignupPayloadGenderEnum =
   (typeof SignupPayloadGenderEnum)[keyof typeof SignupPayloadGenderEnum];
 
+/**
+ *
+ * @export
+ * @interface Ticket
+ */
+export interface Ticket {
+  /**
+   *
+   * @type {string}
+   * @memberof Ticket
+   */
+  id: string;
+  /**
+   *
+   * @type {number}
+   * @memberof Ticket
+   */
+  fromNumber: number;
+  /**
+   *
+   * @type {number}
+   * @memberof Ticket
+   */
+  toNumber: number;
+  /**
+   *
+   * @type {Operation}
+   * @memberof Ticket
+   */
+  operation: Operation;
+  /**
+   *
+   * @type {User}
+   * @memberof Ticket
+   */
+  staff: User;
+  /**
+   *
+   * @type {string}
+   * @memberof Ticket
+   */
+  createdAt: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Ticket
+   */
+  updatedAt: string;
+}
 /**
  *
  * @export
@@ -1099,10 +1295,10 @@ export class HealthApi extends BaseAPI {
 }
 
 /**
- * LedgersApi - axios parameter creator
+ * MoneysApi - axios parameter creator
  * @export
  */
-export const LedgersApiAxiosParamCreator = function (
+export const MoneysApiAxiosParamCreator = function (
   configuration?: Configuration
 ) {
   return {
@@ -1163,6 +1359,182 @@ export const LedgersApiAxiosParamCreator = function (
     /**
      *
      * @summary
+     * @param {Array<Operation>} operation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateOperations: async (
+      operation: Array<Operation>,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'operation' is not null or undefined
+      assertParamExists("crupdateOperations", "operation", operation);
+      const localVarPath = `/operations`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "PUT",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        operation,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {string} operationId
+     * @param {string} staffId
+     * @param {Array<PayedTicket>} payedTicket
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdatePayedTickets: async (
+      operationId: string,
+      staffId: string,
+      payedTicket: Array<PayedTicket>,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'operationId' is not null or undefined
+      assertParamExists("crupdatePayedTickets", "operationId", operationId);
+      // verify required parameter 'staffId' is not null or undefined
+      assertParamExists("crupdatePayedTickets", "staffId", staffId);
+      // verify required parameter 'payedTicket' is not null or undefined
+      assertParamExists("crupdatePayedTickets", "payedTicket", payedTicket);
+      const localVarPath =
+        `/operation/{operationId}/staffs/{staffId}/payed-tickets`
+          .replace(
+            `{${"operationId"}}`,
+            encodeURIComponent(String(operationId))
+          )
+          .replace(`{${"staffId"}}`, encodeURIComponent(String(staffId)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "PUT",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        payedTicket,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {Array<CrupdateTicket>} crupdateTicket
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateTickets: async (
+      crupdateTicket: Array<CrupdateTicket>,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'crupdateTicket' is not null or undefined
+      assertParamExists("crupdateTickets", "crupdateTicket", crupdateTicket);
+      const localVarPath = `/tickets`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "PUT",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        crupdateTicket,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
      * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1174,6 +1546,106 @@ export const LedgersApiAxiosParamCreator = function (
       // verify required parameter 'id' is not null or undefined
       assertParamExists("deleteLedgerById", "id", id);
       const localVarPath = `/ledgers/{id}`.replace(
+        `{${"id"}}`,
+        encodeURIComponent(String(id))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "DELETE",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteOperationById: async (
+      id: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists("deleteOperationById", "id", id);
+      const localVarPath = `/operations/{id}`.replace(
+        `{${"id"}}`,
+        encodeURIComponent(String(id))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "DELETE",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteTicketById: async (
+      id: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists("deleteTicketById", "id", id);
+      const localVarPath = `/tickets/{id}`.replace(
         `{${"id"}}`,
         encodeURIComponent(String(id))
       );
@@ -1321,15 +1793,300 @@ export const LedgersApiAxiosParamCreator = function (
         options: localVarRequestOptions,
       };
     },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOperationById: async (
+      id: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists("getOperationById", "id", id);
+      const localVarPath = `/operations/{id}`.replace(
+        `{${"id"}}`,
+        encodeURIComponent(String(id))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {string} [name]
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOperations: async (
+      name?: string,
+      page?: number,
+      pageSize?: number,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/operations`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (name !== undefined) {
+        localVarQueryParameter["name"] = name;
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameter["page"] = page;
+      }
+
+      if (pageSize !== undefined) {
+        localVarQueryParameter["pageSize"] = pageSize;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {string} operationId
+     * @param {string} staffId
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPayedTickets: async (
+      operationId: string,
+      staffId: string,
+      page?: number,
+      pageSize?: number,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'operationId' is not null or undefined
+      assertParamExists("getPayedTickets", "operationId", operationId);
+      // verify required parameter 'staffId' is not null or undefined
+      assertParamExists("getPayedTickets", "staffId", staffId);
+      const localVarPath =
+        `/operation/{operationId}/staffs/{staffId}/payed-tickets`
+          .replace(
+            `{${"operationId"}}`,
+            encodeURIComponent(String(operationId))
+          )
+          .replace(`{${"staffId"}}`, encodeURIComponent(String(staffId)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (page !== undefined) {
+        localVarQueryParameter["page"] = page;
+      }
+
+      if (pageSize !== undefined) {
+        localVarQueryParameter["pageSize"] = pageSize;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getTicketById: async (
+      id: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists("getTicketById", "id", id);
+      const localVarPath = `/tickets/{id}`.replace(
+        `{${"id"}}`,
+        encodeURIComponent(String(id))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getTickets: async (
+      page?: number,
+      pageSize?: number,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/tickets`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (page !== undefined) {
+        localVarQueryParameter["page"] = page;
+      }
+
+      if (pageSize !== undefined) {
+        localVarQueryParameter["pageSize"] = pageSize;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
   };
 };
 
 /**
- * LedgersApi - functional programming interface
+ * MoneysApi - functional programming interface
  * @export
  */
-export const LedgersApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = LedgersApiAxiosParamCreator(configuration);
+export const MoneysApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = MoneysApiAxiosParamCreator(configuration);
   return {
     /**
      *
@@ -1350,7 +2107,108 @@ export const LedgersApiFp = function (configuration?: Configuration) {
       );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["LedgersApi.crupdateLedgers"]?.[
+        operationServerMap["MoneysApi.crupdateLedgers"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {Array<Operation>} operation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdateOperations(
+      operation: Array<Operation>,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<Operation>>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.crupdateOperations(operation, options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.crupdateOperations"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} operationId
+     * @param {string} staffId
+     * @param {Array<PayedTicket>} payedTicket
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdatePayedTickets(
+      operationId: string,
+      staffId: string,
+      payedTicket: Array<PayedTicket>,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<PayedTicket>>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.crupdatePayedTickets(
+          operationId,
+          staffId,
+          payedTicket,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.crupdatePayedTickets"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {Array<CrupdateTicket>} crupdateTicket
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdateTickets(
+      crupdateTicket: Array<CrupdateTicket>,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Ticket>>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.crupdateTickets(
+        crupdateTicket,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.crupdateTickets"]?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -1378,7 +2236,63 @@ export const LedgersApiFp = function (configuration?: Configuration) {
         await localVarAxiosParamCreator.deleteLedgerById(id, options);
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["LedgersApi.deleteLedgerById"]?.[
+        operationServerMap["MoneysApi.deleteLedgerById"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async deleteOperationById(
+      id: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Operation>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.deleteOperationById(id, options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.deleteOperationById"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async deleteTicketById(
+      id: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Ticket>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.deleteTicketById(id, options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.deleteTicketById"]?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -1408,7 +2322,7 @@ export const LedgersApiFp = function (configuration?: Configuration) {
       );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["LedgersApi.getLedgerById"]?.[
+        operationServerMap["MoneysApi.getLedgerById"]?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -1444,7 +2358,179 @@ export const LedgersApiFp = function (configuration?: Configuration) {
       );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["LedgersApi.getLedgers"]?.[
+        operationServerMap["MoneysApi.getLedgers"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getOperationById(
+      id: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Operation>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getOperationById(id, options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.getOperationById"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} [name]
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getOperations(
+      name?: string,
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<Operation>>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getOperations(
+        name,
+        page,
+        pageSize,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.getOperations"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} operationId
+     * @param {string} staffId
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getPayedTickets(
+      operationId: string,
+      staffId: string,
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<PayedTicket>>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getPayedTickets(
+        operationId,
+        staffId,
+        page,
+        pageSize,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.getPayedTickets"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getTicketById(
+      id: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Ticket>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getTicketById(
+        id,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.getTicketById"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getTickets(
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Ticket>>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getTickets(
+        page,
+        pageSize,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.getTickets"]?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -1459,15 +2545,15 @@ export const LedgersApiFp = function (configuration?: Configuration) {
 };
 
 /**
- * LedgersApi - factory interface
+ * MoneysApi - factory interface
  * @export
  */
-export const LedgersApiFactory = function (
+export const MoneysApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
   axios?: AxiosInstance
 ) {
-  const localVarFp = LedgersApiFp(configuration);
+  const localVarFp = MoneysApiFp(configuration);
   return {
     /**
      *
@@ -1487,6 +2573,55 @@ export const LedgersApiFactory = function (
     /**
      *
      * @summary
+     * @param {Array<Operation>} operation
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateOperations(
+      operation: Array<Operation>,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Array<Operation>> {
+      return localVarFp
+        .crupdateOperations(operation, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {string} operationId
+     * @param {string} staffId
+     * @param {Array<PayedTicket>} payedTicket
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdatePayedTickets(
+      operationId: string,
+      staffId: string,
+      payedTicket: Array<PayedTicket>,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Array<PayedTicket>> {
+      return localVarFp
+        .crupdatePayedTickets(operationId, staffId, payedTicket, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {Array<CrupdateTicket>} crupdateTicket
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateTickets(
+      crupdateTicket: Array<CrupdateTicket>,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Array<Ticket>> {
+      return localVarFp
+        .crupdateTickets(crupdateTicket, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
      * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1497,6 +2632,36 @@ export const LedgersApiFactory = function (
     ): AxiosPromise<Ledger> {
       return localVarFp
         .deleteLedgerById(id, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteOperationById(
+      id: string,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Operation> {
+      return localVarFp
+        .deleteOperationById(id, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteTicketById(
+      id: string,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Ticket> {
+      return localVarFp
+        .deleteTicketById(id, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -1533,30 +2698,172 @@ export const LedgersApiFactory = function (
         .getLedgers(name, page, pageSize, options)
         .then((request) => request(axios, basePath));
     },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOperationById(
+      id: string,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Operation> {
+      return localVarFp
+        .getOperationById(id, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {string} [name]
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOperations(
+      name?: string,
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Array<Operation>> {
+      return localVarFp
+        .getOperations(name, page, pageSize, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {string} operationId
+     * @param {string} staffId
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPayedTickets(
+      operationId: string,
+      staffId: string,
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Array<PayedTicket>> {
+      return localVarFp
+        .getPayedTickets(operationId, staffId, page, pageSize, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getTicketById(
+      id: string,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Ticket> {
+      return localVarFp
+        .getTicketById(id, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getTickets(
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Array<Ticket>> {
+      return localVarFp
+        .getTickets(page, pageSize, options)
+        .then((request) => request(axios, basePath));
+    },
   };
 };
 
 /**
- * LedgersApi - object-oriented interface
+ * MoneysApi - object-oriented interface
  * @export
- * @class LedgersApi
+ * @class MoneysApi
  * @extends {BaseAPI}
  */
-export class LedgersApi extends BaseAPI {
+export class MoneysApi extends BaseAPI {
   /**
    *
    * @summary
    * @param {Array<Ledger>} ledger
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof LedgersApi
+   * @memberof MoneysApi
    */
   public crupdateLedgers(
     ledger: Array<Ledger>,
     options?: RawAxiosRequestConfig
   ) {
-    return LedgersApiFp(this.configuration)
+    return MoneysApiFp(this.configuration)
       .crupdateLedgers(ledger, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {Array<Operation>} operation
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
+   */
+  public crupdateOperations(
+    operation: Array<Operation>,
+    options?: RawAxiosRequestConfig
+  ) {
+    return MoneysApiFp(this.configuration)
+      .crupdateOperations(operation, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} operationId
+   * @param {string} staffId
+   * @param {Array<PayedTicket>} payedTicket
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
+   */
+  public crupdatePayedTickets(
+    operationId: string,
+    staffId: string,
+    payedTicket: Array<PayedTicket>,
+    options?: RawAxiosRequestConfig
+  ) {
+    return MoneysApiFp(this.configuration)
+      .crupdatePayedTickets(operationId, staffId, payedTicket, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {Array<CrupdateTicket>} crupdateTicket
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
+   */
+  public crupdateTickets(
+    crupdateTicket: Array<CrupdateTicket>,
+    options?: RawAxiosRequestConfig
+  ) {
+    return MoneysApiFp(this.configuration)
+      .crupdateTickets(crupdateTicket, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -1566,10 +2873,10 @@ export class LedgersApi extends BaseAPI {
    * @param {string} id
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof LedgersApi
+   * @memberof MoneysApi
    */
   public deleteLedgerById(id: string, options?: RawAxiosRequestConfig) {
-    return LedgersApiFp(this.configuration)
+    return MoneysApiFp(this.configuration)
       .deleteLedgerById(id, options)
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1580,10 +2887,38 @@ export class LedgersApi extends BaseAPI {
    * @param {string} id
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof LedgersApi
+   * @memberof MoneysApi
+   */
+  public deleteOperationById(id: string, options?: RawAxiosRequestConfig) {
+    return MoneysApiFp(this.configuration)
+      .deleteOperationById(id, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
+   */
+  public deleteTicketById(id: string, options?: RawAxiosRequestConfig) {
+    return MoneysApiFp(this.configuration)
+      .deleteTicketById(id, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
    */
   public getLedgerById(id: string, options?: RawAxiosRequestConfig) {
-    return LedgersApiFp(this.configuration)
+    return MoneysApiFp(this.configuration)
       .getLedgerById(id, options)
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1596,7 +2931,7 @@ export class LedgersApi extends BaseAPI {
    * @param {number} [pageSize]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof LedgersApi
+   * @memberof MoneysApi
    */
   public getLedgers(
     name?: string,
@@ -1604,8 +2939,99 @@ export class LedgersApi extends BaseAPI {
     pageSize?: number,
     options?: RawAxiosRequestConfig
   ) {
-    return LedgersApiFp(this.configuration)
+    return MoneysApiFp(this.configuration)
       .getLedgers(name, page, pageSize, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
+   */
+  public getOperationById(id: string, options?: RawAxiosRequestConfig) {
+    return MoneysApiFp(this.configuration)
+      .getOperationById(id, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} [name]
+   * @param {number} [page]
+   * @param {number} [pageSize]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
+   */
+  public getOperations(
+    name?: string,
+    page?: number,
+    pageSize?: number,
+    options?: RawAxiosRequestConfig
+  ) {
+    return MoneysApiFp(this.configuration)
+      .getOperations(name, page, pageSize, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} operationId
+   * @param {string} staffId
+   * @param {number} [page]
+   * @param {number} [pageSize]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
+   */
+  public getPayedTickets(
+    operationId: string,
+    staffId: string,
+    page?: number,
+    pageSize?: number,
+    options?: RawAxiosRequestConfig
+  ) {
+    return MoneysApiFp(this.configuration)
+      .getPayedTickets(operationId, staffId, page, pageSize, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
+   */
+  public getTicketById(id: string, options?: RawAxiosRequestConfig) {
+    return MoneysApiFp(this.configuration)
+      .getTicketById(id, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {number} [page]
+   * @param {number} [pageSize]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
+   */
+  public getTickets(
+    page?: number,
+    pageSize?: number,
+    options?: RawAxiosRequestConfig
+  ) {
+    return MoneysApiFp(this.configuration)
+      .getTickets(page, pageSize, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }
@@ -5113,6 +6539,7 @@ export const UsersApiAxiosParamCreator = function (
      *
      * @summary
      * @param {string} [lastName]
+     * @param {string} [firstName]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
@@ -5120,6 +6547,7 @@ export const UsersApiAxiosParamCreator = function (
      */
     getUsers: async (
       lastName?: string,
+      firstName?: string,
       page?: number,
       pageSize?: number,
       options: RawAxiosRequestConfig = {}
@@ -5146,6 +6574,10 @@ export const UsersApiAxiosParamCreator = function (
 
       if (lastName !== undefined) {
         localVarQueryParameter["lastName"] = lastName;
+      }
+
+      if (firstName !== undefined) {
+        localVarQueryParameter["firstName"] = firstName;
       }
 
       if (page !== undefined) {
@@ -5339,6 +6771,7 @@ export const UsersApiFp = function (configuration?: Configuration) {
      *
      * @summary
      * @param {string} [lastName]
+     * @param {string} [firstName]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
@@ -5346,6 +6779,7 @@ export const UsersApiFp = function (configuration?: Configuration) {
      */
     async getUsers(
       lastName?: string,
+      firstName?: string,
       page?: number,
       pageSize?: number,
       options?: RawAxiosRequestConfig
@@ -5354,6 +6788,7 @@ export const UsersApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getUsers(
         lastName,
+        firstName,
         page,
         pageSize,
         options
@@ -5467,6 +6902,7 @@ export const UsersApiFactory = function (
      *
      * @summary
      * @param {string} [lastName]
+     * @param {string} [firstName]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
@@ -5474,12 +6910,13 @@ export const UsersApiFactory = function (
      */
     getUsers(
       lastName?: string,
+      firstName?: string,
       page?: number,
       pageSize?: number,
       options?: RawAxiosRequestConfig
     ): AxiosPromise<Array<User>> {
       return localVarFp
-        .getUsers(lastName, page, pageSize, options)
+        .getUsers(lastName, firstName, page, pageSize, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -5573,6 +7010,7 @@ export class UsersApi extends BaseAPI {
    *
    * @summary
    * @param {string} [lastName]
+   * @param {string} [firstName]
    * @param {number} [page]
    * @param {number} [pageSize]
    * @param {*} [options] Override http request option.
@@ -5581,12 +7019,13 @@ export class UsersApi extends BaseAPI {
    */
   public getUsers(
     lastName?: string,
+    firstName?: string,
     page?: number,
     pageSize?: number,
     options?: RawAxiosRequestConfig
   ) {
     return UsersApiFp(this.configuration)
-      .getUsers(lastName, page, pageSize, options)
+      .getUsers(lastName, firstName, page, pageSize, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

@@ -38,9 +38,9 @@ export const Calendar = () => {
 };
 
 const CalendarContent = () => {
+  const locale = useLocale();
   const [eventIdToShow, setEventIdToShow] = useState<string | null>(null);
   const { toggleStatus } = useDialogContext<false>();
-  const locale = useLocale();
   const { primaryPalette, textSecondaryColor } = usePalette();
   const { data: events = [], isLoading } = useGetList<Event>("event", {
     pagination: {

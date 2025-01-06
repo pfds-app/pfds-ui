@@ -1,6 +1,6 @@
 import {
   HealthApi,
-  LedgersApi,
+  MoneysApi,
   ResourcesApi,
   SecurityApi,
   UsersApi,
@@ -11,4 +11,4 @@ export const healthApi = () => new HealthApi(getConfiguration());
 export const securityApi = () => new SecurityApi(getConfiguration());
 export const usersApi = () => new UsersApi(getConfiguration());
 export const resourcesApi = () => new ResourcesApi(getConfiguration());
-export const ledgersApi = () => new LedgersApi(getConfiguration());
+export const moneysApi = () => new MoneysApi(getConfiguration());

@@ -9,6 +9,7 @@ import { committeeProvider } from "./committee-provider";
 import { eventProvider } from "./event-provider";
 import { responsabilityProvider } from "./responsability-provider";
 import { ledgerProvider } from "./ledger-provider";
+import { operationProvider } from "./operation-provider";
 
 export const dataProvider = createRaProvider(
   [
@@ -21,6 +22,7 @@ export const dataProvider = createRaProvider(
     eventProvider,
     responsabilityProvider,
     ledgerProvider,
+    operationProvider,
   ],
   {
     getListOptions: {
