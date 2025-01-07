@@ -17,7 +17,9 @@ export const TooltipIconButton: FC<TooltipIconButtonProps> = ({
 
   return (
     <Tooltip title={translateTitle ? translate(title) : title}>
-      <IconButton {...iconButtonProps}>{children}</IconButton>
+      <span>
+        <IconButton {...iconButtonProps}>{children}</IconButton>
+      </span>
     </Tooltip>
   );
 };

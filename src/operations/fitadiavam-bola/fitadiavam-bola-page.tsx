@@ -3,10 +3,11 @@ import { Tabs, TabPanel } from "@/common/components/tabs";
 import { ListAndCreateLayout, WithLayoutPadding } from "@/common/components";
 import { OperationList, OperationCreate } from "../operation";
 import { TicketCreate, TicketList } from "../ticket";
+import { PayedTicketPage } from "../payed-ticket";
 import { useTabManager } from "@/common/hooks";
 import { useTranslate } from "react-admin";
 
-const FITADIAVAM_BOLA_TABS = ["opérations", "tickets"];
+const FITADIAVAM_BOLA_TABS = ["opérations", "tickets", "marquages"];
 
 export const FitadiavamBolaPage = () => {
   const { tabIndex, handleTabChange } = useTabManager({
@@ -19,6 +20,7 @@ export const FitadiavamBolaPage = () => {
       <Tabs tabIndex={tabIndex} handleChange={handleTabChange}>
         <Tab label="Opération" />
         <Tab label={translate("resources.ticket.name")} />
+        <Tab label="Marquage" />
       </Tabs>
       <WithLayoutPadding sx={{ mt: 3 }}>
         <TabPanel index={0} currentIndex={tabIndex}>
@@ -32,6 +34,9 @@ export const FitadiavamBolaPage = () => {
             <TicketCreate />
             <TicketList />
           </ListAndCreateLayout>
+        </TabPanel>
+        <TabPanel index={2} currentIndex={tabIndex}>
+          <PayedTicketPage />
         </TabPanel>
       </WithLayoutPadding>
     </>

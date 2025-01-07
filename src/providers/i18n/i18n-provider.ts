@@ -14,5 +14,8 @@ const messages: Record<SupportedLanguage, any> = {
 
 export const i18nProvider = polyglotI18nProvider(
   (locale) => messages[locale as SupportedLanguage],
-  "fr"
+  "fr",
+  {
+    allowMissing: true,
+  }
 );
