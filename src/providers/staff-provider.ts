@@ -10,7 +10,7 @@ export const staffProvider: ResourceProvider<User> = {
       return [];
     }
 
-    return unwrap(() => moneysApi().findAllOperationStaffs(meta?.operationId!));
+    return unwrap(() => moneysApi().getAllOperationStaffs(meta?.operationId!));
   },
   getMany: async (_resource, { ids }) => {
     const [id] = ids;

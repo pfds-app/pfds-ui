@@ -9,6 +9,7 @@ import {
   useDialogContext,
 } from "@/common/services/dialog";
 import { useState } from "react";
+import { MoneyTextField } from "@/common/components/list/money-text-field";
 
 export const OperationList = () => {
   return (
@@ -33,6 +34,7 @@ export const OperationListContent = () => {
     <BoxPaperTitled title="Lisitry ny opération" containerSx={{ pt: 0 }}>
       <List resource="operation">
         <TextField sortable={false} source="name" />
+        <MoneyTextField source="ticketPrice" />
         <TextField sortable={false} source="numberOfTickets" />
         <DateField sortable={false} source="operationDate" />
         <TextField sortable={false} source="description" />

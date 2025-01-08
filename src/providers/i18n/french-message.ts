@@ -82,6 +82,19 @@ export const haFrenchMessages: any = {
         toNumber: "À",
       },
     },
+    "ticket-status": {
+      name: "Situation",
+      fields: {
+        id: "Id",
+        numberOfTickets: "Nombre de billets",
+        numberOfPayedTickets: "Nombre de billets payés",
+        numberOfNotPayedTickets: "Nombre de billets non payés",
+        pourcentageOfPayedTickets: "Pourcentage de billets payés",
+        pourcentageOfNotPayedTickets: "Pourcentage de billets non payés",
+        notPayedAmount: "Montant non payé",
+        payedAmount: "Montant payé"
+      },
+    },
   },
   custom: {
     enum: {
