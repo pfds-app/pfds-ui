@@ -30,7 +30,7 @@ export const TicketListContent = () => {
 
   return (
     <BoxPaperTitled
-      title="Lisitry ny Fikambanana Masina"
+      title="Lisitry ny Billet"
       containerSx={{ pt: 0 }}
     >
       <List resource="ticket">

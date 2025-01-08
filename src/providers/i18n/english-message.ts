@@ -104,6 +104,7 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      delete_item_title: "Are you sure you want to delete this item",
       orgnisator: "Organisator",
       activity: "Activity",
       event_details: "Event Details",

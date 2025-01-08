@@ -32,7 +32,7 @@ export const TicketCreate = () => {
 
   return (
     <BoxPaperTitled
-      title="Fikambanana Masina"
+      title="Billet"
       sx={{ minWidth: "350px", width: "350px" }}
     >
       <Create transform={transform} resource="ticket">

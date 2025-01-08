@@ -1,10 +1,11 @@
 import { FC } from "react";
 import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
-import { useDelete, useNotify, useTranslate } from "react-admin";
+import { Confirm, useDelete, useNotify, useTranslate } from "react-admin";
 import {
   TooltipIconButton,
   TooltipIconButtonProps,
 } from "../tooltip-icon-button";
+import { useToggle } from "@/common/hooks";
 
 export type EditButtonProps = Partial<TooltipIconButtonProps>;
 
@@ -31,6 +32,7 @@ export const DeleteButton: FC<DeleteButtonProps> = ({
   resource,
   ...tooltipProps
 }) => {
+  const { value, toggleValue } = useToggle();
   const notify = useNotify();
   const translate = useTranslate();
   const [deleteRecord, { isLoading }] = useDelete(
@@ -44,17 +46,26 @@ export const DeleteButton: FC<DeleteButtonProps> = ({
       onError: () => notify("ra.page.error", { type: "error" }),
     }
   );
-
   return (
-    <TooltipIconButton
-      onClick={() => deleteRecord()}
-      size="small"
-      color="error"
-      title={"ra.action.delete"}
-      disabled={isLoading}
-      {...tooltipProps}
-    >
-      <DeleteIcon fontSize="small" />
-    </TooltipIconButton>
+    <>
+      <TooltipIconButton
+        onClick={toggleValue}
+        size="small"
+        color="error"
+        title={"ra.action.delete"}
+        disabled={isLoading}
+        {...tooltipProps}
+      >
+        <DeleteIcon fontSize="small" />
+      </TooltipIconButton>
+      <Confirm
+        title="custom.common.delete_item_title"
+        content=""
+        isOpen={value}
+        loading={isLoading}
+        onConfirm={() => deleteRecord()}
+        onClose={toggleValue}
+      />
+    </>
   );
 };

@@ -104,6 +104,7 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      delete_item_title: "Êtes-vous sûr de vouloir supprimer cet élément ?",
       orgnisator: "Organisateur",
       activity: "Activité",
       verify: "Vérifier",
