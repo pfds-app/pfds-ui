@@ -1,5 +1,12 @@
 import { List } from "@/common/components/list";
-import { FunctionField, ReferenceInput, required, SelectInput, SimpleForm, TextField } from "react-admin";
+import {
+  FunctionField,
+  ReferenceInput,
+  required,
+  SelectInput,
+  SimpleForm,
+  TextField,
+} from "react-admin";
 import { TicketStatus } from "@/gen/jfds-api-client";
 import { MoneyTextField } from "@/common/components/list/money-text-field";
 import { BoxPaperTitled, WithLayoutPadding } from "@/common/components";
@@ -22,8 +29,8 @@ const SelectOperation = () => {
         optionText="name"
       />
     </ReferenceInput>
-  )
-}
+  );
+};
 export const TicketStatusList = () => {
   return (
     <WithLayoutPadding>
@@ -34,8 +41,8 @@ export const TicketStatusList = () => {
         </SimpleForm>
       </BoxPaperTitled>
     </WithLayoutPadding>
-  )
-}
+  );
+};
 
 const ListContent = () => {
   const operationId = useWatch({ name: "operationId" });
@@ -44,10 +51,15 @@ const ListContent = () => {
     <List
       resource="ticket-status"
       queryOptions={{
-        meta: { operationId }
+        meta: { operationId },
       }}
     >
-      <FunctionField label="Staff" render={(ticketStatus: TicketStatus) => formatUserName(ticketStatus.ticket.staff)} />
+      <FunctionField
+        label="Staff"
+        render={(ticketStatus: TicketStatus) =>
+          formatUserName(ticketStatus.ticket.staff)
+        }
+      />
       <TextField sortable={false} source="numberOfTickets" />
       <TextField sortable={false} source="numberOfPayedTickets" />
       <MoneyTextField source="payedAmount" />
@@ -55,5 +67,5 @@ const ListContent = () => {
       <MoneyTextField source="notPayedAmount" />
       <TextField sortable={false} source="pourcentageOfPayedTickets" />
     </List>
-  )
-}
+  );
+};

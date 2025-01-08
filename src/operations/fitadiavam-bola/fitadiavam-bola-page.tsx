@@ -8,7 +8,12 @@ import { useTabManager } from "@/common/hooks";
 import { useTranslate } from "react-admin";
 import { TicketStatusList } from "../ticket-status";
 
-const FITADIAVAM_BOLA_TABS = ["opérations", "tickets", "marquages", "situation"];
+const FITADIAVAM_BOLA_TABS = [
+  "opérations",
+  "tickets",
+  "marquages",
+  "situation",
+];
 
 export const FitadiavamBolaPage = () => {
   const { tabIndex, handleTabChange } = useTabManager({

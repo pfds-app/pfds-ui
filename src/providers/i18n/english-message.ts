@@ -3,14 +3,14 @@ import englishMessages from "ra-language-english";
 export const haEnglishMessages: any = {
   ...englishMessages,
   resources: {
-    sacrament: {
+    "sacrament": {
       name: "Sakramenta",
       fields: {
         id: "Id",
         name: "Label",
       },
     },
-    region: {
+    "region": {
       name: "Faritra |||| Faritra",
       fields: {
         id: "Id",
@@ -18,7 +18,7 @@ export const haEnglishMessages: any = {
         code: "Code",
       },
     },
-    association: {
+    "association": {
       name: "Fikambanana masina |||| Fikambanana masina",
       fields: {
         id: "Id",
@@ -26,7 +26,7 @@ export const haEnglishMessages: any = {
         code: "Code",
       },
     },
-    committee: {
+    "committee": {
       name: "Vaomieran'asa |||| Vaomieran'asa",
       fields: {
         id: "Id",
@@ -34,7 +34,7 @@ export const haEnglishMessages: any = {
         code: "Code",
       },
     },
-    event: {
+    "event": {
       name: "Event |||| Events",
       fields: {
         id: "Id",
@@ -44,14 +44,14 @@ export const haEnglishMessages: any = {
         endDate: "Event end date",
       },
     },
-    responsability: {
+    "responsability": {
       name: "Andraikitra",
       fields: {
         id: "Id",
         name: "Label",
       },
     },
-    ledger: {
+    "ledger": {
       name: "Ledger",
       fields: {
         id: "Id",
@@ -61,7 +61,7 @@ export const haEnglishMessages: any = {
         price: "Amount",
       },
     },
-    operation: {
+    "operation": {
       name: "Operation",
       fields: {
         id: "Id",
@@ -72,7 +72,7 @@ export const haEnglishMessages: any = {
         operationDate: "Date",
       },
     },
-    ticket: {
+    "ticket": {
       name: "Ticket",
       fields: {
         id: "Id",
@@ -92,7 +92,7 @@ export const haEnglishMessages: any = {
         pourcentageOfPayedTickets: "Percentage of paid tickets",
         pourcentageOfNotPayedTickets: "Percentage of unpaid tickets",
         notPayedAmount: "Unpaid amount",
-        payedAmount: "Paid amount"
+        payedAmount: "Paid amount",
       },
     },
   },

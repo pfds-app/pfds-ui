@@ -3,14 +3,14 @@ import frenchMessages from "ra-language-french";
 export const haFrenchMessages: any = {
   ...frenchMessages,
   resources: {
-    sacrament: {
+    "sacrament": {
       name: "Sakramenta |||| Sakramenta",
       fields: {
         id: "Id",
         name: "Libellé",
       },
     },
-    region: {
+    "region": {
       name: "Faritra |||| Faritra",
       fields: {
         id: "Id",
@@ -18,7 +18,7 @@ export const haFrenchMessages: any = {
         code: "Code",
       },
     },
-    association: {
+    "association": {
       name: "Fikambanana masina |||| Fikambanana masina",
       fields: {
         id: "Id",
@@ -26,7 +26,7 @@ export const haFrenchMessages: any = {
         code: "Code",
       },
     },
-    committee: {
+    "committee": {
       name: "Vaomieran'asa |||| Vaomieran'asa",
       fields: {
         id: "Id",
@@ -34,7 +34,7 @@ export const haFrenchMessages: any = {
         code: "Code",
       },
     },
-    event: {
+    "event": {
       name: "Evènment |||| Evènments",
       fields: {
         id: "Id",
@@ -44,14 +44,14 @@ export const haFrenchMessages: any = {
         endDate: "Fin de d'evènement",
       },
     },
-    responsability: {
+    "responsability": {
       name: "Andraikitra",
       fields: {
         id: "Id",
         name: "Libellé",
       },
     },
-    ledger: {
+    "ledger": {
       name: "Caisse",
       fields: {
         id: "Id",
@@ -61,7 +61,7 @@ export const haFrenchMessages: any = {
         price: "Montant",
       },
     },
-    operation: {
+    "operation": {
       name: "Opération",
       fields: {
         id: "Id",
@@ -72,7 +72,7 @@ export const haFrenchMessages: any = {
         operationDate: "Date",
       },
     },
-    ticket: {
+    "ticket": {
       name: "Billet",
       fields: {
         id: "Id",
@@ -92,7 +92,7 @@ export const haFrenchMessages: any = {
         pourcentageOfPayedTickets: "Pourcentage de billets payés",
         pourcentageOfNotPayedTickets: "Pourcentage de billets non payés",
         notPayedAmount: "Montant non payé",
-        payedAmount: "Montant payé"
+        payedAmount: "Montant payé",
       },
     },
   },
