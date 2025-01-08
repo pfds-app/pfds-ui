@@ -7,7 +7,7 @@ import {
   DialogContent,
   TooltipIconButton,
 } from "@/common/components";
-import { useGetList, useLocale } from "react-admin";
+import { useGetList, useLocale, useTranslate } from "react-admin";
 import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 import { useMemo, useState } from "react";
 import { stringifyObj } from "@/common/utils/stringify-obj";
@@ -40,6 +40,7 @@ export const Calendar = () => {
 const CalendarContent = () => {
   const locale = useLocale();
   const [eventIdToShow, setEventIdToShow] = useState<string | null>(null);
+  const translate = useTranslate();
   const { toggleStatus } = useDialogContext<false>();
   const { primaryPalette, textSecondaryColor } = usePalette();
   const { data: events = [], isLoading } = useGetList<Event>("event", {
@@ -49,7 +50,7 @@ const CalendarContent = () => {
     },
   });
 
-  const mappedEvents: EventElement[] = useMemo((): EventElement[] => {
+  const mappedEvents: EventElement[] = useMemo(() => {
     return events.map((event) => ({
       id: event.id,
       title: event.name,
@@ -130,7 +131,7 @@ const CalendarContent = () => {
               fontWeight: "bold",
             }}
           >
-            Details de l'evènement
+            {translate("custom.common.event_details")}
           </Typography>
           <TooltipIconButton
             sx={{ mb: "1px" }}

@@ -14,29 +14,24 @@ import { useWatch } from "react-hook-form";
 import { formatUserName } from "@/common/utils/format-user-name";
 import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 
-const SelectOperation = () => {
-  return (
-    <ReferenceInput
-      source="operationId"
-      reference="operation"
-      page={1}
-      perPage={MAX_ITEM_PER_LIST}
-    >
-      <SelectInput
-        label="Operation"
-        fullWidth={false}
-        validate={required()}
-        optionText="name"
-      />
-    </ReferenceInput>
-  );
-};
 export const TicketStatusList = () => {
   return (
     <WithLayoutPadding>
       <BoxPaperTitled title="Situation">
         <SimpleForm toolbar={false}>
-          <SelectOperation />
+          <ReferenceInput
+            source="operationId"
+            reference="operation"
+            page={1}
+            perPage={MAX_ITEM_PER_LIST}
+          >
+            <SelectInput
+              label="Operation"
+              fullWidth={false}
+              validate={required()}
+              optionText="name"
+            />
+          </ReferenceInput>
           <ListContent />
         </SimpleForm>
       </BoxPaperTitled>

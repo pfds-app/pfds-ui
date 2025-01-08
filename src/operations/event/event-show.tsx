@@ -27,7 +27,7 @@ export const EventShow = ({ id }: { id: string }) => {
           color: textSecondaryColor,
         }}
       >
-        Activité: {event?.name}
+        {translate("custom.common.activity")}: {event?.name}
       </Typography>
       <FlexBox
         sx={{
@@ -47,7 +47,7 @@ export const EventShow = ({ id }: { id: string }) => {
           {translate("resources.event.fields.endDate")}: {event?.endDate}
         </Typography>
         <Typography sx={{ fontSize: "14px", color: textSecondaryColor }}>
-          Organisateur: Vovonan'ny Tanora
+          {translate("custom.common.orgnisator")}: Vovonan'ny Tanora
         </Typography>
       </FlexBox>
     </>

@@ -4,4 +4,4 @@ export const FB_PROFILE_LINK =
 export const MAIL_VALUE = "vdktsoavimasoandro@gmail.com";
 export const MAILTO_LINK = `mailto:${MAIL_VALUE}`;
 
-export const MAX_ITEM_PER_LIST = 200;
+export const MAX_ITEM_PER_LIST = 500;

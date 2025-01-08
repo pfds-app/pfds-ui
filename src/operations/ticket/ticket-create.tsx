@@ -67,12 +67,22 @@ export const TicketCreate = () => {
 
 export const ToNumberInput = () => {
   const translate = useTranslate();
-  const fromNumber = useWatch({ name: "fromNumber" })
+  const fromNumber = useWatch({ name: "fromNumber" });
 
   return (
     <TextInput
       source="toNumber"
-      validate={[required(), number(), minValue(1), higherOrEqualsThan("fromNumber", translate("custom.common.must_be_higher_or_equal_than", { value: +fromNumber }))]}
+      validate={[
+        required(),
+        number(),
+        minValue(1),
+        higherOrEqualsThan(
+          "fromNumber",
+          translate("custom.common.must_be_higher_or_equal_than", {
+            value: +fromNumber,
+          })
+        ),
+      ]}
     />
-  )
-}
+  );
+};

@@ -162,8 +162,13 @@ export const VerifyContent: FC<{ ticketNumber: number | null }> = ({
   return (
     <>
       <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
-        <Typography color={isPayed ? undefined : "red"} sx={{ fontSize: "1rem", opacity: ".8" }}>
-          {isPayed ? translate('custom.common.ticket_paid', { ticketNumber }) : translate('custom.common.ticket_not_paid_yet', { ticketNumber })}
+        <Typography
+          color={isPayed ? undefined : "red"}
+          sx={{ fontSize: "1rem", opacity: ".8" }}
+        >
+          {isPayed
+            ? translate("custom.common.ticket_paid", { ticketNumber })
+            : translate("custom.common.ticket_not_paid_yet", { ticketNumber })}
         </Typography>
         {isPayed && !isDistributed && (
           <Button
@@ -175,7 +180,9 @@ export const VerifyContent: FC<{ ticketNumber: number | null }> = ({
         )}
       </FlexBox>
       {isDistributed && (
-        <Typography color="green">{translate("custom.common.ticket_already_distributed")}</Typography>
+        <Typography color="green">
+          {translate("custom.common.ticket_already_distributed")}
+        </Typography>
       )}
     </>
   );
