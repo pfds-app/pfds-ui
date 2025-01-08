@@ -104,6 +104,12 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      must_be_higher_or_equal_than: "Must be higher or equal to %{value}",
+      distribute: "Distribute",
+      verify: "Verify",
+      ticket_already_distributed: "The ticket has already been distributed",
+      ticket_paid: "The ticket with number %{ticketNumber} is already paid",
+      ticket_not_paid_yet: "The ticket with number %{ticketNumber} is not paid yet",
       edit_profile: "Edit profile",
       empty: "There is no record!",
       optional: "Optional",

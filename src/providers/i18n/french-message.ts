@@ -104,6 +104,12 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      verify: "Vérifier",
+      distribute: "Distribuer",
+      must_be_higher_or_equal_than: "Doit être supérieur ou égal à %{value}",
+      ticket_already_distributed: "Le billet a déjà été distribué",
+      ticket_paid: "Le billet avec le numéro %{ticketNumber} est déjà payé",
+      ticket_not_paid_yet: "Le billet avec le numéro %{ticketNumber} n'est pas encore payé",
       edit_profile: "Editer le profil",
       empty: "Il n'y a pas d'enregistrement!",
       optional: "Facultatif",

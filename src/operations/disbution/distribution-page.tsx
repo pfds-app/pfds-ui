@@ -7,6 +7,7 @@ import {
   SelectInput,
   TextInput,
   Toolbar,
+  useTranslate,
   useNotify,
   useShowContext,
   useUpdate,
@@ -45,7 +46,7 @@ const VerifyButton: FC<{ setter: StateSetter<VerifyPayload> }> = ({
       startIcon={<RemoveRedEye />}
       disabled={!isValid}
       variant="contained"
-      label="Vérifier"
+      label="custom.common.verify"
       onClick={() => {
         setter({
           ticketNumber,
@@ -121,6 +122,7 @@ export const VerifyContent: FC<{ ticketNumber: number | null }> = ({
   const { record: payedTicket, isLoading } = useShowContext<PayedTicket>();
   const [update, { isLoading: isUpdateLoading }] =
     useUpdate<CrupdatePayedTicketPayload>();
+  const translate = useTranslate();
 
   if (isLoading || isUpdateLoading) {
     return (
@@ -134,9 +136,12 @@ export const VerifyContent: FC<{ ticketNumber: number | null }> = ({
     return;
   }
 
+  const isPayed = payedTicket?.isPayed;
+  const isDistributed = payedTicket?.isDistributed;
+
   const doUpdate = async () => {
     if (!payedTicket) {
-      notify("Le billet n'est pas encore payer");
+      notify(translate("custom.common.ticket_not_paid_yet", { ticketNumber }));
     }
 
     update("payed-ticket", {
@@ -154,27 +159,24 @@ export const VerifyContent: FC<{ ticketNumber: number | null }> = ({
     });
   };
 
-  const isPayed = payedTicket?.isPayed;
-  const isDistributed = payedTicket?.isDistributed;
-
   return (
-    <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
-      <Typography sx={{ fontSize: "1rem", opacity: ".8" }}>
-        {isPayed
-          ? `Le billet avec le numéro ${payedTicket.ticketNumber} est payé!`
-          : `Le billet avec le numéro ${ticketNumber} n'est pas encore payé`}
-      </Typography>
-      {isPayed && !isDistributed && (
-        <Button
-          onClick={doUpdate}
-          label="Distribuer"
-          color="success"
-          variant="contained"
-        />
-      )}
+    <>
+      <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
+        <Typography color={isPayed ? undefined : "red"} sx={{ fontSize: "1rem", opacity: ".8" }}>
+          {isPayed ? translate('custom.common.ticket_paid', { ticketNumber }) : translate('custom.common.ticket_not_paid_yet', { ticketNumber })}
+        </Typography>
+        {isPayed && !isDistributed && (
+          <Button
+            onClick={doUpdate}
+            label="custom.common.distribute"
+            color="success"
+            variant="contained"
+          />
+        )}
+      </FlexBox>
       {isDistributed && (
-        <Typography>Le billet a été déjà distribuer</Typography>
+        <Typography color="green">{translate("custom.common.ticket_already_distributed")}</Typography>
       )}
-    </FlexBox>
+    </>
   );
 };

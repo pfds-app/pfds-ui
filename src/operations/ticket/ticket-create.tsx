@@ -5,13 +5,16 @@ import {
   ReferenceInput,
   required,
   TextInput,
+  useTranslate,
 } from "react-admin";
+import { useWatch } from "react-hook-form";
 import { BoxPaperTitled, FlexBox } from "@/common/components";
 import { Create } from "@/common/components/create";
 import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 import { CrupdateTicket, User } from "@/gen/jfds-api-client";
 import { createTranform } from "@/common/utils/transform";
 import { formatUserName } from "@/common/utils/format-user-name";
+import { higherOrEqualsThan } from "@/common/input-validator";
 
 export const TicketCreate = () => {
   const transform = (
@@ -55,12 +58,21 @@ export const TicketCreate = () => {
             source="fromNumber"
             validate={[required(), number(), minValue(1)]}
           />
-          <TextInput
-            source="toNumber"
-            validate={[required(), number(), minValue(1)]}
-          />
+          <ToNumberInput />
         </FlexBox>
       </Create>
     </BoxPaperTitled>
   );
 };
+
+export const ToNumberInput = () => {
+  const translate = useTranslate();
+  const fromNumber = useWatch({ name: "fromNumber" })
+
+  return (
+    <TextInput
+      source="toNumber"
+      validate={[required(), number(), minValue(1), higherOrEqualsThan("fromNumber", translate("custom.common.must_be_higher_or_equal_than", { value: +fromNumber }))]}
+    />
+  )
+}
