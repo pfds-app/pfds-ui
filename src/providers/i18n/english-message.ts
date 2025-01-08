@@ -94,6 +94,7 @@ export const haEnglishMessages: any = {
       edit_profile: "Edit profile",
       empty: "There is no record!",
       optional: "Optional",
+      mark_payed: "Mark as Payed",
     },
     sign_in: {
       welcome: "Welcome !",

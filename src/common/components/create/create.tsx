@@ -1,14 +1,23 @@
 import { FC } from "react";
 import {
-  CreateProps,
+  CreateProps as RaCreateProps,
   Create as RaCreate,
   SaveButton,
   SimpleForm,
+  SimpleFormProps,
   Toolbar,
 } from "react-admin";
 import { PostAdd } from "@mui/icons-material";
 
-export const Create: FC<CreateProps> = ({ children, ...createProps }) => {
+export type CreateProps = RaCreateProps & {
+  simpleFormProps?: Partial<SimpleFormProps>;
+};
+
+export const Create: FC<CreateProps> = ({
+  children,
+  simpleFormProps = {},
+  ...createProps
+}) => {
   return (
     <RaCreate
       redirect={false}
@@ -30,6 +39,7 @@ export const Create: FC<CreateProps> = ({ children, ...createProps }) => {
             />
           </Toolbar>
         }
+        {...simpleFormProps}
       >
         {children}
       </SimpleForm>

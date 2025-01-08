@@ -94,6 +94,7 @@ export const haFrenchMessages: any = {
       edit_profile: "Editer le profil",
       empty: "Il n'y a pas d'enregistrement!",
       optional: "Facultatif",
+      mark_payed: "Marquer payé",
     },
     sign_in: {
       welcome: "Bievenu !",

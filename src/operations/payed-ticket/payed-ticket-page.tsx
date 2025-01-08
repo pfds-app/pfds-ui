@@ -2,9 +2,12 @@ import {
   CheckboxGroupInput,
   ReferenceInput,
   required,
+  SaveButton,
   SelectInput,
+  Toolbar,
   useGetList,
 } from "react-admin";
+import { CheckCircle } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
 import { Create } from "@/common/components/create";
 import { BoxPaperTitled, WithLayoutPadding } from "@/common/components";
@@ -46,7 +49,21 @@ export const PayedTicketPage = () => {
   return (
     <WithLayoutPadding>
       <BoxPaperTitled title="Marquage">
-        <Create transform={transform} resource="payed-ticket">
+        <Create
+          simpleFormProps={{
+            toolbar: (
+              <Toolbar>
+                <SaveButton
+                  color="primary"
+                  label={"custom.common.mark_payed"}
+                  icon={<CheckCircle />}
+                />
+              </Toolbar>
+            ),
+          }}
+          transform={transform}
+          resource="payed-ticket"
+        >
           <ReferenceInput
             source="operationId"
             reference="operation"
@@ -115,20 +132,21 @@ export const TicketCheckBoxList = () => {
       },
     }
   );
+  const stringifiedTickets = stringifyObj(payedTickets);
 
   const defaultCheckedIds = useMemo(() => {
     return payedTickets
       .filter((payedTicket) => payedTicket.isPayed)
       .map((payedTicket) => payedTicket.id);
-  }, [stringifyObj(payedTickets)]);
+  }, [stringifiedTickets]);
 
   useLayoutEffect(() => {
     setValue("checkedPayedTicketIds", defaultCheckedIds);
-  }, [stringifyObj(payedTickets)]);
+  }, [stringifiedTickets]);
 
   useLayoutEffect(() => {
     setValue("payedTickets", payedTickets);
-  }, [stringifyObj(payedTickets)]);
+  }, [stringifiedTickets]);
 
   if (isLoading) {
     <CircularProgress />;
