@@ -9,7 +9,9 @@ export type CrupdatePayedTicketPayload = {
   staffId: string;
   payedTikects: PayedTicket[];
 };
-
+export type MappedGetOnePayedTicket = PayedTicket & {
+  payedTicketId: string;
+};
 export const payedTiketProvider: ResourceProvider<PayedTicket> = {
   resource: "payed-ticket",
   getList: async ({ meta, pagination }) => {
@@ -31,5 +33,21 @@ export const payedTiketProvider: ResourceProvider<PayedTicket> = {
       data as CrupdatePayedTicketPayload;
     await moneysApi().crupdatePayedTickets(operationId, staffId, payedTikects);
     return data as any;
+  },
+  getOne: async ({ meta, id: ticketNumber }) => {
+    if (!meta?.operationId) {
+      return { id: ticketNumber } as any;
+    }
+    const result = await unwrap(() =>
+      moneysApi().getOperationTicketByTicketNumber(
+        meta?.operationId,
+        ticketNumber as any
+      )
+    );
+    return {
+      ...result,
+      id: ticketNumber,
+      payedTicketId: result.id,
+    } as MappedGetOnePayedTicket;
   },
 };

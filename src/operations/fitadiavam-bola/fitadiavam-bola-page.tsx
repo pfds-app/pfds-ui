@@ -7,12 +7,14 @@ import { PayedTicketPage } from "../payed-ticket";
 import { useTabManager } from "@/common/hooks";
 import { useTranslate } from "react-admin";
 import { TicketStatusList } from "../ticket-status";
+import { DistributionPage } from "../disbution";
 
 const FITADIAVAM_BOLA_TABS = [
   "opérations",
   "tickets",
   "marquages",
   "situation",
+  "distribution",
 ];
 
 export const FitadiavamBolaPage = () => {
@@ -28,6 +30,7 @@ export const FitadiavamBolaPage = () => {
         <Tab label={translate("resources.ticket.name")} />
         <Tab label="Marquage" />
         <Tab label="Situation" />
+        <Tab label="Distribution" />
       </Tabs>
       <WithLayoutPadding sx={{ mt: 3 }}>
         <TabPanel index={0} currentIndex={tabIndex}>
@@ -47,6 +50,9 @@ export const FitadiavamBolaPage = () => {
         </TabPanel>
         <TabPanel index={3} currentIndex={tabIndex}>
           <TicketStatusList />
+        </TabPanel>
+        <TabPanel index={4} currentIndex={tabIndex}>
+          <DistributionPage />
         </TabPanel>
       </WithLayoutPadding>
     </>
