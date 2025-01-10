@@ -29,10 +29,7 @@ export const TicketListContent = () => {
   };
 
   return (
-    <BoxPaperTitled
-      title="Lisitry ny Billet"
-      containerSx={{ pt: 0 }}
-    >
+    <BoxPaperTitled title="Lisitry ny Billet" containerSx={{ pt: 0 }}>
       <List resource="ticket">
         <TextField sortable={false} source="fromNumber" />
         <TextField sortable={false} source="toNumber" />

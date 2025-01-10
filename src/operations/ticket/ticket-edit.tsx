@@ -66,7 +66,7 @@ export const TicketEdit: FC<{ ticket: Ticket }> = ({ ticket }) => {
             required(),
             number(),
             minValue(1),
-            higherOrEqualsThan("fromNumber", translate)
+            higherOrEqualsThan("fromNumber", translate),
           ]}
         />
       </FlexBox>

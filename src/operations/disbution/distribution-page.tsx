@@ -115,7 +115,7 @@ export const DistributionPage = () => {
   );
 };
 
-export const VerifyContent: FC<{ ticketNumber: number | null, }> = ({
+export const VerifyContent: FC<{ ticketNumber: number | null }> = ({
   ticketNumber,
 }) => {
   const notify = useNotify();
@@ -157,7 +157,9 @@ export const VerifyContent: FC<{ ticketNumber: number | null, }> = ({
       },
       id: payedTicket?.id,
     });
-    notify(translate('custom.common.distribution_success'), { type: "success" });
+    notify(translate("custom.common.distribution_success"), {
+      type: "success",
+    });
   };
 
   return (

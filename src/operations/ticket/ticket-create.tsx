@@ -32,10 +32,7 @@ export const TicketCreate = () => {
   };
 
   return (
-    <BoxPaperTitled
-      title="Billet"
-      sx={{ minWidth: "350px", width: "350px" }}
-    >
+    <BoxPaperTitled title="Billet" sx={{ minWidth: "350px", width: "350px" }}>
       <Create transform={transform} resource="ticket">
         <ReferenceInput
           source="operationId"
@@ -65,7 +62,7 @@ export const TicketCreate = () => {
               required(),
               number(),
               minValue(1),
-              higherOrEqualsThan("fromNumber", translate)
+              higherOrEqualsThan("fromNumber", translate),
             ]}
           />
         </FlexBox>

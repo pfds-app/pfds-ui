@@ -371,6 +371,31 @@ export interface Operation {
 /**
  *
  * @export
+ * @interface OperationResult
+ */
+export interface OperationResult {
+  /**
+   *
+   * @type {Operation}
+   * @memberof OperationResult
+   */
+  operation: Operation;
+  /**
+   *
+   * @type {number}
+   * @memberof OperationResult
+   */
+  numberOfDistributed: number;
+  /**
+   *
+   * @type {string}
+   * @memberof OperationResult
+   */
+  sumOfDistributed: string;
+}
+/**
+ *
+ * @export
  * @interface PayedTicket
  */
 export interface PayedTicket {
@@ -2023,6 +2048,61 @@ export const MoneysApiAxiosParamCreator = function (
     /**
      *
      * @summary
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOperationResults: async (
+      page?: number,
+      pageSize?: number,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/operations/results`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (page !== undefined) {
+        localVarQueryParameter["page"] = page;
+      }
+
+      if (pageSize !== undefined) {
+        localVarQueryParameter["pageSize"] = pageSize;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
      * @param {string} operationId
      * @param {number} ticketNumber
      * @param {*} [options] Override http request option.
@@ -2712,6 +2792,43 @@ export const MoneysApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getOperationResults(
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<OperationResult>>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getOperationResults(
+          page,
+          pageSize,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.getOperationResults"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
      * @param {string} operationId
      * @param {number} ticketNumber
      * @param {*} [options] Override http request option.
@@ -3096,6 +3213,23 @@ export const MoneysApiFactory = function (
     /**
      *
      * @summary
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOperationResults(
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Array<OperationResult>> {
+      return localVarFp
+        .getOperationResults(page, pageSize, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
      * @param {string} operationId
      * @param {number} ticketNumber
      * @param {*} [options] Override http request option.
@@ -3390,6 +3524,25 @@ export class MoneysApi extends BaseAPI {
   public getOperationById(id: string, options?: RawAxiosRequestConfig) {
     return MoneysApiFp(this.configuration)
       .getOperationById(id, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {number} [page]
+   * @param {number} [pageSize]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
+   */
+  public getOperationResults(
+    page?: number,
+    pageSize?: number,
+    options?: RawAxiosRequestConfig
+  ) {
+    return MoneysApiFp(this.configuration)
+      .getOperationResults(page, pageSize, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
