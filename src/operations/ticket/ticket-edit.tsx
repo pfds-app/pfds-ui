@@ -5,6 +5,7 @@ import {
   ReferenceInput,
   required,
   TextInput,
+  useTranslate,
 } from "react-admin";
 import { Edit } from "@/common/components/edit";
 import { CrupdateTicket, Ticket, User } from "@/gen/jfds-api-client";
@@ -13,6 +14,7 @@ import { updateTranform } from "@/common/utils/transform";
 import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 import { FC } from "react";
 import { formatUserName } from "@/common/utils/format-user-name";
+import { higherOrEqualsThan } from "@/common/input-validator";
 
 export const TicketEdit: FC<{ ticket: Ticket }> = ({ ticket }) => {
   const transform = (
@@ -31,6 +33,7 @@ export const TicketEdit: FC<{ ticket: Ticket }> = ({ ticket }) => {
     });
   };
 
+  const translate = useTranslate();
   return (
     <Edit id={ticket.id} resource="ticket" transform={transform}>
       <ReferenceInput
@@ -59,7 +62,12 @@ export const TicketEdit: FC<{ ticket: Ticket }> = ({ ticket }) => {
         />
         <TextInput
           source="toNumber"
-          validate={[required(), number(), minValue(1)]}
+          validate={[
+            required(),
+            number(),
+            minValue(1),
+            higherOrEqualsThan("fromNumber", translate)
+          ]}
         />
       </FlexBox>
     </Edit>

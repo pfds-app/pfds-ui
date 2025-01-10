@@ -104,6 +104,8 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      distribution_success: "The ticket was distributed successfully.",
+      distribution_error: "An error occurred while distributing the ticket.",
       delete_item_title: "Are you sure you want to delete this item",
       orgnisator: "Organisator",
       activity: "Activity",

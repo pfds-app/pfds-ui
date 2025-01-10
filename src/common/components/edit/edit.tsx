@@ -16,6 +16,7 @@ export const Edit: FC<EditProps> = ({ children, ...editProps }) => {
       {...editProps}
     >
       <SimpleForm
+        disableInvalidFormNotification
         toolbar={
           <Toolbar>
             <SaveButton size="small" icon={<EditIcon />} />

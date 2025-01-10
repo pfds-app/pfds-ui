@@ -104,6 +104,8 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      distribution_success: "Le ticket a été distribué avec succès.",
+      distribution_error: "Une erreur est survenue lors de la distribution du ticket.",
       delete_item_title: "Êtes-vous sûr de vouloir supprimer cet élément ?",
       orgnisator: "Organisateur",
       activity: "Activité",
@@ -118,7 +120,7 @@ export const haFrenchMessages: any = {
       edit_profile: "Editer le profil",
       empty: "Il n'y a pas d'enregistrement!",
       optional: "Facultatif",
-      mark_payed: "Marquer payé",
+      mark_payed: "Marquer payé"
     },
     sign_in: {
       welcome: "Bievenu !",
