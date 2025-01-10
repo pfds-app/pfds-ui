@@ -3,6 +3,13 @@ import englishMessages from "ra-language-english";
 export const haEnglishMessages: any = {
   ...englishMessages,
   resources: {
+    "operation-result": {
+      name: "Result",
+      fields: {
+        numberOfDistributed: "Distributed total",
+        sumOfDistributed: "Sum (Ar)",
+      },
+    },
     "sacrament": {
       name: "Sakramenta",
       fields: {

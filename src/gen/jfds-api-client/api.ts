@@ -2058,7 +2058,7 @@ export const MoneysApiAxiosParamCreator = function (
       pageSize?: number,
       options: RawAxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
-      const localVarPath = `/operations/results`;
+      const localVarPath = `/operations/results/all`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;

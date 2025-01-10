@@ -36,6 +36,7 @@ export const Dashboard = () => {
       <Resource name="payed-ticket" />
       <Resource name="staff" />
       <Resource name="ticket-status" />
+      <Resource name="operation-result" />
 
       <CustomRoutes>
         <Route path="/about" element={<AboutPage />} />

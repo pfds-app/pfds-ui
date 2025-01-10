@@ -3,6 +3,13 @@ import frenchMessages from "ra-language-french";
 export const haFrenchMessages: any = {
   ...frenchMessages,
   resources: {
+    "operation-result": {
+      name: "Résultat",
+      fields: {
+        numberOfDistributed: "Total distribué",
+        sumOfDistributed: "Sommes (Ar)",
+      },
+    },
     "sacrament": {
       name: "Sakramenta |||| Sakramenta",
       fields: {

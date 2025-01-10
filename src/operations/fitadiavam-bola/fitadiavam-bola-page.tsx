@@ -8,6 +8,7 @@ import { useTabManager } from "@/common/hooks";
 import { useTranslate } from "react-admin";
 import { TicketStatusList } from "../ticket-status";
 import { DistributionPage } from "../disbution";
+import { OperationResultPage } from "../operation-result";
 
 const FITADIAVAM_BOLA_TABS = [
   "opérations",
@@ -15,6 +16,7 @@ const FITADIAVAM_BOLA_TABS = [
   "marquages",
   "situation",
   "distribution",
+  "result",
 ];
 
 export const FitadiavamBolaPage = () => {
@@ -31,6 +33,7 @@ export const FitadiavamBolaPage = () => {
         <Tab label="Marquage" />
         <Tab label="Situation" />
         <Tab label="Distribution" />
+        <Tab label={translate("resources.operation-result.name")} />
       </Tabs>
       <WithLayoutPadding sx={{ mt: 3 }}>
         <TabPanel index={0} currentIndex={tabIndex}>
@@ -53,6 +56,9 @@ export const FitadiavamBolaPage = () => {
         </TabPanel>
         <TabPanel index={4} currentIndex={tabIndex}>
           <DistributionPage />
+        </TabPanel>
+        <TabPanel index={5} currentIndex={tabIndex}>
+          <OperationResultPage />
         </TabPanel>
       </WithLayoutPadding>
     </>
