@@ -1,29 +1,29 @@
 import { FlexBox, LocaleSwitch } from "@/common/components";
 import { Typography, Box } from "@mui/material";
 import {
+  Button,
   DateInput,
-  minLength,
   PasswordInput,
   ReferenceInput,
-  required,
   SaveButton,
   SelectInput,
   SimpleForm,
   TextInput,
   Toolbar,
+  required,
+  minLength,
   useNotify,
   useTranslate,
 } from "react-admin";
-import { Add } from "@mui/icons-material";
+import { FC } from "react";
+import { isAxiosError } from "axios";
 
 import { SignupPayload, User } from "@/gen/jfds-api-client";
 import { usePalette, useToggle } from "@/common/hooks";
 import { confirmPasswordValidator } from "@/common/input-validator/password";
-import { USER_GENDER_CHOICES } from "@/operations/profile/utils/gender-choices";
 import { createTranform } from "@/common/utils/transform";
 import { securityApi } from "@/providers";
-import { isAxiosError } from "axios";
-import { FC } from "react";
+import { USER_GENDER_CHOICES } from "@/operations/profile/utils/gender-choices";
 
 export const AdminSignupPage: FC<{
   handleTabChange: (value: number) => void;
@@ -103,11 +103,17 @@ export const AdminSignupPage: FC<{
           disableInvalidFormNotification
           onSubmit={(data: any) => createDefaultAdminUser(data)}
           toolbar={
-            <Toolbar sx={{ justifyContent: "end" }}>
+            <Toolbar sx={{ gap: 2, justifyContent: "end" }}>
+              <Button
+                color="primary"
+                label={"ra.action.cancel"}
+                variant="contained"
+                disabled={isLoading}
+                onClick={() => handleTabChange(0)}
+              />
               <SaveButton
                 disabled={isLoading}
                 color="success"
-                icon={<Add />}
                 label="ra.action.create"
               />
             </Toolbar>

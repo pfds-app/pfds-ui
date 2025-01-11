@@ -171,6 +171,7 @@ export const haFrenchMessages: any = {
     },
     common: {
       created_default_user: "Utilisateur par défaut créé avec succès",
+      create_default_user_btn: "Créer un utilisateur par défaut",
       api_key: "Clé API",
       confirm_password: "Confirmez votre mot de passe",
       confirm_password_error: "Les mots de passe ne correspondent pas.",

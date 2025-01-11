@@ -10,10 +10,12 @@ import {
   useLogin,
   useTranslate,
 } from "react-admin";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
+import { Warning } from "@mui/icons-material";
 import { FlexBox, LocaleSwitch } from "@/common/components";
 import { usePalette } from "@/common/hooks";
-import { Link } from "react-router-dom";
 import {
   FB_PAGE_NAME,
   FB_PROFILE_LINK,
@@ -21,6 +23,8 @@ import {
   MAILTO_LINK,
 } from "@/common/utils/constant";
 import { FC } from "react";
+import { securityApi } from "@/providers";
+import { unwrap } from "@/providers/utils";
 
 export const SigninPage: FC<{ handleTabChange: (value: number) => void }> = ({
   handleTabChange,
@@ -28,6 +32,10 @@ export const SigninPage: FC<{ handleTabChange: (value: number) => void }> = ({
   const { primaryPalette, textSecondaryColor } = usePalette();
   const login = useLogin();
   const translate = useTranslate();
+  const { isLoading, data: allowAdminSignup } = useQuery({
+    queryFn: () => unwrap(() => securityApi().allowAdminSignup()),
+    queryKey: ["allowAdminSignup"],
+  });
 
   return (
     <FlexBox
@@ -92,6 +100,14 @@ export const SigninPage: FC<{ handleTabChange: (value: number) => void }> = ({
               validate={required()}
             />
           </SimpleForm>
+          {!isLoading && allowAdminSignup && (
+            <Button
+              startIcon={<Warning color="warning" />}
+              label="custom.common.create_default_user_btn"
+              sx={{ mt: 2, fontSize: "14px", textDecoration: "underline" }}
+              onClick={() => handleTabChange(1)}
+            />
+          )}
           <Typography
             to={MAILTO_LINK}
             component={Link}
@@ -130,7 +146,6 @@ export const SigninPage: FC<{ handleTabChange: (value: number) => void }> = ({
             />
             {FB_PAGE_NAME}
           </Typography>
-          <Button label="AdminSignup" onClick={() => handleTabChange(1)} />
         </FlexBox>
         <LocaleSwitch />
       </FlexBox>
