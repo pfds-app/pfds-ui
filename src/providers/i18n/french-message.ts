@@ -3,6 +3,54 @@ import frenchMessages from "ra-language-french";
 export const haFrenchMessages: any = {
   ...frenchMessages,
   resources: {
+    "profile": {
+      name: "Profile",
+      fields: {
+        id: "Id",
+        email: "Email",
+        username: "Identifiant",
+        firstName: "Prénom",
+        lastName: "Nom de famille",
+        nic: "Carte d'identité",
+        photo: "Photo",
+        birthDate: "Date de naissance",
+        address: "Adresse",
+        gender: "Genre",
+        apv: "APV",
+        createdAt: "Créé le",
+        updatedAt: "Mis à jour le",
+        role: {
+          id: "Id",
+          name: "Nom du rôle",
+          createdAt: "Créé le",
+          updatedAt: "Mis à jour le"
+        }
+      },
+    },
+    "user": {
+      name: "Utilisateur",
+      fields: {
+        id: "Id",
+        email: "Email",
+        username: "Identifiant",
+        firstName: "Prénom",
+        lastName: "Nom de famille",
+        nic: "Carte d'identité",
+        photo: "Photo",
+        birthDate: "Date de naissance",
+        address: "Adresse",
+        gender: "Genre",
+        apv: "APV",
+        createdAt: "Créé le",
+        updatedAt: "Mis à jour le",
+        role: {
+          id: "Id",
+          name: "Nom du rôle",
+          createdAt: "Créé le",
+          updatedAt: "Mis à jour le"
+        }
+      },
+    },
     "operation-result": {
       name: "Résultat",
       fields: {
