@@ -111,6 +111,11 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      profile_picture_update_title: "Update Profile Picture",
+      profile_picture_update_success:
+        "The profile picture was updated successfully.",
+      profile_picture_update_error:
+        "An error occurred while updating the profile picture.",
       distribution_success: "The ticket was distributed successfully.",
       distribution_error: "An error occurred while distributing the ticket.",
       delete_item_title: "Are you sure you want to delete this item",

@@ -42,7 +42,7 @@ export const TicketCreate = () => {
         />
         <ReferenceInput
           source="staffId"
-          reference="users"
+          reference="user"
           page={1}
           perPage={MAX_ITEM_PER_LIST}
         >

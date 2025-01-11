@@ -111,6 +111,11 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      profile_picture_update_title: "Mettre à jour la photo de profil",
+      profile_picture_update_success:
+        "La photo de profil a été mise à jour avec succès.",
+      profile_picture_update_error:
+        "Une erreur est survenue lors de la mise à jour de la photo de profil.",
       distribution_success: "Le ticket a été distribué avec succès.",
       distribution_error:
         "Une erreur est survenue lors de la distribution du ticket.",

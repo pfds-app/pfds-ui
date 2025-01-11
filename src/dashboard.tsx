@@ -8,6 +8,7 @@ import { CreationPage } from "./operations/creation";
 import { Calendar } from "./operations/calendar";
 import { LedgerPage } from "./operations/ledger";
 import { FitadiavamBolaPage } from "./operations/fitadiavam-bola";
+import { ProfileEditPage } from "./operations/profile";
 import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
 import { jfdsLightTheme } from "./themes";
@@ -37,6 +38,7 @@ export const Dashboard = () => {
       <Resource name="staff" />
       <Resource name="ticket-status" />
       <Resource name="operation-result" />
+      <Resource name="user" />
 
       <CustomRoutes>
         <Route path="/about" element={<AboutPage />} />
@@ -44,6 +46,7 @@ export const Dashboard = () => {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/ledger" element={<LedgerPage />} />
         <Route path="/fitadiavam-bola" element={<FitadiavamBolaPage />} />
+        <Route path="/profiles" element={<ProfileEditPage />} />
       </CustomRoutes>
     </Admin>
   );

@@ -41,6 +41,7 @@ import { useWhoami } from "@/security/hooks";
 import { createImageUrl } from "@/providers";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
 import { SUPPORTED_LOCALES } from "@/providers/i18n";
+import { DEFAULT_PICTURE_IMG } from "@/common/utils/constant";
 
 const APPBAR_SX: SxProps = {
   display: "flex",
@@ -184,7 +185,11 @@ export const AppBarContent = () => {
           {!isLoading ? (
             <Avatar
               alt="John Doe"
-              src={createImageUrl(user?.photo ?? "")}
+              src={
+                user?.photo
+                  ? createImageUrl(user?.photo ?? "")
+                  : DEFAULT_PICTURE_IMG
+              }
               sx={{ width: "35px", height: "35px" }}
             />
           ) : (
@@ -205,7 +210,7 @@ export const AppBarContent = () => {
         <MuiMenuList dense sx={{ minWidth: "200px" }}>
           <MuiMenuItem
             onClick={() => {
-              redirect("/");
+              redirect("/profiles");
               closeMenu();
             }}
             sx={{ "& .MuiSvgIcon-root": { mb: 0.3 } }}

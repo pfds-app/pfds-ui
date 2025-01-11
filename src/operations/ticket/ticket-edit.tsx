@@ -45,7 +45,7 @@ export const TicketEdit: FC<{ ticket: Ticket }> = ({ ticket }) => {
       />
       <ReferenceInput
         source="staff.id"
-        reference="users"
+        reference="user"
         page={1}
         perPage={MAX_ITEM_PER_LIST}
       >
