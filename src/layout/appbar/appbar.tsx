@@ -30,16 +30,17 @@ import {
   AccountCircle,
   ArrowRight,
 } from "@mui/icons-material";
+import { User } from "@/gen/jfds-api-client";
 import { FlexBox, JfdsLogo, LocaleSwitch } from "@/common/components";
 import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
 import { usePalette } from "@/common/hooks";
+import { useWhoami } from "@/security/hooks";
+import { createImageUrl } from "@/providers";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
 import { SUPPORTED_LOCALES } from "@/providers/i18n";
-import { useWhoami } from "@/security/hooks";
-import { User } from "@/gen/jfds-api-client";
 
 const APPBAR_SX: SxProps = {
   display: "flex",
@@ -183,7 +184,7 @@ export const AppBarContent = () => {
           {!isLoading ? (
             <Avatar
               alt="John Doe"
-              src={user?.photo || ""}
+              src={createImageUrl(user?.photo ?? "")}
               sx={{ width: "35px", height: "35px" }}
             />
           ) : (

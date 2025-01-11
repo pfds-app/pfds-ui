@@ -5,8 +5,10 @@ import {
   SecurityApi,
   UsersApi,
 } from "@/gen/jfds-api-client";
-import { getConfiguration } from "./api-conf";
+import { API_BASE_PATH, getConfiguration } from "./api-conf";
 
+export const createImageUrl = (filename: string) =>
+  `${API_BASE_PATH}/files/${filename}`;
 export const healthApi = () => new HealthApi(getConfiguration());
 export const securityApi = () => new SecurityApi(getConfiguration());
 export const usersApi = () => new UsersApi(getConfiguration());
