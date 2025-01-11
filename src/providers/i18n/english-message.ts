@@ -3,53 +3,60 @@ import englishMessages from "ra-language-english";
 export const haEnglishMessages: any = {
   ...englishMessages,
   resources: {
+    "role": {
+      name: "Role",
+      fields: {
+        id: "Id",
+        name: "Role name",
+      },
+    },
     "profile": {
-      "name": "Profile",
-      "fields": {
-        "id": "Id",
-        "email": "Email",
-        "username": "Username",
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "nic": "National ID",
-        "photo": "Photo",
-        "birthDate": "Birth Date",
-        "address": "Address",
-        "gender": "Gender",
-        "apv": "APV",
-        "createdAt": "Created At",
-        "updatedAt": "Updated At",
-        "role": {
-          "id": "Id",
-          "name": "Role Name",
-          "createdAt": "Created At",
-          "updatedAt": "Updated At"
-        }
-      }
+      name: "Profile",
+      fields: {
+        id: "Id",
+        email: "Email",
+        username: "Username",
+        firstName: "First Name",
+        lastName: "Last Name",
+        nic: "National ID",
+        photo: "Photo",
+        birthDate: "Birth Date",
+        address: "Address",
+        gender: "Gender",
+        apv: "APV",
+        createdAt: "Created At",
+        updatedAt: "Updated At",
+        role: {
+          id: "Id",
+          name: "Role Name",
+          createdAt: "Created At",
+          updatedAt: "Updated At",
+        },
+      },
     },
     "user": {
-      "name": "User",
-      "fields": {
-        "id": "Id",
-        "email": "Email",
-        "username": "Username",
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "nic": "National ID",
-        "photo": "Photo",
-        "birthDate": "Birth Date",
-        "address": "Address",
-        "gender": "Gender",
-        "apv": "APV",
-        "createdAt": "Created At",
-        "updatedAt": "Updated At",
-        "role": {
-          "id": "Id",
-          "name": "Role Name",
-          "createdAt": "Created At",
-          "updatedAt": "Updated At"
-        }
-      }
+      name: "User",
+      fields: {
+        id: "Id",
+        email: "Email",
+        username: "Username",
+        firstName: "First Name",
+        lastName: "Last Name",
+        nic: "National ID",
+        photo: "Photo",
+        birthDate: "Birth Date",
+        address: "Address",
+        gender: "Gender",
+        apv: "APV",
+        createdAt: "Created At",
+        updatedAt: "Updated At",
+        role: {
+          id: "Id",
+          name: "Role Name",
+          createdAt: "Created At",
+          updatedAt: "Updated At",
+        },
+      },
     },
     "operation-result": {
       name: "Result",
@@ -153,6 +160,10 @@ export const haEnglishMessages: any = {
   },
   custom: {
     enum: {
+      user_gender: {
+        MALE: "Male",
+        FEMALE: "Female",
+      },
       ledger_mouvement_type: {
         IN: "In",
         OUT: "Out",

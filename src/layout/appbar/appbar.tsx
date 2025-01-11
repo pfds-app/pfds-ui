@@ -42,6 +42,7 @@ import { createImageUrl } from "@/providers";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
 import { SUPPORTED_LOCALES } from "@/providers/i18n";
 import { DEFAULT_PICTURE_IMG } from "@/common/utils/constant";
+import { formatUserName } from "@/common/utils/format-user-name";
 
 const APPBAR_SX: SxProps = {
   display: "flex",
@@ -197,7 +198,7 @@ export const AppBarContent = () => {
           )}
           <Box>
             <Typography sx={{ fontSize: "14px", color: textPrimaryColor }}>
-              {user?.username}
+              {user && formatUserName(user)}
             </Typography>
             <Typography sx={{ fontSize: "13px", color: textSecondaryColor }}>
               {user?.email}

@@ -3,6 +3,13 @@ import frenchMessages from "ra-language-french";
 export const haFrenchMessages: any = {
   ...frenchMessages,
   resources: {
+    "role": {
+      name: "Rôle",
+      fields: {
+        id: "Id",
+        name: "Nom du rôle",
+      },
+    },
     "profile": {
       name: "Profile",
       fields: {
@@ -23,8 +30,8 @@ export const haFrenchMessages: any = {
           id: "Id",
           name: "Nom du rôle",
           createdAt: "Créé le",
-          updatedAt: "Mis à jour le"
-        }
+          updatedAt: "Mis à jour le",
+        },
       },
     },
     "user": {
@@ -47,8 +54,8 @@ export const haFrenchMessages: any = {
           id: "Id",
           name: "Nom du rôle",
           createdAt: "Créé le",
-          updatedAt: "Mis à jour le"
-        }
+          updatedAt: "Mis à jour le",
+        },
       },
     },
     "operation-result": {
@@ -153,6 +160,10 @@ export const haFrenchMessages: any = {
   },
   custom: {
     enum: {
+      user_gender: {
+        MALE: "Homme",
+        FEMALE: "Femme",
+      },
       ledger_mouvement_type: {
         IN: "Entrée",
         OUT: "Sortie",

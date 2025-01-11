@@ -16,3 +16,4 @@ export * from "./ticket-provider";
 export * from "./payed-ticket-provider";
 export * from "./staff-provider";
 export * from "./operation-result-provider";
+export * from "./role-provider";

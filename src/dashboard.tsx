@@ -26,6 +26,7 @@ export const Dashboard = () => {
       theme={jfdsLightTheme}
     >
       <Resource name="profile" />
+      <Resource name="role" />
       <Resource name="sacrament" />
       <Resource name="region" />
       <Resource name="assocation" />
