@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import {
+  Button,
   PasswordInput,
   required,
   SaveButton,
@@ -19,8 +20,11 @@ import {
   MAIL_VALUE,
   MAILTO_LINK,
 } from "@/common/utils/constant";
+import { FC } from "react";
 
-export const LoginPage = () => {
+export const SigninPage: FC<{ handleTabChange: (value: number) => void }> = ({
+  handleTabChange,
+}) => {
   const { primaryPalette, textSecondaryColor } = usePalette();
   const login = useLogin();
   const translate = useTranslate();
@@ -126,6 +130,7 @@ export const LoginPage = () => {
             />
             {FB_PAGE_NAME}
           </Typography>
+          <Button label="AdminSignup" onClick={() => handleTabChange(1)} />
         </FlexBox>
         <LocaleSwitch />
       </FlexBox>

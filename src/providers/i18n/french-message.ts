@@ -170,6 +170,12 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      created_default_user: "Utilisateur par défaut créé avec succès",
+      api_key: "Clé API",
+      confirm_password: "Confirmez votre mot de passe",
+      confirm_password_error: "Les mots de passe ne correspondent pas.",
+      create_default_user:
+        "Créer un utilisateur par défaut (vous pourrez le supprimer plus tard).",
       profile_picture_update_title: "Mettre à jour la photo de profil",
       profile_picture_update_success:
         "La photo de profil a été mise à jour avec succès.",

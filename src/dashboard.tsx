@@ -2,7 +2,7 @@ import { Admin, CustomRoutes, Resource } from "react-admin";
 import { Route } from "react-router-dom";
 
 import { Layout } from "./layout";
-import { LoginPage } from "./security/components";
+import { Login } from "./security/components";
 import { AboutPage } from "./operations/about";
 import { CreationPage } from "./operations/creation";
 import { Calendar } from "./operations/calendar";
@@ -19,7 +19,7 @@ export const Dashboard = () => {
       requireAuth
       layout={Layout}
       dashboard={AboutPage}
-      loginPage={<LoginPage />}
+      loginPage={<Login />}
       authProvider={authProvider}
       dataProvider={dataProvider}
       i18nProvider={i18nProvider}

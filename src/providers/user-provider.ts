@@ -1,7 +1,7 @@
 import { ResourceProvider } from "@rck.princy/ra-data-provider-wrapper";
-import { UpdateUser, User } from "@/gen/jfds-api-client";
+import { SignupPayload, UpdateUser, User } from "@/gen/jfds-api-client";
 import { unwrap } from "./utils";
-import { usersApi } from "./api";
+import { securityApi, usersApi } from "./api";
 
 export enum UserSaveOrUpdateActionType {
   CREATE = "CREATE",
@@ -46,6 +46,8 @@ export const userProvider: ResourceProvider<User> = {
         return data as User;
       case UserSaveOrUpdateActionType.UPDATE_USER_INFOS:
         return unwrap(() => usersApi().updateUserInfo(data as UpdateUser));
+      case UserSaveOrUpdateActionType.CREATE:
+        return unwrap(() => securityApi().signup(data as SignupPayload));
       default:
         throw new Error("Unkown action type");
     }

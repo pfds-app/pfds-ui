@@ -170,6 +170,11 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      created_default_user: "Default user created successfully",
+      api_key: "Api Key",
+      confirm_password: "Confirm your password",
+      confirm_password_error: "The passwords do not match.",
+      create_default_user: "Create a default user (you can delete it later).",
       profile_picture_update_title: "Update Profile Picture",
       profile_picture_update_success:
         "The profile picture was updated successfully.",

@@ -94,11 +94,11 @@ export const ProfileEditPage = () => {
                 <TextInput fullWidth validate={required()} source="address" />
               </FlexBox>
               <FlexBox sx={{ gap: 1, width: "100%" }}>
-                <TextInput fullWidth validate={required()} source="nic" />
+                <TextInput fullWidth source="nic" />
                 <DateInput fullWidth validate={required()} source="birthDate" />
               </FlexBox>
               <FlexBox sx={{ gap: 1, width: "100%" }}>
-                <TextInput fullWidth validate={required()} source="apv" />
+                <TextInput fullWidth source="apv" />
                 <ReferenceInput reference="role" source="role.id">
                   <SelectInput
                     fullWidth

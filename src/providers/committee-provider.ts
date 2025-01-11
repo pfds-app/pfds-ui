@@ -21,4 +21,10 @@ export const committeeProvider: ResourceProvider<Committee> = {
     );
     return response;
   },
+  getMany: async (_resource, { ids }) => {
+    const [id] = ids as string[]; // as we use only select input and never array input
+    return {
+      data: [await unwrap(() => resourcesApi().getCommitteeById(id))],
+    } as any;
+  },
 };
