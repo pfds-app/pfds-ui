@@ -12,6 +12,7 @@ import {
 } from "react-admin";
 import { Box } from "@mui/material";
 import { useFormContext } from "react-hook-form"
+import { FC, useLayoutEffect } from "react";
 
 import { BoxPaperTitled, RequiredWhen } from "@/common/components";
 import { Create } from "@/common/components/create";
@@ -21,7 +22,6 @@ import { createTranform } from "@/common/utils/transform";
 import { confirmPasswordValidator } from "@/common/input-validator/password";
 import { USER_GENDER_CHOICES } from "../profile/utils/gender-choices";
 import { USER_ROLE_CHOICES } from "../profile/utils/role-choices";
-import { FC, useEffect } from "react";
 
 export const UserCreate: FC<{ role: UserRoleEnum }> = ({
   role
@@ -205,8 +205,8 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({
 const ResetFieldsHandler: FC<{ role: UserRoleEnum }> = ({ role }) => {
   const { reset } = useFormContext();
 
-  useEffect(() => {
-    reset();
+  useLayoutEffect(() => {
+    reset({ role }, { keepDefaultValues: true });
   }, [role])
 
   return null;

@@ -22,9 +22,9 @@ export const userProvider: ResourceProvider<User> = {
     return unwrap(() => usersApi().getUserById(id));
   },
   getList: async ({ filter = {}, pagination: { perPage, page } }) => {
-    const { firstName, lastName } = filter;
+    const { role } = filter;
     return unwrap(() =>
-      usersApi().getUsers(lastName, firstName, page, perPage)
+      usersApi().getUsers(role, page, perPage)
     );
   },
   getMany: async (_resource, { ids }) => {

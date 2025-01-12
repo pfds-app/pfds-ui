@@ -5,6 +5,6 @@ import { userProvider } from "./user-provider";
 export const profileProvider: ResourceProvider<User> = {
   resource: "profile",
   getList: () => Promise.resolve([]),
-  getOne: (args) => userProvider!.getOne!(args),
-  saveOrUpdate: (args) => userProvider!.saveOrUpdate!(args),
+  getOne: (args) => userProvider.getOne!(args),
+  saveOrUpdate: (args) => userProvider.saveOrUpdate!(args),
 };
