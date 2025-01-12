@@ -20,8 +20,11 @@ import { createTranform } from "@/common/utils/transform";
 import { confirmPasswordValidator } from "@/common/input-validator/password";
 import { USER_GENDER_CHOICES } from "../profile/utils/gender-choices";
 import { USER_ROLE_CHOICES } from "../profile/utils/role-choices";
+import { FC } from "react";
 
-export const SimpleUserCreate = () => {
+export const UserCreate: FC<{ role: UserRoleEnum }> = ({
+  role
+}) => {
   const translate = useTranslate();
   const transform = ({
     photo,
@@ -46,7 +49,7 @@ export const SimpleUserCreate = () => {
 
   return (
     <BoxPaperTitled
-      title={translate("custom.enum.user_role.SIMPLE_USER")}
+      title={translate(`custom.enum.user_role.${role}`)}
       sx={{ minWidth: "350px", width: "350px" }}
     >
       <Create
@@ -114,10 +117,13 @@ export const SimpleUserCreate = () => {
             validate={required()}
           />
           <SelectInput
+            readOnly
             translateChoice
+            defaultValue={role}
+            value={role}
             source="role"
-            label={translate("resources.user.fields.role")}
             sx={{ mb: "8px" }}
+            label={translate("resources.user.fields.role")}
             choices={USER_ROLE_CHOICES}
             validate={required()}
           />

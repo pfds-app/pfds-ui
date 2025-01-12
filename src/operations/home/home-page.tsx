@@ -30,7 +30,6 @@ export const HomePage = () => {
           <List
             resource="user"
             sx={{
-              "& tr, & td": { border: "none !important" },
               "& th": {
                 display: "none",
               },
@@ -85,7 +84,6 @@ export const HomePage = () => {
             }}
             resource="event"
             sx={{
-              "& tr, & td": { border: "none !important" },
               "& th": {
                 display: "none",
               },
