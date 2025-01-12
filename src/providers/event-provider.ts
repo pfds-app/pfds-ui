@@ -7,7 +7,9 @@ export const eventProvider: ResourceProvider<Event> = {
   resource: "event",
   getList: ({ filter = {}, pagination: { perPage, page }, meta }) => {
     const { name } = filter;
-    return unwrap(() => resourcesApi().getEvents(name, meta?.afterDate, page, perPage));
+    return unwrap(() =>
+      resourcesApi().getEvents(name, meta?.afterDate, page, perPage)
+    );
   },
   delete: ({ id }) => {
     return unwrap(() => resourcesApi().deleteEventById(id));

@@ -148,9 +148,10 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      required_for: "%{source} is required for %{destinationon}",
       today: "Today",
       incoming_event: "Incoming event",
-      teams: 'Teams',
+      teams: "Teams",
       langs: "Languages",
       profile: "Profile",
       created_default_user: "Default user created successfully",

@@ -13,6 +13,7 @@ import { HomePage } from "./operations/home";
 import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
 import { jfdsLightTheme } from "./themes";
+import { HerivelonaPage } from "./operations/herivelona";
 
 export const Dashboard = () => {
   return (
@@ -48,6 +49,7 @@ export const Dashboard = () => {
         <Route path="/ledger" element={<LedgerPage />} />
         <Route path="/fitadiavam-bola" element={<FitadiavamBolaPage />} />
         <Route path="/profiles" element={<ProfileEditPage />} />
+        <Route path="/herivelona" element={<HerivelonaPage />} />
       </CustomRoutes>
     </Admin>
   );

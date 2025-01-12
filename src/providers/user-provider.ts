@@ -1,7 +1,7 @@
 import { ResourceProvider } from "@rck.princy/ra-data-provider-wrapper";
-import { SignupPayload, UpdateUser, User } from "@/gen/jfds-api-client";
+import { CreateUser, UpdateUser, User } from "@/gen/jfds-api-client";
 import { unwrap } from "./utils";
-import { securityApi, usersApi } from "./api";
+import { usersApi } from "./api";
 
 export enum UserSaveOrUpdateActionType {
   CREATE = "CREATE",
@@ -9,6 +9,9 @@ export enum UserSaveOrUpdateActionType {
   UPDATE_USER_PICTURE = "UPDATE_USER_PICTURE",
 }
 
+export type CreateUserPayload = CreateUser & {
+  photo?: any;
+};
 export type UpdateUserPicturePayload = {
   profilePicture: any;
   id: string;
@@ -47,7 +50,13 @@ export const userProvider: ResourceProvider<User> = {
       case UserSaveOrUpdateActionType.UPDATE_USER_INFOS:
         return unwrap(() => usersApi().updateUserInfo(data as UpdateUser));
       case UserSaveOrUpdateActionType.CREATE:
-        return unwrap(() => securityApi().signup(data as SignupPayload));
+        const { photo, ...createUser } = data as CreateUserPayload;
+
+        const user = await unwrap(() => usersApi().createUser(createUser));
+        if (photo) {
+          await usersApi().updateProfilePicture(user.id, photo);
+        }
+        return user;
       default:
         throw new Error("Unkown action type");
     }
