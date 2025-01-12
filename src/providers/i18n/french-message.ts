@@ -141,7 +141,7 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
-      required_for: "%{source} est obligatoire pour %{destinationon}",
+      required_when: "Obligatoire quand %{source}=%{destination}",
       today: "Aujourd'hui",
       incoming_event: "Evènment à venir",
       teams: "Equipes",

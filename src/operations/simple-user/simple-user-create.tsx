@@ -12,10 +12,10 @@ import {
 } from "react-admin";
 import { Box } from "@mui/material";
 
-import { BoxPaperTitled } from "@/common/components";
+import { BoxPaperTitled, RequiredWhen } from "@/common/components";
 import { Create } from "@/common/components/create";
 import { CreateUserPayload, UserSaveOrUpdateActionType } from "@/providers";
-import { User } from "@/gen/jfds-api-client";
+import { User, UserRoleEnum } from "@/gen/jfds-api-client";
 import { createTranform } from "@/common/utils/transform";
 import { confirmPasswordValidator } from "@/common/input-validator/password";
 import { USER_GENDER_CHOICES } from "../profile/utils/gender-choices";
@@ -125,34 +125,48 @@ export const SimpleUserCreate = () => {
             <SelectInput
               fullWidth
               optionText="name"
-              label={translate("resources.responsability.name", {
-                smart_count: 1,
-              })}
+              label={translate("resources.responsability.name")}
+              validate={required()}
             />
           </ReferenceInput>
           <ReferenceInput reference="region" source="region.id">
             <SelectInput
               fullWidth
-              label={translate("resources.region.name", {
-                smart_count: 1,
-              })}
+              label={translate("resources.region.name")}
+              validate={required()}
               optionText="name"
             />
           </ReferenceInput>
           <ReferenceInput reference="association" source="association.id">
-            <SelectInput
-              fullWidth
-              label={translate("resources.association.name", {
-                smart_count: 1,
-              })}
-              optionText="name"
+            <RequiredWhen
+              when="role"
+              translatedEnum
+              enumPath="custom.enum.user_role"
+              equals={[UserRoleEnum.AssociationManager]}
+              render={(validators) => (
+                <SelectInput
+                  fullWidth
+                  validate={validators}
+                  label={translate("resources.association.name")}
+                  optionText="name"
+                />
+              )}
             />
           </ReferenceInput>
           <ReferenceInput reference="committee" source="committee.id">
-            <SelectInput
-              fullWidth
-              optionText="name"
-              label={translate("resources.committee.name")}
+            <RequiredWhen
+              when="role"
+              translatedEnum
+              enumPath="custom.enum.user_role"
+              equals={[UserRoleEnum.CommitteeManager]}
+              render={(validators) => (
+                <SelectInput
+                  fullWidth
+                  validate={validators}
+                  label={translate("resources.committee.name")}
+                  optionText="name"
+                />
+              )}
             />
           </ReferenceInput>
           <ImageInput source="photo" accept={{ "image/*": [".png", ".jpg"] }}>

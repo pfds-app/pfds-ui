@@ -148,7 +148,7 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
-      required_for: "%{source} is required for %{destinationon}",
+      required_when: "Required when %{source}=%{destination}",
       today: "Today",
       incoming_event: "Incoming event",
       teams: "Teams",
