@@ -3,12 +3,15 @@ import {
   Edit as RaEdit,
   SaveButton,
   SimpleForm,
+  SimpleFormProps,
   Toolbar,
 } from "react-admin";
 import { Edit as EditIcon } from "@mui/icons-material";
 import { FC } from "react";
 
-export const Edit: FC<EditProps> = ({ children, ...editProps }) => {
+export const Edit: FC<
+  EditProps & { simpleFormProps?: Partial<SimpleFormProps> }
+> = ({ children, simpleFormProps = {}, ...editProps }) => {
   return (
     <RaEdit
       redirect={false}
@@ -22,6 +25,7 @@ export const Edit: FC<EditProps> = ({ children, ...editProps }) => {
             <SaveButton size="small" icon={<EditIcon />} />
           </Toolbar>
         }
+        {...simpleFormProps}
       >
         {children}
       </SimpleForm>

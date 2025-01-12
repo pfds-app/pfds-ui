@@ -2,6 +2,7 @@ import {
   DateInput,
   ReferenceInput,
   required,
+  SaveButton,
   SelectInput,
   TextInput,
   useTranslate,
@@ -26,11 +27,17 @@ export const ProfileEditPage = () => {
   const transformUpdateUserInfos = ({
     photo,
     role,
+    association,
+    committee,
+    region,
     ...baseUser
   }: User): UpdateUser => {
     return updateTranform({
       ...baseUser,
       roleId: role.id,
+      associationId: association.id,
+      regionId: region.id,
+      committeeId: committee.id,
     });
   };
 
@@ -41,6 +48,7 @@ export const ProfileEditPage = () => {
           id={whoami.id}
           resource="profile"
           transform={transformUpdateUserInfos}
+          simpleFormProps={{ toolbar: false }}
           mutationOptions={{
             meta: {
               actionType: UserSaveOrUpdateActionType.UPDATE_USER_INFOS,
@@ -54,7 +62,7 @@ export const ProfileEditPage = () => {
             },
           }}
         >
-          <FlexBox sx={{ width: "100%", alignItems: "start" }}>
+          <FlexBox sx={{ gap: 2, width: "100%", alignItems: "start" }}>
             <Box sx={{ flex: 1 }}>
               <Typography
                 sx={{
@@ -81,34 +89,67 @@ export const ProfileEditPage = () => {
                 <TextInput fullWidth validate={required()} source="username" />
                 <TextInput fullWidth validate={required()} source="email" />
               </FlexBox>
+              <FlexBox sx={{ gap: 1, width: "100%" }}>
+                <TextInput fullWidth validate={required()} source="address" />
+                <DateInput fullWidth validate={required()} source="birthDate" />
+              </FlexBox>
             </Box>
             <Box sx={{ flex: 1 }}>
               <FlexBox sx={{ gap: 1, width: "100%" }}>
+                <TextInput fullWidth source="nic" />
+                <TextInput fullWidth source="apv" />
+              </FlexBox>
+              <FlexBox sx={{ gap: 1, width: "100%" }}>
                 <SelectInput
                   translateChoice
-                  sx={{ mb: "8px" }}
                   source="gender"
                   choices={USER_GENDER_CHOICES}
                   validate={required()}
                 />
-                <TextInput fullWidth validate={required()} source="address" />
-              </FlexBox>
-              <FlexBox sx={{ gap: 1, width: "100%" }}>
-                <TextInput fullWidth source="nic" />
-                <DateInput fullWidth validate={required()} source="birthDate" />
-              </FlexBox>
-              <FlexBox sx={{ gap: 1, width: "100%" }}>
-                <TextInput fullWidth source="apv" />
                 <ReferenceInput reference="role" source="role.id">
                   <SelectInput
                     fullWidth
-                    sx={{ mb: 1 }}
                     label={translate("resources.role.name")}
                     optionText="name"
                     validate={required()}
                   />
                 </ReferenceInput>
               </FlexBox>
+              <FlexBox sx={{ gap: 1, width: "100%" }}>
+                <ReferenceInput reference="region" source="region.id">
+                  <SelectInput
+                    fullWidth
+                    label={translate("resources.region.name", {
+                      smart_count: 1,
+                    })}
+                    optionText="name"
+                    validate={required()}
+                  />
+                </ReferenceInput>
+                <ReferenceInput reference="association" source="association.id">
+                  <SelectInput
+                    fullWidth
+                    label={translate("resources.association.name", {
+                      smart_count: 1,
+                    })}
+                    optionText="name"
+                    validate={required()}
+                  />
+                </ReferenceInput>
+              </FlexBox>
+              <FlexBox sx={{ gap: 1, width: "100%" }}>
+                <ReferenceInput reference="committee" source="committee.id">
+                  <SelectInput
+                    fullWidth
+                    label={translate("resources.committee.name", {
+                      smart_count: 1,
+                    })}
+                    optionText="name"
+                    validate={required()}
+                  />
+                </ReferenceInput>
+              </FlexBox>
+              <SaveButton color="success" />
             </Box>
           </FlexBox>
         </Edit>
