@@ -1,7 +1,7 @@
 import { Tab } from "@mui/material";
 import { useTranslate } from "react-admin";
 
-import { Tabs, TabPanel } from "@/common/components/tabs";
+import { Tabs } from "@/common/components/tabs";
 import { ListAndCreateLayout, WithLayoutPadding } from "@/common/components";
 import { UserCreate, UserList } from "../user";
 import { UserRoleEnum } from "@/gen/jfds-api-client";
@@ -20,6 +20,16 @@ export const HerivelonaPage = () => {
     values: HERIVELONA_TABS,
   });
   const translate = useTranslate();
+  const getRole = (): UserRoleEnum => {
+    switch (tabIndex) {
+      case 0: return UserRoleEnum.Admin;
+      case 1: return UserRoleEnum.RegionManager;
+      case 2: return UserRoleEnum.AssociationManager;
+      case 3: return UserRoleEnum.CommitteeManager;
+      default: return UserRoleEnum.SimpleUser;
+    }
+  }
+  const role = getRole();
 
   return (
     <>
@@ -31,36 +41,10 @@ export const HerivelonaPage = () => {
         <Tab label={translate("custom.enum.user_role.SIMPLE_USER")} />
       </Tabs>
       <WithLayoutPadding sx={{ mt: 3 }}>
-        <TabPanel index={0} currentIndex={tabIndex}>
-          <ListAndCreateLayout>
-            <UserCreate role={UserRoleEnum.Admin} />
-            <UserList role={UserRoleEnum.Admin} />
-          </ListAndCreateLayout>
-        </TabPanel>
-        <TabPanel index={1} currentIndex={tabIndex}>
-          <ListAndCreateLayout>
-            <UserCreate role={UserRoleEnum.RegionManager} />
-            <UserList role={UserRoleEnum.RegionManager} />
-          </ListAndCreateLayout>
-        </TabPanel>
-        <TabPanel index={2} currentIndex={tabIndex}>
-          <ListAndCreateLayout>
-            <UserCreate role={UserRoleEnum.AssociationManager} />
-            <UserList role={UserRoleEnum.AssociationManager} />
-          </ListAndCreateLayout>
-        </TabPanel>
-        <TabPanel index={3} currentIndex={tabIndex}>
-          <ListAndCreateLayout>
-            <UserCreate role={UserRoleEnum.CommitteeManager} />
-            <UserList role={UserRoleEnum.CommitteeManager} />
-          </ListAndCreateLayout>
-        </TabPanel>
-        <TabPanel index={4} currentIndex={tabIndex}>
-          <ListAndCreateLayout>
-            <UserCreate role={UserRoleEnum.SimpleUser} />
-            <UserList role={UserRoleEnum.SimpleUser} />
-          </ListAndCreateLayout>
-        </TabPanel>
+        <ListAndCreateLayout>
+          <UserCreate role={role} />
+          <UserList role={role} />
+        </ListAndCreateLayout>
       </WithLayoutPadding>
     </>
   );
