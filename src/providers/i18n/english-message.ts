@@ -148,6 +148,8 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      today: "Today",
+      incoming_event: "Incoming event",
       teams: 'Teams',
       langs: "Languages",
       profile: "Profile",

@@ -141,6 +141,8 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      today: "Aujourd'hui",
+      incoming_event: "Evènment à venir",
       teams: 'Equipes',
       langs: "Langues",
       profile: "Profil",

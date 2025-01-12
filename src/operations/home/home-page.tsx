@@ -1,11 +1,16 @@
 import { Avatar, Badge, Typography } from "@mui/material"
 import { FunctionField, useTranslate } from "react-admin"
+import dayjs from 'dayjs';
+import isToday from "dayjs/plugin/isToday";
+
+dayjs.extend(isToday);
 
 import { BoxPaperTitled, FlexBox, WithLayoutPadding } from "@/common/components"
 import { List } from "@/common/components/list"
-import { User } from "@/gen/jfds-api-client";
+import { User, Event } from "@/gen/jfds-api-client";
 import { formatUserName } from "@/common/utils/format-user-name";
 import { createImageUrl } from "@/providers";
+import { newDateToISOString } from "@/common/utils/date";
 import { DEFAULT_PICTURE_IMG } from "@/common/utils/constant";
 
 export const HomePage = () => {
@@ -13,7 +18,7 @@ export const HomePage = () => {
 
   return (
     <WithLayoutPadding sx={{ mt: 2 }}>
-      <FlexBox sx={{ width: '100%', gap: 2 }}>
+      <FlexBox sx={{ width: '100%', alignItems: "stretch", gap: 2 }}>
         <BoxPaperTitled sx={{ flex: 1 }} title={translate("custom.common.teams")}>
           <List
             resource="user"
@@ -22,6 +27,9 @@ export const HomePage = () => {
               "& th": {
                 display: "none"
               }
+            }}
+            datagridProps={{
+              rowSx: undefined
             }}
           >
             <FunctionField label=" " render={(user: User) => {
@@ -53,9 +61,45 @@ export const HomePage = () => {
             }} />
           </List>
         </BoxPaperTitled>
-        <BoxPaperTitled sx={{ flex: 1 }} title="Test">
+        <BoxPaperTitled sx={{ flex: 1 }} title={translate("custom.common.incoming_event")}>
+          <List
+            queryOptions={{
+              meta: {
+                afterDate: newDateToISOString()
+              }
+            }}
+            resource="event"
+            sx={{
+              "& tr, & td": { border: "none !important" },
+              "& th": {
+                display: "none"
+              }
+            }}
+            datagridProps={{
+              rowSx: undefined
+            }}
+          >
+            <FunctionField
+              label=" "
+              render={(event: Event) => {
+                const isToday = dayjs(event.beginDate).isToday();
+                return (
+                  <Typography sx={{ fontSize: "14px", display: "inline-flex", gap: 2 }}>
+                    <span>
+                      {event.name}
+                    </span>
+                    {isToday && (
+                      <span style={{ color: "green" }}>
+                        ({translate("custom.common.today")})
+                      </span>
+                    )}
+                  </Typography>
+                )
+              }}
+            />
+          </List>
         </BoxPaperTitled>
       </FlexBox>
-    </WithLayoutPadding>
+    </WithLayoutPadding >
   )
 }

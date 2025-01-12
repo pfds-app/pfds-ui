@@ -71,7 +71,7 @@ export const List: FC<ListProps> = ({
           borderRadius: "8px",
         },
         "& *": {
-          boxShadow: "none",
+          boxShadow: "none !important",
         },
         ...sx,
       }}
