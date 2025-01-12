@@ -148,6 +148,7 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      teams: 'Teams',
       langs: "Languages",
       profile: "Profile",
       created_default_user: "Default user created successfully",

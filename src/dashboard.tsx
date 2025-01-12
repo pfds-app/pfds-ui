@@ -9,6 +9,7 @@ import { Calendar } from "./operations/calendar";
 import { LedgerPage } from "./operations/ledger";
 import { FitadiavamBolaPage } from "./operations/fitadiavam-bola";
 import { ProfileEditPage } from "./operations/profile";
+import { HomePage } from "./operations/home";
 import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
 import { jfdsLightTheme } from "./themes";
@@ -18,7 +19,7 @@ export const Dashboard = () => {
     <Admin
       requireAuth
       layout={Layout}
-      dashboard={AboutPage}
+      dashboard={HomePage}
       loginPage={<Login />}
       authProvider={authProvider}
       dataProvider={dataProvider}

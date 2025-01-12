@@ -141,6 +141,7 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      teams: 'Equipes',
       langs: "Langues",
       profile: "Profil",
       created_default_user: "Utilisateur par défaut créé avec succès",

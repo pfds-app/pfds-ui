@@ -29,6 +29,7 @@ export const BoxPaperTitled: FC<BoxPaperTitledProps> = ({
       {...boxProps}
     >
       <Typography
+        variant="h2"
         sx={{
           px: 2,
           py: "10px",
