@@ -1,19 +1,21 @@
 import {
   AutocompleteInput,
+  ReferenceInput,
+  TextInput,
+  required,
   minValue,
   number,
-  ReferenceInput,
-  required,
-  TextInput,
   useTranslate,
+  SelectInput,
 } from "react-admin";
+
 import { BoxPaperTitled, FlexBox } from "@/common/components";
 import { Create } from "@/common/components/create";
-import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 import { CrupdateTicket, User } from "@/gen/jfds-api-client";
+import { higherOrEqualsThan } from "@/common/input-validator";
 import { createTranform } from "@/common/utils/transform";
 import { formatUserName } from "@/common/utils/format-user-name";
-import { higherOrEqualsThan } from "@/common/input-validator";
+import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 
 export const TicketCreate = () => {
   const translate = useTranslate();
@@ -32,14 +34,19 @@ export const TicketCreate = () => {
   };
 
   return (
-    <BoxPaperTitled title="Billet" sx={{ minWidth: "350px", width: "350px" }}>
+    <BoxPaperTitled
+      title={translate("resources.ticket.name")}
+      sx={{ minWidth: "350px", width: "350px" }}
+    >
       <Create transform={transform} resource="ticket">
-        <ReferenceInput
-          source="operationId"
-          reference="operation"
-          page={1}
-          perPage={MAX_ITEM_PER_LIST}
-        />
+        <ReferenceInput reference="operation" source="operationId">
+          <SelectInput
+            fullWidth
+            validate={required()}
+            optionText="name"
+            label={translate("resources.operation.name")}
+          />
+        </ReferenceInput>
         <ReferenceInput
           source="staffId"
           reference="user"
@@ -47,6 +54,7 @@ export const TicketCreate = () => {
           perPage={MAX_ITEM_PER_LIST}
         >
           <AutocompleteInput
+            validate={required()}
             suggestionLimit={10}
             optionText={(user: User) => formatUserName(user)}
           />

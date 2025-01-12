@@ -1,8 +1,9 @@
-import { DateInput, number, required, TextInput } from "react-admin";
+import { DateInput, TextInput, number, required } from "react-admin";
+import { FC } from "react";
+
+import { Operation } from "@/gen/jfds-api-client";
 import { Edit } from "@/common/components/edit";
 import { updateTranform } from "@/common/utils/transform";
-import { Operation } from "@/gen/jfds-api-client";
-import { FC } from "react";
 import { toISOString } from "@/common/utils/date";
 
 export const OperationEdit: FC<{ operation: Operation }> = ({ operation }) => {

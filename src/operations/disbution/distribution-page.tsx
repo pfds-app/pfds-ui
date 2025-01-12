@@ -1,17 +1,21 @@
 import {
   Button,
-  minValue,
-  number,
   ReferenceInput,
-  required,
   SelectInput,
   TextInput,
   Toolbar,
+  required,
+  minValue,
+  number,
   useTranslate,
   useNotify,
   useShowContext,
   useUpdate,
 } from "react-admin";
+import { RemoveRedEye } from "@mui/icons-material";
+import { FC, useState } from "react";
+import { useFormState, useWatch } from "react-hook-form";
+
 import {
   BoxPaperTitled,
   FlexBox,
@@ -20,20 +24,16 @@ import {
 } from "@/common/components";
 import { Create } from "@/common/components/create";
 import { Show } from "@/common/components/show";
-import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 import { CircularProgress, Typography } from "@mui/material";
-import { FC, useState } from "react";
-import { RemoveRedEye } from "@mui/icons-material";
 import { StateSetter } from "@/common/utils/types";
-import { useFormState, useWatch } from "react-hook-form";
 import { PayedTicket } from "@/gen/jfds-api-client";
 import { CrupdatePayedTicketPayload } from "@/providers";
+import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 
 export type VerifyPayload = {
   operationId: string | null;
   ticketNumber: number | null;
 };
-
 const VerifyButton: FC<{ setter: StateSetter<VerifyPayload> }> = ({
   setter,
 }) => {

@@ -1,8 +1,11 @@
-import { BoxPaperTitled } from "@/common/components";
-import { List } from "@/common/components/list";
-import { MoneyTextField } from "@/common/components/list/money-text-field";
-import { TranslatedEnumTextField } from "@/common/components/list/translated-enum-text-field";
 import { TextField } from "react-admin";
+
+import {
+  List,
+  MoneyTextField,
+  TranslatedEnumTextField,
+} from "@/common/components/list";
+import { BoxPaperTitled } from "@/common/components";
 
 export const LedgerList = () => {
   return (

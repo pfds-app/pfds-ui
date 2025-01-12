@@ -1,5 +1,7 @@
-import { DateField, FunctionField, TextField } from "react-admin";
-import { List } from "@/common/components/list";
+import { DateField, FunctionField, TextField, useTranslate } from "react-admin";
+import { useState } from "react";
+
+import { List, MoneyTextField } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
 import { OperationEdit } from "./operation-edit";
@@ -8,8 +10,6 @@ import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
-import { useState } from "react";
-import { MoneyTextField } from "@/common/components/list/money-text-field";
 
 export const OperationList = () => {
   return (
@@ -24,14 +24,17 @@ export const OperationListContent = () => {
   const [operationToEdit, setOperationToEdit] = useState<Operation | null>(
     null
   );
-
+  const translate = useTranslate();
   const doEdit = (operation: Operation) => {
     toggleStatus();
     setOperationToEdit(operation);
   };
 
   return (
-    <BoxPaperTitled title="Lisitry ny opération" containerSx={{ pt: 0 }}>
+    <BoxPaperTitled
+      title={`Lisitry ny ${translate("resources.operation.name")}`}
+      containerSx={{ pt: 0 }}
+    >
       <List resource="operation">
         <TextField sortable={false} source="name" />
         <MoneyTextField source="ticketPrice" />

@@ -108,16 +108,14 @@ export const ProfileEditPage = () => {
                   choices={USER_GENDER_CHOICES}
                   validate={required()}
                 />
-                <ReferenceInput reference="role" source="role.id">
-                  <SelectInput
-                    readOnly
-                    fullWidth
-                    source="role"
-                    optionText="name"
-                    validate={required()}
-                    choices={USER_ROLE_CHOICES}
-                  />
-                </ReferenceInput>
+                <SelectInput
+                  readOnly
+                  fullWidth
+                  source="role"
+                  optionText="name"
+                  validate={required()}
+                  choices={USER_ROLE_CHOICES}
+                />
               </FlexBox>
               <FlexBox sx={{ gap: 1, width: "100%" }}>
                 <ReferenceInput reference="region" source="region.id">

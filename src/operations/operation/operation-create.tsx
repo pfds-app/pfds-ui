@@ -1,8 +1,15 @@
-import { DateInput, number, required, TextInput } from "react-admin";
+import {
+  DateInput,
+  TextInput,
+  number,
+  required,
+  useTranslate,
+} from "react-admin";
+
+import { Operation } from "@/gen/jfds-api-client";
 import { BoxPaperTitled } from "@/common/components";
 import { Create } from "@/common/components/create";
 import { createTranform } from "@/common/utils/transform";
-import { Operation } from "@/gen/jfds-api-client";
 import { toISOString } from "@/common/utils/date";
 
 export const OperationCreate = () => {
@@ -22,10 +29,11 @@ export const OperationCreate = () => {
       operationDate: toISOString(record.operationDate),
     });
   };
+  const translate = useTranslate();
 
   return (
     <BoxPaperTitled
-      title="Opération"
+      title={translate("resources.operation.name")}
       sx={{ minWidth: "350px", width: "350px" }}
     >
       <Create transform={transform} resource="operation">

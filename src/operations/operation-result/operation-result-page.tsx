@@ -12,7 +12,10 @@ export const OperationResultPage = () => {
     <WithLayoutPadding>
       <BoxPaperTitled title={translate("resources.operation-result.name")}>
         <List resource="operation-result">
-          <TextField source="operation.name" />
+          <TextField
+            label={translate("resources.operation.name")}
+            source="operation.name"
+          />
           <FunctionField
             label={translate("resources.operation.fields.ticketPrice")}
             sortable={false}

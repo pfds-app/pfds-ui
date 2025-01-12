@@ -1,14 +1,15 @@
 import { Tab } from "@mui/material";
+import { useTranslate } from "react-admin";
+
 import { Tabs, TabPanel } from "@/common/components/tabs";
 import { ListAndCreateLayout, WithLayoutPadding } from "@/common/components";
 import { OperationList, OperationCreate } from "../operation";
 import { TicketCreate, TicketList } from "../ticket";
 import { PayedTicketPage } from "../payed-ticket";
-import { useTabManager } from "@/common/hooks";
-import { useTranslate } from "react-admin";
 import { TicketStatusList } from "../ticket-status";
 import { DistributionPage } from "../disbution";
 import { OperationResultPage } from "../operation-result";
+import { useTabManager } from "@/common/hooks";
 
 const FITADIAVAM_BOLA_TABS = [
   "opérations",
@@ -28,7 +29,7 @@ export const FitadiavamBolaPage = () => {
   return (
     <>
       <Tabs tabIndex={tabIndex} handleChange={handleTabChange}>
-        <Tab label="Opération" />
+        <Tab label={translate("resources.operation.name")} />
         <Tab label={translate("resources.ticket.name")} />
         <Tab label="Marquage" />
         <Tab label="Situation" />

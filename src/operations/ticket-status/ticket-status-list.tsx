@@ -1,16 +1,16 @@
-import { List } from "@/common/components/list";
 import {
   FunctionField,
   ReferenceInput,
-  required,
   SelectInput,
   SimpleForm,
   TextField,
+  required,
 } from "react-admin";
-import { TicketStatus } from "@/gen/jfds-api-client";
-import { MoneyTextField } from "@/common/components/list/money-text-field";
-import { BoxPaperTitled, WithLayoutPadding } from "@/common/components";
 import { useWatch } from "react-hook-form";
+
+import { List, MoneyTextField } from "@/common/components/list";
+import { TicketStatus } from "@/gen/jfds-api-client";
+import { BoxPaperTitled, WithLayoutPadding } from "@/common/components";
 import { formatUserName } from "@/common/utils/format-user-name";
 import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 

@@ -1,26 +1,26 @@
+import { CheckCircle } from "@mui/icons-material";
+import { CircularProgress } from "@mui/material";
 import {
   CheckboxGroupInput,
   ReferenceInput,
-  required,
   SaveButton,
   SelectInput,
   Toolbar,
+  required,
   useGetList,
 } from "react-admin";
-import { CheckCircle } from "@mui/icons-material";
-import { CircularProgress } from "@mui/material";
+
 import { Create } from "@/common/components/create";
-import { BoxPaperTitled, WithLayoutPadding } from "@/common/components";
-import { useFormContext, useWatch } from "react-hook-form";
-import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
-import { formatUserName } from "@/common/utils/format-user-name";
 import { PayedTicket } from "@/gen/jfds-api-client";
+import { BoxPaperTitled, WithLayoutPadding } from "@/common/components";
+import { CrupdatePayedTicketPayload } from "@/providers";
+import { useFormContext, useWatch } from "react-hook-form";
+import { formatUserName } from "@/common/utils/format-user-name";
 import { useLayoutEffect, useMemo } from "react";
 import { stringifyObj } from "@/common/utils/stringify-obj";
-import { CrupdatePayedTicketPayload } from "@/providers";
 import { updateTranform } from "@/common/utils/transform";
+import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 
-const DUMMY_ID = "dummy_id";
 type FormValue = {
   operationId: string;
   staffId: string;
@@ -38,7 +38,7 @@ export const PayedTicketPage = () => {
     return {
       staffId,
       operationId,
-      id: DUMMY_ID,
+      id: "DUMMY_ID",
       payedTikects: payedTickets.map((payedTicket) => {
         const isChecked = checkedPayedTicketIds.includes(payedTicket.id);
         return updateTranform({ ...payedTicket, isPayed: isChecked });
@@ -154,8 +154,7 @@ export const TicketCheckBoxList = () => {
 
   return (
     <CheckboxGroupInput
-      label="Billets"
-      translate={"no"}
+      label={" "}
       source="checkedPayedTicketIds"
       optionText="ticketNumber"
       choices={payedTickets}
