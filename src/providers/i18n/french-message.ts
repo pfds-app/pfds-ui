@@ -3,37 +3,6 @@ import frenchMessages from "ra-language-french";
 export const haFrenchMessages: any = {
   ...frenchMessages,
   resources: {
-    "role": {
-      name: "Rôle",
-      fields: {
-        id: "Id",
-        name: "Nom du rôle",
-      },
-    },
-    "profile": {
-      name: "Profile",
-      fields: {
-        id: "Id",
-        email: "Email",
-        username: "Identifiant",
-        firstName: "Prénom",
-        lastName: "Nom de famille",
-        nic: "Carte d'identité",
-        photo: "Photo",
-        birthDate: "Date de naissance",
-        address: "Adresse",
-        gender: "Genre",
-        apv: "APV",
-        createdAt: "Créé le",
-        updatedAt: "Mis à jour le",
-        role: {
-          id: "Id",
-          name: "Nom du rôle",
-          createdAt: "Créé le",
-          updatedAt: "Mis à jour le",
-        },
-      },
-    },
     "user": {
       name: "Utilisateur",
       fields: {
@@ -42,7 +11,7 @@ export const haFrenchMessages: any = {
         username: "Identifiant",
         firstName: "Prénom",
         lastName: "Nom de famille",
-        nic: "Carte d'identité",
+        nic: "Num Karatra",
         photo: "Photo",
         birthDate: "Date de naissance",
         address: "Adresse",
@@ -50,12 +19,7 @@ export const haFrenchMessages: any = {
         apv: "APV",
         createdAt: "Créé le",
         updatedAt: "Mis à jour le",
-        role: {
-          id: "Id",
-          name: "Nom du rôle",
-          createdAt: "Créé le",
-          updatedAt: "Mis à jour le",
-        },
+        role: "Rôle",
       },
     },
     "operation-result": {
@@ -66,14 +30,14 @@ export const haFrenchMessages: any = {
       },
     },
     "sacrament": {
-      name: "Sakramenta |||| Sakramenta",
+      name: "Sakramenta",
       fields: {
         id: "Id",
         name: "Libellé",
       },
     },
     "region": {
-      name: "Faritra |||| Faritra",
+      name: "Faritra",
       fields: {
         id: "Id",
         name: "Libellé",
@@ -81,7 +45,7 @@ export const haFrenchMessages: any = {
       },
     },
     "association": {
-      name: "Fikambanana masina |||| Fikambanana masina",
+      name: "Fikambanana masina",
       fields: {
         id: "Id",
         name: "Libellé",
@@ -89,7 +53,7 @@ export const haFrenchMessages: any = {
       },
     },
     "committee": {
-      name: "Vaomieran'asa |||| Vaomieran'asa",
+      name: "Vaomieran'asa",
       fields: {
         id: "Id",
         name: "Libellé",
@@ -97,7 +61,7 @@ export const haFrenchMessages: any = {
       },
     },
     "event": {
-      name: "Evènment |||| Evènments",
+      name: "Evènment",
       fields: {
         id: "Id",
         name: "Nom de l'evènment",
@@ -160,6 +124,13 @@ export const haFrenchMessages: any = {
   },
   custom: {
     enum: {
+      user_role: {
+        ADMIN: "Administrateur",
+        REGION_MANAGER: "Filohan’ny Faritra",
+        COMMITTEE_MANAGER: "Filohan’ny Vaomieran’asa",
+        ASSOCIATION_MANAGER: "Filohan’ny Fikambanana Masina",
+        SIMPLE_USER: "Mpikambana"
+      },
       user_gender: {
         MALE: "Homme",
         FEMALE: "Femme",
@@ -170,6 +141,7 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      profile: "Profil",
       created_default_user: "Utilisateur par défaut créé avec succès",
       create_default_user_btn: "Créer un utilisateur par défaut",
       api_key: "Clé API",

@@ -10,30 +10,6 @@ export const haEnglishMessages: any = {
         name: "Role name",
       },
     },
-    "profile": {
-      name: "Profile",
-      fields: {
-        id: "Id",
-        email: "Email",
-        username: "Username",
-        firstName: "First Name",
-        lastName: "Last Name",
-        nic: "National ID",
-        photo: "Photo",
-        birthDate: "Birth Date",
-        address: "Address",
-        gender: "Gender",
-        apv: "APV",
-        createdAt: "Created At",
-        updatedAt: "Updated At",
-        role: {
-          id: "Id",
-          name: "Role Name",
-          createdAt: "Created At",
-          updatedAt: "Updated At",
-        },
-      },
-    },
     "user": {
       name: "User",
       fields: {
@@ -42,20 +18,15 @@ export const haEnglishMessages: any = {
         username: "Username",
         firstName: "First Name",
         lastName: "Last Name",
-        nic: "National ID",
+        nic: "Num Karatra",
+        role: "Role",
         photo: "Photo",
         birthDate: "Birth Date",
         address: "Address",
         gender: "Gender",
         apv: "APV",
         createdAt: "Created At",
-        updatedAt: "Updated At",
-        role: {
-          id: "Id",
-          name: "Role Name",
-          createdAt: "Created At",
-          updatedAt: "Updated At",
-        },
+        updatedAt: "Updated At"
       },
     },
     "operation-result": {
@@ -73,7 +44,7 @@ export const haEnglishMessages: any = {
       },
     },
     "region": {
-      name: "Faritra |||| Faritra",
+      name: "Faritra",
       fields: {
         id: "Id",
         name: "Label",
@@ -81,7 +52,7 @@ export const haEnglishMessages: any = {
       },
     },
     "association": {
-      name: "Fikambanana masina |||| Fikambanana masina",
+      name: "Fikambanana masina",
       fields: {
         id: "Id",
         name: "Label",
@@ -89,7 +60,7 @@ export const haEnglishMessages: any = {
       },
     },
     "committee": {
-      name: "Vaomieran'asa |||| Vaomieran'asa",
+      name: "Vaomieran'asa",
       fields: {
         id: "Id",
         name: "Label",
@@ -97,7 +68,7 @@ export const haEnglishMessages: any = {
       },
     },
     "event": {
-      name: "Event |||| Events",
+      name: "Event",
       fields: {
         id: "Id",
         name: "Event name",
@@ -160,6 +131,13 @@ export const haEnglishMessages: any = {
   },
   custom: {
     enum: {
+      user_role: {
+        ADMIN: "Admin",
+        REGION_MANAGER: "Filohan’ny Faritra",
+        COMMITTEE_MANAGER: "Filohan’ny Vaomieran’asa",
+        ASSOCIATION_MANAGER: "Filohan’ny Fikambanana Masina",
+        SIMPLE_USER: "Mpikambana"
+      },
       user_gender: {
         MALE: "Male",
         FEMALE: "Female",
@@ -170,6 +148,7 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      profile: "Profile",
       created_default_user: "Default user created successfully",
       api_key: "Api Key",
       confirm_password: "Confirm your password",

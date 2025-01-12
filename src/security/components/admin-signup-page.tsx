@@ -1,10 +1,8 @@
-import { FlexBox, LocaleSwitch } from "@/common/components";
 import { Typography, Box } from "@mui/material";
 import {
   Button,
   DateInput,
   PasswordInput,
-  ReferenceInput,
   SaveButton,
   SelectInput,
   SimpleForm,
@@ -18,12 +16,14 @@ import {
 import { FC } from "react";
 import { isAxiosError } from "axios";
 
-import { SignupPayload, User } from "@/gen/jfds-api-client";
+import { SignupPayload, User, UserRoleEnum } from "@/gen/jfds-api-client";
+import { FlexBox, LocaleSwitch } from "@/common/components";
 import { usePalette, useToggle } from "@/common/hooks";
 import { confirmPasswordValidator } from "@/common/input-validator/password";
 import { createTranform } from "@/common/utils/transform";
 import { securityApi } from "@/providers";
 import { USER_GENDER_CHOICES } from "@/operations/profile/utils/gender-choices";
+import { USER_ROLE_CHOICES } from "@/operations/profile/utils/role-choices";
 
 export const AdminSignupPage: FC<{
   handleTabChange: (value: number) => void;
@@ -40,12 +40,8 @@ export const AdminSignupPage: FC<{
   const createDefaultAdminUser = async (
     signup: Omit<
       User,
-      "id" | "photo" | "role" | "association" | "region" | "committee"
+      "id" | "photo" | "responsability" | "association" | "region" | "committee"
     > & {
-      roleId: string;
-      associationId: string;
-      regionId: string;
-      committeeId: string;
       password: string;
       adminApiKey: string;
     }
@@ -105,6 +101,7 @@ export const AdminSignupPage: FC<{
           toolbar={
             <Toolbar sx={{ gap: 2, justifyContent: "end" }}>
               <Button
+                size="medium"
                 color="primary"
                 label={"ra.action.cancel"}
                 variant="contained"
@@ -113,6 +110,7 @@ export const AdminSignupPage: FC<{
               />
               <SaveButton
                 disabled={isLoading}
+                size="small"
                 color="success"
                 label="ra.action.create"
               />
@@ -175,77 +173,47 @@ export const AdminSignupPage: FC<{
                   source="apv"
                 />
               </FlexBox>
+            </Box>
+            <Box sx={{ transform: "translateY(-8px)", flex: 1 }}>
               <FlexBox sx={{ gap: 1, width: "100%" }}>
                 <SelectInput
                   translateChoice
                   sx={{ mb: "8px" }}
                   source="gender"
+                  label={translate("resources.user.fields.gender")}
                   choices={USER_GENDER_CHOICES}
                   validate={required()}
                 />
-                <ReferenceInput reference="role" source="roleId">
-                  <SelectInput
-                    fullWidth
-                    sx={{ mb: 1 }}
-                    label={translate("resources.role.name")}
-                    optionText="name"
-                    validate={required()}
-                  />
-                </ReferenceInput>
-              </FlexBox>
-            </Box>
-            <Box sx={{ transform: "translateY(-8px)", flex: 1 }}>
-              <FlexBox sx={{ gap: 1, width: "100%" }}>
-                <ReferenceInput reference="region" source="regionId">
-                  <SelectInput
-                    fullWidth
-                    sx={{ mb: 1 }}
-                    label={translate("resources.region.name", {
-                      smart_count: 1,
-                    })}
-                    optionText="name"
-                    validate={required()}
-                  />
-                </ReferenceInput>
-                <ReferenceInput reference="committee" source="committeeId">
-                  <SelectInput
-                    fullWidth
-                    sx={{ mb: 1 }}
-                    label={translate("resources.committee.name", {
-                      smart_count: 1,
-                    })}
-                    optionText="name"
-                    validate={required()}
-                  />
-                </ReferenceInput>
-              </FlexBox>
-              <ReferenceInput reference="association" source="associationId">
                 <SelectInput
-                  fullWidth
-                  sx={{ mb: 1 }}
-                  label={translate("resources.association.name", {
-                    smart_count: 1,
-                  })}
-                  optionText="name"
+                  readOnly
+                  translateChoice
+                  source="role"
+                  label={translate("resources.user.fields.role")}
+                  sx={{ mb: "8px" }}
+                  value={UserRoleEnum.Admin}
+                  defaultValue={UserRoleEnum.Admin}
+                  choices={USER_ROLE_CHOICES}
                   validate={required()}
                 />
-              </ReferenceInput>
-              <PasswordInput
-                source="password"
-                label={translate("ra.auth.password")}
-                validate={[required(), minLength(8)]}
-              />
-              <PasswordInput
-                source="confirmPassword"
-                label={translate("custom.common.confirm_password")}
-                validate={[
-                  required(),
-                  confirmPasswordValidator(
-                    "password",
-                    translate("custom.common.confirm_password_error")
-                  ),
-                ]}
-              />
+              </FlexBox>
+              <FlexBox sx={{ gap: 1, width: "100%" }}>
+                <PasswordInput
+                  source="password"
+                  label={translate("ra.auth.password")}
+                  validate={[required(), minLength(8)]}
+                />
+                <PasswordInput
+                  source="confirmPassword"
+                  label={translate("custom.common.confirm_password")}
+                  validate={[
+                    required(),
+                    confirmPasswordValidator(
+                      "password",
+                      translate("custom.common.confirm_password_error")
+                    ),
+                  ]}
+                />
+              </FlexBox>
               <PasswordInput
                 source="adminApiKey"
                 label={translate("custom.common.api_key")}
@@ -255,7 +223,7 @@ export const AdminSignupPage: FC<{
           </FlexBox>
         </SimpleForm>
         <LocaleSwitch />
-      </FlexBox>
-    </FlexBox>
+      </FlexBox >
+    </FlexBox >
   );
 };

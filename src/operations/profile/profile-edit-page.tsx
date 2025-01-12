@@ -1,23 +1,25 @@
 import {
   DateInput,
   ReferenceInput,
-  required,
   SaveButton,
   SelectInput,
   TextInput,
+  required,
   useTranslate,
 } from "react-admin";
 import { Box, Typography } from "@mui/material";
-import { FlexBox, WithLayoutPadding } from "@/common/components";
+
+import { UpdateUser, User } from "@/gen/jfds-api-client";
 import { Show } from "@/common/components/show";
 import { Edit } from "@/common/components/edit";
+import { FlexBox, WithLayoutPadding } from "@/common/components";
 import { ProfilePictureShow } from "./components";
-import { UpdateUser, User } from "@/gen/jfds-api-client";
 import { UserSaveOrUpdateActionType } from "@/providers";
 import { usePalette } from "@/common/hooks";
 import { useWhoami } from "@/security/hooks";
 import { updateTranform } from "@/common/utils/transform";
 import { USER_GENDER_CHOICES } from "./utils/gender-choices";
+import { USER_ROLE_CHOICES } from "./utils/role-choices";
 
 export const ProfileEditPage = () => {
   const { textSecondaryColor } = usePalette();
@@ -26,7 +28,7 @@ export const ProfileEditPage = () => {
 
   const transformUpdateUserInfos = ({
     photo,
-    role,
+    responsability,
     association,
     committee,
     region,
@@ -34,10 +36,10 @@ export const ProfileEditPage = () => {
   }: User): UpdateUser => {
     return updateTranform({
       ...baseUser,
-      roleId: role.id,
-      associationId: association.id,
-      regionId: region.id,
-      committeeId: committee.id,
+      responsabilityId: responsability?.id,
+      associationId: association?.id,
+      regionId: region?.id,
+      committeeId: committee?.id,
     });
   };
 
@@ -46,7 +48,7 @@ export const ProfileEditPage = () => {
       <Box sx={{ width: "100%", px: 5, py: 2, bgcolor: "white" }}>
         <Edit
           id={whoami.id}
-          resource="profile"
+          resource="user"
           transform={transformUpdateUserInfos}
           simpleFormProps={{ toolbar: false }}
           mutationOptions={{
@@ -76,7 +78,7 @@ export const ProfileEditPage = () => {
               </Typography>
               <Show
                 sx={{ mb: 2, width: "fit-content", mx: "auto" }}
-                resource="profile"
+                resource="user"
                 id={whoami?.id}
               >
                 <ProfilePictureShow />
@@ -108,10 +110,12 @@ export const ProfileEditPage = () => {
                 />
                 <ReferenceInput reference="role" source="role.id">
                   <SelectInput
+                    readOnly
                     fullWidth
-                    label={translate("resources.role.name")}
+                    source="role"
                     optionText="name"
                     validate={required()}
+                    choices={USER_ROLE_CHOICES}
                   />
                 </ReferenceInput>
               </FlexBox>

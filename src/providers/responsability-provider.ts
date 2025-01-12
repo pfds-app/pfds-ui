@@ -25,4 +25,10 @@ export const responsabilityProvider: ResourceProvider<Responsability> = {
     );
     return response;
   },
+  getMany: async (_resource, { ids }) => {
+    const [id] = ids as string[]; // as we use only select input and never array input
+    return {
+      data: [await unwrap(() => resourcesApi().getResponsabilityById(id))],
+    } as any;
+  },
 };
