@@ -1,6 +1,7 @@
-import { useRef } from "react";
-import { FunctionField, useRecordContext } from "react-admin";
 import { Badge } from "@mui/material";
+import { FunctionField, useRecordContext } from "react-admin";
+import { useRef } from "react";
+
 import { User } from "@/gen/jfds-api-client";
 import { UploadPictureButton } from "./update-profile-btn";
 import { createImageUrl } from "@/providers";

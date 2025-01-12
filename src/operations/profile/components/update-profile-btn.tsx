@@ -1,3 +1,5 @@
+import { PhotoCamera } from "@mui/icons-material";
+import { Typography } from "@mui/material";
 import {
   ImageField,
   ImageInput,
@@ -7,21 +9,17 @@ import {
   useRecordContext,
   useTranslate,
 } from "react-admin";
-import { PhotoCamera } from "@mui/icons-material";
-import { Typography } from "@mui/material";
+import { FC } from "react";
+
+import { UploadeSuccessResponse, User } from "@/gen/jfds-api-client";
 import { DialogContent, TooltipIconButton } from "@/common/components";
 import { Create } from "@/common/components/create";
-import { UploadeSuccessResponse, User } from "@/gen/jfds-api-client";
-import {
-  DialogContextProvider,
-  useDialogContext,
-} from "@/common/services/dialog";
 import {
   UpdateUserPicturePayload,
   UserSaveOrUpdateActionType,
 } from "@/providers";
+import { DialogContextProvider, useDialogContext } from "@/common/services/dialog";
 import { usePalette } from "@/common/hooks";
-import { FC } from "react";
 import { NOOP_FN } from "@/common/utils/noop-fn";
 
 export type UploadPictureButtonProps = {

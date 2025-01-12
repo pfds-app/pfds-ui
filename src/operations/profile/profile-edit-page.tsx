@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import {
   DateInput,
   ReferenceInput,
@@ -7,7 +8,6 @@ import {
   required,
   useTranslate,
 } from "react-admin";
-import { Box, Typography } from "@mui/material";
 
 import { UpdateUser, User } from "@/gen/jfds-api-client";
 import { Show } from "@/common/components/show";
@@ -127,7 +127,6 @@ export const ProfileEditPage = () => {
                       smart_count: 1,
                     })}
                     optionText="name"
-                    validate={required()}
                   />
                 </ReferenceInput>
                 <ReferenceInput reference="association" source="association.id">
@@ -137,19 +136,26 @@ export const ProfileEditPage = () => {
                       smart_count: 1,
                     })}
                     optionText="name"
-                    validate={required()}
                   />
                 </ReferenceInput>
               </FlexBox>
               <FlexBox sx={{ gap: 1, width: "100%" }}>
+                <ReferenceInput reference="responsability" source="responsability.id">
+                  <SelectInput
+                    fullWidth
+                    optionText="name"
+                    label={translate("resources.responsability.name", {
+                      smart_count: 1,
+                    })}
+                  />
+                </ReferenceInput>
                 <ReferenceInput reference="committee" source="committee.id">
                   <SelectInput
                     fullWidth
+                    optionText="name"
                     label={translate("resources.committee.name", {
                       smart_count: 1,
                     })}
-                    optionText="name"
-                    validate={required()}
                   />
                 </ReferenceInput>
               </FlexBox>
