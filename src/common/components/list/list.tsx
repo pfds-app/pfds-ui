@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Box, SxProps } from "@mui/material";
 import {
   Datagrid,
@@ -6,9 +5,11 @@ import {
   ListProps as RaListProps,
   DatagridProps,
 } from "react-admin";
+import { FC } from "react";
+
 import { Pagination } from "./pagination";
-import { usePalette } from "@/common/hooks";
 import { ListEmpty } from "./list-empty";
+import { usePalette } from "@/common/hooks";
 
 export type ListProps = Partial<Omit<RaListProps, "empty">> & {
   datagridProps?: DatagridProps;

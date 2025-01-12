@@ -1,6 +1,3 @@
-import { FC, useEffect } from "react";
-import { Menu as RaMenu, useSidebarState, useTranslate } from "react-admin";
-import { Box, SxProps, Drawer, useTheme, useMediaQuery } from "@mui/material";
 import {
   AssignmentTurnedIn,
   Home,
@@ -15,6 +12,10 @@ import {
   ReceiptLong,
   Apartment,
 } from "@mui/icons-material";
+import { Menu as RaMenu, useSidebarState, useTranslate } from "react-admin";
+import { Box, SxProps, Drawer, useTheme, useMediaQuery } from "@mui/material";
+import { FC, useEffect } from "react";
+
 import { usePalette } from "@/common/hooks";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
 

@@ -1,12 +1,13 @@
-import { FlexBox } from "@/common/components";
 import { CircularProgress, Typography } from "@mui/material";
-import { Event } from "@/gen/jfds-api-client";
-import { usePalette } from "@/common/hooks";
 import { useGetOne, useTranslate } from "react-admin";
 
+import { Event } from "@/gen/jfds-api-client";
+import { FlexBox } from "@/common/components";
+import { usePalette } from "@/common/hooks";
+
 export const EventShow = ({ id }: { id: string }) => {
-  const { data: event, isLoading } = useGetOne<Event>("event", { id });
   const translate = useTranslate();
+  const { data: event, isLoading } = useGetOne<Event>("event", { id });
   const { textSecondaryColor } = usePalette();
 
   if (isLoading) {

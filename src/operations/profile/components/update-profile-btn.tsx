@@ -18,7 +18,10 @@ import {
   UpdateUserPicturePayload,
   UserSaveOrUpdateActionType,
 } from "@/providers";
-import { DialogContextProvider, useDialogContext } from "@/common/services/dialog";
+import {
+  DialogContextProvider,
+  useDialogContext,
+} from "@/common/services/dialog";
 import { usePalette } from "@/common/hooks";
 import { NOOP_FN } from "@/common/utils/noop-fn";
 

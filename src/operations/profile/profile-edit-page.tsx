@@ -140,7 +140,10 @@ export const ProfileEditPage = () => {
                 </ReferenceInput>
               </FlexBox>
               <FlexBox sx={{ gap: 1, width: "100%" }}>
-                <ReferenceInput reference="responsability" source="responsability.id">
+                <ReferenceInput
+                  reference="responsability"
+                  source="responsability.id"
+                >
                   <SelectInput
                     fullWidth
                     optionText="name"

@@ -1,6 +1,7 @@
-import { renderMoneyWithUnit } from "@/common/utils/money";
-import { FC } from "react";
 import { FunctionField } from "react-admin";
+import { FC } from "react";
+
+import { renderMoneyWithUnit } from "@/common/utils/money";
 
 export type MoneyTextFieldProps = {
   source: string;

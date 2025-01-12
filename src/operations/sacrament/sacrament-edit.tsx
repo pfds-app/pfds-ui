@@ -1,8 +1,9 @@
-import { required, TextInput } from "react-admin";
+import { TextInput, required } from "react-admin";
+import { FC } from "react";
+
+import { Sacrament } from "@/gen/jfds-api-client";
 import { Edit } from "@/common/components/edit";
 import { updateTranform } from "@/common/utils/transform";
-import { Sacrament } from "@/gen/jfds-api-client";
-import { FC } from "react";
 
 export const SacramentEdit: FC<{ sacrament: Sacrament }> = ({ sacrament }) => {
   return (

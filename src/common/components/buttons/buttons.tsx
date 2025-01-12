@@ -1,6 +1,7 @@
-import { FC } from "react";
 import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
 import { Confirm, useDelete, useNotify, useTranslate } from "react-admin";
+import { FC } from "react";
+
 import {
   TooltipIconButton,
   TooltipIconButtonProps,

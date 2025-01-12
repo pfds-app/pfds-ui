@@ -3,6 +3,7 @@ import {
   Popover as MuiPopover,
   PopoverProps as MuiPopoverProps,
 } from "@mui/material";
+
 import { DialogContextProvider, useDialogContext } from "../services/dialog";
 
 export type PopoverProps = { actionHandler: ReactElement } & Omit<

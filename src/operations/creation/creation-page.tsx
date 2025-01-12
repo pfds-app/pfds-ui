@@ -1,13 +1,15 @@
 import { Tab } from "@mui/material";
+
 import { Tabs, TabPanel } from "@/common/components/tabs";
 import { ListAndCreateLayout, WithLayoutPadding } from "@/common/components";
 import { SacramentList, SacramentCreate } from "../sacrament";
 import { RegionCreate, RegionList } from "../region";
 import { AssociationCreate, AssociationList } from "../association";
 import { CommitteeCreate, CommitteeList } from "../committee";
-import { useTabManager } from "@/common/hooks";
 import { EventCreate, EventList } from "../event";
 import { ResponsabilityCreate, ResponsabilityList } from "../responsability";
+import { useTabManager } from "@/common/hooks";
+import { useTranslate } from "react-admin";
 
 const CREATION_TABS = [
   "sacraments",
@@ -22,16 +24,17 @@ export const CreationPage = () => {
   const { tabIndex, handleTabChange } = useTabManager({
     values: CREATION_TABS,
   });
+  const translate = useTranslate();
 
   return (
     <>
       <Tabs tabIndex={tabIndex} handleChange={handleTabChange}>
-        <Tab label="Sakramenta" />
-        <Tab label="Faritra" />
-        <Tab label="Fikambanana Masina" />
-        <Tab label="Vaomieran'asa" />
-        <Tab label="Evènment spécial" />
-        <Tab label="Andraikitra" />
+        <Tab label={translate("resources.sacrament.name")} />
+        <Tab label={translate("resources.region.name")} />
+        <Tab label={translate("resources.association.name")} />
+        <Tab label={translate("resources.committee.name")} />
+        <Tab label={translate("resources.event.name")} />
+        <Tab label={translate("resources.responsability.name")} />
       </Tabs>
       <WithLayoutPadding sx={{ mt: 3 }}>
         <TabPanel index={0} currentIndex={tabIndex}>

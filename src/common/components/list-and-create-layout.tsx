@@ -1,5 +1,6 @@
-import { FC } from "react";
 import { BoxProps } from "@mui/material";
+import { FC } from "react";
+
 import { FlexBox } from "./flex-box";
 
 export const ListAndCreateLayout: FC<BoxProps> = ({

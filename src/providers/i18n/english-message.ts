@@ -26,7 +26,7 @@ export const haEnglishMessages: any = {
         gender: "Gender",
         apv: "APV",
         createdAt: "Created At",
-        updatedAt: "Updated At"
+        updatedAt: "Updated At",
       },
     },
     "operation-result": {
@@ -68,7 +68,7 @@ export const haEnglishMessages: any = {
       },
     },
     "event": {
-      name: "Event",
+      name: "Special Event",
       fields: {
         id: "Id",
         name: "Event name",
@@ -136,7 +136,7 @@ export const haEnglishMessages: any = {
         REGION_MANAGER: "Filohan’ny Faritra",
         COMMITTEE_MANAGER: "Filohan’ny Vaomieran’asa",
         ASSOCIATION_MANAGER: "Filohan’ny Fikambanana Masina",
-        SIMPLE_USER: "Mpikambana"
+        SIMPLE_USER: "Mpikambana",
       },
       user_gender: {
         MALE: "Male",
@@ -148,6 +148,7 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      langs: "Languages",
       profile: "Profile",
       created_default_user: "Default user created successfully",
       api_key: "Api Key",

@@ -1,12 +1,15 @@
-import { required, TextInput } from "react-admin";
+import { TextInput, required, useTranslate } from "react-admin";
+
 import { BoxPaperTitled } from "@/common/components";
 import { Create } from "@/common/components/create";
 import { createTranform } from "@/common/utils/transform";
 
 export const CommitteeCreate = () => {
+  const translate = useTranslate();
+
   return (
     <BoxPaperTitled
-      title="Vaomieran'asa"
+      title={translate("resources.committee.name")}
       sx={{ minWidth: "350px", width: "350px" }}
     >
       <Create transform={createTranform} resource="committee">

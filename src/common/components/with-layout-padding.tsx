@@ -1,5 +1,5 @@
-import { FC } from "react";
 import { BoxProps, Box } from "@mui/material";
+import { FC } from "react";
 
 export const WithLayoutPadding: FC<BoxProps> = ({
   sx = {},

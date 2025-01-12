@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { PostAdd } from "@mui/icons-material";
 import {
   CreateProps as RaCreateProps,
   Create as RaCreate,
@@ -7,7 +7,7 @@ import {
   SimpleFormProps,
   Toolbar,
 } from "react-admin";
-import { PostAdd } from "@mui/icons-material";
+import { FC } from "react";
 
 export type CreateProps = RaCreateProps & {
   simpleFormProps?: Partial<SimpleFormProps>;

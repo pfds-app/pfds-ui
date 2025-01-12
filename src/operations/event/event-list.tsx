@@ -1,14 +1,15 @@
-import { DateField, FunctionField, TextField } from "react-admin";
+import { DateField, FunctionField, TextField, useTranslate } from "react-admin";
+import { useState } from "react";
+
+import { Event } from "@/gen/jfds-api-client";
 import { List } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
 import { EventEdit } from "./event-edit";
-import { Event } from "@/gen/jfds-api-client";
 import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
-import { useState } from "react";
 
 export const EventList = () => {
   return (
@@ -21,14 +22,17 @@ export const EventList = () => {
 export const EventListContent = () => {
   const { status, toggleStatus } = useDialogContext<false>();
   const [eventToEdit, setEventToEdit] = useState<Event | null>(null);
-
+  const translate = useTranslate();
   const doEdit = (event: Event) => {
     toggleStatus();
     setEventToEdit(event);
   };
 
   return (
-    <BoxPaperTitled title="Evènment à venir" containerSx={{ pt: 0 }}>
+    <BoxPaperTitled
+      title={`Lisitry ny ${translate("resources.event.name")}`}
+      containerSx={{ pt: 0 }}
+    >
       <List resource="event">
         <TextField sortable={false} source="name" />
         <TextField sortable={false} source="place" />

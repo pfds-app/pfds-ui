@@ -1,14 +1,15 @@
-import { FunctionField, TextField } from "react-admin";
+import { FunctionField, TextField, useTranslate } from "react-admin";
+import { useState } from "react";
+
+import { Responsability } from "@/gen/jfds-api-client";
 import { List } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
 import { ResponsabilityEdit } from "./responsability-edit";
-import { Responsability } from "@/gen/jfds-api-client";
 import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
-import { useState } from "react";
 
 export const ResponsabilityList = () => {
   return (
@@ -22,14 +23,17 @@ export const ResponsabilityListContent = () => {
   const { status, toggleStatus } = useDialogContext<false>();
   const [responsabilityToEdit, setResponsabilityToEdit] =
     useState<Responsability | null>(null);
-
+  const translate = useTranslate();
   const doEdit = (responsability: Responsability) => {
     toggleStatus();
     setResponsabilityToEdit(responsability);
   };
 
   return (
-    <BoxPaperTitled title="Lisitry ny Andraikitra" containerSx={{ pt: 0 }}>
+    <BoxPaperTitled
+      title={`Lisitry ny ${translate("resources.responsability.name")}`}
+      containerSx={{ pt: 0 }}
+    >
       <List resource="responsability">
         <TextField sortable={false} source="name" />
         <FunctionField

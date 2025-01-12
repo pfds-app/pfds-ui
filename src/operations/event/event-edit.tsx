@@ -1,8 +1,9 @@
-import { DateInput, required, TextInput, useTranslate } from "react-admin";
+import { DateInput, TextInput, useTranslate, required } from "react-admin";
+import { FC } from "react";
+
+import { Event } from "@/gen/jfds-api-client";
 import { Edit } from "@/common/components/edit";
 import { updateTranform } from "@/common/utils/transform";
-import { Event } from "@/gen/jfds-api-client";
-import { FC } from "react";
 import { toISOString } from "@/common/utils/date";
 
 export const EventEdit: FC<{ event: Event }> = ({ event }) => {

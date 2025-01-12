@@ -1,8 +1,9 @@
 import { required, TextInput } from "react-admin";
+import { FC } from "react";
+
+import { Region } from "@/gen/jfds-api-client";
 import { Edit } from "@/common/components/edit";
 import { updateTranform } from "@/common/utils/transform";
-import { Region } from "@/gen/jfds-api-client";
-import { FC } from "react";
 
 export const RegionEdit: FC<{ region: Region }> = ({ region }) => {
   return (

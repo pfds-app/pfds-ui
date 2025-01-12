@@ -1,5 +1,5 @@
-import { FC } from "react";
 import { Box, BoxProps } from "@mui/material";
+import { FC } from "react";
 
 export type TabPanelProps = BoxProps & {
   index: number;

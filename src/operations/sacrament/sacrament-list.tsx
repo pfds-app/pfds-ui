@@ -1,15 +1,16 @@
-import { FunctionField, TextField } from "react-admin";
+import { FunctionField, TextField, useTranslate } from "react-admin";
+import { useState } from "react";
+
+import { Sacrament } from "@/gen/jfds-api-client";
 import { List } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
 import { SacramentEdit } from "./sacrament-edit";
-import { Sacrament } from "@/gen/jfds-api-client";
 import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
 import { usePalette } from "@/common/hooks";
-import { useState } from "react";
 
 export const SacramentList = () => {
   return (
@@ -26,6 +27,7 @@ export const SacramentListContent = () => {
   const [sacramentToEdit, setSacramentToEdit] = useState<Sacrament | null>(
     null
   );
+  const translate = useTranslate();
 
   const doEdit = (sacrament: Sacrament) => {
     toggleStatus();
@@ -33,7 +35,10 @@ export const SacramentListContent = () => {
   };
 
   return (
-    <BoxPaperTitled title="Lisitry ny Sakramenta" containerSx={{ pt: 0 }}>
+    <BoxPaperTitled
+      title={`Lisitry ny ${translate("resources.sacrament.name")}`}
+      containerSx={{ pt: 0 }}
+    >
       <List
         resource="sacrament"
         datagridProps={{

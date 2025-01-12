@@ -1,14 +1,15 @@
-import { FunctionField, TextField } from "react-admin";
+import { FunctionField, TextField, useTranslate } from "react-admin";
+import { useState } from "react";
+
+import { Region } from "@/gen/jfds-api-client";
 import { List } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
 import { RegionEdit } from "./region-edit";
-import { Region } from "@/gen/jfds-api-client";
 import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
-import { useState } from "react";
 
 export const RegionList = () => {
   return (
@@ -21,6 +22,7 @@ export const RegionList = () => {
 export const RegionListContent = () => {
   const { status, toggleStatus } = useDialogContext<false>();
   const [regionToEdit, setRegionToEdit] = useState<Region | null>(null);
+  const translate = useTranslate();
 
   const doEdit = (region: Region) => {
     toggleStatus();
@@ -28,7 +30,10 @@ export const RegionListContent = () => {
   };
 
   return (
-    <BoxPaperTitled title="Lisitry ny Faritra" containerSx={{ pt: 0 }}>
+    <BoxPaperTitled
+      title={`Lisitry ny ${translate("resources.region.name")}`}
+      containerSx={{ pt: 0 }}
+    >
       <List resource="region">
         <TextField sortable={false} source="code" />
         <TextField sortable={false} source="name" />

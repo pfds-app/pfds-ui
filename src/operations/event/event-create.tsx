@@ -1,4 +1,5 @@
-import { DateInput, required, TextInput, useTranslate } from "react-admin";
+import { DateInput, TextInput, useTranslate, required } from "react-admin";
+
 import { Event } from "@/gen/jfds-api-client";
 import { BoxPaperTitled } from "@/common/components";
 import { Create } from "@/common/components/create";
@@ -20,7 +21,7 @@ export const EventCreate = () => {
 
   return (
     <BoxPaperTitled
-      title={"Evènements"}
+      title={translate("resources.event.name")}
       sx={{ minWidth: "350px", width: "350px" }}
     >
       <Create transform={transform} resource="event">

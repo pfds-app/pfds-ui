@@ -61,7 +61,7 @@ export const haFrenchMessages: any = {
       },
     },
     "event": {
-      name: "Evènment",
+      name: "Evènment spécial",
       fields: {
         id: "Id",
         name: "Nom de l'evènment",
@@ -129,7 +129,7 @@ export const haFrenchMessages: any = {
         REGION_MANAGER: "Filohan’ny Faritra",
         COMMITTEE_MANAGER: "Filohan’ny Vaomieran’asa",
         ASSOCIATION_MANAGER: "Filohan’ny Fikambanana Masina",
-        SIMPLE_USER: "Mpikambana"
+        SIMPLE_USER: "Mpikambana",
       },
       user_gender: {
         MALE: "Homme",
@@ -141,6 +141,7 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      langs: "Langues",
       profile: "Profil",
       created_default_user: "Utilisateur par défaut créé avec succès",
       create_default_user_btn: "Créer un utilisateur par défaut",

@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 import { DialogContextType, DIALOG_CONTEXT } from "../context";
 
 export const useDialogContext = <IsPopover extends boolean>() => {

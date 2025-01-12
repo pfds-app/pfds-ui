@@ -1,6 +1,7 @@
-import { FC } from "react";
 import { Box, SxProps } from "@mui/material";
 import { LayoutProps } from "react-admin";
+import { FC } from "react";
+
 import { Menu } from "./menu";
 import { AppBar } from "./appbar";
 import { usePalette } from "@/common/hooks";

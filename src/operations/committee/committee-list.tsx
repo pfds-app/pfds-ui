@@ -1,14 +1,15 @@
-import { FunctionField, TextField } from "react-admin";
+import { FunctionField, TextField, useTranslate } from "react-admin";
+import { useState } from "react";
+
+import { Committee } from "@/gen/jfds-api-client";
 import { List } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
 import { CommitteeEdit } from "./committee-edit";
-import { Committee } from "@/gen/jfds-api-client";
 import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
-import { useState } from "react";
 
 export const CommitteeList = () => {
   return (
@@ -23,14 +24,17 @@ export const CommitteeListContent = () => {
   const [committeeToEdit, setCommitteeToEdit] = useState<Committee | null>(
     null
   );
-
+  const translate = useTranslate();
   const doEdit = (committee: Committee) => {
     toggleStatus();
     setCommitteeToEdit(committee);
   };
 
   return (
-    <BoxPaperTitled title="Lisitry ny Voamieran'asa" containerSx={{ pt: 0 }}>
+    <BoxPaperTitled
+      title={`Lisitry ny ${translate("resources.committee.name")}`}
+      containerSx={{ pt: 0 }}
+    >
       <List resource="committee">
         <TextField sortable={false} source="code" />
         <TextField sortable={false} source="name" />

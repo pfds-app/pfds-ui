@@ -223,7 +223,7 @@ export const AdminSignupPage: FC<{
           </FlexBox>
         </SimpleForm>
         <LocaleSwitch />
-      </FlexBox >
-    </FlexBox >
+      </FlexBox>
+    </FlexBox>
   );
 };

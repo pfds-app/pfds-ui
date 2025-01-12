@@ -1,25 +1,25 @@
 import { CircularProgress, Box, Typography } from "@mui/material";
-import { Event } from "@/gen/jfds-api-client";
 import { Circle, Close } from "@mui/icons-material";
+import { useMemo, useState } from "react";
+import { useGetList, useLocale, useTranslate } from "react-admin";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+
+import { Event } from "@/gen/jfds-api-client";
 import {
   FlexBox,
   WithLayoutPadding,
   DialogContent,
   TooltipIconButton,
 } from "@/common/components";
-import { useGetList, useLocale, useTranslate } from "react-admin";
-import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
-import { useMemo, useState } from "react";
+import { EventShow } from "../event";
 import { stringifyObj } from "@/common/utils/stringify-obj";
-
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
 import { usePalette } from "@/common/hooks";
 import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
-import { EventShow } from "../event";
+import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 
 export type EventElement = {
   id: string;
@@ -38,9 +38,7 @@ export const Calendar = () => {
 };
 
 const CalendarContent = () => {
-  const locale = useLocale();
   const [eventIdToShow, setEventIdToShow] = useState<string | null>(null);
-  const translate = useTranslate();
   const { toggleStatus } = useDialogContext<false>();
   const { primaryPalette, textSecondaryColor } = usePalette();
   const { data: events = [], isLoading } = useGetList<Event>("event", {
@@ -49,6 +47,8 @@ const CalendarContent = () => {
       perPage: MAX_ITEM_PER_LIST,
     },
   });
+  const locale = useLocale();
+  const translate = useTranslate();
 
   const mappedEvents: EventElement[] = useMemo(() => {
     return events.map((event) => ({

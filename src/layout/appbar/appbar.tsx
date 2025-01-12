@@ -1,12 +1,3 @@
-import { FC } from "react";
-import {
-  useGetOne,
-  useLocale,
-  useLogout,
-  useRedirect,
-  useSetLocale,
-  useTranslate,
-} from "react-admin";
 import {
   SxProps,
   Divider,
@@ -30,6 +21,16 @@ import {
   AccountCircle,
   ArrowRight,
 } from "@mui/icons-material";
+import {
+  useGetOne,
+  useLocale,
+  useLogout,
+  useRedirect,
+  useSetLocale,
+  useTranslate,
+} from "react-admin";
+import { FC } from "react";
+
 import { User } from "@/gen/jfds-api-client";
 import { FlexBox, JfdsLogo, LocaleSwitch } from "@/common/components";
 import {
@@ -39,10 +40,10 @@ import {
 import { usePalette } from "@/common/hooks";
 import { useWhoami } from "@/security/hooks";
 import { createImageUrl } from "@/providers";
+import { formatUserName } from "@/common/utils/format-user-name";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
 import { SUPPORTED_LOCALES } from "@/providers/i18n";
 import { DEFAULT_PICTURE_IMG } from "@/common/utils/constant";
-import { formatUserName } from "@/common/utils/format-user-name";
 
 const APPBAR_SX: SxProps = {
   display: "flex",
@@ -109,7 +110,7 @@ const SelectLocalMenuContent: FC<{ closeMainMenu: () => void }> = ({
       <ListItemIcon>
         <GTranslate />
       </ListItemIcon>
-      <ListItemText>Langues</ListItemText>
+      <ListItemText>{translate("custom.common.langs")}</ListItemText>
       <ArrowRight />
       <MuiMenu
         open={status}

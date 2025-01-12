@@ -1,5 +1,5 @@
-import { FC } from "react";
 import { FunctionField, useTranslate } from "react-admin";
+import { FC } from "react";
 
 export type TranslatedEnumTextFieldProps = {
   enumLocalSuffix: string;

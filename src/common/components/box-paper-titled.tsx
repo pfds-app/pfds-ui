@@ -1,5 +1,6 @@
 import { BoxProps, SxProps, Box, Typography } from "@mui/material";
 import { FC } from "react";
+
 import { usePalette } from "../hooks";
 
 export type BoxPaperTitledProps = BoxProps & {

@@ -1,4 +1,5 @@
 import { useCallback, useLayoutEffect, useState } from "react";
+
 import { stringifyObj } from "../utils/stringify-obj";
 
 export type UseTabManagerArgs = {

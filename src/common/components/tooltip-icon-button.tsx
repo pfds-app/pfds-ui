@@ -1,6 +1,6 @@
-import { FC } from "react";
 import { Tooltip, IconButton, IconButtonProps } from "@mui/material";
 import { useTranslate } from "react-admin";
+import { FC } from "react";
 
 export type TooltipIconButtonProps = IconButtonProps & {
   title: string;

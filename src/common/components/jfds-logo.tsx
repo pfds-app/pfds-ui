@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+
 import { FlexBox } from "./flex-box";
 import { usePalette } from "../hooks";
 

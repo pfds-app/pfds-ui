@@ -1,5 +1,5 @@
-import { FC } from "react";
 import { Tabs as MuiTabs, TabsProps as MuiTabsProps } from "@mui/material";
+import { FC } from "react";
 
 export type TabsProps = MuiTabsProps & {
   tabIndex: number;

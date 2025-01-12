@@ -1,8 +1,9 @@
-import { required, TextInput } from "react-admin";
+import { TextInput, required } from "react-admin";
+import { FC } from "react";
+
+import { Committee } from "@/gen/jfds-api-client";
 import { Edit } from "@/common/components/edit";
 import { updateTranform } from "@/common/utils/transform";
-import { Committee } from "@/gen/jfds-api-client";
-import { FC } from "react";
 
 export const CommitteeEdit: FC<{ committee: Committee }> = ({ committee }) => {
   return (

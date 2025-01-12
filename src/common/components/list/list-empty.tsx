@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
-import { usePalette } from "@/common/hooks";
 import { useTranslate } from "react-admin";
+
+import { usePalette } from "@/common/hooks";
 
 export const ListEmpty = () => {
   const { textSecondaryColor } = usePalette();
