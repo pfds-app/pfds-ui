@@ -116,10 +116,8 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
             validate={required()}
           />
           <SelectInput
-            readOnly
             translateChoice
             defaultValue={role}
-            value={role}
             source="role"
             sx={{ mb: "8px" }}
             label={translate("resources.user.fields.role")}

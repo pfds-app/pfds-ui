@@ -4,12 +4,16 @@ import { unwrap } from "./utils";
 import { usersApi } from "./api";
 
 export enum UserSaveOrUpdateActionType {
+  UPDATE = "UPDATE",
   CREATE = "CREATE",
   UPDATE_USER_INFOS = "UPDATE_USER_INFOS",
   UPDATE_USER_PICTURE = "UPDATE_USER_PICTURE",
 }
 
 export type CreateUserPayload = CreateUser & {
+  photo?: any;
+};
+export type UpdateUserPayload = UpdateUser & {
   photo?: any;
 };
 export type UpdateUserPicturePayload = {
@@ -45,8 +49,10 @@ export const userProvider: ResourceProvider<User> = {
           (data as UpdateUserPicturePayload).profilePicture
         );
         return data as User;
+
       case UserSaveOrUpdateActionType.UPDATE_USER_INFOS:
         return unwrap(() => usersApi().updateUserInfo(data as UpdateUser));
+
       case UserSaveOrUpdateActionType.CREATE:
         const { photo, ...createUser } = data as CreateUserPayload;
 
@@ -55,6 +61,18 @@ export const userProvider: ResourceProvider<User> = {
           await usersApi().updateProfilePicture(user.id, photo);
         }
         return user;
+
+      case UserSaveOrUpdateActionType.UPDATE:
+        const { photo: photoValue, ...updateUser } = data as UpdateUserPayload;
+
+        const userUpdated = await unwrap(() =>
+          usersApi().updateUserInfo(updateUser)
+        );
+        if (photoValue) {
+          await usersApi().updateProfilePicture(userUpdated.id, photoValue);
+        }
+        return userUpdated;
+
       default:
         throw new Error("Unkown action type");
     }

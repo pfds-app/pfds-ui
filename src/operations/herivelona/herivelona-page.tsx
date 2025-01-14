@@ -23,15 +23,15 @@ export const HerivelonaPage = () => {
   const getRole = (): UserRoleEnum => {
     switch (tabIndex) {
       case 0:
-        return UserRoleEnum.Admin;
-      case 1:
-        return UserRoleEnum.RegionManager;
-      case 2:
-        return UserRoleEnum.AssociationManager;
-      case 3:
-        return UserRoleEnum.CommitteeManager;
-      default:
         return UserRoleEnum.SimpleUser;
+      case 1:
+        return UserRoleEnum.Admin;
+      case 2:
+        return UserRoleEnum.RegionManager;
+      case 3:
+        return UserRoleEnum.AssociationManager;
+      default:
+        return UserRoleEnum.CommitteeManager;
     }
   };
   const role = getRole();
@@ -39,11 +39,11 @@ export const HerivelonaPage = () => {
   return (
     <>
       <Tabs tabIndex={tabIndex} handleChange={handleTabChange}>
+        <Tab label={translate("custom.enum.user_role.SIMPLE_USER")} />
         <Tab label={translate("custom.enum.user_role.ADMIN")} />
         <Tab label={translate("custom.enum.user_role.REGION_MANAGER")} />
         <Tab label={translate("custom.enum.user_role.ASSOCIATION_MANAGER")} />
         <Tab label={translate("custom.enum.user_role.COMMITTEE_MANAGER")} />
-        <Tab label={translate("custom.enum.user_role.SIMPLE_USER")} />
       </Tabs>
       <WithLayoutPadding sx={{ mt: 3 }}>
         <ListAndCreateLayout>
