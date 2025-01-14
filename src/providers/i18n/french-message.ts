@@ -172,6 +172,7 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      not_defined: "Non défini",
       activity_today: "Activités d'aujourd'hui",
       count: "Nombre",
       year: "Année",

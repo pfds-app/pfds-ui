@@ -179,6 +179,7 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      not_defined: "Not Define",
       count: "Count",
       year: "Year",
       required_when: "Required when %{source}=%{destination}",

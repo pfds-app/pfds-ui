@@ -13,6 +13,7 @@ import { HomePage } from "./operations/home";
 import { HerivelonaPage } from "./operations/herivelona";
 import { StatsPage } from "./operations/stats";
 import { ActivityPage } from "./operations/activity";
+import { UserShow } from "./operations/user";
 import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
 import { jfdsLightTheme } from "./themes";
@@ -43,7 +44,7 @@ export const Dashboard = () => {
       <Resource name="staff" />
       <Resource name="ticket-status" />
       <Resource name="operation-result" />
-      <Resource name="user" />
+      <Resource name="user" show={UserShow} />
       <Resource name="user-stat" />
 
       <CustomRoutes>

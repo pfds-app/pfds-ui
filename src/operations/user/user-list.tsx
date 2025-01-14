@@ -36,7 +36,11 @@ export const UserListContent: FC<{ role: UserRoleEnum }> = ({ role }) => {
       title={`Lisitry ny ${translate(`custom.enum.user_role.${role}`)}`}
       containerSx={{ pt: 0 }}
     >
-      <List resource="user" filter={{ role }}>
+      <List
+        datagridProps={{ rowClick: "show" }}
+        resource="user"
+        filter={{ role }}
+      >
         <FunctionField
           label=" "
           render={(user: User) => (

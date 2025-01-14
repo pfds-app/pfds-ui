@@ -117,6 +117,7 @@ export const HomePage = () => {
               },
             }}
             datagridProps={{
+              rowClick: "show",
               rowSx: undefined,
             }}
           >
