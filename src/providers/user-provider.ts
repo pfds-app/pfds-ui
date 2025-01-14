@@ -23,9 +23,7 @@ export const userProvider: ResourceProvider<User> = {
   },
   getList: async ({ filter = {}, pagination: { perPage, page } }) => {
     const { role } = filter;
-    return unwrap(() =>
-      usersApi().getUsers(role, page, perPage)
-    );
+    return unwrap(() => usersApi().getUsers(role, page, perPage));
   },
   getMany: async (_resource, { ids }) => {
     const [id] = ids as string[]; // as we use only select input and never array input

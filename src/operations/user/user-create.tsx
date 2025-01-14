@@ -11,7 +11,7 @@ import {
   useTranslate,
 } from "react-admin";
 import { Box } from "@mui/material";
-import { useFormContext } from "react-hook-form"
+import { useFormContext } from "react-hook-form";
 import { FC, useLayoutEffect } from "react";
 
 import { BoxPaperTitled, RequiredWhen } from "@/common/components";
@@ -23,9 +23,7 @@ import { confirmPasswordValidator } from "@/common/input-validator/password";
 import { USER_GENDER_CHOICES } from "../profile/utils/gender-choices";
 import { USER_ROLE_CHOICES } from "../profile/utils/role-choices";
 
-export const UserCreate: FC<{ role: UserRoleEnum }> = ({
-  role
-}) => {
+export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
   const translate = useTranslate();
   const transform = ({
     photo,
@@ -133,14 +131,12 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({
               fullWidth
               optionText="name"
               label={translate("resources.responsability.name")}
-              validate={required()}
             />
           </ReferenceInput>
           <ReferenceInput reference="region" source="region.id">
             <SelectInput
               fullWidth
               label={translate("resources.region.name")}
-              validate={required()}
               optionText="name"
             />
           </ReferenceInput>
@@ -207,7 +203,7 @@ const ResetFieldsHandler: FC<{ role: UserRoleEnum }> = ({ role }) => {
 
   useLayoutEffect(() => {
     reset({ role }, { keepDefaultValues: true });
-  }, [role])
+  }, [role]);
 
   return null;
-}
+};

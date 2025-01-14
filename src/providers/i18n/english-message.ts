@@ -3,6 +3,17 @@ import englishMessages from "ra-language-english";
 export const haEnglishMessages: any = {
   ...englishMessages,
   resources: {
+    "user-gender-stats": {
+      name: "Member per year",
+      fields: {
+        id: "Id",
+        year: "Year",
+        maleCount: "Male Count",
+        femaleCount: "Female Count",
+        fromDate: "From",
+        endDate: "To",
+      },
+    },
     "role": {
       name: "Role",
       fields: {
@@ -148,6 +159,8 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      count: "Count",
+      year: "Year",
       required_when: "Required when %{source}=%{destination}",
       today: "Today",
       incoming_event: "Incoming event",

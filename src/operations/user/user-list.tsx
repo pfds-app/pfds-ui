@@ -72,6 +72,6 @@ export const UserListContent: FC<{ role: UserRoleEnum }> = ({ role }) => {
       >
         {userToEdit && <UserEdit user={userToEdit} />}
       </DialogContent>
-    </BoxPaperTitled >
+    </BoxPaperTitled>
   );
 };

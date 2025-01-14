@@ -10,10 +10,12 @@ import { LedgerPage } from "./operations/ledger";
 import { FitadiavamBolaPage } from "./operations/fitadiavam-bola";
 import { ProfileEditPage } from "./operations/profile";
 import { HomePage } from "./operations/home";
+import { HerivelonaPage } from "./operations/herivelona";
+import { StatsPage } from "./operations/stats";
 import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
 import { jfdsLightTheme } from "./themes";
-import { HerivelonaPage } from "./operations/herivelona";
+import "@/common/components/charts/setup";
 
 export const Dashboard = () => {
   return (
@@ -41,6 +43,7 @@ export const Dashboard = () => {
       <Resource name="ticket-status" />
       <Resource name="operation-result" />
       <Resource name="user" />
+      <Resource name="user-gender-stats" />
 
       <CustomRoutes>
         <Route path="/about" element={<AboutPage />} />
@@ -50,6 +53,7 @@ export const Dashboard = () => {
         <Route path="/fitadiavam-bola" element={<FitadiavamBolaPage />} />
         <Route path="/profiles" element={<ProfileEditPage />} />
         <Route path="/herivelona" element={<HerivelonaPage />} />
+        <Route path="/stats" element={<StatsPage />} />
       </CustomRoutes>
     </Admin>
   );

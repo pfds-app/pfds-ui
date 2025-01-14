@@ -12,7 +12,7 @@ const HERIVELONA_TABS = [
   "region-manager",
   "association-manager",
   "committee-manager",
-  "simple-user"
+  "simple-user",
 ];
 
 export const HerivelonaPage = () => {
@@ -22,13 +22,18 @@ export const HerivelonaPage = () => {
   const translate = useTranslate();
   const getRole = (): UserRoleEnum => {
     switch (tabIndex) {
-      case 0: return UserRoleEnum.Admin;
-      case 1: return UserRoleEnum.RegionManager;
-      case 2: return UserRoleEnum.AssociationManager;
-      case 3: return UserRoleEnum.CommitteeManager;
-      default: return UserRoleEnum.SimpleUser;
+      case 0:
+        return UserRoleEnum.Admin;
+      case 1:
+        return UserRoleEnum.RegionManager;
+      case 2:
+        return UserRoleEnum.AssociationManager;
+      case 3:
+        return UserRoleEnum.CommitteeManager;
+      default:
+        return UserRoleEnum.SimpleUser;
     }
-  }
+  };
   const role = getRole();
 
   return (

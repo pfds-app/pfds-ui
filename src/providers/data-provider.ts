@@ -15,6 +15,7 @@ import { payedTiketProvider } from "./payed-ticket-provider";
 import { staffProvider } from "./staff-provider";
 import { ticketStatusProvider } from "./ticket-status-provider";
 import { operationResultProvider } from "./operation-result-provider";
+import { userGenderStatsProvider } from "./user-gender-stats-provider";
 
 export const dataProvider = createRaProvider(
   [
@@ -33,6 +34,7 @@ export const dataProvider = createRaProvider(
     staffProvider,
     ticketStatusProvider,
     operationResultProvider,
+    userGenderStatsProvider,
   ],
   {
     getListOptions: {
@@ -41,9 +43,19 @@ export const dataProvider = createRaProvider(
         perPage: 10,
       },
       getPageInfo: async ({
+        resource,
         currentProvider,
         getListParams: { pagination },
       }) => {
+        if (resource === "user-gender-stats") {
+          return {
+            pageInfo: {
+              hasNextPage: false,
+              hasPreviousPage: false,
+            },
+          };
+        }
+
         const nextPage = await currentProvider.getList!({
           pagination: {
             perPage: pagination.perPage,

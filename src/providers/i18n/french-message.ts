@@ -3,6 +3,17 @@ import frenchMessages from "ra-language-french";
 export const haFrenchMessages: any = {
   ...frenchMessages,
   resources: {
+    "user-gender-stats": {
+      name: "Membre par année",
+      fields: {
+        id: "Id",
+        year: "Année",
+        maleCount: "Nombre d'hommes",
+        femaleCount: "Nombre de femmes",
+        fromDate: "De",
+        endDate: "À",
+      },
+    },
     "user": {
       name: "Utilisateur",
       fields: {
@@ -141,6 +152,8 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      count: "Nombre",
+      year: "Année",
       required_when: "Obligatoire quand %{source}=%{destination}",
       today: "Aujourd'hui",
       incoming_event: "Evènment à venir",
