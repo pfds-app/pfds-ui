@@ -16,6 +16,7 @@ import { staffProvider } from "./staff-provider";
 import { ticketStatusProvider } from "./ticket-status-provider";
 import { operationResultProvider } from "./operation-result-provider";
 import { userStatProvider } from "./user-stat-provider";
+import { activityProvider } from "./activity-provider";
 
 export const dataProvider = createRaProvider(
   [
@@ -35,6 +36,7 @@ export const dataProvider = createRaProvider(
     ticketStatusProvider,
     operationResultProvider,
     userStatProvider,
+    activityProvider,
   ],
   {
     getListOptions: {

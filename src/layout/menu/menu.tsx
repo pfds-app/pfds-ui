@@ -131,7 +131,7 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             leftIcon={<LocalAtm />}
           />
           <RaMenu.Item
-            to="/activity"
+            to="/activities"
             primaryText={translate("custom.menu.activity")}
             leftIcon={<Celebration />}
           />

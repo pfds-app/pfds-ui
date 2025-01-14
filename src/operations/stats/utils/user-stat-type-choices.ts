@@ -1,5 +1,5 @@
-import { GetUserMembersStatsTypeEnum } from "@/gen/jfds-api-client"
-import { Choices } from "@/common/utils/types"
+import { GetUserMembersStatsTypeEnum } from "@/gen/jfds-api-client";
+import { Choices } from "@/common/utils/types";
 
 export const USER_STAT_TYPE_CHOICES: Choices<GetUserMembersStatsTypeEnum> = [
   {
@@ -9,5 +9,5 @@ export const USER_STAT_TYPE_CHOICES: Choices<GetUserMembersStatsTypeEnum> = [
   {
     id: "ACCULUMATED",
     name: "custom.enum.user_stat_type.ACCULUMATED",
-  }
-]
+  },
+];

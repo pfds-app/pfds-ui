@@ -3,6 +3,18 @@ import englishMessages from "ra-language-english";
 export const haEnglishMessages: any = {
   ...englishMessages,
   resources: {
+    "activity": {
+      name: "Hetsika",
+      fields: {
+        id: "Id",
+        name: "Name",
+        place: "Place",
+        beginDate: "Event start date",
+        endDate: "Event end date",
+        description: "Description",
+        rolType: "Type",
+      },
+    },
     "user-stat": {
       name: "Member per year",
       fields: {
@@ -142,9 +154,13 @@ export const haEnglishMessages: any = {
   },
   custom: {
     enum: {
+      activity_role_type: {
+        ALL: "All",
+        MANAGER: "Filan-kevitra",
+      },
       user_stat_type: {
-        ACCULUMATED: 'Acculumated',
-        PER_YEAR: 'Registered per year',
+        ACCULUMATED: "Acculumated",
+        PER_YEAR: "Registered per year",
       },
       user_role: {
         ADMIN: "Admin",
@@ -168,6 +184,7 @@ export const haEnglishMessages: any = {
       required_when: "Required when %{source}=%{destination}",
       today: "Today",
       incoming_event: "Incoming event",
+      activity_today: "Today's Activities",
       teams: "Teams",
       langs: "Languages",
       profile: "Profile",

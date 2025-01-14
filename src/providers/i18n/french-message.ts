@@ -3,6 +3,18 @@ import frenchMessages from "ra-language-french";
 export const haFrenchMessages: any = {
   ...frenchMessages,
   resources: {
+    "activity": {
+      name: "Hetsika",
+      fields: {
+        id: "Id",
+        name: "Nom",
+        place: "Lieu",
+        beginDate: "Début de d'evènement",
+        endDate: "Fin de d'evènement",
+        description: "Description",
+        rolType: "Type",
+      },
+    },
     "user-stat": {
       name: "Membre par année",
       fields: {
@@ -135,9 +147,13 @@ export const haFrenchMessages: any = {
   },
   custom: {
     enum: {
+      activity_role_type: {
+        ALL: "Tout",
+        MANAGER: "Filan-kevitra",
+      },
       user_stat_type: {
-        ACCULUMATED: 'Accumulé',
-        PER_YEAR: 'Inscript par année',
+        ACCULUMATED: "Accumulé",
+        PER_YEAR: "Inscript par année",
       },
       user_role: {
         ADMIN: "Administrateur",
@@ -156,6 +172,7 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      activity_today: "Activités d'aujourd'hui",
       count: "Nombre",
       year: "Année",
       required_when: "Obligatoire quand %{source}=%{destination}",

@@ -12,6 +12,7 @@ import { ProfileEditPage } from "./operations/profile";
 import { HomePage } from "./operations/home";
 import { HerivelonaPage } from "./operations/herivelona";
 import { StatsPage } from "./operations/stats";
+import { ActivityPage } from "./operations/activity";
 import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
 import { jfdsLightTheme } from "./themes";
@@ -54,6 +55,7 @@ export const Dashboard = () => {
         <Route path="/profiles" element={<ProfileEditPage />} />
         <Route path="/herivelona" element={<HerivelonaPage />} />
         <Route path="/stats" element={<StatsPage />} />
+        <Route path="/activities" element={<ActivityPage />} />
       </CustomRoutes>
     </Admin>
   );

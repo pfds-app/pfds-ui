@@ -5,9 +5,7 @@ import { UserStat } from "@/gen/jfds-api-client";
 import { unwrap } from "./utils";
 import { usersApi } from "./api";
 
-export const userStatProvider: ResourceProvider<
-  UserStat & { id: string }
-> = {
+export const userStatProvider: ResourceProvider<UserStat & { id: string }> = {
   resource: "user-stat",
   getList: async ({ filter = {} }) => {
     const { fromDate, endDate, type } = filter;

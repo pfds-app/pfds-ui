@@ -25,29 +25,29 @@ import { USER_STAT_TYPE_CHOICES } from "./utils/user-stat-type-choices";
 type Filters = {
   fromDate: number;
   endDate: number;
-  type: GetUserMembersStatsTypeEnum
+  type: GetUserMembersStatsTypeEnum;
 };
 export const UserMemberStat = () => {
   const [filters, setFitlers] = useState<Filters>({
     fromDate: dayjs().year() - 3,
     endDate: dayjs().year() + 3,
-    type: GetUserMembersStatsTypeEnum.PerYear
+    type: GetUserMembersStatsTypeEnum.PerYear,
   });
   const translate = useTranslate();
 
   const updateFilters = ({
     endDate,
     fromDate,
-    type
+    type,
   }: {
     fromDate: string;
     endDate: string;
-    type: GetUserMembersStatsTypeEnum
+    type: GetUserMembersStatsTypeEnum;
   }) => {
     setFitlers({
       endDate: +endDate,
       fromDate: +fromDate,
-      type
+      type,
     });
   };
 
@@ -108,46 +108,50 @@ export const UserMemberStat = () => {
 };
 
 const StatsContent: FC<Filters> = ({ fromDate, endDate, type }) => {
-  const { data: stats = [], isLoading } = useGetList<
-    UserStat & { id: string }
-  >("user-stat", {
-    filter: {
-      fromDate: `${fromDate}-01-01`,
-      endDate: `${endDate}-12-31`,
-      type
-    },
-  });
+  const { data: stats = [], isLoading } = useGetList<UserStat & { id: string }>(
+    "user-stat",
+    {
+      filter: {
+        fromDate: `${fromDate}-01-01`,
+        endDate: `${endDate}-12-31`,
+        type,
+      },
+    }
+  );
   const translate = useTranslate();
 
-  const options: ChartOptions<"line"> = useMemo(() => ({
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      tooltip: {
-        enabled: true,
-      },
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: translate("custom.common.year"),
+  const options: ChartOptions<"line"> = useMemo(
+    () => ({
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        tooltip: {
+          enabled: true,
         },
       },
-      y: {
-        title: {
-          display: true,
-          text: translate("custom.common.count"),
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: translate("custom.common.year"),
+          },
         },
-        ticks: {
-          stepSize: 5,
+        y: {
+          title: {
+            display: true,
+            text: translate("custom.common.count"),
+          },
+          ticks: {
+            stepSize: 5,
+          },
+          beginAtZero: true,
         },
-        beginAtZero: true,
       },
-    },
-  }), [translate]);
+    }),
+    [translate]
+  );
 
   const chartData: ChartData<"line"> = {
     labels: stats.map((stat) => stat.year),
