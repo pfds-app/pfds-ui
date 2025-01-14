@@ -1,7 +1,8 @@
-import { Typography, Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import {
   SaveButton,
+  SelectInput,
   SimpleForm,
   TextInput,
   maxValue,
@@ -13,36 +14,40 @@ import {
 } from "react-admin";
 import { Line } from "react-chartjs-2";
 import { ChartData, ChartOptions } from "chart.js";
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import dayjs from "dayjs";
 
+import { GetUserMembersStatsTypeEnum, UserStat } from "@/gen/jfds-api-client";
 import { FlexBox, WithLayoutPadding } from "@/common/components";
-import { UserGenderStat } from "@/gen/jfds-api-client";
-import { usePalette } from "@/common/hooks";
 import { higherOrEqualsThan } from "@/common/input-validator";
+import { USER_STAT_TYPE_CHOICES } from "./utils/user-stat-type-choices";
 
 type Filters = {
   fromDate: number;
   endDate: number;
+  type: GetUserMembersStatsTypeEnum
 };
-export const UserGenderStats = () => {
+export const UserMemberStat = () => {
   const [filters, setFitlers] = useState<Filters>({
     fromDate: dayjs().year() - 3,
     endDate: dayjs().year() + 3,
+    type: GetUserMembersStatsTypeEnum.PerYear
   });
-  const { textSecondaryColor } = usePalette();
   const translate = useTranslate();
 
   const updateFilters = ({
     endDate,
     fromDate,
+    type
   }: {
     fromDate: string;
     endDate: string;
+    type: GetUserMembersStatsTypeEnum
   }) => {
     setFitlers({
       endDate: +endDate,
       fromDate: +fromDate,
+      type
     });
   };
 
@@ -54,25 +59,22 @@ export const UserGenderStats = () => {
         defaultValues={filters}
         toolbar={false}
       >
-        <Typography sx={{ my: 1, color: textSecondaryColor, fontSize: "1rem" }}>
-          Filtre
-        </Typography>
         <FlexBox
           sx={{
             width: "fit-content",
-            alignItems: "start",
+            alignItems: "center",
             justifyContent: "start",
             gap: 1,
           }}
         >
           <TextInput
             source="fromDate"
-            label={translate("resources.user-gender-stats.fields.fromDate")}
+            label={translate("resources.user-stat.fields.fromDate")}
             validate={[required(), number(), minValue(2000), maxValue(4000)]}
           />
           <TextInput
             source="endDate"
-            label={translate("resources.user-gender-stats.fields.endDate")}
+            label={translate("resources.user-stat.fields.endDate")}
             validate={[
               required(),
               number(),
@@ -81,10 +83,18 @@ export const UserGenderStats = () => {
               higherOrEqualsThan("fromDate", translate),
             ]}
           />
+          <SelectInput
+            translateChoice
+            label="Type"
+            source="type"
+            sx={{ mb: 1 }}
+            choices={USER_STAT_TYPE_CHOICES}
+            validate={required()}
+          />
           <Box>
             <SaveButton
               icon={<Search />}
-              sx={{ py: "11px" }}
+              sx={{ mb: 3, py: "11px" }}
               label="ra.action.search"
             />
           </Box>
@@ -97,44 +107,19 @@ export const UserGenderStats = () => {
   );
 };
 
-const StatsContent: FC<Filters> = ({ fromDate, endDate }) => {
+const StatsContent: FC<Filters> = ({ fromDate, endDate, type }) => {
   const { data: stats = [], isLoading } = useGetList<
-    UserGenderStat & { id: string }
-  >("user-gender-stats", {
+    UserStat & { id: string }
+  >("user-stat", {
     filter: {
       fromDate: `${fromDate}-01-01`,
-      endDate: `${endDate}-01-01`,
+      endDate: `${endDate}-12-31`,
+      type
     },
   });
   const translate = useTranslate();
 
-  if (isLoading) {
-    <FlexBox sx={{ width: "100%" }}>
-      <CircularProgress />
-    </FlexBox>;
-  }
-
-  const chartData: ChartData<"line"> = {
-    labels: stats.map((stat) => stat.year),
-    datasets: [
-      {
-        label: translate("custom.enum.user_gender.MALE"),
-        data: stats.map((stat) => stat.maleCount),
-        borderColor: "blue",
-        backgroundColor: "rgba(0, 0, 255, 0.2)",
-        fill: true,
-      },
-      {
-        label: translate("custom.enum.user_gender.FEMALE"),
-        data: stats.map((stat) => stat.femaleCount),
-        borderColor: "pink",
-        backgroundColor: "rgba(255, 192, 203, 0.2)",
-        fill: true,
-      },
-    ],
-  };
-
-  const options: ChartOptions<"line"> = {
+  const options: ChartOptions<"line"> = useMemo(() => ({
     responsive: true,
     plugins: {
       legend: {
@@ -157,12 +142,45 @@ const StatsContent: FC<Filters> = ({ fromDate, endDate }) => {
           text: translate("custom.common.count"),
         },
         ticks: {
-          stepSize: 1,
+          stepSize: 5,
         },
         beginAtZero: true,
       },
     },
+  }), [translate]);
+
+  const chartData: ChartData<"line"> = {
+    labels: stats.map((stat) => stat.year),
+    datasets: [
+      {
+        label: "Total",
+        data: stats.map((stat) => stat.totalCount),
+        borderColor: "yellow",
+        backgroundColor: "rgba(224, 209, 67, 0.2)",
+        fill: true,
+      },
+      {
+        label: translate("custom.enum.user_gender.MALE"),
+        data: stats.map((stat) => stat.maleCount),
+        borderColor: "blue",
+        backgroundColor: "rgba(0, 0, 255, 0.2)",
+        fill: true,
+      },
+      {
+        label: translate("custom.enum.user_gender.FEMALE"),
+        data: stats.map((stat) => stat.femaleCount),
+        borderColor: "pink",
+        backgroundColor: "rgba(255, 192, 203, 0.2)",
+        fill: true,
+      },
+    ],
   };
+
+  if (isLoading) {
+    <FlexBox sx={{ width: "100%" }}>
+      <CircularProgress />
+    </FlexBox>;
+  }
 
   return (
     <Box sx={{ width: "100%", mx: "auto", maxWidth: "800px" }}>

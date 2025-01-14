@@ -3,7 +3,7 @@ import frenchMessages from "ra-language-french";
 export const haFrenchMessages: any = {
   ...frenchMessages,
   resources: {
-    "user-gender-stats": {
+    "user-stat": {
       name: "Membre par année",
       fields: {
         id: "Id",
@@ -135,6 +135,10 @@ export const haFrenchMessages: any = {
   },
   custom: {
     enum: {
+      user_stat_type: {
+        ACCULUMATED: 'Accumulé',
+        PER_YEAR: 'Inscript par année',
+      },
       user_role: {
         ADMIN: "Administrateur",
         REGION_MANAGER: "Filohan’ny Faritra",

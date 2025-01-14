@@ -1,2 +1,2 @@
 export * from "./stats-page";
-export * from "./user-gender-stats";
+export * from "./user-member-stat";

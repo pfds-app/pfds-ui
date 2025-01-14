@@ -3,7 +3,7 @@ import englishMessages from "ra-language-english";
 export const haEnglishMessages: any = {
   ...englishMessages,
   resources: {
-    "user-gender-stats": {
+    "user-stat": {
       name: "Member per year",
       fields: {
         id: "Id",
@@ -142,6 +142,10 @@ export const haEnglishMessages: any = {
   },
   custom: {
     enum: {
+      user_stat_type: {
+        ACCULUMATED: 'Acculumated',
+        PER_YEAR: 'Registered per year',
+      },
       user_role: {
         ADMIN: "Admin",
         REGION_MANAGER: "Filohan’ny Faritra",

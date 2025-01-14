@@ -15,7 +15,7 @@ import { payedTiketProvider } from "./payed-ticket-provider";
 import { staffProvider } from "./staff-provider";
 import { ticketStatusProvider } from "./ticket-status-provider";
 import { operationResultProvider } from "./operation-result-provider";
-import { userGenderStatsProvider } from "./user-gender-stats-provider";
+import { userStatProvider } from "./user-stat-provider";
 
 export const dataProvider = createRaProvider(
   [
@@ -34,7 +34,7 @@ export const dataProvider = createRaProvider(
     staffProvider,
     ticketStatusProvider,
     operationResultProvider,
-    userGenderStatsProvider,
+    userStatProvider,
   ],
   {
     getListOptions: {
@@ -47,7 +47,7 @@ export const dataProvider = createRaProvider(
         currentProvider,
         getListParams: { pagination },
       }) => {
-        if (resource === "user-gender-stats") {
+        if (resource === "user-stat") {
           return {
             pageInfo: {
               hasNextPage: false,

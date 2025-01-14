@@ -2,10 +2,10 @@ import { Tab } from "@mui/material";
 import { useTranslate } from "react-admin";
 
 import { Tabs, TabPanel } from "@/common/components/tabs";
-import { UserGenderStats } from "./user-gender-stats";
+import { UserMemberStat } from "./user-member-stat";
 import { useTabManager } from "@/common/hooks";
 
-const STATS_TABS = ["genders"];
+const STATS_TABS = ["members"];
 export const StatsPage = () => {
   const { tabIndex, handleTabChange } = useTabManager({
     values: STATS_TABS,
@@ -15,10 +15,10 @@ export const StatsPage = () => {
   return (
     <>
       <Tabs tabIndex={tabIndex} handleChange={handleTabChange}>
-        <Tab label={translate("resources.user-gender-stats.name")} />
+        <Tab label={translate("resources.user-stat.name")} />
       </Tabs>
       <TabPanel currentIndex={tabIndex} index={0}>
-        <UserGenderStats />
+        <UserMemberStat />
       </TabPanel>
     </>
   );

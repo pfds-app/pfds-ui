@@ -1,19 +1,19 @@
 import { ResourceProvider } from "@rck.princy/ra-data-provider-wrapper";
 import { v4 as uuid } from "uuid";
 
-import { UserGenderStat } from "@/gen/jfds-api-client";
+import { UserStat } from "@/gen/jfds-api-client";
 import { unwrap } from "./utils";
 import { usersApi } from "./api";
 
-export const userGenderStatsProvider: ResourceProvider<
-  UserGenderStat & { id: string }
+export const userStatProvider: ResourceProvider<
+  UserStat & { id: string }
 > = {
-  resource: "user-gender-stats",
+  resource: "user-stat",
   getList: async ({ filter = {} }) => {
-    const { fromDate, endDate } = filter;
+    const { fromDate, endDate, type } = filter;
 
     const results = await unwrap(() =>
-      usersApi().getUserGenderStats(fromDate, endDate)
+      usersApi().getUserMembersStats(fromDate, endDate, type)
     );
 
     return results.map((stat) => ({ ...stat, id: uuid() }));
