@@ -13,6 +13,7 @@ export const haFrenchMessages: any = {
         endDate: "Fin de d'evènement",
         description: "Description",
         rolType: "Type",
+        organisatorRole: "Organisateur",
       },
     },
     "user-stat": {
@@ -198,7 +199,6 @@ export const haFrenchMessages: any = {
       distribution_error:
         "Une erreur est survenue lors de la distribution du ticket.",
       delete_item_title: "Êtes-vous sûr de vouloir supprimer cet élément ?",
-      orgnisator: "Organisateur",
       activity: "Activité",
       verify: "Vérifier",
       event_details: "Détails de l'événement",

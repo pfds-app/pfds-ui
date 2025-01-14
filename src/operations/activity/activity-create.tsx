@@ -12,10 +12,12 @@ import { BoxPaperTitled } from "@/common/components";
 import { Create } from "@/common/components/create";
 import { createTranform } from "@/common/utils/transform";
 import { toISOString } from "@/common/utils/date";
+import { useWhoami } from "@/security/hooks";
 import { ACTIVITY_ROLE_CHOICES } from "./utils/activity_role_choies";
 
 export const ActivityCreate = () => {
   const translate = useTranslate();
+  const whoami = useWhoami();
 
   const transform = (
     activity: Pick<
@@ -25,6 +27,7 @@ export const ActivityCreate = () => {
   ): Activity => {
     return createTranform({
       ...activity,
+      organisatorRole: whoami?.role,
       beginDate: toISOString(activity.beginDate),
       endDate: toISOString(activity.endDate ?? activity.beginDate),
     });
@@ -44,6 +47,7 @@ export const ActivityCreate = () => {
           <TextInput multiline validate={required()} source="description" />
           <RadioButtonGroupInput
             translateChoice
+            label=""
             source="roleType"
             choices={ACTIVITY_ROLE_CHOICES}
             validate={required()}

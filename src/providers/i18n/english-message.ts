@@ -13,6 +13,7 @@ export const haEnglishMessages: any = {
         endDate: "Event end date",
         description: "Description",
         rolType: "Type",
+        organisatorRole: "Organisator",
       },
     },
     "user-stat": {
@@ -203,7 +204,6 @@ export const haEnglishMessages: any = {
       distribution_success: "The ticket was distributed successfully.",
       distribution_error: "An error occurred while distributing the ticket.",
       delete_item_title: "Are you sure you want to delete this item",
-      orgnisator: "Organisator",
       activity: "Activity",
       event_details: "Event Details",
       must_be_higher_or_equal_than: "Must be higher or equal to %{value}",

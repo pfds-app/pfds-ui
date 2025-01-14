@@ -1,6 +1,7 @@
 import {
   DateInput,
   RadioButtonGroupInput,
+  SelectInput,
   TextInput,
   required,
 } from "react-admin";
@@ -11,6 +12,7 @@ import { Activity } from "@/gen/jfds-api-client";
 import { Edit } from "@/common/components/edit";
 import { ACTIVITY_ROLE_CHOICES } from "./utils/activity_role_choies";
 import { updateTranform } from "@/common/utils/transform";
+import { USER_ROLE_CHOICES } from "../profile/utils/role-choices";
 
 export const ActivityEdit: FC<{ activity: Activity }> = ({ activity }) => {
   return (
@@ -21,6 +23,12 @@ export const ActivityEdit: FC<{ activity: Activity }> = ({ activity }) => {
         <DateInput validate={required()} source="beginDate" />
         <DateInput validate={required()} source="endDate" />
         <TextInput multiline validate={required()} source="description" />
+        <SelectInput
+          translateChoice
+          source="organisatorRole"
+          choices={USER_ROLE_CHOICES}
+          validate={required()}
+        />
         <RadioButtonGroupInput
           translateChoice
           source="roleType"

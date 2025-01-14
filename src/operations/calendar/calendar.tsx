@@ -5,14 +5,14 @@ import { useGetList, useLocale, useTranslate } from "react-admin";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
-import { Event } from "@/gen/jfds-api-client";
+import { Activity } from "@/gen/jfds-api-client";
 import {
   FlexBox,
   WithLayoutPadding,
   DialogContent,
   TooltipIconButton,
 } from "@/common/components";
-import { EventShow } from "../event";
+import { ActivityShow } from "../activity";
 import { stringifyObj } from "@/common/utils/stringify-obj";
 import { usePalette } from "@/common/hooks";
 import {
@@ -21,7 +21,7 @@ import {
 } from "@/common/services/dialog";
 import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 
-export type EventElement = {
+export type ActivityElement = {
   id: string;
   title: string;
   date?: Date;
@@ -38,34 +38,39 @@ export const Calendar = () => {
 };
 
 const CalendarContent = () => {
-  const [eventIdToShow, setEventIdToShow] = useState<string | null>(null);
+  const [activityIdToShow, setActivityIdToShow] = useState<string | null>(null);
   const { toggleStatus } = useDialogContext<false>();
   const { primaryPalette, textSecondaryColor } = usePalette();
-  const { data: events = [], isLoading } = useGetList<Event>("event", {
-    pagination: {
-      page: 1,
-      perPage: MAX_ITEM_PER_LIST,
-    },
-  });
+  const { data: activities = [], isLoading } = useGetList<Activity>(
+    "activity",
+    {
+      pagination: {
+        page: 1,
+        perPage: MAX_ITEM_PER_LIST,
+      },
+    }
+  );
   const locale = useLocale();
   const translate = useTranslate();
 
-  const mappedEvents: EventElement[] = useMemo(() => {
-    return events.map((event) => ({
-      id: event.id,
-      title: event.name,
+  const mappedActivities: ActivityElement[] = useMemo(() => {
+    return activities.map((activity) => ({
+      id: activity.id,
+      title: activity.name,
       date:
-        event.beginDate === event.endDate
-          ? new Date(event.beginDate)
+        activity.beginDate === activity.endDate
+          ? new Date(activity.beginDate)
           : undefined,
       start:
-        event.beginDate !== event.endDate
-          ? new Date(event.beginDate)
+        activity.beginDate !== activity.endDate
+          ? new Date(activity.beginDate)
           : undefined,
       end:
-        event.beginDate !== event.endDate ? new Date(event.endDate) : undefined,
+        activity.beginDate !== activity.endDate
+          ? new Date(activity.endDate)
+          : undefined,
     }));
-  }, [stringifyObj(events)]);
+  }, [stringifyObj(activities)]);
 
   if (isLoading) {
     return (
@@ -105,11 +110,11 @@ const CalendarContent = () => {
           <FullCalendar
             locale={locale}
             plugins={[dayGridPlugin]}
-            events={mappedEvents}
+            events={mappedActivities}
             initialView="dayGridMonth"
-            eventContent={EventContent}
-            eventClick={({ event: { id: eventId } }) => {
-              setEventIdToShow(eventId);
+            eventContent={ActivityContent}
+            eventClick={({ event: { id: activityId } }) => {
+              setActivityIdToShow(activityId);
               toggleStatus();
             }}
           />
@@ -141,13 +146,13 @@ const CalendarContent = () => {
             <Close />
           </TooltipIconButton>
         </FlexBox>
-        {eventIdToShow && <EventShow id={eventIdToShow} />}
+        {activityIdToShow && <ActivityShow id={activityIdToShow} />}
       </DialogContent>
     </>
   );
 };
 
-const EventContent = (eventInfo: any) => {
+const ActivityContent = (activityInfo: any) => {
   return (
     <Typography
       sx={{
@@ -159,7 +164,7 @@ const EventContent = (eventInfo: any) => {
       }}
     >
       <Circle sx={{ fontSize: "10px", color: "#1ac714" }} />
-      <span>{eventInfo.event.title}</span>
+      <span>{activityInfo.event.title}</span>
     </Typography>
   );
 };

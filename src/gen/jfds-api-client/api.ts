@@ -92,6 +92,12 @@ export interface Activity {
    * @type {string}
    * @memberof Activity
    */
+  organisatorRole: ActivityOrganisatorRoleEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof Activity
+   */
   createdAt: string;
   /**
    *
@@ -108,6 +114,16 @@ export const ActivityRoleTypeEnum = {
 
 export type ActivityRoleTypeEnum =
   (typeof ActivityRoleTypeEnum)[keyof typeof ActivityRoleTypeEnum];
+export const ActivityOrganisatorRoleEnum = {
+  Admin: "ADMIN",
+  RegionManager: "REGION_MANAGER",
+  CommitteeManager: "COMMITTEE_MANAGER",
+  AssociationManager: "ASSOCIATION_MANAGER",
+  SimpleUser: "SIMPLE_USER",
+} as const;
+
+export type ActivityOrganisatorRoleEnum =
+  (typeof ActivityOrganisatorRoleEnum)[keyof typeof ActivityOrganisatorRoleEnum];
 
 /**
  *
