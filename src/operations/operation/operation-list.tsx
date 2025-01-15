@@ -5,11 +5,12 @@ import { List, MoneyTextField } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
 import { OperationEdit } from "./operation-edit";
-import { Operation } from "@/gen/jfds-api-client";
+import { Operation, UserRoleEnum } from "@/gen/jfds-api-client";
 import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
+import { ShowIfRole } from "@/security/components";
 
 export const OperationList = () => {
   return (
@@ -41,17 +42,19 @@ export const OperationListContent = () => {
         <TextField sortable={false} source="numberOfTickets" />
         <DateField sortable={false} source="operationDate" />
         <TextField sortable={false} source="description" />
-        <FunctionField
-          label="Actions"
-          render={(operation: Operation) => (
-            <>
-              <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
-                <EditButton onClick={() => doEdit(operation)} />
-                <DeleteButton resource="operation" id={operation.id} />
-              </FlexBox>
-            </>
-          )}
-        />
+        <ShowIfRole roles={[UserRoleEnum.Admin]}>
+          <FunctionField
+            label="Actions"
+            render={(operation: Operation) => (
+              <>
+                <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
+                  <EditButton onClick={() => doEdit(operation)} />
+                  <DeleteButton resource="operation" id={operation.id} />
+                </FlexBox>
+              </>
+            )}
+          />
+        </ShowIfRole>
       </List>
       <DialogContent
         fullWidth

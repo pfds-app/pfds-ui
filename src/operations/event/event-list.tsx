@@ -1,7 +1,7 @@
 import { DateField, FunctionField, TextField, useTranslate } from "react-admin";
 import { useState } from "react";
 
-import { Event } from "@/gen/jfds-api-client";
+import { Event, UserRoleEnum } from "@/gen/jfds-api-client";
 import { List } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
@@ -10,6 +10,7 @@ import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
+import { ShowIfRole } from "@/security/components";
 
 export const EventList = () => {
   return (
@@ -38,17 +39,19 @@ export const EventListContent = () => {
         <TextField sortable={false} source="place" />
         <DateField sortable={false} source="beginDate" />
         <DateField sortable={false} source="endDate" />
-        <FunctionField
-          label="Actions"
-          render={(event: Event) => (
-            <>
-              <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
-                <EditButton onClick={() => doEdit(event)} />
-                <DeleteButton resource="event" id={event.id} />
-              </FlexBox>
-            </>
-          )}
-        />
+        <ShowIfRole roles={[UserRoleEnum.Admin]}>
+          <FunctionField
+            label="Actions"
+            render={(event: Event) => (
+              <>
+                <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
+                  <EditButton onClick={() => doEdit(event)} />
+                  <DeleteButton resource="event" id={event.id} />
+                </FlexBox>
+              </>
+            )}
+          />
+        </ShowIfRole>
       </List>
       <DialogContent
         fullWidth

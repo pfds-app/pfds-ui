@@ -1,7 +1,7 @@
 import { FunctionField, TextField, useTranslate } from "react-admin";
 import { useState } from "react";
 
-import { Sacrament } from "@/gen/jfds-api-client";
+import { Sacrament, UserRoleEnum } from "@/gen/jfds-api-client";
 import { List } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
@@ -11,6 +11,7 @@ import {
   useDialogContext,
 } from "@/common/services/dialog";
 import { usePalette } from "@/common/hooks";
+import { ShowIfRole } from "@/security/components";
 
 export const SacramentList = () => {
   return (
@@ -57,17 +58,19 @@ export const SacramentListContent = () => {
         }}
       >
         <TextField sortable={false} source="name" />
-        <FunctionField
-          label="Actions"
-          render={(sacrament: Sacrament) => (
-            <>
-              <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
-                <EditButton onClick={() => doEdit(sacrament)} />
-                <DeleteButton resource="sacrament" id={sacrament.id} />
-              </FlexBox>
-            </>
-          )}
-        />
+        <ShowIfRole roles={[UserRoleEnum.Admin]}>
+          <FunctionField
+            label="Actions"
+            render={(sacrament: Sacrament) => (
+              <>
+                <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
+                  <EditButton onClick={() => doEdit(sacrament)} />
+                  <DeleteButton resource="sacrament" id={sacrament.id} />
+                </FlexBox>
+              </>
+            )}
+          />
+        </ShowIfRole>
       </List>
       <DialogContent
         fullWidth

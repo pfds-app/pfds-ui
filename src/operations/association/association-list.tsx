@@ -1,7 +1,7 @@
 import { FunctionField, TextField, useTranslate } from "react-admin";
 import { useState } from "react";
 
-import { Association } from "@/gen/jfds-api-client";
+import { Association, UserRoleEnum } from "@/gen/jfds-api-client";
 import { List } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
@@ -10,6 +10,7 @@ import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
+import { ShowIfRole } from "@/security/components";
 
 export const AssociationList = () => {
   return (
@@ -37,17 +38,19 @@ export const AssociationListContent = () => {
       <List resource="association">
         <TextField sortable={false} source="code" />
         <TextField sortable={false} source="name" />
-        <FunctionField
-          label="Actions"
-          render={(association: Association) => (
-            <>
-              <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
-                <EditButton onClick={() => doEdit(association)} />
-                <DeleteButton resource="association" id={association.id} />
-              </FlexBox>
-            </>
-          )}
-        />
+        <ShowIfRole roles={[UserRoleEnum.Admin]}>
+          <FunctionField
+            label="Actions"
+            render={(association: Association) => (
+              <>
+                <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
+                  <EditButton onClick={() => doEdit(association)} />
+                  <DeleteButton resource="association" id={association.id} />
+                </FlexBox>
+              </>
+            )}
+          />
+        </ShowIfRole>
       </List>
       <DialogContent
         fullWidth

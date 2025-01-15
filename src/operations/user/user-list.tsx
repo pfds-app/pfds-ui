@@ -12,6 +12,7 @@ import {
   useDialogContext,
 } from "@/common/services/dialog";
 import { createImageUrl } from "@/providers";
+import { ShowIfRole } from "@/security/components";
 
 export const UserList: FC<{ role: UserRoleEnum }> = ({ role }) => {
   return (
@@ -52,17 +53,19 @@ export const UserListContent: FC<{ role: UserRoleEnum }> = ({ role }) => {
           source="role"
           enumLocalSuffix="custom.enum.user_role"
         />
-        <FunctionField
-          label="Actions"
-          render={(user: User) => (
-            <>
-              <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
-                <EditButton onClick={() => doEdit(user)} />
-                <DeleteButton resource="user" id={user.id} />
-              </FlexBox>
-            </>
-          )}
-        />
+        <ShowIfRole roles={[UserRoleEnum.Admin]}>
+          <FunctionField
+            label="Actions"
+            render={(user: User) => (
+              <>
+                <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
+                  <EditButton onClick={() => doEdit(user)} />
+                  <DeleteButton resource="user" id={user.id} />
+                </FlexBox>
+              </>
+            )}
+          />
+        </ShowIfRole>
       </List>
       <DialogContent
         fullWidth

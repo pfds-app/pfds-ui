@@ -1,7 +1,7 @@
 import { FunctionField, TextField, useTranslate } from "react-admin";
 import { useState } from "react";
 
-import { Committee } from "@/gen/jfds-api-client";
+import { Committee, UserRoleEnum } from "@/gen/jfds-api-client";
 import { List } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
@@ -10,6 +10,7 @@ import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
+import { ShowIfRole } from "@/security/components";
 
 export const CommitteeList = () => {
   return (
@@ -38,17 +39,19 @@ export const CommitteeListContent = () => {
       <List resource="committee">
         <TextField sortable={false} source="code" />
         <TextField sortable={false} source="name" />
-        <FunctionField
-          label="Actions"
-          render={(committee: Committee) => (
-            <>
-              <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
-                <EditButton onClick={() => doEdit(committee)} />
-                <DeleteButton resource="committee" id={committee.id} />
-              </FlexBox>
-            </>
-          )}
-        />
+        <ShowIfRole roles={[UserRoleEnum.Admin]}>
+          <FunctionField
+            label="Actions"
+            render={(committee: Committee) => (
+              <>
+                <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
+                  <EditButton onClick={() => doEdit(committee)} />
+                  <DeleteButton resource="committee" id={committee.id} />
+                </FlexBox>
+              </>
+            )}
+          />
+        </ShowIfRole>
       </List>
       <DialogContent
         fullWidth
