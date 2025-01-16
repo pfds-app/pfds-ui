@@ -109,6 +109,11 @@ export const SigninPage: FC<{ handleTabChange: (value: number) => void }> = ({
               onClick={() => handleTabChange(1)}
             />
           )}
+          <Button
+            label="custom.common.signin_by_role"
+            sx={{ mt: 2, fontSize: "14px", textDecoration: "underline" }}
+            onClick={() => handleTabChange(2)}
+          />
           <Typography
             to={MAILTO_LINK}
             component={Link}

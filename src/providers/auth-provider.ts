@@ -1,6 +1,6 @@
 import { AuthProvider } from "react-admin";
 import { isAxiosError } from "axios";
-import { SigninPayload } from "@/gen/jfds-api-client";
+import { SigninByRole, SigninPayload } from "@/gen/jfds-api-client";
 import { authWhoamiCache, clearCaches } from "@/common/utils/cache";
 import { securityApi } from "./api";
 import { unwrap } from "./utils";
@@ -12,8 +12,14 @@ const shouldSignout = (error: any) => {
   );
 };
 export const authProvider: AuthProvider = {
-  login: async (loginData: SigninPayload) => {
-    const whoami = await unwrap(() => securityApi().signin(loginData));
+  login: async (loginData: SigninPayload | SigninByRole) => {
+    if ("password" in loginData) {
+      const whoami = await unwrap(() => securityApi().signin(loginData));
+      authWhoamiCache.replace(whoami);
+      return;
+    }
+
+    const whoami = await unwrap(() => securityApi().signinByRole(loginData));
     authWhoamiCache.replace(whoami);
   },
   logout: async () => {

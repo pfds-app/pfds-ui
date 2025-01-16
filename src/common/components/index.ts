@@ -8,3 +8,4 @@ export * from "./box-paper-titled";
 export * from "./with-layout-padding";
 export * from "./list-and-create-layout";
 export * from "./required-when";
+export * from "./is-source-equals";

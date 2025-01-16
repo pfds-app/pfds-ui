@@ -764,6 +764,49 @@ export interface Sacrament {
 /**
  *
  * @export
+ * @interface SigninByRole
+ */
+export interface SigninByRole {
+  /**
+   *
+   * @type {string}
+   * @memberof SigninByRole
+   */
+  firstName: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SigninByRole
+   */
+  lastName: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SigninByRole
+   */
+  responsabilityId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SigninByRole
+   */
+  committeeId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SigninByRole
+   */
+  associationId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SigninByRole
+   */
+  regionId: string;
+}
+/**
+ *
+ * @export
  * @interface SigninPayload
  */
 export interface SigninPayload {
@@ -7592,6 +7635,56 @@ export const SecurityApiAxiosParamCreator = function (
     /**
      *
      * @summary
+     * @param {SigninByRole} signinByRole
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    signinByRole: async (
+      signinByRole: SigninByRole,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'signinByRole' is not null or undefined
+      assertParamExists("signinByRole", "signinByRole", signinByRole);
+      const localVarPath = `/signin-by-role`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        signinByRole,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
      * @param {SignupPayload} signupPayload
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7750,6 +7843,36 @@ export const SecurityApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary
+     * @param {SigninByRole} signinByRole
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async signinByRole(
+      signinByRole: SigninByRole,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Whoami>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.signinByRole(
+        signinByRole,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["SecurityApi.signinByRole"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
      * @param {SignupPayload} signupPayload
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7843,6 +7966,21 @@ export const SecurityApiFactory = function (
     /**
      *
      * @summary
+     * @param {SigninByRole} signinByRole
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    signinByRole(
+      signinByRole: SigninByRole,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Whoami> {
+      return localVarFp
+        .signinByRole(signinByRole, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
      * @param {SignupPayload} signupPayload
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7900,6 +8038,23 @@ export class SecurityApi extends BaseAPI {
   public signin(signinPayload: SigninPayload, options?: RawAxiosRequestConfig) {
     return SecurityApiFp(this.configuration)
       .signin(signinPayload, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {SigninByRole} signinByRole
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof SecurityApi
+   */
+  public signinByRole(
+    signinByRole: SigninByRole,
+    options?: RawAxiosRequestConfig
+  ) {
+    return SecurityApiFp(this.configuration)
+      .signinByRole(signinByRole, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -7967,6 +8122,10 @@ export const UsersApiAxiosParamCreator = function (
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       localVarHeaderParameter["Content-Type"] = "application/json";
 
@@ -8199,6 +8358,10 @@ export const UsersApiAxiosParamCreator = function (
       const localVarFormParams = new ((configuration &&
         configuration.formDataCtor) ||
         FormData)();
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (file !== undefined) {
         localVarFormParams.append("file", file as any);

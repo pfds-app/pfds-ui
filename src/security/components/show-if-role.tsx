@@ -5,12 +5,17 @@ import { useRole } from "../hooks";
 
 export type ShowIfRoleProps = PropsWithChildren<{
   roles: UserRoleEnum[];
+  role?: UserRoleEnum;
 }>;
 
-export const ShowIfRole: FC<ShowIfRoleProps> = ({ roles, children }) => {
+export const ShowIfRole: FC<ShowIfRoleProps> = ({
+  role: providedRole,
+  roles,
+  children,
+}) => {
   const role = useRole();
 
-  if (!roles.includes(role)) {
+  if (!roles.includes(providedRole ?? role)) {
     return null;
   }
 
