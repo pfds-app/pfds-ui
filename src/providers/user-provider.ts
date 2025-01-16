@@ -25,6 +25,9 @@ export const userProvider: ResourceProvider<User> = {
   getOne: async ({ id }) => {
     return unwrap(() => usersApi().getUserById(id));
   },
+  delete: ({ id }) => {
+    return unwrap(() => usersApi().deleteUserById(id));
+  },
   getList: async ({ filter = {}, pagination: { perPage, page } }) => {
     const { role } = filter;
     return unwrap(() => usersApi().getUsers(role, page, perPage));

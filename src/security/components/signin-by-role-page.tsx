@@ -14,8 +14,10 @@ import {
 } from "react-admin";
 import { Link } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
+import { useWatch } from "react-hook-form";
 
-import { FlexBox, IsSourceEquals, LocaleSwitch } from "@/common/components";
+import { FlexBox, LocaleSwitch } from "@/common/components";
+import { UserRoleEnum } from "@/gen/jfds-api-client";
 import { usePalette } from "@/common/hooks";
 import {
   FB_PAGE_NAME,
@@ -24,7 +26,6 @@ import {
   MAILTO_LINK,
 } from "@/common/utils/constant";
 import { USER_ROLE_CHOICES } from "@/operations/profile/utils/role-choices";
-import { UserRoleEnum } from "@/gen/jfds-api-client";
 
 export const SigninByRolePage: FC<{
   handleTabChange: (value: number) => void;
@@ -118,95 +119,8 @@ export const SigninByRolePage: FC<{
                   label={translate("resources.responsability.name")}
                 />
               </ReferenceInput>
-              <IsSourceEquals
-                source="role"
-                equals={[UserRoleEnum.Admin]}
-                render={(isEqual) => {
-                  if (isEqual) {
-                    return null;
-                  }
-
-                  return (
-                    <IsSourceEquals
-                      source="role"
-                      equals={[UserRoleEnum.RegionManager]}
-                      render={(isRegionManager) => {
-                        if (!isRegionManager) {
-                          return null;
-                        }
-                        return (
-                          <ReferenceInput reference="region" source="regionId">
-                            <SelectInput
-                              fullWidth
-                              disabled={isEqual}
-                              optionText="name"
-                              label={translate("resources.region.name")}
-                            />
-                          </ReferenceInput>
-                        );
-                      }}
-                    />
-                  );
-                }}
-              />
+              <AdditionalInfoInput />
             </FlexBox>
-            <IsSourceEquals
-              source="role"
-              equals={[UserRoleEnum.Admin]}
-              render={(isEqual) => {
-                if (isEqual) {
-                  return null;
-                }
-
-                return (
-                  <FlexBox sx={{ width: "100%", gap: 1 }}>
-                    <IsSourceEquals
-                      source="role"
-                      equals={[UserRoleEnum.AssociationManager]}
-                      render={(isAssociationManager) => {
-                        if (!isAssociationManager) {
-                          return null;
-                        }
-                        return (
-                          <ReferenceInput
-                            reference="association"
-                            source="associationId"
-                          >
-                            <SelectInput
-                              fullWidth
-                              optionText="name"
-                              label={translate("resources.association.name")}
-                            />
-                          </ReferenceInput>
-                        );
-                      }}
-                    />
-                    <IsSourceEquals
-                      source="role"
-                      equals={[UserRoleEnum.CommitteeManager]}
-                      render={(isCommitteeManager) => {
-                        if (!isCommitteeManager) {
-                          return null;
-                        }
-
-                        return (
-                          <ReferenceInput
-                            reference="committee"
-                            source="committeeId"
-                          >
-                            <SelectInput
-                              fullWidth
-                              optionText="name"
-                              label={translate("resources.committee.name")}
-                            />
-                          </ReferenceInput>
-                        );
-                      }}
-                    />
-                  </FlexBox>
-                );
-              }}
-            />
           </SimpleForm>
           <Button
             label="custom.common.simple_signin"
@@ -256,4 +170,44 @@ export const SigninByRolePage: FC<{
       </FlexBox>
     </FlexBox>
   );
+};
+
+export const AdditionalInfoInput = () => {
+  const role = useWatch({ name: "role" });
+  const translate = useTranslate();
+
+  switch (role) {
+    case UserRoleEnum.RegionManager:
+      return (
+        <ReferenceInput reference="region" source="regionId">
+          <SelectInput
+            fullWidth
+            optionText="name"
+            label={translate("resources.region.name")}
+          />
+        </ReferenceInput>
+      );
+    case UserRoleEnum.CommitteeManager:
+      return (
+        <ReferenceInput reference="committee" source="committeeId">
+          <SelectInput
+            fullWidth
+            optionText="name"
+            label={translate("resources.committee.name")}
+          />
+        </ReferenceInput>
+      );
+    case UserRoleEnum.AssociationManager:
+      return (
+        <ReferenceInput reference="association" source="associationId">
+          <SelectInput
+            fullWidth
+            optionText="name"
+            label={translate("resources.association.name")}
+          />
+        </ReferenceInput>
+      );
+    default:
+      return null;
+  }
 };
