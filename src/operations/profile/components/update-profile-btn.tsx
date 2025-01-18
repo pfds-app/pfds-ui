@@ -110,7 +110,7 @@ const UploadPictureButtonContent: FC<UploadPictureButtonProps> = ({
             label=" "
             accept={{ "image/*": [".png", ".jpg"] }}
           >
-            <ImageField source="rawFile" title="title" />
+            <ImageField source="src" title="title" />
           </ImageInput>
         </Create>
       </DialogContent>

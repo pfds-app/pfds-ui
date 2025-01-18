@@ -18,6 +18,7 @@ import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
 import { jfdsLightTheme } from "./themes";
 import "@/common/components/charts/setup";
+import { SearchPage } from "./operations/search";
 
 export const Dashboard = () => {
   return (
@@ -57,6 +58,7 @@ export const Dashboard = () => {
         <Route path="/herivelona" element={<HerivelonaPage />} />
         <Route path="/stats" element={<StatsPage />} />
         <Route path="/activities" element={<ActivityPage />} />
+        <Route path="/search" element={<SearchPage />} />
       </CustomRoutes>
     </Admin>
   );

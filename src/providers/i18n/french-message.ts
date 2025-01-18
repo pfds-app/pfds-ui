@@ -173,6 +173,8 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      clear_search: "Réinitialiser",
+      find_member: "Rechercher un membre",
       simple_signin: "Connexion Simple",
       signin_by_role: "Se connecter par Rôle",
       not_defined: "Non défini",

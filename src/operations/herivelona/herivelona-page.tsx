@@ -8,11 +8,11 @@ import { UserRoleEnum } from "@/gen/jfds-api-client";
 import { useTabManager } from "@/common/hooks";
 
 const HERIVELONA_TABS = [
+  "simple-user",
   "admin",
   "region-manager",
   "association-manager",
   "committee-manager",
-  "simple-user",
 ];
 
 export const HerivelonaPage = () => {

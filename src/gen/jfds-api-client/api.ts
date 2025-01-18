@@ -8289,6 +8289,16 @@ export const UsersApiAxiosParamCreator = function (
      *
      * @summary
      * @param {GetUsersRoleEnum} [role]
+     * @param {string} [nic]
+     * @param {string} [apv]
+     * @param {string} [lastName]
+     * @param {string} [firstName]
+     * @param {string} [username]
+     * @param {string} [regionId]
+     * @param {string} [committeeId]
+     * @param {string} [associationId]
+     * @param {string} [responsabilityId]
+     * @param {GetUsersGenderEnum} [gender]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
@@ -8296,6 +8306,16 @@ export const UsersApiAxiosParamCreator = function (
      */
     getUsers: async (
       role?: GetUsersRoleEnum,
+      nic?: string,
+      apv?: string,
+      lastName?: string,
+      firstName?: string,
+      username?: string,
+      regionId?: string,
+      committeeId?: string,
+      associationId?: string,
+      responsabilityId?: string,
+      gender?: GetUsersGenderEnum,
       page?: number,
       pageSize?: number,
       options: RawAxiosRequestConfig = {}
@@ -8322,6 +8342,46 @@ export const UsersApiAxiosParamCreator = function (
 
       if (role !== undefined) {
         localVarQueryParameter["role"] = role;
+      }
+
+      if (nic !== undefined) {
+        localVarQueryParameter["nic"] = nic;
+      }
+
+      if (apv !== undefined) {
+        localVarQueryParameter["apv"] = apv;
+      }
+
+      if (lastName !== undefined) {
+        localVarQueryParameter["lastName"] = lastName;
+      }
+
+      if (firstName !== undefined) {
+        localVarQueryParameter["firstName"] = firstName;
+      }
+
+      if (username !== undefined) {
+        localVarQueryParameter["username"] = username;
+      }
+
+      if (regionId !== undefined) {
+        localVarQueryParameter["regionId"] = regionId;
+      }
+
+      if (committeeId !== undefined) {
+        localVarQueryParameter["committeeId"] = committeeId;
+      }
+
+      if (associationId !== undefined) {
+        localVarQueryParameter["associationId"] = associationId;
+      }
+
+      if (responsabilityId !== undefined) {
+        localVarQueryParameter["responsabilityId"] = responsabilityId;
+      }
+
+      if (gender !== undefined) {
+        localVarQueryParameter["gender"] = gender;
       }
 
       if (page !== undefined) {
@@ -8602,6 +8662,16 @@ export const UsersApiFp = function (configuration?: Configuration) {
      *
      * @summary
      * @param {GetUsersRoleEnum} [role]
+     * @param {string} [nic]
+     * @param {string} [apv]
+     * @param {string} [lastName]
+     * @param {string} [firstName]
+     * @param {string} [username]
+     * @param {string} [regionId]
+     * @param {string} [committeeId]
+     * @param {string} [associationId]
+     * @param {string} [responsabilityId]
+     * @param {GetUsersGenderEnum} [gender]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
@@ -8609,6 +8679,16 @@ export const UsersApiFp = function (configuration?: Configuration) {
      */
     async getUsers(
       role?: GetUsersRoleEnum,
+      nic?: string,
+      apv?: string,
+      lastName?: string,
+      firstName?: string,
+      username?: string,
+      regionId?: string,
+      committeeId?: string,
+      associationId?: string,
+      responsabilityId?: string,
+      gender?: GetUsersGenderEnum,
       page?: number,
       pageSize?: number,
       options?: RawAxiosRequestConfig
@@ -8617,6 +8697,16 @@ export const UsersApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getUsers(
         role,
+        nic,
+        apv,
+        lastName,
+        firstName,
+        username,
+        regionId,
+        committeeId,
+        associationId,
+        responsabilityId,
+        gender,
         page,
         pageSize,
         options
@@ -8778,6 +8868,16 @@ export const UsersApiFactory = function (
      *
      * @summary
      * @param {GetUsersRoleEnum} [role]
+     * @param {string} [nic]
+     * @param {string} [apv]
+     * @param {string} [lastName]
+     * @param {string} [firstName]
+     * @param {string} [username]
+     * @param {string} [regionId]
+     * @param {string} [committeeId]
+     * @param {string} [associationId]
+     * @param {string} [responsabilityId]
+     * @param {GetUsersGenderEnum} [gender]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
@@ -8785,12 +8885,37 @@ export const UsersApiFactory = function (
      */
     getUsers(
       role?: GetUsersRoleEnum,
+      nic?: string,
+      apv?: string,
+      lastName?: string,
+      firstName?: string,
+      username?: string,
+      regionId?: string,
+      committeeId?: string,
+      associationId?: string,
+      responsabilityId?: string,
+      gender?: GetUsersGenderEnum,
       page?: number,
       pageSize?: number,
       options?: RawAxiosRequestConfig
     ): AxiosPromise<Array<User>> {
       return localVarFp
-        .getUsers(role, page, pageSize, options)
+        .getUsers(
+          role,
+          nic,
+          apv,
+          lastName,
+          firstName,
+          username,
+          regionId,
+          committeeId,
+          associationId,
+          responsabilityId,
+          gender,
+          page,
+          pageSize,
+          options
+        )
         .then((request) => request(axios, basePath));
     },
     /**
@@ -8902,6 +9027,16 @@ export class UsersApi extends BaseAPI {
    *
    * @summary
    * @param {GetUsersRoleEnum} [role]
+   * @param {string} [nic]
+   * @param {string} [apv]
+   * @param {string} [lastName]
+   * @param {string} [firstName]
+   * @param {string} [username]
+   * @param {string} [regionId]
+   * @param {string} [committeeId]
+   * @param {string} [associationId]
+   * @param {string} [responsabilityId]
+   * @param {GetUsersGenderEnum} [gender]
    * @param {number} [page]
    * @param {number} [pageSize]
    * @param {*} [options] Override http request option.
@@ -8910,12 +9045,37 @@ export class UsersApi extends BaseAPI {
    */
   public getUsers(
     role?: GetUsersRoleEnum,
+    nic?: string,
+    apv?: string,
+    lastName?: string,
+    firstName?: string,
+    username?: string,
+    regionId?: string,
+    committeeId?: string,
+    associationId?: string,
+    responsabilityId?: string,
+    gender?: GetUsersGenderEnum,
     page?: number,
     pageSize?: number,
     options?: RawAxiosRequestConfig
   ) {
     return UsersApiFp(this.configuration)
-      .getUsers(role, page, pageSize, options)
+      .getUsers(
+        role,
+        nic,
+        apv,
+        lastName,
+        firstName,
+        username,
+        regionId,
+        committeeId,
+        associationId,
+        responsabilityId,
+        gender,
+        page,
+        pageSize,
+        options
+      )
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -8977,3 +9137,12 @@ export const GetUsersRoleEnum = {
 } as const;
 export type GetUsersRoleEnum =
   (typeof GetUsersRoleEnum)[keyof typeof GetUsersRoleEnum];
+/**
+ * @export
+ */
+export const GetUsersGenderEnum = {
+  Male: "MALE",
+  Female: "FEMALE",
+} as const;
+export type GetUsersGenderEnum =
+  (typeof GetUsersGenderEnum)[keyof typeof GetUsersGenderEnum];

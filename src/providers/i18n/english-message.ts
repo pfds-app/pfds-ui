@@ -180,6 +180,8 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      clear_search: "Reset",
+      find_member: "Search for a member",
       simple_signin: "Simple Signin",
       signin_by_role: "Signin By Role",
       not_defined: "Not Define",

@@ -29,8 +29,37 @@ export const userProvider: ResourceProvider<User> = {
     return unwrap(() => usersApi().deleteUserById(id));
   },
   getList: async ({ filter = {}, pagination: { perPage, page } }) => {
-    const { role } = filter;
-    return unwrap(() => usersApi().getUsers(role, page, perPage));
+    const {
+      role,
+      nic,
+      apv,
+      lastName,
+      firstName,
+      username,
+      regionId,
+      committeeId,
+      associationId,
+      gender,
+      responsabilityId,
+    } = filter;
+
+    return unwrap(() =>
+      usersApi().getUsers(
+        role,
+        nic,
+        apv,
+        lastName,
+        firstName,
+        username,
+        regionId,
+        committeeId,
+        associationId,
+        responsabilityId,
+        gender,
+        page,
+        perPage
+      )
+    );
   },
   getMany: async (_resource, { ids }) => {
     const [id] = ids as string[]; // as we use only select input and never array input
