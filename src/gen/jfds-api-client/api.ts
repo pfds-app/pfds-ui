@@ -536,6 +536,25 @@ export type LedgerMouvementTypeEnum =
 /**
  *
  * @export
+ * @interface LedgerStat
+ */
+export interface LedgerStat {
+  /**
+   *
+   * @type {string}
+   * @memberof LedgerStat
+   */
+  count: string;
+  /**
+   *
+   * @type {number}
+   * @memberof LedgerStat
+   */
+  month: number;
+}
+/**
+ *
+ * @export
  * @interface Operation
  */
 export interface Operation {
@@ -2454,7 +2473,60 @@ export const MoneysApiAxiosParamCreator = function (
     /**
      *
      * @summary
+     * @param {number} [year]
+     * @param {GetLedgerStatsTypeEnum} [type]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getLedgerStats: async (
+      year?: number,
+      type?: GetLedgerStatsTypeEnum,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/ledgers/all/stats`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      if (year !== undefined) {
+        localVarQueryParameter["year"] = year;
+      }
+
+      if (type !== undefined) {
+        localVarQueryParameter["type"] = type;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
      * @param {string} [name]
+     * @param {number} [year]
+     * @param {number} [month]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
@@ -2462,6 +2534,8 @@ export const MoneysApiAxiosParamCreator = function (
      */
     getLedgers: async (
       name?: string,
+      year?: number,
+      month?: number,
       page?: number,
       pageSize?: number,
       options: RawAxiosRequestConfig = {}
@@ -2488,6 +2562,14 @@ export const MoneysApiAxiosParamCreator = function (
 
       if (name !== undefined) {
         localVarQueryParameter["name"] = name;
+      }
+
+      if (year !== undefined) {
+        localVarQueryParameter["year"] = year;
+      }
+
+      if (month !== undefined) {
+        localVarQueryParameter["month"] = month;
       }
 
       if (page !== undefined) {
@@ -3245,7 +3327,45 @@ export const MoneysApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary
+     * @param {number} [year]
+     * @param {GetLedgerStatsTypeEnum} [type]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getLedgerStats(
+      year?: number,
+      type?: GetLedgerStatsTypeEnum,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<LedgerStat>>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getLedgerStats(
+        year,
+        type,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["MoneysApi.getLedgerStats"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
      * @param {string} [name]
+     * @param {number} [year]
+     * @param {number} [month]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
@@ -3253,6 +3373,8 @@ export const MoneysApiFp = function (configuration?: Configuration) {
      */
     async getLedgers(
       name?: string,
+      year?: number,
+      month?: number,
       page?: number,
       pageSize?: number,
       options?: RawAxiosRequestConfig
@@ -3261,6 +3383,8 @@ export const MoneysApiFp = function (configuration?: Configuration) {
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getLedgers(
         name,
+        year,
+        month,
         page,
         pageSize,
         options
@@ -3696,7 +3820,26 @@ export const MoneysApiFactory = function (
     /**
      *
      * @summary
+     * @param {number} [year]
+     * @param {GetLedgerStatsTypeEnum} [type]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getLedgerStats(
+      year?: number,
+      type?: GetLedgerStatsTypeEnum,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Array<LedgerStat>> {
+      return localVarFp
+        .getLedgerStats(year, type, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
      * @param {string} [name]
+     * @param {number} [year]
+     * @param {number} [month]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
@@ -3704,12 +3847,14 @@ export const MoneysApiFactory = function (
      */
     getLedgers(
       name?: string,
+      year?: number,
+      month?: number,
       page?: number,
       pageSize?: number,
       options?: RawAxiosRequestConfig
     ): AxiosPromise<Array<Ledger>> {
       return localVarFp
-        .getLedgers(name, page, pageSize, options)
+        .getLedgers(name, year, month, page, pageSize, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -4012,7 +4157,28 @@ export class MoneysApi extends BaseAPI {
   /**
    *
    * @summary
+   * @param {number} [year]
+   * @param {GetLedgerStatsTypeEnum} [type]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MoneysApi
+   */
+  public getLedgerStats(
+    year?: number,
+    type?: GetLedgerStatsTypeEnum,
+    options?: RawAxiosRequestConfig
+  ) {
+    return MoneysApiFp(this.configuration)
+      .getLedgerStats(year, type, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
    * @param {string} [name]
+   * @param {number} [year]
+   * @param {number} [month]
    * @param {number} [page]
    * @param {number} [pageSize]
    * @param {*} [options] Override http request option.
@@ -4021,12 +4187,14 @@ export class MoneysApi extends BaseAPI {
    */
   public getLedgers(
     name?: string,
+    year?: number,
+    month?: number,
     page?: number,
     pageSize?: number,
     options?: RawAxiosRequestConfig
   ) {
     return MoneysApiFp(this.configuration)
-      .getLedgers(name, page, pageSize, options)
+      .getLedgers(name, year, month, page, pageSize, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -4159,6 +4327,16 @@ export class MoneysApi extends BaseAPI {
       .then((request) => request(this.axios, this.basePath));
   }
 }
+
+/**
+ * @export
+ */
+export const GetLedgerStatsTypeEnum = {
+  Acculumated: "ACCULUMATED",
+  PerYear: "PER_YEAR",
+} as const;
+export type GetLedgerStatsTypeEnum =
+  (typeof GetLedgerStatsTypeEnum)[keyof typeof GetLedgerStatsTypeEnum];
 
 /**
  * ResourcesApi - axios parameter creator
@@ -5069,14 +5247,12 @@ export const ResourcesApiAxiosParamCreator = function (
     /**
      *
      * @summary
-     * @param {string} [name]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getAssociations: async (
-      name?: string,
       page?: number,
       pageSize?: number,
       options: RawAxiosRequestConfig = {}
@@ -5096,10 +5272,6 @@ export const ResourcesApiAxiosParamCreator = function (
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
-
-      if (name !== undefined) {
-        localVarQueryParameter["name"] = name;
-      }
 
       if (page !== undefined) {
         localVarQueryParameter["page"] = page;
@@ -6196,14 +6368,12 @@ export const ResourcesApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary
-     * @param {string} [name]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async getAssociations(
-      name?: string,
       page?: number,
       pageSize?: number,
       options?: RawAxiosRequestConfig
@@ -6214,7 +6384,6 @@ export const ResourcesApiFp = function (configuration?: Configuration) {
       ) => AxiosPromise<Array<Association>>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getAssociations(
-        name,
         page,
         pageSize,
         options
@@ -6847,20 +7016,18 @@ export const ResourcesApiFactory = function (
     /**
      *
      * @summary
-     * @param {string} [name]
      * @param {number} [page]
      * @param {number} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getAssociations(
-      name?: string,
       page?: number,
       pageSize?: number,
       options?: RawAxiosRequestConfig
     ): AxiosPromise<Array<Association>> {
       return localVarFp
-        .getAssociations(name, page, pageSize, options)
+        .getAssociations(page, pageSize, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -7313,7 +7480,6 @@ export class ResourcesApi extends BaseAPI {
   /**
    *
    * @summary
-   * @param {string} [name]
    * @param {number} [page]
    * @param {number} [pageSize]
    * @param {*} [options] Override http request option.
@@ -7321,13 +7487,12 @@ export class ResourcesApi extends BaseAPI {
    * @memberof ResourcesApi
    */
   public getAssociations(
-    name?: string,
     page?: number,
     pageSize?: number,
     options?: RawAxiosRequestConfig
   ) {
     return ResourcesApiFp(this.configuration)
-      .getAssociations(name, page, pageSize, options)
+      .getAssociations(page, pageSize, options)
       .then((request) => request(this.axios, this.basePath));
   }
 

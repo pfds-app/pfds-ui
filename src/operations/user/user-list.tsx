@@ -7,12 +7,12 @@ import { List, TranslatedEnumTextField } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
 import { UserEdit } from "./user-edit";
+import { ShowIfRole } from "@/security/components";
 import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
 import { createImageUrl } from "@/providers";
-import { ShowIfRole } from "@/security/components";
 
 export const UserList: FC<{ role: UserRoleEnum }> = ({ role }) => {
   return (

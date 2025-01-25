@@ -14,11 +14,11 @@ import { HerivelonaPage } from "./operations/herivelona";
 import { StatsPage } from "./operations/stats";
 import { ActivityPage } from "./operations/activity";
 import { UserShow } from "./operations/user";
+import { SearchPage } from "./operations/search";
 import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
 import { jfdsLightTheme } from "./themes";
 import "@/common/components/charts/setup";
-import { SearchPage } from "./operations/search";
 
 export const Dashboard = () => {
   return (
@@ -45,9 +45,8 @@ export const Dashboard = () => {
       <Resource name="staff" />
       <Resource name="ticket-status" />
       <Resource name="operation-result" />
-      <Resource name="user" show={UserShow} />
       <Resource name="user-stat" />
-
+      <Resource name="user" show={UserShow} />
       <CustomRoutes>
         <Route path="/about" element={<AboutPage />} />
         <Route path="/creations" element={<CreationPage />} />

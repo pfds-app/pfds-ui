@@ -5,9 +5,8 @@ import { resourcesApi } from "./api";
 
 export const associationProvider: ResourceProvider<Association> = {
   resource: "association",
-  getList: ({ filter = {}, pagination: { perPage, page } }) => {
-    const { name } = filter;
-    return unwrap(() => resourcesApi().getAssociations(name, page, perPage));
+  getList: ({ pagination: { perPage, page } }) => {
+    return unwrap(() => resourcesApi().getAssociations(page, perPage));
   },
   delete: ({ id }) => {
     return unwrap(() => resourcesApi().deleteAssociationById(id));
