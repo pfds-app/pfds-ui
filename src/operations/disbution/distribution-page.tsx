@@ -29,6 +29,7 @@ import { StateSetter } from "@/common/utils/types";
 import { PayedTicket } from "@/gen/jfds-api-client";
 import { CrupdatePayedTicketPayload } from "@/providers";
 import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
+import { NOOP_FN } from "@/common/utils/noop-fn";
 
 export type VerifyPayload = {
   operationId: string | null;
@@ -78,7 +79,7 @@ export const DistributionPage = () => {
                 </Toolbar>
               ),
             }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={NOOP_FN}
             resource="payed-ticket"
           >
             <ReferenceInput

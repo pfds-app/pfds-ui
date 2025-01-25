@@ -152,6 +152,10 @@ export const haFrenchMessages: any = {
         ALL: "Tout",
         MANAGER: "Filan-kevitra",
       },
+      ledger_stat_type: {
+        ACCULUMATED: "Accumulé",
+        PER_YEAR: "Inscript par année",
+      },
       user_stat_type: {
         ACCULUMATED: "Accumulé",
         PER_YEAR: "Inscript par année",
@@ -181,6 +185,8 @@ export const haFrenchMessages: any = {
       activity_today: "Activités d'aujourd'hui",
       count: "Nombre",
       year: "Année",
+      month: "Mois",
+      budget: "Budget",
       required_when: "Obligatoire quand %{source}=%{destination}",
       today: "Aujourd'hui",
       incoming_event: "Evènment à venir",

@@ -159,6 +159,10 @@ export const haEnglishMessages: any = {
         ALL: "All",
         MANAGER: "Filan-kevitra",
       },
+      ledger_stat_type: {
+        ACCULUMATED: "Acculumated",
+        PER_YEAR: "Registered per year",
+      },
       user_stat_type: {
         ACCULUMATED: "Acculumated",
         PER_YEAR: "Registered per year",
@@ -186,7 +190,9 @@ export const haEnglishMessages: any = {
       signin_by_role: "Signin By Role",
       not_defined: "Not Define",
       count: "Count",
+      month: "Month",
       year: "Year",
+      budget: "Budget",
       required_when: "Required when %{source}=%{destination}",
       today: "Today",
       incoming_event: "Incoming event",

@@ -2,7 +2,6 @@ import { Box, CircularProgress } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import {
   SaveButton,
-  SelectInput,
   SimpleForm,
   TextInput,
   maxValue,
@@ -17,37 +16,24 @@ import { ChartData, ChartOptions } from "chart.js";
 import { FC, useMemo, useState } from "react";
 import dayjs from "dayjs";
 
-import { GetUserMembersStatsTypeEnum, UserStat } from "@/gen/jfds-api-client";
+import { GetLedgerStatsTypeEnum, LedgerStat } from "@/gen/jfds-api-client";
 import { FlexBox, WithLayoutPadding } from "@/common/components";
-import { higherOrEqualsThan } from "@/common/input-validator";
-import { USER_STAT_TYPE_CHOICES } from "./utils/user-stat-type-choices";
 
 type Filters = {
-  fromDate: number;
-  endDate: number;
-  type: GetUserMembersStatsTypeEnum;
+  year: number;
+  type: GetLedgerStatsTypeEnum;
 };
-export const UserMemberStat = () => {
+export const LedgerStatUI = () => {
   const [filters, setFitlers] = useState<Filters>({
-    fromDate: dayjs().year() - 3,
-    endDate: dayjs().year() + 3,
-    type: GetUserMembersStatsTypeEnum.Acculumated,
+    year: dayjs().year(),
+    type: GetLedgerStatsTypeEnum.Acculumated,
   });
   const translate = useTranslate();
 
-  const updateFilters = ({
-    endDate,
-    fromDate,
-    type,
-  }: {
-    fromDate: string;
-    endDate: string;
-    type: GetUserMembersStatsTypeEnum;
-  }) => {
+  const updateFilters = ({ year }: { year: string }) => {
     setFitlers({
-      endDate: +endDate,
-      fromDate: +fromDate,
-      type,
+      year: +year,
+      type: GetLedgerStatsTypeEnum.Acculumated,
     });
   };
 
@@ -61,35 +47,18 @@ export const UserMemberStat = () => {
       >
         <FlexBox
           sx={{
-            width: "fit-content",
+            width: "100%",
+            margin: "10px 0px",
             alignItems: "center",
-            justifyContent: "start",
+            justifyContent: "end",
             gap: 1,
           }}
         >
           <TextInput
-            source="fromDate"
-            label={translate("resources.user-stat.fields.fromDate")}
+            fullWidth={false}
+            source="year"
+            label={translate("custom.common.year")}
             validate={[required(), number(), minValue(2000), maxValue(4000)]}
-          />
-          <TextInput
-            source="endDate"
-            label={translate("resources.user-stat.fields.endDate")}
-            validate={[
-              required(),
-              number(),
-              minValue(2000),
-              maxValue(4000),
-              higherOrEqualsThan("fromDate", translate),
-            ]}
-          />
-          <SelectInput
-            translateChoice
-            label="Type"
-            source="type"
-            sx={{ mb: 1 }}
-            choices={USER_STAT_TYPE_CHOICES}
-            validate={required()}
           />
           <Box>
             <SaveButton
@@ -107,17 +76,16 @@ export const UserMemberStat = () => {
   );
 };
 
-const StatsContent: FC<Filters> = ({ fromDate, endDate, type }) => {
-  const { data: stats = [], isLoading } = useGetList<UserStat & { id: string }>(
-    "user-stat",
-    {
-      filter: {
-        fromDate: `${fromDate}-01-01`,
-        endDate: `${endDate}-12-31`,
-        type,
-      },
-    }
-  );
+const StatsContent: FC<Filters> = ({ year, type }) => {
+  const { data: stats = [], isLoading } = useGetList<
+    LedgerStat & { id: string }
+  >("ledger-stat", {
+    filter: {
+      year: year ?? 2025,
+      type: type ?? GetLedgerStatsTypeEnum.Acculumated,
+    },
+  });
+
   const translate = useTranslate();
 
   const options: ChartOptions<"line"> = useMemo(
@@ -135,7 +103,7 @@ const StatsContent: FC<Filters> = ({ fromDate, endDate, type }) => {
         x: {
           title: {
             display: true,
-            text: translate("custom.common.year"),
+            text: translate("custom.common.month"),
           },
         },
         y: {
@@ -154,27 +122,13 @@ const StatsContent: FC<Filters> = ({ fromDate, endDate, type }) => {
   );
 
   const chartData: ChartData<"line"> = {
-    labels: stats.map((stat) => stat.year),
+    labels: stats.map((stat) => stat.month),
     datasets: [
       {
         label: "Total",
-        data: stats.map((stat) => stat.totalCount),
+        data: stats.map((stat) => parseInt(stat.count)),
         borderColor: "yellow",
         backgroundColor: "rgba(224, 209, 67, 0.2)",
-        fill: true,
-      },
-      {
-        label: translate("custom.enum.user_gender.MALE"),
-        data: stats.map((stat) => stat.maleCount),
-        borderColor: "blue",
-        backgroundColor: "rgba(0, 0, 255, 0.2)",
-        fill: true,
-      },
-      {
-        label: translate("custom.enum.user_gender.FEMALE"),
-        data: stats.map((stat) => stat.femaleCount),
-        borderColor: "pink",
-        backgroundColor: "rgba(255, 192, 203, 0.2)",
         fill: true,
       },
     ],

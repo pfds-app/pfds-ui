@@ -46,6 +46,7 @@ export const Dashboard = () => {
       <Resource name="ticket-status" />
       <Resource name="operation-result" />
       <Resource name="user-stat" />
+      <Resource name="ledger-stat" />
       <Resource name="user" show={UserShow} />
       <CustomRoutes>
         <Route path="/about" element={<AboutPage />} />
