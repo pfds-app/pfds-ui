@@ -1,17 +1,33 @@
-import { Avatar } from "@mui/material";
+import { Avatar, Box } from "@mui/material";
 import {
   DateField,
   FunctionField,
   Show,
   SimpleShowLayout,
   TextField,
+  useShowContext,
   useTranslate,
 } from "react-admin";
 import { useParams } from "react-router-dom";
 
 import { TranslatedEnumTextField } from "@/common/components/list";
 import { User } from "@/gen/jfds-api-client";
+import { QrCodeBox } from "@/common/components";
 import { createImageUrl } from "@/providers";
+
+const QrCodeBoxWrapper = () => {
+  const { record: user, isLoading } = useShowContext<User>();
+
+  if (isLoading) {
+    return null;
+  }
+
+  return (
+    <Box sx={{ position: "absolute", right: 50, top: 120 }}>
+      <QrCodeBox user={user!} />
+    </Box>
+  );
+};
 
 export const UserShow = () => {
   const { id } = useParams();
@@ -20,6 +36,7 @@ export const UserShow = () => {
   return (
     <Show actions={false} resource="user" id={id}>
       <SimpleShowLayout>
+        <QrCodeBoxWrapper />
         <FunctionField
           label=" "
           render={(user: User) => (

@@ -37,7 +37,11 @@ export const UserListContent: FC<{ role: UserRoleEnum }> = ({ role }) => {
       title={`Lisitry ny ${translate(`custom.enum.user_role.${role}`)}`}
       containerSx={{ pt: 0 }}
     >
-      <List resource="user" filter={{ role }}>
+      <List
+        resource="user"
+        filter={{ role }}
+        datagridProps={{ rowClick: "show" }}
+      >
         <FunctionField
           label=" "
           render={(user: User) => (
@@ -59,7 +63,12 @@ export const UserListContent: FC<{ role: UserRoleEnum }> = ({ role }) => {
             render={(user: User) => (
               <>
                 <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
-                  <EditButton onClick={() => doEdit(user)} />
+                  <EditButton
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      doEdit(user);
+                    }}
+                  />
                   <DeleteButton resource="user" id={user.id} />
                 </FlexBox>
               </>

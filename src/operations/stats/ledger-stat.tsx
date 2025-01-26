@@ -19,8 +19,9 @@ import dayjs from "dayjs";
 
 import { GetLedgerStatsTypeEnum, LedgerStat } from "@/gen/jfds-api-client";
 import { FlexBox, WithLayoutPadding } from "@/common/components";
-import { MONTHS } from "../ledger";
 import { SupportedLanguage } from "@/providers/i18n";
+import { MONTHS } from "../ledger";
+import { stringifyObj } from "@/common/utils/stringify-obj";
 
 type Filters = {
   year: number;
@@ -134,7 +135,7 @@ const StatsContent: FC<Filters> = ({ year, type }) => {
       const monthValue = stats.find((stat) => +stat.month === month.id);
       return +(monthValue?.count ?? 0);
     });
-  }, [locale, isLoading]);
+  }, [locale, isLoading, stringifyObj(stats)]);
 
   const chartData: ChartData<"line"> = {
     labels,

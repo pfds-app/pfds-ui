@@ -50,7 +50,10 @@ export const DeleteButton: FC<DeleteButtonProps> = ({
   return (
     <>
       <TooltipIconButton
-        onClick={toggleValue}
+        onClick={(event) => {
+          event.stopPropagation();
+          toggleValue();
+        }}
         size="small"
         color="error"
         title={"ra.action.delete"}

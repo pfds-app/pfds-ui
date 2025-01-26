@@ -12,7 +12,7 @@ import {
 import { UpdateUser, User } from "@/gen/jfds-api-client";
 import { Show } from "@/common/components/show";
 import { Edit } from "@/common/components/edit";
-import { FlexBox, WithLayoutPadding } from "@/common/components";
+import { QrCodeBox, FlexBox, WithLayoutPadding } from "@/common/components";
 import { ProfilePictureShow } from "./components";
 import { UserSaveOrUpdateActionType } from "@/providers";
 import { usePalette } from "@/common/hooks";
@@ -81,7 +81,20 @@ export const ProfileEditPage = () => {
                 resource="user"
                 id={whoami?.id}
               >
-                <ProfilePictureShow />
+                <FlexBox
+                  sx={{
+                    justifyContent: "space-between",
+                    width: "100%",
+                    gap: 2,
+                  }}
+                >
+                  <Box sx={{ flex: 1 }}>
+                    <ProfilePictureShow />
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <QrCodeBox user={whoami} />
+                  </Box>
+                </FlexBox>
               </Show>
               <FlexBox sx={{ gap: 1, width: "100%" }}>
                 <TextInput fullWidth validate={required()} source="firstName" />
