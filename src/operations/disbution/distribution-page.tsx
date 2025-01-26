@@ -120,7 +120,11 @@ export const VerifyContent: FC<{ ticketNumber: number | null }> = ({
   ticketNumber,
 }) => {
   const notify = useNotify();
-  const { record: payedTicket, isLoading } = useShowContext<PayedTicket>();
+  const {
+    refetch,
+    record: payedTicket,
+    isLoading,
+  } = useShowContext<PayedTicket & { payedTicketId: string }>();
   const [update, { isLoading: isUpdateLoading }] =
     useUpdate<CrupdatePayedTicketPayload>();
   const translate = useTranslate();
@@ -150,17 +154,24 @@ export const VerifyContent: FC<{ ticketNumber: number | null }> = ({
         id: "DUMMMY",
         staffId: "DUMMY",
         operationId: "DUMMY",
-        payedTikects: [{ ...payedTicket!, isDistributed: true }],
+        payedTikects: [
+          {
+            ...payedTicket!,
+            id: payedTicket?.payedTicketId!,
+            isDistributed: true,
+          },
+        ],
       },
       meta: {
         operationId: "operationId",
         staffId: "staffId",
       },
-      id: payedTicket?.id,
+      id: ticketNumber.toString(),
     });
     notify(translate("custom.common.distribution_success"), {
       type: "success",
     });
+    refetch();
   };
 
   return (
