@@ -12,7 +12,12 @@ import {
 import { UpdateUser, User } from "@/gen/jfds-api-client";
 import { Show } from "@/common/components/show";
 import { Edit } from "@/common/components/edit";
-import { QrCodeBox, FlexBox, WithLayoutPadding } from "@/common/components";
+import {
+  QrCodeBox,
+  FlexBox,
+  WithLayoutPadding,
+  DownloadQrCodeButton,
+} from "@/common/components";
 import { ProfilePictureShow } from "./components";
 import { UserSaveOrUpdateActionType } from "@/providers";
 import { usePalette } from "@/common/hooks";
@@ -77,7 +82,7 @@ export const ProfileEditPage = () => {
                 {translate("custom.common.edit_profile")}
               </Typography>
               <Show
-                sx={{ mb: 2, width: "fit-content", mx: "auto" }}
+                sx={{ mb: 2, width: "100%", mx: "auto" }}
                 resource="user"
                 id={whoami?.id}
               >
@@ -88,12 +93,21 @@ export const ProfileEditPage = () => {
                     gap: 2,
                   }}
                 >
-                  <Box sx={{ flex: 1 }}>
-                    <ProfilePictureShow />
-                  </Box>
-                  <Box sx={{ flex: 1 }}>
-                    <QrCodeBox user={whoami} />
-                  </Box>
+                  <ProfilePictureShow />
+                  <FlexBox
+                    sx={{
+                      flex: 1,
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "end",
+                      gap: 1,
+                    }}
+                  >
+                    <Box sx={{ width: "100%", maxWidth: "150px" }}>
+                      <QrCodeBox user={whoami} />
+                    </Box>
+                    <DownloadQrCodeButton user={whoami} />
+                  </FlexBox>
                 </FlexBox>
               </Show>
               <FlexBox sx={{ gap: 1, width: "100%" }}>

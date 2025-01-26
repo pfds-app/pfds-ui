@@ -37,8 +37,8 @@ export const ProfilePictureShow = () => {
               }
             }}
             style={{
-              height: 150,
-              width: 150,
+              height: 170,
+              width: 170,
               borderRadius: "50%",
             }}
           />

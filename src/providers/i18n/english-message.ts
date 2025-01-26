@@ -184,6 +184,7 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      download_qr_code: "Download QR Code",
       clear_search: "Reset",
       find_member: "Search for a member",
       simple_signin: "Simple Signin",

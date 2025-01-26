@@ -177,6 +177,7 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      download_qr_code: "Télécharger le code QR",
       clear_search: "Réinitialiser",
       find_member: "Rechercher un membre",
       simple_signin: "Connexion Simple",
