@@ -9,6 +9,7 @@ import {
   number,
   required,
   useGetList,
+  useLocale,
   useTranslate,
 } from "react-admin";
 import { Line } from "react-chartjs-2";
@@ -18,6 +19,8 @@ import dayjs from "dayjs";
 
 import { GetLedgerStatsTypeEnum, LedgerStat } from "@/gen/jfds-api-client";
 import { FlexBox, WithLayoutPadding } from "@/common/components";
+import { MONTHS } from "../ledger";
+import { SupportedLanguage } from "@/providers/i18n";
 
 type Filters = {
   year: number;
@@ -87,6 +90,7 @@ const StatsContent: FC<Filters> = ({ year, type }) => {
   });
 
   const translate = useTranslate();
+  const locale = useLocale();
 
   const options: ChartOptions<"line"> = useMemo(
     () => ({
@@ -112,7 +116,7 @@ const StatsContent: FC<Filters> = ({ year, type }) => {
             text: translate("custom.common.count"),
           },
           ticks: {
-            stepSize: 5,
+            stepSize: 100,
           },
           beginAtZero: true,
         },
@@ -121,12 +125,23 @@ const StatsContent: FC<Filters> = ({ year, type }) => {
     [translate]
   );
 
+  const labels = useMemo(() => {
+    return MONTHS[locale as SupportedLanguage].map((month) => month.name);
+  }, [locale]);
+
+  const data = useMemo(() => {
+    return MONTHS[locale as SupportedLanguage].map((month) => {
+      const monthValue = stats.find((stat) => +stat.month === month.id);
+      return +(monthValue?.count ?? 0);
+    });
+  }, [locale, isLoading]);
+
   const chartData: ChartData<"line"> = {
-    labels: stats.map((stat) => stat.month),
+    labels,
     datasets: [
       {
         label: "Total",
-        data: stats.map((stat) => parseInt(stat.count)),
+        data,
         borderColor: "yellow",
         backgroundColor: "rgba(224, 209, 67, 0.2)",
         fill: true,

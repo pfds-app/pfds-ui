@@ -192,7 +192,7 @@ export const haEnglishMessages: any = {
       count: "Count",
       month: "Month",
       year: "Year",
-      budget: "Budget",
+      budget_per_month: "Budget per month",
       required_when: "Required when %{source}=%{destination}",
       today: "Today",
       incoming_event: "Incoming event",

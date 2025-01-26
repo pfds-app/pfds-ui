@@ -186,7 +186,7 @@ export const haFrenchMessages: any = {
       count: "Nombre",
       year: "Année",
       month: "Mois",
-      budget: "Budget",
+      budget_per_month: "Budget par mois",
       required_when: "Obligatoire quand %{source}=%{destination}",
       today: "Aujourd'hui",
       incoming_event: "Evènment à venir",

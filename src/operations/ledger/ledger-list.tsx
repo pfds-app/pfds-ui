@@ -28,7 +28,7 @@ type Filters = {
   year: number;
 };
 
-const MONTHS = {
+export const MONTHS = {
   en: [
     { id: 1, name: "January" },
     { id: 2, name: "February" },
