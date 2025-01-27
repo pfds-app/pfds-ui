@@ -3,6 +3,9 @@ import englishMessages from "ra-language-english";
 export const haEnglishMessages: any = {
   ...englishMessages,
   resources: {
+    "presence": {
+      name: "Presence",
+    },
     "activity": {
       name: "Hetsika",
       fields: {
@@ -182,8 +185,14 @@ export const haEnglishMessages: any = {
         IN: "In",
         OUT: "Out",
       },
+      presence: {
+        PRESENT: "Present",
+        ABSENT: "Absent",
+      },
     },
     common: {
+      watch_presence: "Watch presence",
+      all: "All",
       download_qr_code: "Download QR Code",
       clear_search: "Reset",
       find_member: "Search for a member",

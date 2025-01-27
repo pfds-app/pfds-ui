@@ -3,6 +3,9 @@ import frenchMessages from "ra-language-french";
 export const haFrenchMessages: any = {
   ...frenchMessages,
   resources: {
+    "presence": {
+      name: "Présence",
+    },
     "activity": {
       name: "Hetsika",
       fields: {
@@ -175,8 +178,14 @@ export const haFrenchMessages: any = {
         IN: "Entrée",
         OUT: "Sortie",
       },
+      presence: {
+        PRESENT: "Présent",
+        ABSENT: "Absent",
+      },
     },
     common: {
+      watch_presence: "Surveiller la présence",
+      all: "Tout",
       download_qr_code: "Télécharger le code QR",
       clear_search: "Réinitialiser",
       find_member: "Rechercher un membre",

@@ -117,9 +117,8 @@ const StatsContent: FC<Filters> = ({ year, type }) => {
             text: translate("custom.common.count"),
           },
           ticks: {
-            stepSize: 100,
+            stepSize: 10_000,
           },
-          beginAtZero: true,
         },
       },
     }),
@@ -133,7 +132,7 @@ const StatsContent: FC<Filters> = ({ year, type }) => {
   const data = useMemo(() => {
     return MONTHS[locale as SupportedLanguage].map((month) => {
       const monthValue = stats.find((stat) => +stat.month === month.id);
-      return +(monthValue?.count ?? 0);
+      return +(monthValue?.count ?? "0");
     });
   }, [locale, isLoading, stringifyObj(stats)]);
 

@@ -18,3 +18,4 @@ export * from "./staff-provider";
 export * from "./operation-result-provider";
 export * from "./activity-provider";
 export * from "./ledger-stat-provider";
+export * from "./presence-provider";

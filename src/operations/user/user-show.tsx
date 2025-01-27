@@ -66,6 +66,10 @@ export const UserShow = () => {
           <TextField source="firstName" />
           <TextField source="lastName" />
           <DateField source="birthDate" />
+          <TranslatedEnumTextField
+            source="role"
+            enumLocalSuffix="custom.enum.user_role"
+          />
         </SimpleShowLayout>
       </FlexBox>
       <FlexBox sx={{ width: "100%" }}>

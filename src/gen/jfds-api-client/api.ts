@@ -227,6 +227,43 @@ export interface Committee {
 /**
  *
  * @export
+ * @interface CreatePresence
+ */
+export interface CreatePresence {
+  /**
+   *
+   * @type {string}
+   * @memberof CreatePresence
+   */
+  id: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreatePresence
+   */
+  activityId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreatePresence
+   */
+  userId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreatePresence
+   */
+  createdAt: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreatePresence
+   */
+  updatedAt: string;
+}
+/**
+ *
+ * @export
  * @interface CreateUser
  */
 export interface CreateUser {
@@ -680,6 +717,62 @@ export interface PayedTicket {
    * @memberof PayedTicket
    */
   updatedAt: string;
+}
+/**
+ *
+ * @export
+ * @interface Presence
+ */
+export interface Presence {
+  /**
+   *
+   * @type {string}
+   * @memberof Presence
+   */
+  id: string;
+  /**
+   *
+   * @type {Activity}
+   * @memberof Presence
+   */
+  activity: Activity;
+  /**
+   *
+   * @type {User}
+   * @memberof Presence
+   */
+  user: User;
+  /**
+   *
+   * @type {string}
+   * @memberof Presence
+   */
+  createdAt: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Presence
+   */
+  updatedAt: string;
+}
+/**
+ *
+ * @export
+ * @interface PresenceStatus
+ */
+export interface PresenceStatus {
+  /**
+   *
+   * @type {User}
+   * @memberof PresenceStatus
+   */
+  user: User;
+  /**
+   *
+   * @type {boolean}
+   * @memberof PresenceStatus
+   */
+  isPresent: boolean;
 }
 /**
  *
@@ -4565,6 +4658,67 @@ export const ResourcesApiAxiosParamCreator = function (
     /**
      *
      * @summary
+     * @param {string} activityId
+     * @param {Array<CreatePresence>} createPresence
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdatePresences: async (
+      activityId: string,
+      createPresence: Array<CreatePresence>,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'activityId' is not null or undefined
+      assertParamExists("crupdatePresences", "activityId", activityId);
+      // verify required parameter 'createPresence' is not null or undefined
+      assertParamExists("crupdatePresences", "createPresence", createPresence);
+      const localVarPath = `/activities/{activityId}/presences`.replace(
+        `{${"activityId"}}`,
+        encodeURIComponent(String(activityId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "PUT",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        createPresence,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
      * @param {Array<Region>} region
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -5521,6 +5675,74 @@ export const ResourcesApiAxiosParamCreator = function (
     /**
      *
      * @summary
+     * @param {string} activityId
+     * @param {boolean} [isPresent]
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPresencesStatus: async (
+      activityId: string,
+      isPresent?: boolean,
+      page?: number,
+      pageSize?: number,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'activityId' is not null or undefined
+      assertParamExists("getPresencesStatus", "activityId", activityId);
+      const localVarPath = `/activities/{activityId}/status`.replace(
+        `{${"activityId"}}`,
+        encodeURIComponent(String(activityId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (isPresent !== undefined) {
+        localVarQueryParameter["isPresent"] = isPresent;
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameter["page"] = page;
+      }
+
+      if (pageSize !== undefined) {
+        localVarQueryParameter["pageSize"] = pageSize;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
      * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -5962,6 +6184,43 @@ export const ResourcesApiFp = function (configuration?: Configuration) {
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap["ResourcesApi.crupdateEvents"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} activityId
+     * @param {Array<CreatePresence>} createPresence
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdatePresences(
+      activityId: string,
+      createPresence: Array<CreatePresence>,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<Presence>>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.crupdatePresences(
+          activityId,
+          createPresence,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["ResourcesApi.crupdatePresences"]?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -6540,6 +6799,49 @@ export const ResourcesApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary
+     * @param {string} activityId
+     * @param {boolean} [isPresent]
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getPresencesStatus(
+      activityId: string,
+      isPresent?: boolean,
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<PresenceStatus>>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getPresencesStatus(
+          activityId,
+          isPresent,
+          page,
+          pageSize,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["ResourcesApi.getPresencesStatus"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
      * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -6810,6 +7112,23 @@ export const ResourcesApiFactory = function (
     ): AxiosPromise<Array<Event>> {
       return localVarFp
         .crupdateEvents(event, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {string} activityId
+     * @param {Array<CreatePresence>} createPresence
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdatePresences(
+      activityId: string,
+      createPresence: Array<CreatePresence>,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Array<Presence>> {
+      return localVarFp
+        .crupdatePresences(activityId, createPresence, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -7103,6 +7422,27 @@ export const ResourcesApiFactory = function (
     /**
      *
      * @summary
+     * @param {string} activityId
+     * @param {boolean} [isPresent]
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPresencesStatus(
+      activityId: string,
+      isPresent?: boolean,
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Array<PresenceStatus>> {
+      return localVarFp
+        .getPresencesStatus(activityId, isPresent, page, pageSize, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
      * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7274,6 +7614,25 @@ export class ResourcesApi extends BaseAPI {
   public crupdateEvents(event: Array<Event>, options?: RawAxiosRequestConfig) {
     return ResourcesApiFp(this.configuration)
       .crupdateEvents(event, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} activityId
+   * @param {Array<CreatePresence>} createPresence
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ResourcesApi
+   */
+  public crupdatePresences(
+    activityId: string,
+    createPresence: Array<CreatePresence>,
+    options?: RawAxiosRequestConfig
+  ) {
+    return ResourcesApiFp(this.configuration)
+      .crupdatePresences(activityId, createPresence, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -7565,6 +7924,29 @@ export class ResourcesApi extends BaseAPI {
   ) {
     return ResourcesApiFp(this.configuration)
       .getEvents(name, afterDate, page, pageSize, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} activityId
+   * @param {boolean} [isPresent]
+   * @param {number} [page]
+   * @param {number} [pageSize]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof ResourcesApi
+   */
+  public getPresencesStatus(
+    activityId: string,
+    isPresent?: boolean,
+    page?: number,
+    pageSize?: number,
+    options?: RawAxiosRequestConfig
+  ) {
+    return ResourcesApiFp(this.configuration)
+      .getPresencesStatus(activityId, isPresent, page, pageSize, options)
       .then((request) => request(this.axios, this.basePath));
   }
 

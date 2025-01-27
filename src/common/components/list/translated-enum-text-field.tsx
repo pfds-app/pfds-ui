@@ -1,5 +1,6 @@
 import { FunctionField, useTranslate } from "react-admin";
 import { FC } from "react";
+import { getObjValue } from "@/common/utils/get-obj-value";
 
 export type TranslatedEnumTextFieldProps = {
   enumLocalSuffix: string;
@@ -17,7 +18,7 @@ export const TranslatedEnumTextField: FC<TranslatedEnumTextFieldProps> = ({
       sortable={false}
       source={source}
       render={(record) => {
-        const value = record[source];
+        const value = getObjValue(record, source);
         return translate(`${enumLocalSuffix}.${value}`);
       }}
     />

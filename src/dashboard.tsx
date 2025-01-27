@@ -15,6 +15,7 @@ import { StatsPage } from "./operations/stats";
 import { ActivityPage } from "./operations/activity";
 import { UserShow } from "./operations/user";
 import { SearchPage } from "./operations/search";
+import { PresencePage } from "./operations/presences";
 import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
 import { jfdsLightTheme } from "./themes";
@@ -59,6 +60,7 @@ export const Dashboard = () => {
         <Route path="/stats" element={<StatsPage />} />
         <Route path="/activities" element={<ActivityPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/presence" element={<PresencePage />} />
       </CustomRoutes>
     </Admin>
   );
