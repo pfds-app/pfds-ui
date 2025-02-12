@@ -1,18 +1,27 @@
-import { Typography, Avatar, Switch } from "@mui/material";
+import {
+  Dialog,
+  DialogContent,
+  DialogActions,
+  Typography,
+  Avatar,
+  Switch,
+  Box,
+} from "@mui/material";
 import {
   Button,
   FunctionField,
   ReferenceInput,
   SelectInput,
   SimpleForm,
+  Toolbar,
   required,
   useUpdate,
   useTranslate,
-  Toolbar,
   useNotify,
   useListContext,
 } from "react-admin";
-import { Check, Close } from "@mui/icons-material";
+import { Save, QrCode, Check, Close } from "@mui/icons-material";
+import { IDetectedBarcode, Scanner } from "@yudiel/react-qr-scanner";
 import { useWatch } from "react-hook-form";
 import { useState, FC } from "react";
 
@@ -33,6 +42,7 @@ import {
 } from "./utils/presence-type-choices";
 import { StateSetter } from "@/common/utils/types";
 import { createTranform } from "@/common/utils/transform";
+import { ParsedQrValue } from "@/common/utils/to-qrcode-value";
 
 type Filter = {
   activityId: string;
@@ -120,6 +130,7 @@ export const PresencePage = () => {
           <SelectAction view={view} setView={setView} />
         </FlexBox>
         <BoxPaperTitled title="Presence">
+          <QRScan view={view} setView={setView} />
           <List
             filter={{
               activityId: filter.activityId,
@@ -166,7 +177,7 @@ export const PresencePage = () => {
             />
             {view !== View.LIST && (
               <FunctionField
-                label="Actions"
+                label="Est Présent"
                 render={(presentStatus: PresenceStatus) => {
                   const isPresent = getIsPresentValue(presentStatus);
                   return (
@@ -294,8 +305,24 @@ const UpdateActions: FC<{
   };
 
   return (
-    <Toolbar>
+    <Toolbar sx={{ gap: 2 }}>
       <Button
+        disabled={isLoading || isListLoading}
+        color="error"
+        variant="contained"
+        label="ra.action.cancel"
+        onClick={() => setView(View.LIST)}
+      />
+      <Button
+        startIcon={<QrCode />}
+        disabled={isLoading || isListLoading}
+        color="info"
+        variant="contained"
+        label="Par Scan"
+        onClick={() => setView(View.QRSCAN)}
+      />
+      <Button
+        startIcon={<Save />}
         disabled={isLoading || isListLoading}
         color="warning"
         variant="contained"
@@ -303,5 +330,48 @@ const UpdateActions: FC<{
         onClick={doUpdate}
       />
     </Toolbar>
+  );
+};
+
+const QRScan: FC<{ view: View; setView: StateSetter<View> }> = ({
+  setView,
+  view,
+}) => {
+  const {} = useListContext<PresenceStatus & { id: string }>();
+  const notify = useNotify();
+
+  const handleScanned = (data: IDetectedBarcode[]) => {
+    if (data.length !== 1) {
+      return;
+    }
+    const parseData = JSON.parse(data[0].rawValue) as ParsedQrValue;
+    notify(
+      `L'utilisateur ${parseData.firstName} ${parseData.lastName} a été marqué present`,
+      { type: "success" }
+    );
+  };
+
+  return (
+    <Dialog
+      fullWidth
+      maxWidth="md"
+      open={view === View.QRSCAN}
+      onClose={() => setView(View.UPDATE)}
+    >
+      <DialogContent>
+        <Box sx={{ height: "fit-content", width: "100%" }}>
+          <Scanner scanDelay={3_000} onScan={handleScanned} />
+        </Box>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          size="large"
+          type="submit"
+          variant="contained"
+          label="Fermer"
+          onClick={() => setView(View.UPDATE)}
+        />
+      </DialogActions>
+    </Dialog>
   );
 };
