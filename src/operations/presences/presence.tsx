@@ -130,7 +130,6 @@ export const PresencePage = () => {
           <SelectAction view={view} setView={setView} />
         </FlexBox>
         <BoxPaperTitled title="Presence">
-          <QRScan view={view} setView={setView} />
           <List
             filter={{
               activityId: filter.activityId,
@@ -181,12 +180,19 @@ export const PresencePage = () => {
                 render={(presentStatus: PresenceStatus) => {
                   const isPresent = getIsPresentValue(presentStatus);
                   return (
-                    <Switch
-                      checked={isPresent}
-                      onChange={(_e, isChecked) =>
-                        toggleIsPresent(isChecked, presentStatus)
-                      }
-                    />
+                    <>
+                      <QRScan
+                        toggleIsPresent={toggleIsPresent}
+                        view={view}
+                        setView={setView}
+                      />
+                      <Switch
+                        checked={isPresent}
+                        onChange={(_e, isChecked) =>
+                          toggleIsPresent(isChecked, presentStatus)
+                        }
+                      />
+                    </>
                   );
                 }}
               />
@@ -333,11 +339,14 @@ const UpdateActions: FC<{
   );
 };
 
-const QRScan: FC<{ view: View; setView: StateSetter<View> }> = ({
-  setView,
-  view,
-}) => {
-  const {} = useListContext<PresenceStatus & { id: string }>();
+const QRScan: FC<{
+  toggleIsPresent: any;
+  view: View;
+  setView: StateSetter<View>;
+}> = ({ setView, view, toggleIsPresent }) => {
+  const { data: fromList = [] } = useListContext<
+    PresenceStatus & { id: string }
+  >();
   const notify = useNotify();
 
   const handleScanned = (data: IDetectedBarcode[]) => {
@@ -345,6 +354,14 @@ const QRScan: FC<{ view: View; setView: StateSetter<View> }> = ({
       return;
     }
     const parseData = JSON.parse(data[0].rawValue) as ParsedQrValue;
+    const dataFromList = fromList.find((el) => el.user.id === parseData?.id);
+    if (!dataFromList) {
+      notify(`Utilisateur n'a pas été trouver dans la liste actuel`, {
+        type: "error",
+      });
+      return;
+    }
+    toggleIsPresent(true, dataFromList);
     notify(
       `L'utilisateur ${parseData.firstName} ${parseData.lastName} a été marqué present`,
       { type: "success" }

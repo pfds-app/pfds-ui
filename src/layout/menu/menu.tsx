@@ -9,7 +9,6 @@ import {
   LocalAtm,
   Celebration,
   Search,
-  ReceiptLong,
   Apartment,
 } from "@mui/icons-material";
 import { Menu as RaMenu, useSidebarState, useTranslate } from "react-admin";
@@ -134,11 +133,6 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             to="/activities"
             primaryText={translate("custom.menu.activity")}
             leftIcon={<Celebration />}
-          />
-          <RaMenu.Item
-            to="/history"
-            primaryText={translate("custom.menu.history")}
-            leftIcon={<ReceiptLong />}
           />
           <RaMenu.Item
             to="/search"
