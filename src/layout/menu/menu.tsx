@@ -17,6 +17,8 @@ import { FC, useEffect } from "react";
 
 import { usePalette } from "@/common/hooks";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
+import { ShowIfRole } from "@/security/components";
+import { UserRoleEnum } from "@/gen/jfds-api-client";
 
 const MENU_SX: SxProps = {
   "top": "68px",
@@ -104,16 +106,18 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             primaryText={translate("custom.menu.stats")}
             leftIcon={<SignalCellularAlt />}
           />
-          <RaMenu.Item
-            to="/creations"
-            primaryText={translate("custom.menu.creation")}
-            leftIcon={<AutoGraph />}
-          />
-          <RaMenu.Item
-            to="/herivelona"
-            primaryText={translate("custom.menu.herivelona")}
-            leftIcon={<PersonAdd />}
-          />
+          <ShowIfRole roles={[UserRoleEnum.Admin]}>
+            <RaMenu.Item
+              to="/creations"
+              primaryText={translate("custom.menu.creation")}
+              leftIcon={<AutoGraph />}
+            />
+            <RaMenu.Item
+              to="/herivelona"
+              primaryText={translate("custom.menu.herivelona")}
+              leftIcon={<PersonAdd />}
+            />
+          </ShowIfRole>
           <RaMenu.Item
             to="/ledger"
             primaryText={translate("custom.menu.caisse")}
@@ -124,11 +128,13 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             primaryText={translate("custom.menu.presence")}
             leftIcon={<AssignmentTurnedIn />}
           />
-          <RaMenu.Item
-            to="/fitadiavam-bola"
-            primaryText={translate("custom.menu.fitadiavamBola")}
-            leftIcon={<LocalAtm />}
-          />
+          <ShowIfRole roles={[UserRoleEnum.Admin]}>
+            <RaMenu.Item
+              to="/fitadiavam-bola"
+              primaryText={translate("custom.menu.fitadiavamBola")}
+              leftIcon={<LocalAtm />}
+            />
+          </ShowIfRole>
           <RaMenu.Item
             to="/activities"
             primaryText={translate("custom.menu.activity")}

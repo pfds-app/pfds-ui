@@ -11,10 +11,12 @@ import {
   ReferenceInput,
   Button,
   useTranslate,
+  useListContext,
+  useListFilterContext,
 } from "react-admin";
 import { User } from "@/gen/jfds-api-client";
 import { useFormContext } from "react-hook-form";
-import { useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import {
   BoxPaperTitled,
@@ -25,10 +27,13 @@ import { List, TranslatedEnumTextField } from "@/common/components/list";
 import { createImageUrl } from "@/providers";
 import { USER_GENDER_CHOICES } from "../profile/utils/gender-choices";
 import { USER_ROLE_CHOICES } from "../profile/utils/role-choices";
+import { StateSetter } from "@/common/utils/types";
+import { stringifyObj } from "@/common/utils/stringify-obj";
 
 export const SearchPage = () => {
   const translate = useTranslate();
   const [filters, setFilters] = useState({});
+  const [listCount, setListCount] = useState(0);
 
   const updateSearchFilter = (newFilterValue: Partial<User>) => {
     setFilters(newFilterValue);
@@ -123,10 +128,10 @@ export const SearchPage = () => {
             </ReferenceInput>
           </SimpleForm>
         </BoxPaperTitled>
-        <BoxPaperTitled title={translate("resources.user.name")}>
+        <BoxPaperTitled title={`${translate("resources.user.name")} ${translate("custom.common.found")} ${listCount}`}>
           <List
-            filter={filters}
             resource="user"
+            filter={filters}
             datagridProps={{
               rowClick: "show",
             }}
@@ -134,10 +139,13 @@ export const SearchPage = () => {
             <FunctionField
               label=" "
               render={(user: User) => (
-                <Avatar
-                  src={createImageUrl(user.photo ?? "")}
-                  sx={{ width: "35px", height: "35px" }}
-                />
+                <>
+                  <Avatar
+                    src={createImageUrl(user.photo ?? "")}
+                    sx={{ width: "35px", height: "35px" }}
+                  />
+                  <ListCountUpdated listCount={listCount} setListCount={setListCount} />
+                </>
               )}
             />
             <TextField sortable={false} source="lastName" />
@@ -156,6 +164,7 @@ export const SearchPage = () => {
 const ClearButton = () => {
   const translate = useTranslate();
   const { reset } = useFormContext();
+
   return (
     <Button
       size="small"
@@ -167,3 +176,14 @@ const ClearButton = () => {
     />
   );
 };
+
+const ListCountUpdated: FC<{ listCount: number, setListCount: StateSetter<number> }> = ({ listCount, setListCount }) => {
+  const { data = [] } = useListContext();
+  const { filterValues } = useListFilterContext();
+
+  useEffect(() => {
+    setListCount(data.length)
+  }, [stringifyObj(filterValues)]);
+
+  return null;
+}
