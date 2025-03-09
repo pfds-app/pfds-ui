@@ -17,7 +17,7 @@ import { FC, useLayoutEffect } from "react";
 import { BoxPaperTitled, RequiredWhen } from "@/common/components";
 import { Create } from "@/common/components/create";
 import { CreateUserPayload, UserSaveOrUpdateActionType } from "@/providers";
-import { User, UserRoleEnum } from "@/gen/jfds-api-client";
+import { Sacrament, User, UserRoleEnum } from "@/gen/jfds-api-client";
 import { createTranform } from "@/common/utils/transform";
 import { confirmPasswordValidator } from "@/common/input-validator/password";
 import { USER_GENDER_CHOICES } from "../profile/utils/gender-choices";
@@ -29,13 +29,15 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
     photo,
     responsability,
     association,
+    sacrament,
     region,
     committee,
     ...createUser
   }: Omit<User, "id" | "photo" | "createdAt" | "updatedAt"> & {
     photo: { rawFile: any };
     password: string;
-  }): CreateUserPayload => {
+    sacrament?: Sacrament;
+  }): CreateUserPayload & { sacramentId?: string } => {
     return createTranform({
       ...createUser,
       photo: photo?.rawFile,
@@ -43,6 +45,7 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
       responsabilityId: responsability?.id,
       committeeId: committee?.id,
       associationId: association?.id,
+      sacramentId: sacrament?.id,
     });
   };
 
@@ -116,6 +119,7 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
             validate={required()}
           />
           <SelectInput
+            readOnly
             translateChoice
             defaultValue={role}
             source="role"
@@ -131,11 +135,19 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
               label={translate("resources.responsability.name")}
             />
           </ReferenceInput>
+          <ReferenceInput reference="sacrament" source="sacrament.id">
+            <SelectInput
+              fullWidth
+              optionText="name"
+              label={translate("resources.sacrament.name")}
+            />
+          </ReferenceInput>
           <ReferenceInput reference="region" source="region.id">
             <SelectInput
               fullWidth
-              label={translate("resources.region.name")}
+              validate={required()}
               optionText="name"
+              label={translate("resources.region.name")}
             />
           </ReferenceInput>
           <ReferenceInput reference="association" source="association.id">

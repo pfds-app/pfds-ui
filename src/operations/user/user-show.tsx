@@ -16,9 +16,11 @@ import { createImageUrl } from "@/providers";
 
 const Label = ({ label }: { label: string }) => {
   return (
-    <Typography sx={{ fontSize: "14px", fontWeight: "bold" }}>{label}</Typography>
-  )
-}
+    <Typography sx={{ fontSize: "14px", fontWeight: "bold" }}>
+      {label}
+    </Typography>
+  );
+};
 export const UserShow = () => {
   const { id } = useParams();
   const translate = useTranslate();
@@ -67,14 +69,38 @@ export const UserShow = () => {
           <Typography sx={{ fontWeight: "bold", opacity: 0.85 }}>
             Informations
           </Typography>
-          <TextField source="username" label={<Label label={translate("resources.user.fields.username")} />} />
-          <TextField source="firstName" label={<Label label={translate("resources.user.fields.firstName")} />} />
-          <TextField source="lastName" label={<Label label={translate("resources.user.fields.lastName")} />} />
-          <DateField source="birthDate" label={<Label label={translate("resources.user.fields.birthDate")} />} />
+          <TextField
+            source="username"
+            label={
+              <Label label={translate("resources.user.fields.username")} />
+            }
+          />
+          <TextField
+            source="firstName"
+            label={
+              <Label label={translate("resources.user.fields.firstName")} />
+            }
+          />
+          <TextField
+            source="lastName"
+            label={
+              <Label label={translate("resources.user.fields.lastName")} />
+            }
+          />
+          <DateField
+            source="birthDate"
+            label={
+              <Label label={translate("resources.user.fields.birthDate")} />
+            }
+          />
           <TranslatedEnumTextField
             source="role"
             label={<Label label={translate("resources.user.fields.role")} />}
             enumLocalSuffix="custom.enum.user_role"
+          />
+          <TextField
+            source="sacrament.name"
+            label={<Label label={translate("resources.sacrament.name")} />}
           />
         </SimpleShowLayout>
       </FlexBox>
@@ -82,14 +108,19 @@ export const UserShow = () => {
         <Box sx={{ flex: 1 }}>
           <FlexBox sx={{ width: "100%" }}>
             <SimpleShowLayout>
-              <TextField source="address"
-                label={<Label label={translate("resources.user.fields.address")} />}
+              <TextField
+                source="address"
+                label={
+                  <Label label={translate("resources.user.fields.address")} />
+                }
               />
             </SimpleShowLayout>
             <SimpleShowLayout>
               <TranslatedEnumTextField
                 source="gender"
-                label={<Label label={translate("resources.user.fields.gender")} />}
+                label={
+                  <Label label={translate("resources.user.fields.gender")} />
+                }
                 enumLocalSuffix="custom.enum.user_gender"
               />
             </SimpleShowLayout>
@@ -97,7 +128,9 @@ export const UserShow = () => {
           <FlexBox sx={{ width: "100%" }}>
             <SimpleShowLayout>
               <TextField
-                label={<Label label={translate("resources.responsability.name")} />}
+                label={
+                  <Label label={translate("resources.responsability.name")} />
+                }
                 source="responsability.name"
               />
             </SimpleShowLayout>
@@ -112,12 +145,14 @@ export const UserShow = () => {
         <Box sx={{ flex: 1 }}>
           <FlexBox sx={{ width: "100%" }}>
             <SimpleShowLayout>
-              <TextField source="nic" 
+              <TextField
+                source="nic"
                 label={<Label label={translate("resources.user.fields.nic")} />}
               />
             </SimpleShowLayout>
             <SimpleShowLayout>
-              <TextField source="apv" 
+              <TextField
+                source="apv"
                 label={<Label label={translate("resources.user.fields.apv")} />}
               />
             </SimpleShowLayout>
@@ -131,7 +166,9 @@ export const UserShow = () => {
             </SimpleShowLayout>
             <SimpleShowLayout>
               <TextField
-                label={<Label label={translate("resources.association.name")} />}
+                label={
+                  <Label label={translate("resources.association.name")} />
+                }
                 source="association.name"
               />
             </SimpleShowLayout>

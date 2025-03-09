@@ -5,13 +5,13 @@ import { getObjValue } from "@/common/utils/get-obj-value";
 export type TranslatedEnumTextFieldProps = {
   enumLocalSuffix: string;
   source: string;
-  label?: any
+  label?: any;
 };
 
 export const TranslatedEnumTextField: FC<TranslatedEnumTextFieldProps> = ({
   source,
   enumLocalSuffix,
-  label
+  label,
 }) => {
   const translate = useTranslate();
 

@@ -50,7 +50,9 @@ export const ActivityCreate = () => {
             translateChoice
             label=""
             source="roleType"
-            choices={ACTIVITY_ROLE_CHOICES.filter(r => role === UserRoleEnum.Admin ? true : (r.id !== "MANAGER"))}
+            choices={ACTIVITY_ROLE_CHOICES.filter((r) =>
+              role === UserRoleEnum.Admin ? true : r.id !== "MANAGER"
+            )}
             validate={required()}
           />
         </Box>

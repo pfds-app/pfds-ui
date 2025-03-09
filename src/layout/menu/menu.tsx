@@ -10,6 +10,7 @@ import {
   Celebration,
   Search,
   Apartment,
+  Update,
 } from "@mui/icons-material";
 import { Menu as RaMenu, useSidebarState, useTranslate } from "react-admin";
 import { Box, SxProps, Drawer, useTheme, useMediaQuery } from "@mui/material";
@@ -106,12 +107,21 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             primaryText={translate("custom.menu.stats")}
             leftIcon={<SignalCellularAlt />}
           />
-          <ShowIfRole roles={[UserRoleEnum.Admin]}>
+          <ShowIfRole roles={[UserRoleEnum.Admin, UserRoleEnum.RegionManager]}>
             <RaMenu.Item
               to="/creations"
               primaryText={translate("custom.menu.creation")}
               leftIcon={<AutoGraph />}
             />
+          </ShowIfRole>
+          <ShowIfRole
+            roles={[
+              UserRoleEnum.Admin,
+              UserRoleEnum.RegionManager,
+              UserRoleEnum.CommitteeManager,
+              UserRoleEnum.AssociationManager,
+            ]}
+          >
             <RaMenu.Item
               to="/herivelona"
               primaryText={translate("custom.menu.herivelona")}
@@ -139,6 +149,11 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             to="/activities"
             primaryText={translate("custom.menu.activity")}
             leftIcon={<Celebration />}
+          />
+          <RaMenu.Item
+            to="/history"
+            primaryText={translate("custom.menu.history")}
+            leftIcon={<Update />}
           />
           <RaMenu.Item
             to="/search"

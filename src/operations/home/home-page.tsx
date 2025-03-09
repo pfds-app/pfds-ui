@@ -1,5 +1,6 @@
 import { Avatar, Badge, Typography } from "@mui/material";
 import { FunctionField, useTranslate } from "react-admin";
+import { Event as EventIcon } from "@mui/icons-material";
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 
@@ -51,6 +52,7 @@ export const HomePage = () => {
                   <Typography
                     sx={{ fontSize: "14px", display: "inline-flex", gap: 2 }}
                   >
+                    <EventIcon />
                     <span>{activity.name}</span>
                     {isToday && (
                       <span style={{ color: "green" }}>
@@ -91,6 +93,7 @@ export const HomePage = () => {
                   <Typography
                     sx={{ fontSize: "14px", display: "inline-flex", gap: 2 }}
                   >
+                    <EventIcon />
                     <span>{event.name}</span>
                     {isToday && (
                       <span style={{ color: "green" }}>

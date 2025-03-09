@@ -136,8 +136,8 @@ export const PresencePage = () => {
               activityId: filter.activityId,
               isPresent:
                 view === View.LIST &&
-                  filter.type !== undefined &&
-                  filter.type !== null
+                filter.type !== undefined &&
+                filter.type !== null
                   ? filter.type === PresenceTypeEnum.PRESENT
                   : undefined,
             }}

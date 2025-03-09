@@ -20,6 +20,7 @@ import { authProvider, dataProvider } from "./providers";
 import { i18nProvider } from "./providers/i18n";
 import { jfdsLightTheme } from "./themes";
 import "@/common/components/charts/setup";
+import { HistoryPage } from "./operations/history";
 
 export const Dashboard = () => {
   return (
@@ -61,6 +62,7 @@ export const Dashboard = () => {
         <Route path="/activities" element={<ActivityPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/presence" element={<PresencePage />} />
+        <Route path="/history" element={<HistoryPage />} />
       </CustomRoutes>
     </Admin>
   );

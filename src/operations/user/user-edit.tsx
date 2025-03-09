@@ -121,9 +121,17 @@ export const UserEdit: FC<{ user: User }> = ({ user }) => {
           label={translate("resources.responsability.name")}
         />
       </ReferenceInput>
+      <ReferenceInput reference="sacrament" source="sacrament.id">
+        <SelectInput
+          fullWidth
+          optionText="name"
+          label={translate("resources.sacrament.name")}
+        />
+      </ReferenceInput>
       <ReferenceInput reference="region" source="region.id">
         <SelectInput
           fullWidth
+          validate={required()}
           label={translate("resources.region.name")}
           optionText="name"
         />
