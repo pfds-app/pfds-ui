@@ -2,6 +2,7 @@ import { ResourceProvider } from "@rck.princy/ra-data-provider-wrapper";
 import { CreateUser, UpdateUser, User } from "@/gen/jfds-api-client";
 import { unwrap } from "./utils";
 import { usersApi } from "./api";
+import { getAxios } from "@/conf/axios";
 
 export enum UserSaveOrUpdateActionType {
   UPDATE = "UPDATE",
@@ -25,7 +26,13 @@ export const userProvider: ResourceProvider<User> = {
   getOne: async ({ id }) => {
     return unwrap(() => usersApi().getUserById(id));
   },
-  delete: ({ id }) => {
+  delete: ({ id, meta }) => {
+    console.log(meta);
+    if (meta?.isDeletedRole) {
+      return unwrap(
+        async () => await getAxios().delete<User>(`/users/${id}/role`)
+      );
+    }
     return unwrap(() => usersApi().deleteUserById(id));
   },
   getList: async ({ filter = {}, pagination: { perPage, page } }) => {

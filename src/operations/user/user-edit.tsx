@@ -107,6 +107,7 @@ export const UserEdit: FC<{ user: User }> = ({ user }) => {
         validate={required()}
       />
       <SelectInput
+        readOnly
         translateChoice
         source="role"
         sx={{ mb: "8px" }}

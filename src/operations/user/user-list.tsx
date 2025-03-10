@@ -69,7 +69,15 @@ export const UserListContent: FC<{ role: UserRoleEnum }> = ({ role }) => {
                       doEdit(user);
                     }}
                   />
-                  <DeleteButton resource="user" id={user.id} />
+                  <DeleteButton
+                    meta={
+                      role === UserRoleEnum.SimpleUser
+                        ? undefined
+                        : { isDeletedRole: true }
+                    }
+                    resource="user"
+                    id={user.id}
+                  />
                 </FlexBox>
               </>
             )}

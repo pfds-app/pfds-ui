@@ -28,7 +28,6 @@ import { createImageUrl } from "@/providers";
 import { USER_GENDER_CHOICES } from "../profile/utils/gender-choices";
 import { USER_ROLE_CHOICES } from "../profile/utils/role-choices";
 import { StateSetter } from "@/common/utils/types";
-import { stringifyObj } from "@/common/utils/stringify-obj";
 import { ShowIfRole } from "@/security/components";
 
 export const SearchPage = () => {
@@ -190,7 +189,7 @@ const ClearButton = () => {
 const ListCountUpdated: FC<{
   listCount: number;
   setListCount: StateSetter<number>;
-}> = ({ listCount, setListCount }) => {
+}> = ({ setListCount }) => {
   const { data = [] } = useListContext();
   const {} = useListFilterContext();
 
