@@ -227,6 +227,19 @@ export interface Committee {
 /**
  *
  * @export
+ * @interface Count
+ */
+export interface Count {
+  /**
+   *
+   * @type {number}
+   * @memberof Count
+   */
+  value: number;
+}
+/**
+ *
+ * @export
  * @interface CreatePresence
  */
 export interface CreatePresence {
@@ -374,6 +387,12 @@ export interface CreateUser {
    * @type {string}
    * @memberof CreateUser
    */
+  sacramentId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateUser
+   */
   password: string;
 }
 
@@ -444,6 +463,49 @@ export interface CrupdateTicket {
    */
   updatedAt: string;
 }
+/**
+ *
+ * @export
+ * @interface DeletedRole
+ */
+export interface DeletedRole {
+  /**
+   *
+   * @type {string}
+   * @memberof DeletedRole
+   */
+  id: string;
+  /**
+   *
+   * @type {string}
+   * @memberof DeletedRole
+   */
+  role: DeletedRoleRoleEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof DeletedRole
+   */
+  createdAt: string;
+  /**
+   *
+   * @type {User}
+   * @memberof DeletedRole
+   */
+  user: User;
+}
+
+export const DeletedRoleRoleEnum = {
+  Admin: "ADMIN",
+  RegionManager: "REGION_MANAGER",
+  CommitteeManager: "COMMITTEE_MANAGER",
+  AssociationManager: "ASSOCIATION_MANAGER",
+  SimpleUser: "SIMPLE_USER",
+} as const;
+
+export type DeletedRoleRoleEnum =
+  (typeof DeletedRoleRoleEnum)[keyof typeof DeletedRoleRoleEnum];
+
 /**
  *
  * @export
@@ -1054,6 +1116,12 @@ export interface SignupPayload {
    * @type {string}
    * @memberof SignupPayload
    */
+  sacramentId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SignupPayload
+   */
   password: string;
   /**
    *
@@ -1293,6 +1361,12 @@ export interface UpdateUser {
    * @memberof UpdateUser
    */
   associationId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateUser
+   */
+  sacramentId?: string;
 }
 
 export const UpdateUserGenderEnum = {
@@ -1446,6 +1520,12 @@ export interface User {
    * @memberof User
    */
   association?: Association;
+  /**
+   *
+   * @type {Sacrament}
+   * @memberof User
+   */
+  sacrament?: Sacrament;
 }
 
 export const UserGenderEnum = {
@@ -1610,6 +1690,12 @@ export interface Whoami {
    * @memberof Whoami
    */
   association?: Association;
+  /**
+   *
+   * @type {Sacrament}
+   * @memberof Whoami
+   */
+  sacrament?: Sacrament;
   /**
    *
    * @type {string}
@@ -2591,6 +2677,10 @@ export const MoneysApiAxiosParamCreator = function (
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (year !== undefined) {
         localVarQueryParameter["year"] = year;
@@ -5384,6 +5474,10 @@ export const ResourcesApiAxiosParamCreator = function (
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
         baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -5426,6 +5520,10 @@ export const ResourcesApiAxiosParamCreator = function (
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (page !== undefined) {
         localVarQueryParameter["page"] = page;
@@ -5481,6 +5579,10 @@ export const ResourcesApiAxiosParamCreator = function (
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
         baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -5525,6 +5627,10 @@ export const ResourcesApiAxiosParamCreator = function (
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (name !== undefined) {
         localVarQueryParameter["name"] = name;
@@ -5772,6 +5878,10 @@ export const ResourcesApiAxiosParamCreator = function (
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
         baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -5816,6 +5926,10 @@ export const ResourcesApiAxiosParamCreator = function (
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (name !== undefined) {
         localVarQueryParameter["name"] = name;
@@ -5874,6 +5988,10 @@ export const ResourcesApiAxiosParamCreator = function (
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
       if (name !== undefined) {
         localVarQueryParameter["name"] = name;
       }
@@ -5931,6 +6049,10 @@ export const ResourcesApiAxiosParamCreator = function (
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -8722,6 +8844,67 @@ export const UsersApiAxiosParamCreator = function (
     /**
      *
      * @summary
+     * @param {FindDeletedRolesRoleEnum} [role]
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findDeletedRoles: async (
+      role?: FindDeletedRolesRoleEnum,
+      page?: number,
+      pageSize?: number,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/deleted-roles`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (role !== undefined) {
+        localVarQueryParameter["role"] = role;
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameter["page"] = page;
+      }
+
+      if (pageSize !== undefined) {
+        localVarQueryParameter["pageSize"] = pageSize;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
      * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -8736,6 +8919,49 @@ export const UsersApiAxiosParamCreator = function (
         `{${"id"}}`,
         encodeURIComponent(String(id))
       );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserMemberCount: async (
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/users-member-count`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -8800,6 +9026,10 @@ export const UsersApiAxiosParamCreator = function (
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
       if (fromDate !== undefined) {
         localVarQueryParameter["fromDate"] =
           (fromDate as any) instanceof Date
@@ -8835,16 +9065,18 @@ export const UsersApiAxiosParamCreator = function (
     /**
      *
      * @summary
+     * @param {string} [q]
      * @param {GetUsersRoleEnum} [role]
      * @param {string} [nic]
      * @param {string} [apv]
      * @param {string} [lastName]
      * @param {string} [firstName]
      * @param {string} [username]
+     * @param {string} [responsabilityId]
+     * @param {string} [sacramentId]
      * @param {string} [regionId]
      * @param {string} [committeeId]
      * @param {string} [associationId]
-     * @param {string} [responsabilityId]
      * @param {GetUsersGenderEnum} [gender]
      * @param {number} [page]
      * @param {number} [pageSize]
@@ -8852,16 +9084,18 @@ export const UsersApiAxiosParamCreator = function (
      * @throws {RequiredError}
      */
     getUsers: async (
+      q?: string,
       role?: GetUsersRoleEnum,
       nic?: string,
       apv?: string,
       lastName?: string,
       firstName?: string,
       username?: string,
+      responsabilityId?: string,
+      sacramentId?: string,
       regionId?: string,
       committeeId?: string,
       associationId?: string,
-      responsabilityId?: string,
       gender?: GetUsersGenderEnum,
       page?: number,
       pageSize?: number,
@@ -8887,6 +9121,10 @@ export const UsersApiAxiosParamCreator = function (
       // http bearer authentication required
       await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
+      if (q !== undefined) {
+        localVarQueryParameter["q"] = q;
+      }
+
       if (role !== undefined) {
         localVarQueryParameter["role"] = role;
       }
@@ -8911,6 +9149,14 @@ export const UsersApiAxiosParamCreator = function (
         localVarQueryParameter["username"] = username;
       }
 
+      if (responsabilityId !== undefined) {
+        localVarQueryParameter["responsabilityId"] = responsabilityId;
+      }
+
+      if (sacramentId !== undefined) {
+        localVarQueryParameter["sacramentId"] = sacramentId;
+      }
+
       if (regionId !== undefined) {
         localVarQueryParameter["regionId"] = regionId;
       }
@@ -8921,10 +9167,6 @@ export const UsersApiAxiosParamCreator = function (
 
       if (associationId !== undefined) {
         localVarQueryParameter["associationId"] = associationId;
-      }
-
-      if (responsabilityId !== undefined) {
-        localVarQueryParameter["responsabilityId"] = responsabilityId;
       }
 
       if (gender !== undefined) {
@@ -9018,17 +9260,24 @@ export const UsersApiAxiosParamCreator = function (
     /**
      *
      * @summary
+     * @param {string} id
      * @param {UpdateUser} updateUser
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     updateUserInfo: async (
+      id: string,
       updateUser: UpdateUser,
       options: RawAxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists("updateUserInfo", "id", id);
       // verify required parameter 'updateUser' is not null or undefined
       assertParamExists("updateUserInfo", "updateUser", updateUser);
-      const localVarPath = `/users/infos`;
+      const localVarPath = `/users/{id}/infos`.replace(
+        `{${"id"}}`,
+        encodeURIComponent(String(id))
+      );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -9043,6 +9292,10 @@ export const UsersApiAxiosParamCreator = function (
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       localVarHeaderParameter["Content-Type"] = "application/json";
 
@@ -9138,6 +9391,46 @@ export const UsersApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary
+     * @param {FindDeletedRolesRoleEnum} [role]
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async findDeletedRoles(
+      role?: FindDeletedRolesRoleEnum,
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<DeletedRole>>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.findDeletedRoles(
+          role,
+          page,
+          pageSize,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["UsersApi.findDeletedRoles"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
      * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -9155,6 +9448,32 @@ export const UsersApiFp = function (configuration?: Configuration) {
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap["UsersApi.getUserById"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getUserMemberCount(
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Count>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getUserMemberCount(options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["UsersApi.getUserMemberCount"]?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -9208,16 +9527,18 @@ export const UsersApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary
+     * @param {string} [q]
      * @param {GetUsersRoleEnum} [role]
      * @param {string} [nic]
      * @param {string} [apv]
      * @param {string} [lastName]
      * @param {string} [firstName]
      * @param {string} [username]
+     * @param {string} [responsabilityId]
+     * @param {string} [sacramentId]
      * @param {string} [regionId]
      * @param {string} [committeeId]
      * @param {string} [associationId]
-     * @param {string} [responsabilityId]
      * @param {GetUsersGenderEnum} [gender]
      * @param {number} [page]
      * @param {number} [pageSize]
@@ -9225,16 +9546,18 @@ export const UsersApiFp = function (configuration?: Configuration) {
      * @throws {RequiredError}
      */
     async getUsers(
+      q?: string,
       role?: GetUsersRoleEnum,
       nic?: string,
       apv?: string,
       lastName?: string,
       firstName?: string,
       username?: string,
+      responsabilityId?: string,
+      sacramentId?: string,
       regionId?: string,
       committeeId?: string,
       associationId?: string,
-      responsabilityId?: string,
       gender?: GetUsersGenderEnum,
       page?: number,
       pageSize?: number,
@@ -9243,16 +9566,18 @@ export const UsersApiFp = function (configuration?: Configuration) {
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<User>>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getUsers(
+        q,
         role,
         nic,
         apv,
         lastName,
         firstName,
         username,
+        responsabilityId,
+        sacramentId,
         regionId,
         committeeId,
         associationId,
-        responsabilityId,
         gender,
         page,
         pageSize,
@@ -9306,17 +9631,20 @@ export const UsersApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary
+     * @param {string} id
      * @param {UpdateUser} updateUser
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async updateUserInfo(
+      id: string,
       updateUser: UpdateUser,
       options?: RawAxiosRequestConfig
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserInfo(
+        id,
         updateUser,
         options
       );
@@ -9380,6 +9708,25 @@ export const UsersApiFactory = function (
     /**
      *
      * @summary
+     * @param {FindDeletedRolesRoleEnum} [role]
+     * @param {number} [page]
+     * @param {number} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findDeletedRoles(
+      role?: FindDeletedRolesRoleEnum,
+      page?: number,
+      pageSize?: number,
+      options?: RawAxiosRequestConfig
+    ): AxiosPromise<Array<DeletedRole>> {
+      return localVarFp
+        .findDeletedRoles(role, page, pageSize, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
      * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -9390,6 +9737,17 @@ export const UsersApiFactory = function (
     ): AxiosPromise<User> {
       return localVarFp
         .getUserById(id, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserMemberCount(options?: RawAxiosRequestConfig): AxiosPromise<Count> {
+      return localVarFp
+        .getUserMemberCount(options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -9414,16 +9772,18 @@ export const UsersApiFactory = function (
     /**
      *
      * @summary
+     * @param {string} [q]
      * @param {GetUsersRoleEnum} [role]
      * @param {string} [nic]
      * @param {string} [apv]
      * @param {string} [lastName]
      * @param {string} [firstName]
      * @param {string} [username]
+     * @param {string} [responsabilityId]
+     * @param {string} [sacramentId]
      * @param {string} [regionId]
      * @param {string} [committeeId]
      * @param {string} [associationId]
-     * @param {string} [responsabilityId]
      * @param {GetUsersGenderEnum} [gender]
      * @param {number} [page]
      * @param {number} [pageSize]
@@ -9431,16 +9791,18 @@ export const UsersApiFactory = function (
      * @throws {RequiredError}
      */
     getUsers(
+      q?: string,
       role?: GetUsersRoleEnum,
       nic?: string,
       apv?: string,
       lastName?: string,
       firstName?: string,
       username?: string,
+      responsabilityId?: string,
+      sacramentId?: string,
       regionId?: string,
       committeeId?: string,
       associationId?: string,
-      responsabilityId?: string,
       gender?: GetUsersGenderEnum,
       page?: number,
       pageSize?: number,
@@ -9448,16 +9810,18 @@ export const UsersApiFactory = function (
     ): AxiosPromise<Array<User>> {
       return localVarFp
         .getUsers(
+          q,
           role,
           nic,
           apv,
           lastName,
           firstName,
           username,
+          responsabilityId,
+          sacramentId,
           regionId,
           committeeId,
           associationId,
-          responsabilityId,
           gender,
           page,
           pageSize,
@@ -9485,16 +9849,18 @@ export const UsersApiFactory = function (
     /**
      *
      * @summary
+     * @param {string} id
      * @param {UpdateUser} updateUser
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     updateUserInfo(
+      id: string,
       updateUser: UpdateUser,
       options?: RawAxiosRequestConfig
     ): AxiosPromise<User> {
       return localVarFp
-        .updateUserInfo(updateUser, options)
+        .updateUserInfo(id, updateUser, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -9538,6 +9904,27 @@ export class UsersApi extends BaseAPI {
   /**
    *
    * @summary
+   * @param {FindDeletedRolesRoleEnum} [role]
+   * @param {number} [page]
+   * @param {number} [pageSize]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UsersApi
+   */
+  public findDeletedRoles(
+    role?: FindDeletedRolesRoleEnum,
+    page?: number,
+    pageSize?: number,
+    options?: RawAxiosRequestConfig
+  ) {
+    return UsersApiFp(this.configuration)
+      .findDeletedRoles(role, page, pageSize, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
    * @param {string} id
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
@@ -9546,6 +9933,19 @@ export class UsersApi extends BaseAPI {
   public getUserById(id: string, options?: RawAxiosRequestConfig) {
     return UsersApiFp(this.configuration)
       .getUserById(id, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UsersApi
+   */
+  public getUserMemberCount(options?: RawAxiosRequestConfig) {
+    return UsersApiFp(this.configuration)
+      .getUserMemberCount(options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -9573,16 +9973,18 @@ export class UsersApi extends BaseAPI {
   /**
    *
    * @summary
+   * @param {string} [q]
    * @param {GetUsersRoleEnum} [role]
    * @param {string} [nic]
    * @param {string} [apv]
    * @param {string} [lastName]
    * @param {string} [firstName]
    * @param {string} [username]
+   * @param {string} [responsabilityId]
+   * @param {string} [sacramentId]
    * @param {string} [regionId]
    * @param {string} [committeeId]
    * @param {string} [associationId]
-   * @param {string} [responsabilityId]
    * @param {GetUsersGenderEnum} [gender]
    * @param {number} [page]
    * @param {number} [pageSize]
@@ -9591,16 +9993,18 @@ export class UsersApi extends BaseAPI {
    * @memberof UsersApi
    */
   public getUsers(
+    q?: string,
     role?: GetUsersRoleEnum,
     nic?: string,
     apv?: string,
     lastName?: string,
     firstName?: string,
     username?: string,
+    responsabilityId?: string,
+    sacramentId?: string,
     regionId?: string,
     committeeId?: string,
     associationId?: string,
-    responsabilityId?: string,
     gender?: GetUsersGenderEnum,
     page?: number,
     pageSize?: number,
@@ -9608,16 +10012,18 @@ export class UsersApi extends BaseAPI {
   ) {
     return UsersApiFp(this.configuration)
       .getUsers(
+        q,
         role,
         nic,
         apv,
         lastName,
         firstName,
         username,
+        responsabilityId,
+        sacramentId,
         regionId,
         committeeId,
         associationId,
-        responsabilityId,
         gender,
         page,
         pageSize,
@@ -9648,21 +10054,35 @@ export class UsersApi extends BaseAPI {
   /**
    *
    * @summary
+   * @param {string} id
    * @param {UpdateUser} updateUser
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UsersApi
    */
   public updateUserInfo(
+    id: string,
     updateUser: UpdateUser,
     options?: RawAxiosRequestConfig
   ) {
     return UsersApiFp(this.configuration)
-      .updateUserInfo(updateUser, options)
+      .updateUserInfo(id, updateUser, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }
 
+/**
+ * @export
+ */
+export const FindDeletedRolesRoleEnum = {
+  Admin: "ADMIN",
+  RegionManager: "REGION_MANAGER",
+  CommitteeManager: "COMMITTEE_MANAGER",
+  AssociationManager: "ASSOCIATION_MANAGER",
+  SimpleUser: "SIMPLE_USER",
+} as const;
+export type FindDeletedRolesRoleEnum =
+  (typeof FindDeletedRolesRoleEnum)[keyof typeof FindDeletedRolesRoleEnum];
 /**
  * @export
  */

@@ -6,6 +6,7 @@ import {
   PasswordInput,
   SelectInput,
   TextInput,
+  SelectInputProps,
   minLength,
   required,
   useTranslate,
@@ -14,21 +15,28 @@ import { Box } from "@mui/material";
 import { useFormContext } from "react-hook-form";
 import { FC, useLayoutEffect } from "react";
 
-import { BoxPaperTitled, RequiredWhen } from "@/common/components";
+import {
+  BoxPaperTitled,
+  PassPropsIfRole,
+  RequiredWhen,
+} from "@/common/components";
 import { Create } from "@/common/components/create";
 import { CreateUserPayload, UserSaveOrUpdateActionType } from "@/providers";
 import { User, UserRoleEnum } from "@/gen/jfds-api-client";
 import { createTranform } from "@/common/utils/transform";
 import { confirmPasswordValidator } from "@/common/input-validator/password";
+import { useWhoami } from "@/security/hooks";
 import { USER_GENDER_CHOICES } from "../profile/utils/gender-choices";
 import { USER_ROLE_CHOICES } from "../profile/utils/role-choices";
 
 export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
   const translate = useTranslate();
+  const whoami = useWhoami();
   const transform = ({
     photo,
     responsability,
     association,
+    sacrament,
     region,
     committee,
     ...createUser
@@ -43,6 +51,7 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
       responsabilityId: responsability?.id,
       committeeId: committee?.id,
       associationId: association?.id,
+      sacramentId: sacrament?.id,
     });
   };
 
@@ -115,14 +124,26 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
             choices={USER_GENDER_CHOICES}
             validate={required()}
           />
-          <SelectInput
-            translateChoice
-            defaultValue={role}
-            source="role"
-            sx={{ mb: "8px" }}
-            label={translate("resources.user.fields.role")}
-            choices={USER_ROLE_CHOICES}
-            validate={required()}
+          <PassPropsIfRole
+            readOnly
+            roles={[
+              UserRoleEnum.RegionManager,
+              UserRoleEnum.CommitteeManager,
+              UserRoleEnum.AssociationManager,
+              UserRoleEnum.SimpleUser,
+            ]}
+            render={(props) => (
+              <SelectInput
+                {...props}
+                defaultValue={role}
+                translateChoice
+                source="role"
+                sx={{ mb: "8px" }}
+                label={translate("resources.user.fields.role")}
+                choices={USER_ROLE_CHOICES}
+                validate={required()}
+              />
+            )}
           />
           <ReferenceInput reference="responsability" source="responsability.id">
             <SelectInput
@@ -131,11 +152,32 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
               label={translate("resources.responsability.name")}
             />
           </ReferenceInput>
-          <ReferenceInput reference="region" source="region.id">
+          <ReferenceInput reference="sacrament" source="sacrament.id">
             <SelectInput
               fullWidth
-              label={translate("resources.region.name")}
               optionText="name"
+              label={translate("resources.sacrament.name")}
+            />
+          </ReferenceInput>
+          <ReferenceInput reference="region" source="region.id">
+            <PassPropsIfRole<SelectInputProps>
+              readOnly
+              defaultValue={whoami.region?.id}
+              roles={[
+                UserRoleEnum.RegionManager,
+                UserRoleEnum.AssociationManager,
+                UserRoleEnum.CommitteeManager,
+                UserRoleEnum.SimpleUser,
+              ]}
+              render={(props) => (
+                <SelectInput
+                  {...props}
+                  fullWidth
+                  validate={required()}
+                  optionText="name"
+                  label={translate("resources.region.name")}
+                />
+              )}
             />
           </ReferenceInput>
           <ReferenceInput reference="association" source="association.id">
@@ -145,11 +187,23 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
               enumPath="custom.enum.user_role"
               equals={[UserRoleEnum.AssociationManager]}
               render={(validators) => (
-                <SelectInput
-                  fullWidth
-                  validate={validators}
-                  label={translate("resources.association.name")}
-                  optionText="name"
+                <PassPropsIfRole<SelectInputProps>
+                  readOnly
+                  defaultValue={whoami.association?.id}
+                  roles={[
+                    UserRoleEnum.AssociationManager,
+                    UserRoleEnum.CommitteeManager,
+                    UserRoleEnum.SimpleUser,
+                  ]}
+                  render={(props) => (
+                    <SelectInput
+                      {...props}
+                      fullWidth
+                      validate={validators}
+                      label={translate("resources.association.name")}
+                      optionText="name"
+                    />
+                  )}
                 />
               )}
             />
@@ -161,11 +215,23 @@ export const UserCreate: FC<{ role: UserRoleEnum }> = ({ role }) => {
               enumPath="custom.enum.user_role"
               equals={[UserRoleEnum.CommitteeManager]}
               render={(validators) => (
-                <SelectInput
-                  fullWidth
-                  validate={validators}
-                  label={translate("resources.committee.name")}
-                  optionText="name"
+                <PassPropsIfRole<SelectInputProps>
+                  readOnly
+                  defaultValue={whoami.committee?.id}
+                  roles={[
+                    UserRoleEnum.CommitteeManager,
+                    UserRoleEnum.AssociationManager,
+                    UserRoleEnum.SimpleUser,
+                  ]}
+                  render={(props) => (
+                    <SelectInput
+                      {...props}
+                      fullWidth
+                      validate={validators}
+                      label={translate("resources.committee.name")}
+                      optionText="name"
+                    />
+                  )}
                 />
               )}
             />

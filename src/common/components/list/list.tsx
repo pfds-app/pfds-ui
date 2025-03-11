@@ -1,11 +1,12 @@
-import { Box, SxProps } from "@mui/material";
+import { Box, LinearProgress, SxProps } from "@mui/material";
 import {
   Datagrid,
   List as RaList,
   ListProps as RaListProps,
   DatagridProps,
+  useListContext,
 } from "react-admin";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 import { Pagination } from "./pagination";
 import { ListEmpty } from "./list-empty";
@@ -52,9 +53,10 @@ const alternateDatagridRowSx: DatagridProps["rowSx"] = (_record, index) => {
   };
 };
 
-export const List: FC<ListProps> = ({
+export const List: FC<ListProps & { listChildren?: ReactNode }> = ({
   children,
   datagridProps,
+  listChildren,
   sx = {},
   ...raListProps
 }) => {
@@ -78,6 +80,8 @@ export const List: FC<ListProps> = ({
       pagination={<Pagination />}
       {...raListProps}
     >
+      {listChildren}
+      <ListLoader />
       <Box sx={{ bgcolor, ...DATAGRID_WRAPPER_SX }}>
         <Datagrid
           rowClick={false}
@@ -91,4 +95,9 @@ export const List: FC<ListProps> = ({
       </Box>
     </RaList>
   );
+};
+
+const ListLoader = () => {
+  const { isLoading } = useListContext();
+  return isLoading ? <LinearProgress color="primary" /> : null;
 };

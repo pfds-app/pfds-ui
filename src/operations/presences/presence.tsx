@@ -26,7 +26,7 @@ import { useWatch } from "react-hook-form";
 import { useState, FC } from "react";
 
 import { List, TranslatedEnumTextField } from "@/common/components/list";
-import { PresenceStatus } from "@/gen/jfds-api-client";
+import { PresenceStatus, UserRoleEnum } from "@/gen/jfds-api-client";
 import {
   BoxPaperTitled,
   FlexBox,
@@ -43,6 +43,7 @@ import {
 import { StateSetter } from "@/common/utils/types";
 import { createTranform } from "@/common/utils/transform";
 import { ParsedQrValue } from "@/common/utils/to-qrcode-value";
+import { ShowIfRole } from "@/security/components";
 
 type Filter = {
   activityId: string;
@@ -257,14 +258,16 @@ const SelectAction: FC<{ view: View; setView: StateSetter<View> }> = ({
         label="custom.common.watch_presence"
         sx={{ marginBottom: 2, minWidth: "200px" }}
       />
-      <Button
-        size="large"
-        variant="contained"
-        color="success"
-        label="Faire la présence"
-        sx={{ marginBottom: 2, minWidth: "200px" }}
-        onClick={() => setView(View.UPDATE)}
-      />
+      <ShowIfRole roles={[UserRoleEnum.Admin]}>
+        <Button
+          size="large"
+          variant="contained"
+          color="success"
+          label="Faire la présence"
+          sx={{ marginBottom: 2, minWidth: "200px" }}
+          onClick={() => setView(View.UPDATE)}
+        />
+      </ShowIfRole>
     </>
   );
 };

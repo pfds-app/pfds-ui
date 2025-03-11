@@ -1,4 +1,9 @@
-import { FunctionField, TextField, useTranslate } from "react-admin";
+import {
+  FunctionField,
+  ShowButton,
+  TextField,
+  useTranslate,
+} from "react-admin";
 import { Avatar } from "@mui/material";
 import { FC, useState } from "react";
 
@@ -7,12 +12,13 @@ import { List, TranslatedEnumTextField } from "@/common/components/list";
 import { BoxPaperTitled, DialogContent, FlexBox } from "@/common/components";
 import { EditButton, DeleteButton } from "@/common/components/buttons";
 import { UserEdit } from "./user-edit";
-import { ShowIfRole } from "@/security/components";
 import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
-import { createImageUrl } from "@/providers";
+import { createImageUrl, DeleteUserActionType } from "@/providers";
+import { useRole } from "@/security/hooks";
+import { ShowIfRole } from "@/security/components";
 
 export const UserList: FC<{ role: UserRoleEnum }> = ({ role }) => {
   return (
@@ -23,6 +29,7 @@ export const UserList: FC<{ role: UserRoleEnum }> = ({ role }) => {
 };
 
 export const UserListContent: FC<{ role: UserRoleEnum }> = ({ role }) => {
+  const connectedRole = useRole();
   const { status, toggleStatus } = useDialogContext<false>();
   const [userToEdit, setUserToEdit] = useState<User | null>(null);
   const translate = useTranslate();
@@ -57,24 +64,62 @@ export const UserListContent: FC<{ role: UserRoleEnum }> = ({ role }) => {
           source="role"
           enumLocalSuffix="custom.enum.user_role"
         />
-        <ShowIfRole roles={[UserRoleEnum.Admin]}>
-          <FunctionField
-            label="Actions"
-            render={(user: User) => (
+        <FunctionField
+          label="Actions"
+          render={(user: User) => {
+            if (connectedRole === UserRoleEnum.SimpleUser) {
+              return <ShowButton />;
+            }
+
+            if (
+              user.role === UserRoleEnum.Admin &&
+              connectedRole !== UserRoleEnum.Admin
+            ) {
+              return <ShowButton />;
+            }
+
+            return (
               <>
                 <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
-                  <EditButton
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      doEdit(user);
+                  <ShowIfRole
+                    roles={[UserRoleEnum.Admin, UserRoleEnum.RegionManager]}
+                  >
+                    <EditButton
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        doEdit(user);
+                      }}
+                    />
+                  </ShowIfRole>
+                  <DeleteButton
+                    meta={{
+                      actionType: (() => {
+                        if (role !== UserRoleEnum.SimpleUser) {
+                          return DeleteUserActionType.ROLE;
+                        }
+                        switch (connectedRole) {
+                          case UserRoleEnum.Admin:
+                            return DeleteUserActionType.PERMANENT;
+                          case UserRoleEnum.RegionManager:
+                            return DeleteUserActionType.PERMANENT;
+                          case UserRoleEnum.AssociationManager:
+                            return DeleteUserActionType.FROM_ASSOCIATION;
+                          case UserRoleEnum.CommitteeManager:
+                            return DeleteUserActionType.FROM_COMMITEE;
+                          default:
+                            throw new Error("Invalid props");
+                        }
+                      })(),
                     }}
+                    previousData={user}
+                    resource="user"
+                    id={user.id}
                   />
-                  <DeleteButton resource="user" id={user.id} />
                 </FlexBox>
               </>
-            )}
-          />
-        </ShowIfRole>
+            );
+          }}
+        />
       </List>
       <DialogContent
         fullWidth

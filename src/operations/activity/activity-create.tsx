@@ -7,17 +7,18 @@ import {
 } from "react-admin";
 import { Box } from "@mui/material";
 
-import { Activity } from "@/gen/jfds-api-client";
+import { Activity, UserRoleEnum } from "@/gen/jfds-api-client";
 import { BoxPaperTitled } from "@/common/components";
 import { Create } from "@/common/components/create";
 import { createTranform } from "@/common/utils/transform";
 import { toISOString } from "@/common/utils/date";
-import { useWhoami } from "@/security/hooks";
+import { useRole, useWhoami } from "@/security/hooks";
 import { ACTIVITY_ROLE_CHOICES } from "./utils/activity_role_choies";
 
 export const ActivityCreate = () => {
   const translate = useTranslate();
   const whoami = useWhoami();
+  const role = useRole();
 
   const transform = (
     activity: Pick<
@@ -49,7 +50,9 @@ export const ActivityCreate = () => {
             translateChoice
             label=""
             source="roleType"
-            choices={ACTIVITY_ROLE_CHOICES}
+            choices={ACTIVITY_ROLE_CHOICES.filter((r) =>
+              role === UserRoleEnum.Admin ? true : r.id !== "MANAGER"
+            )}
             validate={required()}
           />
         </Box>

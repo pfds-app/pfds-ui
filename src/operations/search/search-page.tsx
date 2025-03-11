@@ -11,10 +11,13 @@ import {
   ReferenceInput,
   Button,
   useTranslate,
+  useListContext,
+  useListFilterContext,
+  useGetOne,
 } from "react-admin";
-import { User } from "@/gen/jfds-api-client";
+import { Count, User, UserRoleEnum } from "@/gen/jfds-api-client";
 import { useFormContext } from "react-hook-form";
-import { useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import {
   BoxPaperTitled,
@@ -25,10 +28,17 @@ import { List, TranslatedEnumTextField } from "@/common/components/list";
 import { createImageUrl } from "@/providers";
 import { USER_GENDER_CHOICES } from "../profile/utils/gender-choices";
 import { USER_ROLE_CHOICES } from "../profile/utils/role-choices";
+import { StateSetter } from "@/common/utils/types";
+import { ShowIfRole } from "@/security/components";
 
 export const SearchPage = () => {
   const translate = useTranslate();
   const [filters, setFilters] = useState({});
+  const [listCount, setListCount] = useState(0);
+  const { data: userCount } = useGetOne<Count & { id: string }>("user", {
+    id: "dummy",
+    meta: { isGetCount: true },
+  });
 
   const updateSearchFilter = (newFilterValue: Partial<User>) => {
     setFilters(newFilterValue);
@@ -100,13 +110,15 @@ export const SearchPage = () => {
                 label={translate("resources.responsability.name")}
               />
             </ReferenceInput>
-            <ReferenceInput reference="region" source="regionId">
-              <SelectInput
-                fullWidth
-                label={translate("resources.region.name")}
-                optionText="name"
-              />
-            </ReferenceInput>
+            <ShowIfRole roles={[UserRoleEnum.Admin]}>
+              <ReferenceInput reference="region" source="regionId">
+                <SelectInput
+                  fullWidth
+                  label={translate("resources.region.name")}
+                  optionText="name"
+                />
+              </ReferenceInput>
+            </ShowIfRole>
             <ReferenceInput reference="association" source="associationId">
               <SelectInput
                 fullWidth
@@ -123,10 +135,18 @@ export const SearchPage = () => {
             </ReferenceInput>
           </SimpleForm>
         </BoxPaperTitled>
-        <BoxPaperTitled title={translate("resources.user.name")}>
+        <BoxPaperTitled
+          title={`${translate("resources.user.name")} - Total ${userCount?.value} - ${translate("custom.common.found")} ${listCount}`}
+        >
           <List
-            filter={filters}
             resource="user"
+            filter={filters}
+            listChildren={
+              <ListCountUpdated
+                listCount={listCount}
+                setListCount={setListCount}
+              />
+            }
             datagridProps={{
               rowClick: "show",
             }}
@@ -134,10 +154,12 @@ export const SearchPage = () => {
             <FunctionField
               label=" "
               render={(user: User) => (
-                <Avatar
-                  src={createImageUrl(user.photo ?? "")}
-                  sx={{ width: "35px", height: "35px" }}
-                />
+                <>
+                  <Avatar
+                    src={createImageUrl(user.photo ?? "")}
+                    sx={{ width: "35px", height: "35px" }}
+                  />
+                </>
               )}
             />
             <TextField sortable={false} source="lastName" />
@@ -156,6 +178,7 @@ export const SearchPage = () => {
 const ClearButton = () => {
   const translate = useTranslate();
   const { reset } = useFormContext();
+
   return (
     <Button
       size="small"
@@ -166,4 +189,18 @@ const ClearButton = () => {
       label={translate("custom.common.clear_search")}
     />
   );
+};
+
+const ListCountUpdated: FC<{
+  listCount: number;
+  setListCount: StateSetter<number>;
+}> = ({ setListCount }) => {
+  const { data = [] } = useListContext();
+  const {} = useListFilterContext();
+
+  useEffect(() => {
+    setListCount(data.length);
+  }, [data.length]);
+
+  return null;
 };

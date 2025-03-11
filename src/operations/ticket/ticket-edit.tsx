@@ -16,7 +16,6 @@ import { FlexBox } from "@/common/components";
 import { updateTranform } from "@/common/utils/transform";
 import { formatUserName } from "@/common/utils/format-user-name";
 import { higherOrEqualsThan } from "@/common/input-validator";
-import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 
 export const TicketEdit: FC<{ ticket: Ticket }> = ({ ticket }) => {
   const transform = (
@@ -46,12 +45,7 @@ export const TicketEdit: FC<{ ticket: Ticket }> = ({ ticket }) => {
           label={translate("resources.operation.name")}
         />
       </ReferenceInput>
-      <ReferenceInput
-        source="staff.id"
-        reference="user"
-        page={1}
-        perPage={MAX_ITEM_PER_LIST}
-      >
+      <ReferenceInput source="staff.id" reference="user" page={1} perPage={10}>
         <AutocompleteInput
           label={translate("resources.ticket.fields.staff")}
           validate={required()}

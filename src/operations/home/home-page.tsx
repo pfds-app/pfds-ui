@@ -1,5 +1,6 @@
 import { Avatar, Badge, Typography } from "@mui/material";
 import { FunctionField, useTranslate } from "react-admin";
+import { Event as EventIcon } from "@mui/icons-material";
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 
@@ -11,11 +12,12 @@ import {
   WithLayoutPadding,
 } from "@/common/components";
 import { List } from "@/common/components/list";
-import { User, Event, Activity } from "@/gen/jfds-api-client";
+import { User, Event, Activity, UserRoleEnum } from "@/gen/jfds-api-client";
 import { formatUserName } from "@/common/utils/format-user-name";
 import { createImageUrl } from "@/providers";
 import { newDateToISOString } from "@/common/utils/date";
 import { DEFAULT_PICTURE_IMG } from "@/common/utils/constant";
+import { ShowIfRole } from "@/security/components";
 
 export const HomePage = () => {
   const translate = useTranslate();
@@ -51,6 +53,7 @@ export const HomePage = () => {
                   <Typography
                     sx={{ fontSize: "14px", display: "inline-flex", gap: 2 }}
                   >
+                    <EventIcon />
                     <span>{activity.name}</span>
                     {isToday && (
                       <span style={{ color: "green" }}>
@@ -91,6 +94,7 @@ export const HomePage = () => {
                   <Typography
                     sx={{ fontSize: "14px", display: "inline-flex", gap: 2 }}
                   >
+                    <EventIcon />
                     <span>{event.name}</span>
                     {isToday && (
                       <span style={{ color: "green" }}>
@@ -105,56 +109,65 @@ export const HomePage = () => {
         </BoxPaperTitled>
       </FlexBox>
       <FlexBox sx={{ width: "100%", mt: 2, alignItems: "stretch", gap: 2 }}>
-        <BoxPaperTitled
-          sx={{ flex: 1 }}
-          title={translate("custom.common.teams")}
+        <ShowIfRole
+          roles={[
+            UserRoleEnum.Admin,
+            UserRoleEnum.RegionManager,
+            UserRoleEnum.AssociationManager,
+            UserRoleEnum.CommitteeManager,
+          ]}
         >
-          <List
-            resource="user"
-            sx={{
-              "& th": {
-                display: "none",
-              },
-            }}
-            datagridProps={{
-              rowClick: "show",
-              rowSx: undefined,
-            }}
+          <BoxPaperTitled
+            sx={{ flex: 1 }}
+            title={translate("custom.common.teams")}
           >
-            <FunctionField
-              label=" "
-              render={(user: User) => {
-                const username = formatUserName(user);
-                return (
-                  <FlexBox sx={{ gap: 3, justifyContent: "start" }}>
-                    <Badge
-                      variant="dot"
-                      badgeContent=" "
-                      color="success"
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "right",
-                      }}
-                    >
-                      <Avatar
-                        alt={username}
-                        src={
-                          user?.photo
-                            ? createImageUrl(user?.photo ?? "")
-                            : DEFAULT_PICTURE_IMG
-                        }
-                        sx={{ width: "35px", height: "35px" }}
-                      />
-                    </Badge>
-                    <Typography sx={{ fontSize: "14px" }}>
-                      {username}
-                    </Typography>
-                  </FlexBox>
-                );
+            <List
+              resource="user"
+              sx={{
+                "& th": {
+                  display: "none",
+                },
               }}
-            />
-          </List>
-        </BoxPaperTitled>
+              datagridProps={{
+                rowClick: "show",
+                rowSx: undefined,
+              }}
+            >
+              <FunctionField
+                label=" "
+                render={(user: User) => {
+                  const username = formatUserName(user);
+                  return (
+                    <FlexBox sx={{ gap: 3, justifyContent: "start" }}>
+                      <Badge
+                        variant="dot"
+                        badgeContent=" "
+                        color="success"
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "right",
+                        }}
+                      >
+                        <Avatar
+                          alt={username}
+                          src={
+                            user?.photo
+                              ? createImageUrl(user?.photo ?? "")
+                              : DEFAULT_PICTURE_IMG
+                          }
+                          sx={{ width: "35px", height: "35px" }}
+                        />
+                      </Badge>
+                      <Typography sx={{ fontSize: "14px" }}>
+                        {username}
+                      </Typography>
+                    </FlexBox>
+                  );
+                }}
+              />
+            </List>
+          </BoxPaperTitled>
+        </ShowIfRole>
       </FlexBox>
     </WithLayoutPadding>
   );

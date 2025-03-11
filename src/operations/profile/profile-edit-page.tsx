@@ -4,12 +4,18 @@ import {
   ReferenceInput,
   SaveButton,
   SelectInput,
+  SelectInputProps,
   TextInput,
   required,
   useTranslate,
 } from "react-admin";
 
-import { UpdateUser, User } from "@/gen/jfds-api-client";
+import {
+  Sacrament,
+  UpdateUser,
+  User,
+  UserRoleEnum,
+} from "@/gen/jfds-api-client";
 import { Show } from "@/common/components/show";
 import { Edit } from "@/common/components/edit";
 import {
@@ -17,6 +23,7 @@ import {
   FlexBox,
   WithLayoutPadding,
   DownloadQrCodeButton,
+  PassPropsIfRole,
 } from "@/common/components";
 import { ProfilePictureShow } from "./components";
 import { UserSaveOrUpdateActionType } from "@/providers";
@@ -37,14 +44,18 @@ export const ProfileEditPage = () => {
     association,
     committee,
     region,
+    sacrament,
     ...baseUser
-  }: User): UpdateUser => {
+  }: User & { sacrament: Sacrament }): UpdateUser & {
+    sacramentId?: string;
+  } => {
     return updateTranform({
       ...baseUser,
       responsabilityId: responsability?.id,
       associationId: association?.id,
       regionId: region?.id,
       committeeId: committee?.id,
+      sacramentId: sacrament?.id,
     });
   };
 
@@ -145,26 +156,15 @@ export const ProfileEditPage = () => {
                 />
               </FlexBox>
               <FlexBox sx={{ gap: 1, width: "100%" }}>
-                <ReferenceInput reference="region" source="region.id">
+                <ReferenceInput reference="sacrament" source="sacrament.id">
                   <SelectInput
                     fullWidth
-                    label={translate("resources.region.name", {
+                    optionText="name"
+                    label={translate("resources.sacrament.name", {
                       smart_count: 1,
                     })}
-                    optionText="name"
                   />
                 </ReferenceInput>
-                <ReferenceInput reference="association" source="association.id">
-                  <SelectInput
-                    fullWidth
-                    label={translate("resources.association.name", {
-                      smart_count: 1,
-                    })}
-                    optionText="name"
-                  />
-                </ReferenceInput>
-              </FlexBox>
-              <FlexBox sx={{ gap: 1, width: "100%" }}>
                 <ReferenceInput
                   reference="responsability"
                   source="responsability.id"
@@ -177,16 +177,67 @@ export const ProfileEditPage = () => {
                     })}
                   />
                 </ReferenceInput>
-                <ReferenceInput reference="committee" source="committee.id">
-                  <SelectInput
-                    fullWidth
-                    optionText="name"
-                    label={translate("resources.committee.name", {
-                      smart_count: 1,
-                    })}
+              </FlexBox>
+              <FlexBox sx={{ gap: 1, width: "100%" }}>
+                <ReferenceInput reference="region" source="region.id">
+                  <PassPropsIfRole<SelectInputProps>
+                    readOnly
+                    roles={[
+                      UserRoleEnum.RegionManager,
+                      UserRoleEnum.CommitteeManager,
+                      UserRoleEnum.AssociationManager,
+                      UserRoleEnum.SimpleUser,
+                    ]}
+                    render={(props) => (
+                      <SelectInput
+                        {...props}
+                        fullWidth
+                        optionText="name"
+                        label={translate("resources.region.name", {
+                          smart_count: 1,
+                        })}
+                      />
+                    )}
+                  />
+                </ReferenceInput>
+                <ReferenceInput reference="association" source="association.id">
+                  <PassPropsIfRole<SelectInputProps>
+                    readOnly
+                    roles={[
+                      UserRoleEnum.CommitteeManager,
+                      UserRoleEnum.AssociationManager,
+                      UserRoleEnum.SimpleUser,
+                    ]}
+                    render={(props) => (
+                      <SelectInput
+                        {...props}
+                        fullWidth
+                        label={translate("resources.association.name")}
+                        optionText="name"
+                      />
+                    )}
                   />
                 </ReferenceInput>
               </FlexBox>
+              <ReferenceInput reference="committee" source="committee.id">
+                <PassPropsIfRole<SelectInputProps>
+                  readOnly
+                  defaultValue={whoami.role}
+                  roles={[
+                    UserRoleEnum.CommitteeManager,
+                    UserRoleEnum.AssociationManager,
+                    UserRoleEnum.SimpleUser,
+                  ]}
+                  render={(props) => (
+                    <SelectInput
+                      {...props}
+                      fullWidth
+                      label={translate("resources.committee.name")}
+                      optionText="name"
+                    />
+                  )}
+                />
+              </ReferenceInput>
               <SaveButton color="success" />
             </Box>
           </FlexBox>

@@ -191,6 +191,7 @@ export const haEnglishMessages: any = {
       },
     },
     common: {
+      found: "User founded",
       watch_presence: "Watch presence",
       all: "All",
       download_qr_code: "Download QR Code",

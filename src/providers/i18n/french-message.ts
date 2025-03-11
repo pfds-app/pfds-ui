@@ -184,6 +184,7 @@ export const haFrenchMessages: any = {
       },
     },
     common: {
+      found: "Utilisateur trouvées",
       watch_presence: "Surveiller la présence",
       all: "Tout",
       download_qr_code: "Télécharger le code QR",

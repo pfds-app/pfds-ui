@@ -10,6 +10,7 @@ import {
   Celebration,
   Search,
   Apartment,
+  Update,
 } from "@mui/icons-material";
 import { Menu as RaMenu, useSidebarState, useTranslate } from "react-admin";
 import { Box, SxProps, Drawer, useTheme, useMediaQuery } from "@mui/material";
@@ -17,6 +18,8 @@ import { FC, useEffect } from "react";
 
 import { usePalette } from "@/common/hooks";
 import { PAPER_BOX_SX } from "@/common/utils/common-props";
+import { ShowIfRole } from "@/security/components";
+import { UserRoleEnum } from "@/gen/jfds-api-client";
 
 const MENU_SX: SxProps = {
   "top": "68px",
@@ -104,41 +107,77 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             primaryText={translate("custom.menu.stats")}
             leftIcon={<SignalCellularAlt />}
           />
-          <RaMenu.Item
-            to="/creations"
-            primaryText={translate("custom.menu.creation")}
-            leftIcon={<AutoGraph />}
-          />
-          <RaMenu.Item
-            to="/herivelona"
-            primaryText={translate("custom.menu.herivelona")}
-            leftIcon={<PersonAdd />}
-          />
-          <RaMenu.Item
-            to="/ledger"
-            primaryText={translate("custom.menu.caisse")}
-            leftIcon={<AddBusiness />}
-          />
+          <ShowIfRole roles={[UserRoleEnum.Admin]}>
+            <RaMenu.Item
+              to="/creations"
+              primaryText={translate("custom.menu.creation")}
+              leftIcon={<AutoGraph />}
+            />
+          </ShowIfRole>
+          <ShowIfRole
+            roles={[
+              UserRoleEnum.Admin,
+              UserRoleEnum.RegionManager,
+              UserRoleEnum.CommitteeManager,
+              UserRoleEnum.AssociationManager,
+            ]}
+          >
+            <RaMenu.Item
+              to="/herivelona"
+              primaryText={translate("custom.menu.herivelona")}
+              leftIcon={<PersonAdd />}
+            />
+          </ShowIfRole>
+          <ShowIfRole
+            roles={[
+              UserRoleEnum.Admin,
+              UserRoleEnum.RegionManager,
+              UserRoleEnum.AssociationManager,
+              UserRoleEnum.CommitteeManager,
+            ]}
+          >
+            <RaMenu.Item
+              to="/ledger"
+              primaryText={translate("custom.menu.caisse")}
+              leftIcon={<AddBusiness />}
+            />
+          </ShowIfRole>
           <RaMenu.Item
             to="/presence"
             primaryText={translate("custom.menu.presence")}
             leftIcon={<AssignmentTurnedIn />}
           />
-          <RaMenu.Item
-            to="/fitadiavam-bola"
-            primaryText={translate("custom.menu.fitadiavamBola")}
-            leftIcon={<LocalAtm />}
-          />
+          <ShowIfRole roles={[UserRoleEnum.Admin]}>
+            <RaMenu.Item
+              to="/fitadiavam-bola"
+              primaryText={translate("custom.menu.fitadiavamBola")}
+              leftIcon={<LocalAtm />}
+            />
+          </ShowIfRole>
           <RaMenu.Item
             to="/activities"
             primaryText={translate("custom.menu.activity")}
             leftIcon={<Celebration />}
           />
-          <RaMenu.Item
-            to="/search"
-            primaryText={translate("custom.menu.find")}
-            leftIcon={<Search />}
-          />
+          <ShowIfRole
+            roles={[
+              UserRoleEnum.Admin,
+              UserRoleEnum.RegionManager,
+              UserRoleEnum.AssociationManager,
+              UserRoleEnum.CommitteeManager,
+            ]}
+          >
+            <RaMenu.Item
+              to="/history"
+              primaryText={translate("custom.menu.history")}
+              leftIcon={<Update />}
+            />
+            <RaMenu.Item
+              to="/search"
+              primaryText={translate("custom.menu.find")}
+              leftIcon={<Search />}
+            />
+          </ShowIfRole>
           <RaMenu.Item
             sx={{ borderBottom: "none !important" }}
             to="/about"

@@ -58,6 +58,14 @@ export const AdminSignupPage: FC<{
         notify("ra.auth.sign_in_error", { type: "error" });
         return;
       }
+
+      if (isAxiosError(error) && error.status === 400) {
+        notify("Email ou identifiant déjà utilisé", {
+          autoHideDuration: 5_000,
+        });
+        return;
+      }
+
       notify("ra.page.error");
     } finally {
       stopLoading();

@@ -11,3 +11,4 @@ export * from "./required-when";
 export * from "./is-source-equals";
 export * from "./qr-code";
 export * from "./download-qrcode-btn";
+export * from "./pass-props-if-role";

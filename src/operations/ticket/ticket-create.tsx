@@ -15,7 +15,6 @@ import { CrupdateTicket, User } from "@/gen/jfds-api-client";
 import { higherOrEqualsThan } from "@/common/input-validator";
 import { createTranform } from "@/common/utils/transform";
 import { formatUserName } from "@/common/utils/format-user-name";
-import { MAX_ITEM_PER_LIST } from "@/common/utils/constant";
 
 export const TicketCreate = () => {
   const translate = useTranslate();
@@ -47,12 +46,7 @@ export const TicketCreate = () => {
             label={translate("resources.operation.name")}
           />
         </ReferenceInput>
-        <ReferenceInput
-          source="staffId"
-          reference="user"
-          page={1}
-          perPage={MAX_ITEM_PER_LIST}
-        >
+        <ReferenceInput page={1} perPage={10} source="staffId" reference="user">
           <AutocompleteInput
             validate={required()}
             suggestionLimit={10}
