@@ -1,4 +1,10 @@
-import { DateField, FunctionField, TextField, useTranslate } from "react-admin";
+import {
+  DateField,
+  FunctionField,
+  ShowButton,
+  TextField,
+  useTranslate,
+} from "react-admin";
 import { useState } from "react";
 
 import { Activity, UserRoleEnum } from "@/gen/jfds-api-client";
@@ -10,7 +16,7 @@ import {
   DialogContextProvider,
   useDialogContext,
 } from "@/common/services/dialog";
-import { ShowIfRole } from "@/security/components";
+import { useRole } from "@/security/hooks";
 
 export const ActivityList = () => {
   return (
@@ -28,6 +34,7 @@ export const ActivityListContent = () => {
     toggleStatus();
     setActivityToEdit(activity);
   };
+  const role = useRole();
 
   return (
     <BoxPaperTitled
@@ -40,19 +47,21 @@ export const ActivityListContent = () => {
         <TextField sortable={false} source="name" />
         <TextField sortable={false} source="place" />
         <TextField sortable={false} source="description" />
-        <ShowIfRole roles={[UserRoleEnum.Admin]}>
-          <FunctionField
-            label="Actions"
-            render={(activity: Activity) => (
+        <FunctionField
+          label="Actions"
+          render={(activity: Activity) =>
+            role !== UserRoleEnum.Admin ? (
+              <ShowButton />
+            ) : (
               <>
                 <FlexBox sx={{ gap: 1, justifyContent: "start" }}>
                   <EditButton onClick={() => doEdit(activity)} />
                   <DeleteButton resource="activity" id={activity.id} />
                 </FlexBox>
               </>
-            )}
-          />
-        </ShowIfRole>
+            )
+          }
+        />
       </List>
       <DialogContent
         fullWidth

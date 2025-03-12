@@ -222,7 +222,6 @@ export const ProfileEditPage = () => {
               <ReferenceInput reference="committee" source="committee.id">
                 <PassPropsIfRole<SelectInputProps>
                   readOnly
-                  defaultValue={whoami.role}
                   roles={[
                     UserRoleEnum.CommitteeManager,
                     UserRoleEnum.AssociationManager,

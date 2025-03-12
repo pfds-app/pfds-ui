@@ -107,7 +107,7 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             primaryText={translate("custom.menu.stats")}
             leftIcon={<SignalCellularAlt />}
           />
-          <ShowIfRole roles={[UserRoleEnum.Admin, UserRoleEnum.RegionManager]}>
+          <ShowIfRole roles={[UserRoleEnum.Admin]}>
             <RaMenu.Item
               to="/creations"
               primaryText={translate("custom.menu.creation")}
