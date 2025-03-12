@@ -54,7 +54,7 @@ export const userProvider: ResourceProvider<User> = {
       responsability,
       association,
       ...toUpdate
-    } = previousData;
+    } = previousData as User;
 
     switch (meta?.actionType as DeleteUserActionType) {
       case DeleteUserActionType.ROLE:
@@ -67,7 +67,7 @@ export const userProvider: ResourceProvider<User> = {
             sacramentId: sacrament?.id,
             associationId: association?.id,
             committeeId: committee?.id,
-          } as any)
+          })
         );
       case DeleteUserActionType.FROM_COMMITEE:
         return unwrap(() =>
@@ -77,8 +77,8 @@ export const userProvider: ResourceProvider<User> = {
             responsabilityId: responsability?.id,
             sacramentId: sacrament?.id,
             associationId: association?.id,
-            committeeId: undefined,
-          } as any)
+            committeeId: null as any,
+          })
         );
       case DeleteUserActionType.FROM_ASSOCIATION:
         return unwrap(() =>
@@ -88,8 +88,8 @@ export const userProvider: ResourceProvider<User> = {
             responsabilityId: responsability?.id,
             sacramentId: sacrament?.id,
             committeeId: committee?.id,
-            associationId: undefined,
-          } as any)
+            associationId: null as any,
+          })
         );
       case DeleteUserActionType.PERMANENT:
         return unwrap(() => usersApi().deleteUserById(id));

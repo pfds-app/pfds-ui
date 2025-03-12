@@ -107,7 +107,7 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             primaryText={translate("custom.menu.stats")}
             leftIcon={<SignalCellularAlt />}
           />
-          <ShowIfRole roles={[UserRoleEnum.Admin]}>
+          <ShowIfRole roles={[UserRoleEnum.Admin, UserRoleEnum.RegionManager]}>
             <RaMenu.Item
               to="/creations"
               primaryText={translate("custom.menu.creation")}
@@ -159,6 +159,11 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
             primaryText={translate("custom.menu.activity")}
             leftIcon={<Celebration />}
           />
+          <RaMenu.Item
+            to="/history"
+            primaryText={translate("custom.menu.history")}
+            leftIcon={<Update />}
+          />
           <ShowIfRole
             roles={[
               UserRoleEnum.Admin,
@@ -167,11 +172,6 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({
               UserRoleEnum.CommitteeManager,
             ]}
           >
-            <RaMenu.Item
-              to="/history"
-              primaryText={translate("custom.menu.history")}
-              leftIcon={<Update />}
-            />
             <RaMenu.Item
               to="/search"
               primaryText={translate("custom.menu.find")}

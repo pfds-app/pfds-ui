@@ -72,6 +72,13 @@ export const UserListContent: FC<{ role: UserRoleEnum }> = ({ role }) => {
             }
 
             if (
+              user.role === connectedRole &&
+              connectedRole !== UserRoleEnum.Admin
+            ) {
+              return <ShowButton />;
+            }
+
+            if (
               user.role === UserRoleEnum.Admin &&
               connectedRole !== UserRoleEnum.Admin
             ) {

@@ -126,6 +126,13 @@ export const SearchPage = () => {
                 optionText="name"
               />
             </ReferenceInput>
+            <ReferenceInput reference="sacrament" source="sacramentId">
+              <SelectInput
+                fullWidth
+                label={translate("resources.sacrament.name")}
+                optionText="name"
+              />
+            </ReferenceInput>
             <ReferenceInput reference="committee" source="committeeId">
               <SelectInput
                 fullWidth

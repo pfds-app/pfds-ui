@@ -258,7 +258,14 @@ const SelectAction: FC<{ view: View; setView: StateSetter<View> }> = ({
         label="custom.common.watch_presence"
         sx={{ marginBottom: 2, minWidth: "200px" }}
       />
-      <ShowIfRole roles={[UserRoleEnum.Admin]}>
+      <ShowIfRole
+        roles={[
+          UserRoleEnum.Admin,
+          UserRoleEnum.RegionManager,
+          UserRoleEnum.CommitteeManager,
+          UserRoleEnum.AssociationManager,
+        ]}
+      >
         <Button
           size="large"
           variant="contained"

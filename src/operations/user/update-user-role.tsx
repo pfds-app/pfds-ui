@@ -19,17 +19,19 @@ import {
 import { formatUserName } from "@/common/utils/format-user-name";
 import { Create } from "@/common/components/create";
 import { ShowIfRole } from "@/security/components";
-import { useWhoami } from "@/security/hooks";
+import { useRole, useWhoami } from "@/security/hooks";
 
 export const UpdateUserRole: FC<{ role: UserRoleEnum }> = ({ role }) => {
   const translate = useTranslate();
   const whoami = useWhoami();
+  const connectedRole = useRole();
 
   const transform = async (
     fromForm: Pick<User, "id" | "region" | "association" | "committee">
   ): Promise<UpdateUserPayload> => {
     const data = await userProvider.getOne!({ id: fromForm.id! });
     const {
+      role: previousRole,
       responsability,
       association,
       region,
@@ -44,7 +46,27 @@ export const UpdateUserRole: FC<{ role: UserRoleEnum }> = ({ role }) => {
 
     return updateTranform({
       ...createUser,
-      role,
+      role: (() => {
+        switch (role) {
+          case UserRoleEnum.Admin:
+            return role;
+          case UserRoleEnum.RegionManager:
+            return role;
+          case UserRoleEnum.AssociationManager:
+            return role;
+          case UserRoleEnum.CommitteeManager:
+            return role;
+          case UserRoleEnum.SimpleUser:
+            return [
+              UserRoleEnum.AssociationManager,
+              UserRoleEnum.CommitteeManager,
+            ].includes(whoami.role as any)
+              ? previousRole
+              : role;
+          default:
+            throw new Error("Invalid role");
+        }
+      })(),
       responsabilityId: responsability?.id,
       sacramentId: sacrament?.id,
       regionId:
@@ -52,13 +74,17 @@ export const UpdateUserRole: FC<{ role: UserRoleEnum }> = ({ role }) => {
           ? fromForm?.region?.id
           : region?.id!,
       committeeId:
-        role === UserRoleEnum.CommitteeManager
-          ? fromForm?.committee?.id
-          : committee?.id,
+        connectedRole === UserRoleEnum.CommitteeManager
+          ? whoami.committee?.id
+          : role === UserRoleEnum.CommitteeManager
+            ? fromForm?.committee?.id
+            : committee?.id,
       associationId:
-        role === UserRoleEnum.AssociationManager
-          ? fromForm?.association?.id
-          : association?.id,
+        connectedRole === UserRoleEnum.AssociationManager
+          ? whoami.association?.id
+          : role === UserRoleEnum.AssociationManager
+            ? fromForm?.association?.id
+            : association?.id,
     });
   };
 
@@ -72,7 +98,12 @@ export const UpdateUserRole: FC<{ role: UserRoleEnum }> = ({ role }) => {
         transform={transform}
         mutationOptions={{
           meta: {
-            actionType: UserSaveOrUpdateActionType.UPDATE_ROLE,
+            actionType: [
+              UserRoleEnum.Admin,
+              UserRoleEnum.RegionManager,
+            ].includes(whoami.role as any)
+              ? UserSaveOrUpdateActionType.UPDATE_ROLE
+              : UserSaveOrUpdateActionType.UPDATE_USER_INFOS,
           },
         }}
       >
