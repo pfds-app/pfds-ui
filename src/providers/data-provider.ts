@@ -19,6 +19,7 @@ import { userStatProvider } from "./user-stat-provider";
 import { activityProvider } from "./activity-provider";
 import { ledgerStatProvider } from "./ledger-stat-provider";
 import { presenceProvider } from "./presence-provider";
+import { deletedRoleProvider } from "./deleted-roles-provider";
 
 export const dataProvider = createRaProvider(
   [
@@ -41,6 +42,7 @@ export const dataProvider = createRaProvider(
     activityProvider,
     ledgerStatProvider,
     presenceProvider,
+    deletedRoleProvider,
   ],
   {
     getListOptions: {

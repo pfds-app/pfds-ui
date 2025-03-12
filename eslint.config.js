@@ -24,6 +24,7 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       "@typescript-eslint/no-explicit-any": "off",
+      "no-case-declarations": "off",
       "no-unused-vars": "off", // because we want to allow all unused vars that start with "_",
       "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
       "@typescript-eslint/no-unused-vars": [
